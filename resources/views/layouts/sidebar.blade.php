@@ -8,7 +8,7 @@
                          alt="User avatar">
                 </div>
 
-                <span><a href="#">Kenneth Paul Cabrillas</a></span>
+                <span><a href="{{route('profile')}}">Kenneth Paul Cabrillas</a></span>
 
                 <p >
                     <small >DEVELOPER</small>

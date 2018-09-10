@@ -11730,11 +11730,11 @@ footer {
   }
 }
 
-.email-app .email-wrapper .email-compose {
+.email-app .email-wrapper .profile-info {
   position: relative;
 }
 
-.email-app .email-wrapper .email-compose .email-compose-body {
+.email-app .email-wrapper .profile-info .profile-info-body {
   padding: 30px 20px;
 }
 

@@ -161,7 +161,7 @@
                                 <ul class="dropdown-menu fsz-sm">
                                     <li><a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
                                                     class="ti-settings mR-10"></i> <span>Setting</span></a></li>
-                                    <li><a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
+                                    <li><a href="{{route('profile')}}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
                                                     class="ti-user mR-10"></i>
                                             <span>Profile</span></a></li>
                                     <li role="separator" class="divider"></li>
@@ -179,9 +179,9 @@
 
                     </div>
                 </main>
-                {{--<footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600"><span><a--}}
-                                {{--href="#" target="_blank" title="RAJ Technologies, Inc.">RAJ Technologies, Inc.</a> Copyright © 2018</span>--}}
-                {{--</footer>--}}
+                <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600"><span><a
+                                href="#" target="_blank" title="RAJ Technologies, Inc.">RAJ Technologies, Inc.</a> Copyright © 2018</span>
+                </footer>
             </div>
         </div>
     </div>

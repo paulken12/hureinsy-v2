@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* ------------------ PROFILE ------------------*/
 
-Route::get('/profile/my-team', 'Personnel\Team\TeamController@index')->name('team');
+Route::get('/profile/personnel-name', 'Personnel\Profile\ProfileController@index')->name('profile');
 
 /* ------------------ TEAM ------------------*/
 
