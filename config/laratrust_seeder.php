@@ -2,7 +2,7 @@
 
 return [
     'role_structure' => [
-        'superadministrator' => [
+        'titan' => [
             'users' => 'c,r,u,d',
             'acl' => 'c,r,u,d',
             'profile' => 'r,u'
@@ -11,7 +11,7 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'user' => [
+        'employee' => [
             'profile' => 'r,u'
         ],
     ],

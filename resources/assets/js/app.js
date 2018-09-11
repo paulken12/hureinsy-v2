@@ -1,3 +1,4 @@
+import PerfectScrollbar from "perfect-scrollbar";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26,6 +27,16 @@ const app = new Vue({
     {
         return{
             isClose: false
+        }
+    },
+
+    created: function(){
+
+        const scrollables = $('.scrollable');
+        if (scrollables.length > 0) {
+            scrollables.each((index, el) => {
+                new PerfectScrollbar(el);
+            });
         }
     },
 

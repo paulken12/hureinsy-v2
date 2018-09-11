@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="full-container">
-        <div class="email-app">
-            <div class="email-side-nav remain-height ov-h">
+        <div class="profile-app">
+            <div class="profile-side-nav remain-height ov-h">
                 <div class="h-100 layers">
                     <div class="p-20 bgc-grey-100 layer w-100 text-center">
                         <span>All About Me</span>
@@ -147,26 +147,40 @@
                     </div>
                 </div>
             </div>
-            <div class="email-wrapper row remain-height pos-r scrollable bgc-white">
-                <div class="tab-content email-content open no-inbox-view">
+            <div class="profile-wrapper row remain-height pos-r scrollable bgc-white">
+                <div class="tab-content profile-content open no-inbox-view">
                     <div class="tab-pane fade show active profile-info" id="basic" role="tabpanel"
                          aria-labelledby="basic-tab">
-                        <div class="email-content-wrapper">
+                        <div class="profile-content-wrapper">
                             <!-- Header -->
                             <div class="peers ai-c jc-sb pX-40 pY-30">
                                 <div class="peers peer-greed">
                                     <div class="peer mR-20">
-                                        <img class="bdrs-50p w-5r h-5r" alt="" src="{{asset('images/avatars/raj_male.png')}}">
+                                        <img class="bdrs-50p w-6r h-6r" alt="" src="{{asset('images/avatars/raj_male.png')}}">
                                     </div>
                                     <div class="peer">
                                         <h5 class="c-grey-900 mB-5">Kenneth Paul Bautista Cabrillas</h5>
-                                        <span>email@gmail.com</span>
+                                        <div class="peer peer-greed">
+                                            <i class="mR-10 ti-id-badge"></i>
+                                            <span>9400</span>
+                                        </div>
+                                        <div class="peer peer-greed">
+                                            <i class="mR-10 ti-email"></i>
+                                            <span>email@gmail.com</span>
+                                        </div>
+                                        <div class="peer peer-greed">
+                                            <i class="mR-10 ti-linkedin"></i>
+                                            <span><a href="#">kenneth-paul</a></span>
+                                        </div>
+
+
                                     </div>
                                 </div>
                                 <div class="peer">
-                                    <a href="" class="btn btn-danger bdrs-50p p-15 lh-0">
-                                        <i class="fa fa-reply"></i>
-                                    </a>
+                                    <span>some stuff</span>
+                                    <br>
+                                    <span>some stuff</span>
+
                                 </div>
                             </div>
 
@@ -181,15 +195,11 @@
                                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                                </p>
+
+                                <hr>
+
+                                <p>Some Information</p>
+
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 /* ------------------ PROFILE ------------------*/
 
 Route::get('/profile/personnel-name', 'Personnel\Profile\ProfileController@index')->name('profile');
@@ -26,3 +28,5 @@ Route::get('/profile/personnel-name', 'Personnel\Profile\ProfileController@index
 /* ------------------ TEAM ------------------*/
 
 Route::get('/profile/my-team', 'Personnel\Team\TeamController@index')->name('team');
+
+

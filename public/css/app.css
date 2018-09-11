@@ -11636,7 +11636,7 @@ footer {
   overflow: auto;
 }
 
-.email-app .email-side-nav {
+.profile-app .profile-side-nav {
   background: #fff;
   position: fixed;
   border-right: 1px solid rgba(0, 0, 0, 0.0625);
@@ -11647,13 +11647,13 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-  .email-app .email-side-nav {
+  .profile-app .profile-side-nav {
     z-index: 1;
     left: -250px;
   }
 }
 
-.email-app .email-wrapper {
+.profile-app .profile-wrapper {
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -11663,7 +11663,7 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-  .email-app .email-wrapper {
+  .profile-app .profile-wrapper {
     position: absolute;
     left: 0;
     width: 100%;
@@ -11672,12 +11672,12 @@ footer {
 }
 
 @media screen and (min-width: 992px) {
-  .email-app .email-wrapper {
+  .profile-app .profile-wrapper {
     margin-left: 250px;
   }
 }
 
-.email-app .email-wrapper .email-list {
+.profile-app .profile-wrapper .profile-list {
   position: relative;
   padding: 0;
   width: 100%;
@@ -11687,20 +11687,20 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-  .email-app .email-wrapper .email-list {
+  .profile-app .profile-wrapper .profile-list {
     max-height: calc(100vh - 65px);
   }
 }
 
 @media screen and (min-width: 992px) {
-  .email-app .email-wrapper .email-list {
+  .profile-app .profile-wrapper .profile-list {
     width: 40%;
     border-right: 1px solid rgba(0, 0, 0, 0.0625);
     float: left;
   }
 }
 
-.email-app .email-wrapper .email-content {
+.profile-app .profile-wrapper .profile-content {
   float: left;
   width: 60%;
   position: relative;
@@ -11708,12 +11708,12 @@ footer {
   background-color: #fff;
 }
 
-.email-app .email-wrapper .email-content.no-inbox-view {
+.profile-app .profile-wrapper .profile-content.no-inbox-view {
   width: 100%;
 }
 
 @media screen and (max-width: 991px) {
-  .email-app .email-wrapper .email-content {
+  .profile-app .profile-wrapper .profile-content {
     position: absolute;
     top: 0;
     left: 100%;
@@ -11725,27 +11725,27 @@ footer {
     overflow-y: scroll;
   }
 
-  .email-app .email-wrapper .email-content.open {
+  .profile-app .profile-wrapper .profile-content.open {
     left: 0;
   }
 }
 
-.email-app .email-wrapper .profile-info {
+.profile-app .profile-wrapper .profile-info {
   position: relative;
 }
 
-.email-app .email-wrapper .profile-info .profile-info-body {
+.profile-app .profile-wrapper .profile-info .profile-info-body {
   padding: 30px 20px;
 }
 
 @media screen and (max-width: 991px) {
-  .email-app.side-active .email-side-nav {
+  .profile-app.side-active .profile-side-nav {
     left: 0;
   }
 }
 
 @media screen and (max-width: 991px) {
-  .email-app.side-active .email-wrapper {
+  .profile-app.side-active .profile-wrapper {
     left: 250px;
   }
 }

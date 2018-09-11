@@ -1,5 +1,5 @@
-.email-app {
-  .email-side-nav {
+.profile-app {
+  .profile-side-nav {
     background: $default-white;
     position: fixed;
     border-right: 1px solid $border-color;
@@ -13,7 +13,7 @@
     }
   }
 
-  .email-wrapper {
+  .profile-wrapper {
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -31,7 +31,7 @@
       margin-left: 250px;
     }
 
-    .email-list {
+    .profile-list {
       position: relative;
       padding: 0;
       width: 100%;
@@ -50,7 +50,7 @@
       }
     }
 
-    .email-content {
+    .profile-content {
       float: left;
       width: 60%;
       position: relative;
@@ -89,13 +89,13 @@
 
 
     &.side-active {
-      .email-side-nav {
+      .profile-side-nav {
         @include to($breakpoint-md) {
           left: 0;
         }
       }
 
-      .email-wrapper {
+      .profile-wrapper {
         @include to($breakpoint-md) {
           left: 250px;
         }
