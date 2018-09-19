@@ -11,11 +11,14 @@ class EmpBasicController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * get all employees and paginate to 15 data
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+
+        $employees = EmpBasic::all();
+
+        return view('personnel.list.index',compact('employees'));
     }
 
     /**

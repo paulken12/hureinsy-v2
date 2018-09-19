@@ -1,0 +1,351 @@
+emp_basic_id,master_family_key,last_name,first_name,date_of_birth,occupation,employer,master_gender_key
+1,fat,Desierto, Efren Vistal,,,,m
+1,mot,Pascua, Julie Lopez,,,,f
+1,sib,Desierto, Nyssa Kariz Pascua,,,,f
+1,sib,Sudango, Jazper Angelo Pascua,,,,m
+1,sib,Sudango, Jazmin Nory Pascua,,,,f
+2,fat,Dumpit, Manuel Abuan,,Retired Police / Driver,,m
+2,mot,Angbengco, Sylvia Bautista,,Housewife,,f
+2,chi,Dumpit,Zenon Zaint,2011-10-09,,,m
+3,fat,Abad, Nicanor Pelias,,,,m
+3,mot,Dominguez, Norma Bernales,,self-employed,,f
+4,fat,Amurao, Severino Avellaneda,,Office Employee,,m
+4,mot,Amurao, Ernita Inting,,OFW,,f
+5,fat,Balingdan, Felix Labutan,,Miner,,m
+5,mot,Balingdan Rita Balanza,,,Store Keeper,,f
+6,fat,Antonio, Roger Torno,,Deceased,,m
+6,mot,Antonio, Elynor Camarillo,,Housewife,,f
+6,spo,Belason, Warren Abillar,,IT Manager,Texas Instruments Inc.,m
+6,chi,Belason,Chrys Zander,2015-04-03,,,m
+7,fat,Besa, Emeterio Castillo,,Retired Military,,m
+7,mot,Besa, Evelyn Abellera,,House Wife,,f
+8,fat,Brillantes, Eliseo,,BWD Supervisor,,m
+8,mot,Brillantes, Alma,,Barangay Treasurer,,f
+9,fat,Cabangon, Michael Genetiano,,NGO Worker,,m
+9,mot,Arroyo, Ana lee Dela Gente,,Deceased,,f
+9,chi,Cacho,Andres Kahlil,2015-08-18,,,m
+10,fat,Castro, Richard Walter Dela Pena,,Deceased,,m
+10,mot,Castro, Sofia Leah Caoili,,,,f
+11,fat,Chavez, Mario Macasaet,,Auditor,,m
+11,mot,Chavez, Edith Suyom,,Housewife,,f
+12,fat,Cortes, Jose Noro Luzon,,,,m
+12,mot,Garcia, Felicitas Natividad,,Doctor,,f
+13,fat,De Guzman, Federico Tomboc,,None,,m
+13,mot,De Guzman, Aucia De Guzman,,OFW,,f
+14,fat,De Guzman, Victorino P. Jr,,Safety Supervisor,,m
+14,mot,De Guzman, Salome E.,,Teacher,,f
+17,mot,Lapira, Elisa Escame,,housemaid,,f
+18,fat,Espiritu, Romeo,,,,m
+18,mot,Espiritu, Flordeliza Santos,,,,f
+18,chi,Espiritu,Chelsea Durene,2008-06-03,,,f
+19,fat,Estolero, James Mariñas,,Deceased,,m
+19,mot,Estolero, Carmela Ventura,,Deceased,,f
+20,fat,Gabertan, Eduardo Carongcong,,Framemake,,m
+20,mot,Gabertan, Milagros Cerezo,,Beautician,,f
+21,fat,Garcia, Edgar Ignacio,,Seaman,,m
+21,mot,Garcia, Flora May Adaoag,,Professor - SLU,,f
+22,fat,Ginez, Wilfredo Primo,,Deceased,,m
+22,mot,Ginez, Elenita Bautista,,Vendor,,f
+23,spo,Gomez, Lea David,,Housewife,,f
+23,chi,Gomez,Wells Darwin,1998-08-21,,,m
+23,chi,Gomez,Ezekiel John,2000-05-06,,,m
+24,fat,Gragasin, Mark Pontino,,Mechanical Engineer,,m
+24,mot,Manzano, Mirliza Calabias,,Housewife,,f
+25,fat,Jacinto, Pablo Bongsal,,Engineer,,m
+25,mot,Jacinto, Ma. Isabel Galasgas,,Housewife,,f
+26,fat,Joaquin, Domingo Fernandez,,Businessman,,m
+26,mot,Joaquin, Teresita Limbawan,,Housewife,,f
+27,fat,Lacanilao Jr., Castor Hipolito,,,,m
+27,mot,Lacanilao, Vilma Escame,,,,f
+28,fat,Lagasca, Orlando Mario Cachero,,Electrician/Operator,,m
+28,mot,Lagasca, Gilda Sembrano,,Housewife,,f
+29,fat,Leung, Raul Lagman,,"Driver, Mechanic",,m
+29,mot,Leung, Evelyn Ramos,,OFW,,f
+30,fat,Liceralde, Francis Bernal,,Civil Engineer,,m
+30,mot,Liceralde, Elma Picar,,,,f
+31,fat,Lim, Anselmo Hao,,Businessman,,m
+31,mot,Lim, Rosita tan,,Businesswoman,,f
+32,fat,Lomboy, Ricardo Gonzales,,Deceased,,m
+32,mot,Lomboy, Maria Dioquino,,Housewife,,f
+33,fat,Mendoza, Harry Calpotura,,Machinist,,m
+33,mot,Gelogo, Mary Ann Carbaquil,,Businesswoman,,f
+34,fat,Monzon, Menrado Colis,,IDO(NIA),,m
+34,mot,Monzon, Levita Asuncion,,Housewife,,f
+35,fat,Pagaduan, Godofredo Lapurga,,Driver,,m
+35,mot,Pagaduan, Halda Ordinario,,Clerk,,f
+36,spo,Patnaan, Norman M.,1984-05-31,,,m
+36,chi,Patnaan,Angel Linsay,2006-04-21,,,f
+37,fat,Polonio, Jerome Muguet,,,,m
+37,mot,Polonio, Ignacia Ola-o,,,,f
+37,spo,Polonio, Emie Maliones,,Vegetable desposer,Self employed,f
+37,chi,Polonio,Hezron John,2008-08-17,,,m
+38,fat,Quinio, Bartolome Pilgi,,Employee,,m
+38,mot,Quinio, Florida Aspillaga,,Employee,,f
+39,fat,Ragadio, Romuald Cardenas,,Teaching,,m
+39,mot,Ragadio, Marites Mangosing,,Teaching,,f
+41,fat,Rodriguez, Ramon Mendoza,,Taxi Driver,,m
+41,mot,Rodriguez, Leonora Sambrona,,Housewife,,f
+43,fat,Salingbay, Leo Gamiling,,Farming,,m
+43,mot,Salingbay, Letty,,Farming,,f
+44,mot,Santos, Amparo,,,,f
+45,fat,Siruno, Nixon Siruno,,,,m
+45,mot,Siruno, Edna Campos,,,,f
+46,fat,Solomon, Andres Cayabyab,,Retired Police Officer,,m
+46,mot,Solomon, Felicidad,,,,f
+47,fat,Belleza, Avelino Ballestar,,Deceased,,m
+47,mot,Billedo, Veneranda Cantano,,Deceased,,f
+47,spo,Stewart, Ralph Glenn Nelson,,Application Developer,TI(Phils.) Inc.,m
+47,chi,Stewart,Alexander Rain,2012-05-08,,,m
+48,fat,Tambuyat Sr., Jose Bato,,,,m
+48,mot,Tambuyat, Felicidad Ligat,,None,,f
+48,chi,Campos,Carl Fiona,2003-10-23,,,m
+48,chi,Gonzales,Teojale Jzrya,2013-01-15,,,m
+48,chi,Gonzales,Riceaux Everest,2014-03-27,,,m
+49,fat,Toriado, William Cancino,,OFW,,m
+49,mot,Toriado, Myrna Cancino,,Housewife,,f
+50,fat,Biag, Ronald Abuela,,Construction Worker,,m
+50,mot,Biag, Evelyn Riñon,,OFW,,f
+51,fat,Napadao, Lester Picpican,,Civil Engineer,,m
+52,fat,Navalta, Mario Bautista,,Maintenance,,m
+52,mot,Navalta, Cristina Garcia,,Housewife,,f
+53,fat,Orpilla, Valentino,,Medical Representative,,m
+53,mot,Orpilla, Marissa Talosig,,Businesswoman,,f
+54,fat,Macam, Donato Castillo,,Deceased,,m
+54,mot,Macam, Perla Santiago,,Admin Aide Lingayen Capitol,,f
+55,fat,Flores, Warlito Bermudez,,House husband,,m
+55,mot,Pascua-Flores, Rosa Gacutan,,Dentist,,f
+56,fat,Lacaba, Federico Muñoz,,Deceased,,m
+56,mot,Lacaba, Iluminada Sicat,,Self Employed,,f
+57,fat,Evangelista, Romulo Gattoc,,Security Manager(Ret. Col.),,m
+57,mot,Evangelista, Candida Torres,,Teacher(Deceased),,f
+57,spo,Evangelista, Jenalyn Bautista,,,,f
+57,chi,Evangelista,Trisha Josephine,2003-10-23,,,f
+57,chi,Evangelista,Jerlyn Candice,2005-10-22,,,f
+57,chi,Evangelista II,Tristan Jerome,2007-05-19,,,m
+57,chi,Evangelista,McKenzie Riley,2012-01-14,,,m
+58,fat,Pomantoc, Gregorio,,,,m
+58,mot,Sabado, Maryphy Melano,,,,f
+58,chi,Pomantoc,Mavry,2011-02-13,,,m
+60,fat,Andres, Angelito Laoagan,,Deceased,,m
+60,mot,Andres, Mina Panggod,,,,f
+61,fat,Gañalongo,Roger Abad,,Farmer,,m
+61,mot,Gañalongo, Patty Esguerra,,Barangay Kagawad,,f
+62,fat,Kimayong, Gregorio Dilim,,High School Principal,,m
+62,mot,Kimayong, Alice Dilim,,Housewife,,f
+63,fat,Rafols, Jose Recto,,,,m
+63,mot,Rafols, Juanita Laciste,,,,f
+64,fat,Corpuz, Gerald Malanum,,,,m
+64,mot,Corpuz, Wilma Balagot,,Housewife,,f
+65,fat,Pesigan, Macario Marasigan,,Seaman,,m
+65,mot,Del Socorro, Catalina Borce,,Housewife,,f
+66,fat,Roy, Adam Galadate,,Construction Worker,,m
+66,mot,Roy, Maria Calpase,,Houswife,,f
+67,fat,Wansi, Leonard Oglayon,,Farmer,,m
+67,mot,Capones, Brenda Berad,,Dentist,,f
+68,fat,Rillo, Emmanuel Pedernal,,Businessman,,m
+68,mot,Rillo, Loida Tanwangco,,Businesswoman,,f
+68,spo,Rillo, Cybill Birung,1983-05-01,Curriculum Developer/ ESL teacher,,f
+68,sib,Rillo, Maria Fiona Tanwangco,,,,f
+68,sib,Veloso, Paula Joy Rillo,,,,f
+68,sib,Rillo, Maria Criselda Tanwangco,,,,f
+68,sib,Rillo, Victor Armand Tanwangco,,,,m
+69,fat,Miguel, Arnel Gela Cruz,,Farming(Deceased),,m
+69,mot,Miguel, Mylene Paraguison,,OFW(Asst. Secretary),,f
+70,fat,Layug, Fernando Garong,,OFW,,m
+70,mot,Layug, Janet Pabalan,,Government Employee,,f
+71,fat,Macaraeg, Floro,,Deceased,,m
+71,mot,Macaraeg, Irene Lalaquit,,,,f
+72,fat,,,,,,m
+77,fat,Mendoza, Cesar Malinga,,Laborer,,m
+77,mot,Mendoza, Fe Lampacan,,OFW-DH,,f
+78,fat,Chan, Samuel Tiago,,Unemployed,,m
+78,mot,Laza, Fermina Calapuz,,Self-employed,,f
+79,fat,Fajardo, Ernesto Fajardo,,Farmer,,m
+79,mot,Ariaga, Carmelita Collado,,Teacher,,f
+80,fat,Domingo. Aurelio Jr. Dulay,,,Self-employed,,m
+80,mot,Domingo Rubirsora Destor,,,Housewife,,f
+81,fat,camaya ramiro hernandez,,,rigger,,m
+81,mot,maglalang loida galica,,,housewife,,f
+81,sib,camaya, trisha mae maglalang,1998-07-28,,,f
+82,fat,Foronda, Joel Guasch,,Call Center Agent,,m
+82,mot,Maurillo, Loida Colajo,,Housewife,,f
+83,fat,Las-sin, Johnny Sagmayao,,Government Employee,,m
+83,mot,Chochopen, Herminia Anongos,,Nurse,,f
+84,fat,Arenas, Jerry Macaraeg,,Private Employee,,m
+84,mot,Arenas, Marife Aville,,Government Employee,,f
+85,fat,Angiwan Jr., Philip Chawana,,Housepainter,,m
+85,mot,Angiwan, Purisima Cawilan,,N/A,,f
+86,fat,Austria, Sukarno De Guzman,,Engineer,,m
+86,mot,Austria, Marilou Aquino,,Housewife,,f
+87,fat,Batang, Romel Piano,,Laborer,,m
+87,mot,Basilio, Olivia Arias,,OFW,,f
+88,fat,Buan, Reynold Decembrano,,Nurse,,m
+88,mot,Buan, Eva Marie Bueno,,N/A,,f
+89,fat,Cabotaje, Arcel Lazarte,,Sales Representative,,m
+89,mot,Cabotaje, Jessica Geronimo,,College Instructor,,f
+90,fat,Corpuz, Rogelio Pascua,,Retired Engineer,,m
+90,mot,Corpuz, Ester Patiag,,Housewife,,f
+91,fat,Heruela, Eleazer Calonge,,Farmer,,m
+91,mot,Heruela, Maria Theresa Supsupin,,Housewife,,f
+91,sib,Heruela, Michael Supsupin,1993-01-08,Auditor,,m
+91,sib,Heruela, Trizia Mae Supsupin,1997-02-12,Student,,f
+91,sib,Heruela, Karl Dominique Supsupin,2009-04-14,Student,,m
+91,chi,Heruela,Zhion Brayden,2016-08-07,,,m
+93,fat,Dy Tioco, Ernesto Sarmiento,,n/a,,m
+93,mot,Dy Tioco, Juliana Toreja,,n/a,,f
+93,spo,Dy Tioco, Ma. Regina Tanes,,SME,,f
+97,fat,Salvaleon, Arturo Cuyo,,Welder,,m
+97,mot,Allas, Elizabeth Macabitas,,OFW,,f
+97,spo,Salvaleon, Myra Bel-ot,1995-11-04,Virtual Assistant,"Odessa, Texas",f
+97,sib,Salvaleon, Mae Kathleen Allas,,,,f
+97,sib,Salvaleon, Paolo Allas,,,,m
+97,sib,Salvaleon, Christian Allas,,,,m
+97,sib,Salvaleon, Edgar John Allas,,,,m
+97,chi,,Nashvee Elle,2015-10-02,,,m
+98,fat,Lleva, Nestor Alarcon,,Civil Engineer,,m
+98,mot,Lleva, Evelyn Garcia,,Secondary School Teacher,,f
+99,fat,Parrocha, Democrito Refuerzo,,PLDT Employee,,m
+99,mot,Padilla, Adela Dacanay,,Housewife,,f
+100,fat,Del Rosario, Carlos Ricasio,,Retired Soldier,,m
+100,mot,Del Rosario, Cynthia Doyaoen,,Bank Manager,,f
+101,fat,Soriano. Roberto Arcellana,,,DECEASED,,m
+101,mot,Soriano, Clarita Flores,,Housewife,,f
+101,sib,Soriano, Michael Paul,1977-06-17,,,m
+101,sib,Teotico, Michell Antonette F,1980-03-13,Manager,,f
+101,sib,Soriano, Angelica Louise,2001-08-21,Student,,f
+102,fat,Razote, Ramon Fernandez,,Professional Teacher,,m
+102,mot,Ragamat, Victoria Quiton,,Professional Nurse,,f
+102,spo,Fantiyao, Marlyn Falangon,,Prefessional Teacher,,f
+103,fat,ILOA, ANTHONY DUYA,,DECEASE,,m
+103,mot,ILAO, RACHEL ESTILLORE,,MED-TECH,,f
+103,spo,ILAO, GEMMA MINA VILLA,,HOUSEWIFE,,f
+103,chi,ILAO,ZOE MAXXINE,2015-03-30,,,f
+104,fat,Cabrera, herminio Ramos,,Farmer,,m
+104,mot,Cabrera, Aurora Lee,,Housewife,,f
+104,sib,Cabrera, Marlo Lee,,Business,,m
+104,sib,Cabrera, Darnel Lee,,Business,,m
+105,fat,Bucaoto, Aldin Tuliio,,Businessman,,m
+105,mot,Bucaoto, Minerva Vallejos,,Office Clerk,,f
+105,sib,Bucaoto, Jan Vincent,2002-04-16,Student,,m
+106,fat,Kiweng, George Galambas,,DECEASED,,m
+106,mot,Kiweng, Aida Salingbay,,Dress Maker,,f
+106,sib,Kiweng, Gigi Salingbay,,Overseas Worker,,f
+106,sib,Kiweng, Abex Salingbay,,,,m
+107,fat,Boado Jr., Teofilo Andrada,,Carpenter,,m
+107,mot,Rivera, Ermelinda Gago,,Housewife,,f
+108,mot,Uy, Cristina Labay,,Housewife,,f
+108,sib,Uy, Keithley Mhaye Labay,1997-07-24,Nurse,,f
+108,sib,Lanuza, John Mobarac,1969-01-08,Nurse,,m
+108,sib,Lanuza, Kier Michael Uy,2007-03-19,N/A,,m
+109,fat,Balinggan, Lucio Dangga-as,,Electrician,,m
+109,mot,Balinggan, Faustina Caday-as,,Optemetrist,,f
+109,spo,Balinggan, Mynne Pagtan,,Branch Operations Associate,East West Unibank,f
+109,sib,Balinggan, John Mark C,,Engineer,,m
+109,sib,Balinggan, Joan Ann C,,Accountant,,f
+109,sib,Balinggan, John mark Caday-as,,Engineer,,m
+109,sib,Balinggan, Joan Ann Caday-as,,Accountant,,f
+109,chi,Balinggan,Louise Blaise,2015-12-02,,,m
+110,fat,Kumar, Blajit,,Businessman,,m
+110,mot,Kaur, Balwinder,,Housewife,,f
+111,fat,Erasquin, Jess Cuizzon,,Church Pastor,,m
+111,mot,Erasquin, Isabella Verzosa,,Public School Teacher,,f
+111,sib,Agor, Jessebelle Erasquin,1985-04-23,Broker,,f
+111,sib,Erasquin, Josiah Verzosa,1989-05-04,Copywriter,,m
+112,fat,Embernate, Cristobal Galace,,Mechanic,,m
+112,mot,Embernate, Babelyn Dacillo,,Housewife,,f
+113,fat,Cacas,Rodrigo Bucsit,,,,m
+113,mot,Cacas, Lorna Tadeo,,,,f
+113,sib,Cacas, Gerald Tadeo,,ECE,,m
+113,sib,Cacas, Mary Lara Camille,,Business Analyst,,f
+114,fat,Benauro, Joselito Abero,,OFW,,m
+114,mot,Benauro, Perina Palo,,OFW,,f
+115,fat,Mendez, Sotero Intay,,Businessman,,m
+115,mot,Mendez, Violeta Afidchao,,Businessman,,f
+116,fat,Castañeda, Edmund Valera,,Police,,m
+116,mot,Acosta, Valeriana Mauricio,,House Wife,,f
+117,fat,Manalansan, Arnel Montemayor,,Business Man,,m
+117,mot,Manalansan, Gladys Mae Villanueva,,Housewife,,f
+118,fat,Mamenta, Reynaldo Vinluan,,Retired PNP,,m
+118,mot,Mamenta, Ruby Allas,,Housewife,,f
+118,sib,Mamenta, Rey Julius Allas,1992-10-04,,,m
+119,fat,Madayag, Rodolfo De Castro,,Safety Supervisor,,m
+119,mot,Miller, Janet Gagil,,Sari-Sari Store,,f
+119,sib,Madayag, Wreneo Joe Miller,,,,m
+119,sib,Madayag, Rodolfo Miller,,,,m
+120,fat,Lacanlale, Zaldt Canilao,,Deceased,,m
+120,mot,Lacanlale. Anita Masangcay,,,Housewife,,f
+121,fat,Rojas, Dominador Jr Passion,,Businessman,,m
+121,mot,Rojas, Eloisa Tan,,Manager,,f
+121,sib,Rojas, Jun Tan,,Businessman,,m
+121,sib,Rojas, John Dave Tan,1985-01-15,Businessman,,m
+121,sib,Rojas, Junel Tan,1986-10-20,n/a,,m
+121,sib,Rojas, Jamie Tan,1988-09-19,Supervisor,,m
+121,sib,Rojas, James Christopher Tan,1990-02-09,,,m
+121,sib,Rojas, Bea Louise Tan,1995-08-08,,,f
+122,fat,Quodala, Darwin Natata,,Seaman,,m
+122,mot,Quodala, Thelma Rollo,,LGU/ Government Employee,,f
+122,sib,Senados, Diana Janin Quodala,1988-01-13,housewife,,f
+122,sib,Quodala, Desiree Mae Rollo,1991-05-24,nurse,,f
+122,sib,Quodala, Julienne Gail,1999-06-21,College Student,,f
+123,fat,Pulido, Eugenio Mejia,,Business Man,,m
+123,mot,Pulido Agnes Valdez,,,Business woman,,f
+124,fat,Pascual, Jose Arcilla,,School Service Driver,,m
+124,mot,Pascual, Marites Capili,,Production,,f
+124,sib,Pascual, Francis Michael,,Architecture,,m
+125,fat,Palo, Rolando Palma,,Minister,,m
+125,mot,Cortez, Tessie Agno,,Minister,,f
+125,sib,Palo, rolijames Cortez,1987-12-04,Self Employed,,m
+125,sib,Palo, Alpha Cortez,1991-06-18,Nurse,,m
+125,sib,Palo, Jonah Cortez,1993-11-18,Teacher,,f
+126,fat,Ortigas, Jr. Gaston Dayrit,,Professor,,m
+126,mot,Garcia, Rita Delgado,,Sales Executive,,f
+127,fat,Zamora, Ales Enriquez,,Self Employed,,m
+127,mot,Zamora, Elbina Cancino,,Housewife,,f
+128,fat,Solomon, Bartolome Hernandez,,Deceased,,m
+128,mot,Solomon, Dinnah Delos Santos,,Teacher,,f
+129,fat,Sitjak, Dalton Francisco,,Worker,,m
+129,mot,Tuballes, Ma. Susan Paitone,,Deceased,,f
+130,fat,Suyam, Miguel Kichas,,Plumber,,m
+130,mot,Suyam, Irene Cagas,,A.W.,,f
+131,fat,Coy-om, Patrick Kiteng,,Retired Fireman,,m
+131,mot,Langato, Virginia Sagandoy,,Store Owner,,f
+131,sib,Daisa, Elvie Coy-om,1980-09-02,Computer Shop Owner,,m
+131,sib,Coy-om, Ryan Rey Langato,1984-04-04,N/A,,m
+131,sib,Coy-om, Jenny Claire Langato,1987-08-08,Overseas Filipino Worker,,f
+131,sib,Coy-om, Arnold Langato,1989-03-24,Fireman,Beauro of Fire Portection,m
+131,sib,Coy-om, Erick Janseen Langato,1991-01-24,Fireman,Beauro of Fire Portection,m
+132,fat,Vincente, Daniel Dumalos,,farmer,,m
+132,mot,Vicente, Jane Ngayawon,,Farmer,,f
+132,sib,Vicente, Jehda Vicente,,Farmer,,f
+132,sib,Vicenten, Daniel Vicente,,Farmer,,m
+132,sib,Vicente, Jehuiada Vicente,,Driver,,f
+132,sib,Vicente, Jadarose,,,,f
+132,sib,Vicente, Jasper Vicente,,,,m
+133,fat,Supnet JR, Gerardo Estalilla,,,,m
+133,mot,Supnet, Remedios Carbonell,,,,f
+133,chi,Alzaga,Damien Avery,2015-10-10,,,m
+133,chi,Alzaga,Freyja Thiassi,2016-12-28,,,f
+134,fat,Cruz Sr, Ernesto Catahan,,,,m
+134,mot,Cruz, Lolita Caasi,,Housewife,,f
+134,sib,Cruz, Leonardo Caasi,,Fisherman,,m
+134,sib,Cruz Jr, Ernesto Caasi,,Fisherman,,m
+134,sib,Molo, Liezel Cruz,,,,f
+134,sib,Banggoy, Marissa Cruz,,Housekeeper,,f
+134,sib,Mundo, Marienel Cruz,,Housewife,,f
+135,mot,Malalis, Maria Charito Gutierrez,,Unemployed,,f
+135,chi,Valdez,Cyrus,2008-07-19,,,m
+136,fat,Cabrillas, Armando Catigay,,Retired Electrician,,m
+136,mot,Cabrillas, Dahlia Octaviano,,House wife,,f
+136,sib,Madriaga, Khristina Cabrillas,,OFW,,f
+136,sib,Cabrillas Jr, Armando Bautista,,Call Center Agent,,m
+137,fat,Sab-it, Porton Capdos,,Farmer,,m
+137,mot,Sab-it, Gladdys Guzman,,,,f
+137,sib,Sat-ib, Eugene Sinong,,Machine Operator,,m
+137,sib,Sab-it, Rex Sinong,,Equipment Engineer,,m
+137,sib,Namuro, Esther Sinong,,Housewife,,f
+137,sib,Sab-it, Mylene,1996-05-16,,,f
+138,fat,Antonio, Ronald Tagudar,,,,m
+138,mot,Antonio, Mary Eileen Mallare,,Dentist,,f
+138,sib,Antonio, Ronald Ace Flora,1990-04-27,Business Man,,m
+138,sib,Villanueva, Eric Flora,1982-03-12,Supervisor,,m
+138,sib,Pimentel, Jennifer Villanueva,1980-09-08,Nurse,,f

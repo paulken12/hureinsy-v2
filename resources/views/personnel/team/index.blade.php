@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="bd bgc-white mt-4">
+    <div class="bd bgc-white">
         <div class="layers">
             <div class="layer w-100 p-20">
                 <h4 class="lh-1">The Brainiacs</h4>

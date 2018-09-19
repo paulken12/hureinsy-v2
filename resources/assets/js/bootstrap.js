@@ -1,3 +1,5 @@
+import  PerfectScrollbar from 'perfect-scrollbar';
+import  DataTable from 'datatables';
 
 
 window._ = require('lodash');
@@ -56,3 +58,6 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+window.PerfectScrollbar = PerfectScrollbar;
+window.DataTable = DataTable;

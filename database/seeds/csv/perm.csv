@@ -1,0 +1,8 @@
+name,display_name,description
+create-user,Create User,Create User
+read-user,Read User,Read User
+update-user,Update User,Update User
+delete-user,Delete User,Delete User
+update-profile,Update Profile,Update Profile
+create-profile,Create Profile,Create Profile
+read-profile,Read Profile,Read Profile

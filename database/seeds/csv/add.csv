@@ -1,0 +1,269 @@
+emp_basic_id,master_address_key,unit_num,block,street_name,subdivision,barangay,city,province,zip_code
+1,pa,135, Purok 1,,,Lucnab Barangay, Baguio City, Benguet,2600
+1,ra,135, Purok 1,,,Lucnab Barangay, Baguio City, Benguet,2600
+2,pa,48-B ,,,,Scout Barrio,Baguio City, Benguet,2600
+2,ra,48-B ,,,,Scout Barrio,Baguio City, Benguet,2600
+3,pa,46A ,,Mangga Road,, Loakan Proper, Baguio City, Benguet,2600
+3,ra,46A ,,Mangga Road,, Loakan Proper, Baguio City, Benguet,2600
+4,pa,99A,,, Sta. Escolastica Village,, Baguio City, Benguet,2600
+4,ra,99A,,, Sta. Escolastica Village,, Baguio City, Benguet,2600
+5,pa,1043,,,,Bontoc Vill Virac, Itogon, Benguet,2904
+5,ra,1043,,,,Bontoc Vill Virac, Itogon, Benguet,2904
+6,pa,95,,,Purok 5, Sta. Cruz Highway, Alicia, Isabela,3306
+6,ra,22,, Purok, Pongian, Loakan Proper, Baguio City, Benguet,2600
+7,pa,G1, Block 4,,Crystal Dale Subdivision, Bakakeng Central, Baguio City, Benguet,2600
+7,ra,G1, Block 4,,Crystal Dale Subdivision, Bakakeng Central, Baguio City, Benguet,2600
+8,pa,30,,, Happy Glen Loop, Brgy. Salud Mitra, Baguio City, Benguet,2600
+8,ra,30,,, Happy Glen Loop, Brgy. Salud Mitra, Baguio City, Benguet,2600
+9,pa,46,,, Interior A Balacbac Rd., SantoTomas Proper, Baguio City, Benguet,2600
+9,ra,46,,, Interior A Balacbac Rd., SantoTomas Proper, Baguio City, Benguet,2600
+10,pa,66,,Purok 6, Apugan, Irisan, Baguio City, Benguet,2600
+10,ra,66,,Purok 6, Apugan, Irisan, Baguio City, Benguet,2600
+11,pa,7104,,, Purok 5, Kias, Baguio City, Benguet,2600
+11,ra,7104,,, Purok 5, Kias, Baguio City, Benguet,2600
+12,pa,18,,,, Middle Rock Quarry, Baguio City, Benguet,2600
+12,ra,18,,,, Middle Rock Quarry, Baguio City, Benguet,2600
+13,pa,92,,,, Brgy. Camangaan, Binalonan, Pangasinan,2436
+13,ra,136B,,,,,Liwanag  Loakan, Baguio City,2600
+14,pa,,,, Northhills Commercial Building 9, Lower General Luna, Baguio City, Benguet,2600
+14,ra,,,, Northhills Commercial Building 9, Lower General Luna, Baguio City, Benguet,2600
+15,pa,IC-109A,,,Casa Beati, Betag, La Trinidad, Benguet,2601
+15,ra,IC-109A,,,Casa Beati, Betag, La Trinidad, Benguet,2601
+16,pa,275,,, Purok 2, Lower West Camp 7, Baguio City, Benguet,2600
+16,ra,275,,, Purok 2, Lower West Camp 7, Baguio City, Benguet,2600
+17,pa,,,,,Bagsangan, Irosin, Sorsogon ,
+17,ra,20,,,, Magsaysay Private Road, Baguio City, Benguet,2600
+18,pa,, Block 15,, Lot 30 Marville Homes Subdivision, Tadiangan, Tuba, Benguet,2603
+18,ra,, Block 15,, Lot 30 Marville Homes Subdivision, Tadiangan, Tuba, Benguet,2603
+19,pa,45,,,, Manga Rd. Loakan, Baguio City, Benguet,2600
+19,ra,45,,,, Manga Rd. Loakan, Baguio City, Benguet,2600
+20,pa,118, Pugaro District,,,, Dagupan City, Pangasinan,2400
+20,ra,104,, Marnique Street ,,Upper Engineers Hill, Baguio City,Benguet ,2600
+21,pa,67,,, Marcos Highway, Bakakeng Central, Baguio City, Benguet,2600
+21,ra,67,,, Marcos Highway, Bakakeng Central, Baguio City, Benguet,2600
+22,pa,Rm. 306,, Synita Bldg., Kayang St., Azkco Brgy, Baguio City, Benguet,2600
+22,ra,Rm. 306,, Synita Bldg., Kayang St., Azkco Brgy, Baguio City, Benguet,2600
+23,pa,302,, Strawberry st. San Francisco,, Mabalacat, Pampanga ,,
+23,ra,302,, Strawberry st. San Francisco,, Mabalacat, Pampanga ,,
+24,pa,3D,,Sto Nino., Marcos Highway, Central Bakakeng, Baguio City, Benguet,2600
+24,ra,3D,,Sto Nino., Marcos Highway, Central Bakakeng, Baguio City, Benguet,2600
+25,pa,JB089,, Lower Capjaran, Km. 4, Pico, La Trinidad, Benguet,2601
+25,ra,JB089,, Lower Capjaran, Km. 4, Pico, La Trinidad, Benguet,2601
+26,pa,151,, Chamomile St., Sunnyside Fairview, ,Baguio City, Benguet,2600
+26,ra,151,, Chamomile St., Sunnyside Fairview,,Baguio City, Benguet,2600
+27,pa,196,,, Dalan na bato, Pasig, Candaba, Pampanga,2013
+27,ra,20,,Magsaysay Private Road ,,,Baguio City, Benguet,2600
+28,pa,51,,,, Nangalisan Proper, Tuba, Benguet,2603
+28,ra,51,,,, Nangalisan Proper, Tuba, Benguet,2603
+29,pa,3,,, Bekes, Alno, La Trinidad, Benguet,2601
+29,ra,3,,, Bekes, Alno, La Trinidad, Benguet,2601
+30,pa,3,, Pine Street, Richwood Subdivision, Guisad Road, Baguio City, Benguet,2600
+30,ra,3,, Pine Street, Richwood Subdivision, Guisad Road, Baguio City, Benguet,2600
+31,pa,26,,,, Hilltop Road Hilltop-Kayang, Baguio City, Benguet,2600
+31,ra,3rd flr. 14-C,,,, Upper Market, Baguio City, Benguet,2600
+32,pa,220,,, Doña Mercedes Subd., Nalsian, Calasiao, Pangasinan,2418
+32,ra,,,, Pines park, KM 4, La Trinidad, Benguet,
+33,pa,718,,,,  Veterans Compound Camp Allen, Baguio City, Benguet,2600
+33,ra,718,,,,  Veterans Compound Camp Allen, Baguio City, Benguet,2600
+34,pa,,,,, Zone 3 Calantac, Alcala, Cagayan,3507
+34,ra,126,,  Purok 1, Lower Ferguson, Guisad Surong, Baguio City, Benguet,2600
+35,pa,520,,, Purok 5, Camp Allen, Baguio City, Benguet,2600
+35,ra,520,,, Purok 5, Camp Allen, Baguio City, Benguet,2600
+36,pa,17,, Camte Compound, Purok Cudirao, Loakan Proper, Baguio City, Benguet,2600
+36,ra,17,, Camte Compound, Purok Cudirao, Loakan Proper, Baguio City, Benguet,2600
+37,pa,M13476,,, Chinese Village, Pico, La Trinidad, Benguet,2601
+37,ra,M13476,,, Chinese Village, Pico, La Trinidad, Benguet,2601
+38,pa,AC148,,, Central, Ambiong, La Trinidad, Benguet,2601
+38,ra,AC148,,, Central, Ambiong, La Trinidad, Benguet,2601
+39,pa,211,, Novales St., Sta. Maria, , Castillejos, Zambales,
+39,ra,211,, Novales St., Sta. Maria,, Castillejos, Zambales,
+40,pa,27,,,, KM 3 Marcos Highway, Baguio City, Benguet,2600
+40,ra,27,,,, KM 3 Marcos Highway, Baguio City, Benguet,2600
+41,pa,230,,,, Lower Ferguson Central Guisad, Baguio City, Benguet,2600
+41,ra,230,,,, Lower Ferguson Central Guisad, Baguio City, Benguet,2600
+42,pa,221P,,,, Fuentes Dominican Hill, Baguio City, Benguet,2600
+42,ra,221P,,,, Fuentes Dominican Hill, Baguio City, Benguet,2600
+43,pa,,,,, Tamac, Villaviciosa, Abra,
+43,ra,57,,Purok 7, Saint Joseph Village, Navy Base, Baguio City, Benguet,2600
+44,pa,210,, Valdez St. Marisol Village,,Brgy. Ninoy Aquino, Angeles City, Pampanga ,2009
+44,ra,210,, Valdez St. Marisol Village,,Brgy. Ninoy Aquino, Angeles City, Pampanga ,2009
+45,pa,,,, Purok Lakay-Lakay, Taggat Norte, Claveria, Cagayan,3519
+45,ra,149,,, Camp 8, Kennon Road, Baguio City, Benguet,2600
+46,pa,102,,,, Camp Dangwa, La Trinidad, Benguet,2601
+46,ra,102,,,, Camp Dangwa, La Trinidad, Benguet,2601
+47,pa,27,,, Brookspoint, Aurora Hill, Baguio City, Benguet,2600
+47,ra,27,,, Brookspoint, Aurora Hill, Baguio City, Benguet,2600
+48,pa,32,,, Purok 5, Km. 5 Asin Road, Baguio City, Benguet,2600
+48,ra,32,,, Purok 5, Km. 5 Asin Road, Baguio City, Benguet,2600
+49,pa,100,,, M. Roxas St., Brookside, Baguio City, Benguet,2600
+49,ra,100,,, M. Roxas St., Brookside, Baguio City, Benguet,2600
+50,pa,,,,, Poblacion, Balungao, Pangasinan,2442
+50,ra,,,,, Poblacion, Balungao, Pangasinan,2442
+51,pa,79,,, Lower Apugan, Sto. Tomas Central, Baguio City, Benguet,2600
+51,ra,79,,, Lower Apugan, Sto. Tomas Central, Baguio City, Benguet,2600
+52,pa,48,,, Saint Patrick Road, Irisan, Baguio City, Benguet,2600
+52,ra,48,,, Saint Patrick Road, Irisan, Baguio City, Benguet,2600
+53,pa,D-A-3,  207-208,,, Holyghost Extension, Baguio City, Benguet,2600
+53,ra,61,, Mabini St. District 1,,, Cauayan City, Isabela,
+54,pa,,,,,Pangapisan North, Lingayen, Pangasinan ,
+54,ra,44,,,, purok 6 west Gibraltar, Baguio City, Benguet,2600
+55,pa,,,Callalily Apartment, Sandiko Street, Salud Mitra, Baguio City, Benguet,2600
+55,ra,,,Callalily Apartment, Sandiko Street, Salud Mitra, Baguio City, Benguet,2600
+56,pa,002-A,,, Kalapati Extension, Dizon Subdivision, Baguio City, Benguet,2600
+56,ra,002-A,,, Kalapati Extension, Dizon Subdivision, Baguio City, Benguet,2600
+57,pa,,,BLK. 4,, Sampaloc St., Brgy. Maligaya, Tarlac City,2300
+57,ra,99C,,,  Ledesma St., Aurora Hill, Baguio City, Benguet,2600
+58,pa,122,, Loakan Apugan, Purok 3, Spring Hill, Baguio City, Benguet,2600
+58,ra,122,, Loakan Apugan, Purok 3, Spring Hill, Baguio City, Benguet,2600
+59,pa,37,,,, Ambiong Road, Baguio City, Benguet,2600
+59,ra,37,,,, Ambiong Road, Baguio City, Benguet,2600
+60,pa,,,Home Sweet Home Compound, Governor pack Road,Military Cut off, Baguio City, Benguet,2600
+60,ra,,,Home Sweet Home Compound, Governor pack Road,Military Cut off, Baguio City, Benguet,2600
+61,pa,,,,, Purok 5 Sagat, Cordon, Isabela,3312
+61,ra,303,,,, T. Alonzo, Baguio City, Benguet,2600
+62,pa,5,, Madayag Street,, Natividad, Naguilian, La Union,2511
+62,ra,5,, Madayag Street,, Natividad, Naguilian, La Union,2511
+63,pa,86,,,Upper Purok 2, Sto. Rosario Valley, Baguio City, Benguet,2600
+63,ra,86,,,Upper Purok 2, Sto. Rosario Valley, Baguio City, Benguet,2600
+64,pa,26,,,, Lower Dagsian, Baguio City, Benguet,2600
+64,ra,26,,,, Lower Dagsian, Baguio City, Benguet,2600
+65,pa,708,,, Makati City land 9, Dela Rosa Street, Makati, Manila,
+65,ra,708,,, Makati City land 9, Dela Rosa Street, Makati, Manila,
+66,pa,238,,,,Upper San Vicente, Baguio City, Benguet,2600
+66,ra,238,,,,Upper San Vicente, Baguio City, Benguet,2600
+67,pa,DA 055,,, Upper Tomay, Bahong, La Trinidad, Benguet,2601
+67,ra,DA 055,,, Upper Tomay, Bahong, La Trinidad, Benguet,2601
+68,pa,54,,  Palma St.,, Palma-Urbano Brgy., Baguio City, Benguet,2600
+68,ra,54,,  Palma St.,, Palma-Urbano Brgy., Baguio City, Benguet,2600
+69,pa,361,,, Zone 5, Barangay Rang-ayan, Science City of Muñoz, Nueva Ecija,3119
+69,ra,361,,, Zone 5, Barangay Rang-ayan, Science City of Muñoz, Nueva Ecija,3119
+70,pa,,,,Block 6B, Victoria-Lapaz Rd. San Gavino, Victoria, Tarlac,2313
+70,ra,,,,Block 6B, Victoria-Lapaz Rd. San Gavino, Victoria, Tarlac,2313
+71,pa,91,,,,, Landas Mangaldan, Pangasinan,2432
+71,ra,89,,,, Purok 3 Central Fairview, Baguio City , Benguet,2600
+72,pa,102,,,,  Carlatan, San Fernando City, La Union,
+72,ra,102,,,,  Carlatan, San Fernando City, La Union,
+73,pa,90,,, Purok 15, Irisan, Baguio City, Benguet,2600
+73,ra,90,,, Purok 15, Irisan, Baguio City, Benguet,2600
+74,pa,31,,,, San Roque Village, Baguio City, Benguet,2600
+74,ra,31,,,, San Roque Village, Baguio City, Benguet,2600
+75,pa,50,,,, City Camp Central, Baguio City, Benguet,2600
+75,ra,50,,,, City Camp Central, Baguio City, Benguet,2600
+76,pa,71,,, Sitio Dapiting, Alapang, La Trinidad, Benguet,
+76,ra,71,,, Sitio Dapiting, Alapang, La Trinidad, Benguet,
+77,pa,842,,,,Baguio Gold ,Tuding Itogon ,Benguet ,2604
+77,ra,,,,, Tuding, Itogon, Benguet,2604
+78,pa,91,,,Purok Padiwan ,Loakan Proper, Baguio City, Benguet,2600
+78,ra,91,,,Purok Padiwan ,Loakan Proper, Baguio City, Benguet,2600
+79,pa,,,,,San Francisco Sur, Sudipen, la Union,2520
+79,ra,40,,,, New Lucban, Baguio City , Benguet,2600
+80,pa,205,,,, ,Palaris Asingan, Pangasinan,2439
+80,ra,205,,,,,Palaris Asingan, Pangasinan,2439
+81,pa,441,,,,capalangan, apalit, pampanga,
+81,ra,441,,,,capalangan, apalit, pampanga,
+82,pa,169,,, Naguilian Road, Lourdes Extension, Baguio City, Benguet,2600
+82,ra,169,,, Naguilian Road, Lourdes Extension, Baguio City, Benguet,2600
+83,pa,3F 105,,, Purok 2, Pinget, Baguio City, Benguet,2600
+83,ra,3F 105,,, Purok 2, Pinget, Baguio City, Benguet,2600
+84,pa,212,,, Coquia Road, Malued District, Dagupan City, Pangasinan,2400
+84,ra,301,,, Remedios, Teodora Alonzo, Baguio City, Benguet,2600
+85,pa,161,,,Purok 15, Irisan, Baguio City, Benguet,2600
+85,ra,161,,,Purok 15, Irisan, Baguio City, Benguet,2600
+86,pa,413,,, Zarate Village, Pinsao Proper, Baguio City, Benguet,2600
+86,ra,413,,, Zarate Village, Pinsao Proper, Baguio City, Benguet,2600
+87,pa,126,,, M. Roxas Street, Imelda Village, Baguio City, Benguet,2600
+87,ra,126,,, M. Roxas Street, Imelda Village, Baguio City, Benguet,2600
+88,pa,50,,,Chapis Village, Bakakeng Central, Baguio City, Benguet,2600
+88,ra,50,,,Chapis Village, Bakakeng Central, Baguio City, Benguet,2600
+89,pa,69,,,, BGH Compound, Baguio City, Benguet,2600
+89,ra,69,,,, BGH Compound, Baguio City, Benguet,2600
+90,pa,11,, Rubby Street, NPC Subd., Irisan Purok 20, Baguio City, Benguet,2600
+90,ra,11,, Rubby Street, NPC Subd., Irisan Purok 20, Baguio City, Benguet,2600
+91,pa,18,,,,Honeymoon Road, Baguio City, Benguet,2600
+91,ra,18,,,,Honeymoon Road, Baguio City, Benguet,2600
+93,pa,146,,,,Purok 2, Sto. Niño Hagonoy ,Bulacan,3002
+93,ra,49,,,, Queen of Apostles Lourdes, Baguio City, Benguet,2600
+97,pa,276,,,, Legaspi, Tayug, Pangasinan,2445
+97,ra,234-A,,,,  Pinsao Proper, Baguio City, Benguet,2600
+98,pa,92,, Yap Street, South Sanitary Camp, Trancoville , Baguio City, Benguet,2600
+98,ra,92,, Yap Street, South Sanitary Camp, Trancoville , Baguio City, Benguet,2600
+99,pa,81,,,,Provincial Road, Tay-ac Rosario, La Union,2506
+99,ra,81,,,,Provincial Road, Tay-ac Rosario, La Union,2506
+100,pa,6023A,, Purok 6,, Kias, Baguio City, Benguet,2600
+100,ra,6023A,, Purok 6,, Kias, Baguio City, Benguet,2600
+101,pa,9,, Armenia Street, Middle Quezon Hill ,, Baguio City, Benguet,2600
+101,ra,9,, Armenia Street, Middle Quezon Hill ,, Baguio City, Benguet,2600
+102,pa,159,,Purok 1, Upper East Woodsgate, Camp 7, Baguio City, Benguet,2600
+102,ra,159,,Purok 1, Upper East Woodsgate, Camp 7, Baguio City, Benguet,2600
+103,pa,88,,,,Alfonso Tabora, Baguio City, Benguet,2600
+103,ra,88,,,,Alfonso Tabora, Baguio City, Benguet,2600
+104,pa,,,,,Cabrera Orence, Narvacan, Ilocos Sur,
+104,ra,,,,,Cabrera Orence, Narvacan, Ilocos Sur,
+105,pa,795,,,, Purok 5 Irisan, Baguio City, Benguet,2600
+105,ra,795,,,, Purok 5 Irisan, Baguio City, Benguet,2600
+106,pa,63,,,, Crystal Cave, Baguio City, Benguet,2600
+106,ra,63,,,, Crystal Cave, Baguio City, Benguet,2600
+107,pa,82,, Purok 7, San Luis Extension, Bang-ar Subdivision, Baguio City, Benguet,2600
+107,ra,82,, Purok 7, San Luis Extension, Bang-ar Subdivision, Baguio City, Benguet,2600
+108,pa,27,,, Happy Homes Old Lucban, Happy Homes, Baguio City, Benguet,2600
+108,ra,27,,, Happy Homes Old Lucban, Happy Homes, Baguio City, Benguet,2600
+109,pa,28-A,, Kalapati Street, Dizon Subdivision,, Baguio City, Benguet,2600
+109,ra,28-A,, Kalapati Street, Dizon Subdivision,, Baguio City, Benguet,2600
+110,pa,6,99,, Evangelista Street, Leonila Hill, Baguio City, Benguet,2600
+110,ra,6,99,, Evangelista Street, Leonila Hill, Baguio City, Benguet,2600
+111,pa,38,,,, Guinatan,Iligan City, Isabela,3300
+111,ra,38,,,, Guinatan,Iligan City, Isabela,3300
+112,pa,AE-83,,,, Western Buyagan Poblacion, La trinidad, Benguet,
+112,ra,AE-83,,,, Western Buyagan Poblacion, La trinidad, Benguet,
+113,pa,,,,Purok Bubon, Loakan Road, Baguio City, Benguet,2600
+113,ra,,,,Purok Bubon, Loakan Road, Baguio City, Benguet,2600
+114,pa,,,,Don Quintin Paredes, Poblacion East, Pidigan, Abra,
+114,ra,77C,,  Leonen Building T. Alonza Street,,, Baguio City, Benguet,2600
+115,pa,,,,,Palatong Tabio, Mankayan, Benguet,2602
+115,ra,4/F FD - 11OE,,, Tebteb, Balili, La trinidad, Benguet,2601
+116,pa,18A,, Kanaryu Street, Dizon Subdivision,, Baguio City, Benguet,2600
+116,ra,18A,, Kanaryu Street, Dizon Subdivision,, Baguio City, Benguet,2600
+117,pa,4B,,,, ORS Compound, Baguio City, Benguet,2600
+117,ra,13C,,, St. Anthony Street, San Cacrlos heights, Baguio City, Benguet,2600
+118,pa,13,,,, Rimando ,Baguio City, Benguet,2600
+118,ra,13,,,, Rimando ,Baguio City, Benguet,2600
+119,pa,Cottage 5,, Star Apple Street, Philex Mines ,, Tuba, Benguet,2603
+119,ra,Cottage 5,, Star Apple Street, Philex Mines ,, Tuba, Benguet,2603
+120,pa,43,,, Purok 6, Bakakeng Norte, Baguio City, Benguet,2600
+120,ra,43,,, Purok 6, Bakakeng Norte, Baguio City, Benguet,2600
+121,pa,184,,,, Laraya Street, Baguio City, Benguet,2600
+121,ra,184,,,, Laraya Street, Baguio City, Benguet,2600
+122,pa,192,,,, Nanglawlawan, Bangan-oda Agno, Pangasinan ,2408
+122,ra,50,,,, Green Water Village, Baguio City, Benguet,2600
+123,pa,19,,,,Santiago, Linmansangan Binalolnan, Pangasinan,2436
+123,ra,19,,,,Santiago, Linmansangan Binalolnan, Pangasinan,2436
+124,pa,36,,,, Valenzuela Salud Motra, Baguio City, Benguet,2600
+124,ra,36,,,, Valenzuela Salud Motra, Baguio City, Benguet,2600
+125,pa,116,,,, Happy Homes Campo Sioco Ferdinand, Baguio City, Benguet,2600
+125,ra,116,,,, Happy Homes Campo Sioco Ferdinand, Baguio City, Benguet,2600
+126,pa,615,,, Purok 9, Barangay Dontogan, Baguio City, Benguet,2600
+126,ra,615,,, Purok 9, Barangay Dontogan, Baguio City, Benguet,2600
+127,pa,128,,,Purok 3, Red Rose Alley Central Fairview, Baguio City, Benguet,2600
+127,ra,128,  ,,Purok 3, Red Rose Alley Central Fairview, Baguio City, Benguet,2600
+128,pa,2nd Floor,272,, Bronze St. Upper Quezon Hill,, Baguio City, Benguet,2600
+128,ra,2nd Floor,272,, Bronze St. Upper Quezon Hill,, Baguio City, Benguet,2600
+129,pa,19354,,,Ilang-Ilang ST., San Isidro Matatdo, Paranaque City,,1700
+129,ra,6A,,, Drix Mae Ann Kim Apt Magsaysay, Loakan Rd, Baguio City, Benguet,2600
+130,pa,1009A,,,Pine Tree, Kias, Baguio City, Benguet,2600
+130,ra,1009A,,,Pine Tree, Kias, Baguio City, Benguet,2600
+131,pa,41,,, purok 7, Pinsao Pilot Project, Baguio City, Benguet,2600
+131,ra,41,,, purok 7, Pinsao Pilot Project, Baguio City, Benguet,2600
+132,pa,,,,Pingew, Baculongan Sur, Buguias, Benguet,2601
+132,ra,AE-229,,,, Poblacion Buyagan, La Trinidad, Benguet,2601
+133,pa,120,,, Purok Magsaysay, Loakan Proper, Baguio City, Benguet,2600
+133,ra,120,,, Purok Magsaysay, Loakan Proper, Baguio City, Benguet,2600
+134,pa,187,,,,, Barangay Gama Sta. Cruz, Zambales,2213
+134,ra,37,,,, Cresencia Village Bokawkan Road, Baguio City, Benguet,2600
+135,pa,37,,, Cresencia Village, Bokawkan Road, Baguio City, Benguet,2600
+135,ra,37,,, Cresencia Village, Bokawkan Road, Baguio City, Benguet,2600
+136,pa,469,,,, Lennec, Guimba, Nueva Ecija,
+136,ra,70,, Evangelista Street,, North Sanitary Camp, Baguio City, Benguet,2600
+137,pa,Me92,,,, Lamtang Puguis, La trinidad, Benguet,2601
+137,ra,Me92,,,, Lamtang Puguis, La trinidad, Benguet,2601
+138,pa,22,,, Old Forestry Compound, Lower Engineers Hill, Baguio City, Benguet,2600
+138,ra,22,,, Old Forestry Compound, Lower Engineers Hill, Baguio City, Benguet,2600

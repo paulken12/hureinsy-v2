@@ -11,21 +11,15 @@
 // ---------------------------------------------------------
 // @Sidebar
 // ---------------------------------------------------------
-%show-sidebar{
-  display: block;
-}
-
-%hide-sidebar{
-  display: none;
-}
 
 .sidebar {
+
   background-color: $default-white;
   bottom: 0;
   overflow: hidden;
   position: fixed;
   top: 0;
-  transition: all 0.2s ease;
+  transition: all .5s ease;
   width: $offscreen-size;
   z-index: 1000;
 
@@ -51,13 +45,12 @@
 
       .sidebar-menu {
         overflow-x: hidden;
-
+        transition: all .5s ease;
         > li {
           > a {
             .title {
+
               display: none;
-              visibility: hidden;
-              opacity: 0;
             }
           }
         }
@@ -78,46 +71,40 @@
       }
     }
 
-    &:hover {
-      width: $offscreen-size;
-
-      .sidebar-inner {
-        .sidebar-logo {
-          border-bottom: 1px solid $border-color;
-          padding: 0 20px;
-
-        }
-
-
-        .sidebar-menu {
-          > li {
-            > a {
-              .title {
-                display: inline-block;
-                transition-delay: 1s;
-                visibility: ani;
-                opacity: 1;
-
-              }
-            }
-          }
-
-          li {
-            &.dropdown {
-              .arrow {
-                opacity: 1;
-              }
-            }
-
-            &.open {
-              > ul.dropdown-menu {
-                display: block !important;
-              }
-            }
-          }
-        }
-      }
-    }
+    //&:hover {
+    //  width: $offscreen-size;
+    //  transition: all .5s ease;
+    //  .sidebar-inner {
+    //    .sidebar-logo {
+    //      border-bottom: 1px solid $border-color;
+    //      padding: 0 20px;
+    //    }
+    //
+    //    .sidebar-menu {
+    //      > li {
+    //        > a {
+    //          .title {
+    //            display: inline-block;
+    //          }
+    //        }
+    //      }
+    //
+    //      li {
+    //        &.dropdown {
+    //          .arrow {
+    //            opacity: 1;
+    //          }
+    //        }
+    //
+    //        &.open {
+    //          > ul.dropdown-menu {
+    //            display: block !important;
+    //          }
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
   }
 
   @include to($breakpoint-md) {
@@ -139,102 +126,53 @@
 // @Sidebar Header
 // ---------------------------------------------------------
 
+
 .sidebar-logo {
   border-bottom: 1px solid $border-color;
   border-right: 1px solid $border-color;
   line-height: 0;
   padding: 0 20px;
-  transition: all 0.2s ease;
+  transition: all .5s ease;
 
-  %transition {
-    -webkit-transition: all 1s linear;
-    -moz-transition: all 1s linear;
-    -o-transition: all 1s linear;
-    transition: all 1s linear;
-  }
-  
-  %ani {
+  .sidebar-open{
     transition: all .5s ease;
-  }
-
-  .user-close{
-    @extend %ani;
-    text-align: center;
-    img{
-      @extend %ani;
-      height: 70px;
-      width: 70px;
-      padding: 10px;
-      margin-bottom: 1rem;
-    }
+    margin: 20px;
     span{
-      @extend %ani;
-      display: none;
+      visibility: hidden;
+      animation: 0s linear .5s forwards delayedShow ;
     }
-    p{
-      @extend %ani;
-      display: none;
+
+    small{
+      margin-top: 20px;
     }
-  }
-  .user-open{
-    @extend %ani;
-    padding: 20px;
-    text-align: center;
 
     img{
-      @extend %ani;
-      height: 100px;
-      width: 100px;
-      margin-bottom: 1rem;
+      transition: all .5s ease;
+      height: 100px; width: 100px; margin-bottom: 20px;
     }
+  }
+
+  .sidebar-close{
+
+    margin: 5px;
     span{
-      @extend %ani;
-      display: block;
-      margin-bottom: 1rem;
-    }
-    p{
-      @extend %ani;
-      display: block;
-      margin-top: 0.8rem;
-    }
-  }
-
-  //#user-info{
-  //  padding: 20px;
-  //  text-align: center;
-  //
-  //  img{
-  //    height: 100px;
-  //    width: 100px;
-  //    margin-bottom: 1rem;
-  //  }
-  //  span{
-  //    margin-bottom: 1rem;
-  //  }
-  //  p{
-  //    margin-top: 0.8rem;
-  //  }
-  //}
-
-  a {
-    display: inline-block;
-    width: 100%;
-
-    .logo {
-      background-position: center left;
-      background-repeat: no-repeat;
-      display: inline-block;
-      min-height: calc(#{$header-height} - 1px);
-      width: 100%;
-      width: 70px;
+      transition: all .5s ease;
+      display: none;
     }
 
-    .logo-text {
-      color: $grey-900;
+    small{
+      transition: all .5s ease;
+      display: none;
+    }
+    img{
+      transition: all .5s ease;
+      height: 60px; width: 60px; margin-bottom: 20px;
     }
   }
+
 
   .mobile-toggle {
+    transition: all .5s ease;
     display: none;
     float: right;
     font-size: 18px;
@@ -411,7 +349,7 @@
 // ---------------------------------------------------------
 
 .is-collapsed {
-
+  transition: all .5s ease;
   .sidebar {
     @include from($breakpoint-xl) {
       width: $collapsed-size;
@@ -471,7 +409,6 @@
       //        &.dropdown {
       //          .arrow {
       //            opacity: 1;
-      //
       //          }
       //        }
       //
@@ -531,5 +468,12 @@
     @include to($breakpoint-md) {
       left: 0;
     }
+  }
+}
+
+
+@keyframes delayedShow {
+  to {
+    visibility: visible;
   }
 }

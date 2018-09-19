@@ -12,7 +12,6 @@
 // ---------------------------------------------------------
 
 .page-container {
-  margin-top:-20px;
   min-height: 100vh;
   padding-left: $offscreen-size;
   transition: all 0.2s ease;
@@ -71,7 +70,6 @@
 
 .is-collapsed {
   .page-container {
-    margin-top:-20px;
     padding-left: $collapsed-size;
 
     @include to($breakpoint-md) {

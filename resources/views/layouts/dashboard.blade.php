@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:v-on="http://www.w3.org/1999/xhtml"
-      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +23,7 @@
             position: fixed;
             height: 100vh;
             width: 100%;
+            overflow: hidden;
             background: #fff;
             z-index: 90000
         }
@@ -41,6 +41,7 @@
             left: calc(50% - 20px);
             background-color: #333;
             border-radius: 100%;
+            overflow: hidden;
             -webkit-animation: sk-scaleout 1s infinite ease-in-out;
             animation: sk-scaleout 1s infinite ease-in-out
         }
@@ -71,13 +72,14 @@
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('css/themify-icons.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="overflow: hidden;">
 
     @include('layouts.loader')
 
     <div id="app">
-        <div class="app" v-bind:class="{ 'is-collapsed' : isClose }">>
+        <div class="app" v-bind:class="{ 'is-collapsed' : isCollapsed }">
 
             @include('layouts.sidebar')
 

@@ -1,0 +1,33 @@
+
+#employee-list_wrapper{
+  label{
+    margin: 1rem;
+  }
+
+  #employee-list_info{
+    margin: 1rem;
+  }
+
+  .current{
+    background: #2196f3;
+  }
+
+  .paginate_button:hover{
+    background: #2196f3 ;
+  }
+
+  #employee-list_paginate{
+    margin: 1rem;
+  }
+
+  .table{
+    th{
+      cursor: cell;
+    }
+    td{
+      padding: 0.75rem;
+      border-top: 1px solid #dee2e6;
+    }
+  }
+}
+

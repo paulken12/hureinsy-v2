@@ -52,10 +52,10 @@
 
     .profile-content {
       float: left;
-      width: 60%;
+      //width: 60%;
       position: relative;
       padding: 0;
-      background-color: $default-white;
+      //background-color: $default-white;
       // min-height: calc(100vh - #{$header-height});
 
       &.no-inbox-view {

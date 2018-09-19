@@ -1,103 +1,129 @@
-<div class="sidebar" @mouseover="mouseHover" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<div class="sidebar" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="sidebar-inner">
+        <!-- ### $Sidebar Header ### -->
         <div class="sidebar-logo">
-            <div v-bind:class="{'user-close': isClose,'user-open': !isClose }">
-                <div >
-                    <img class="rounded-circle"
-                         src="{{asset('images/avatars/raj_male.png')}}"
-                         alt="User avatar">
+            <div class="peers ai-c fxw-nw">
+                <div v-bind:class="{'peer peer-greed text-center sidebar-open':isCollapsed, 'sidebar-close':!isCollapsed,  }">
+                    <img src="{{Auth::user()->avatar_path}}" alt="" class="rounded-circle">
+                    <br>
+                    <span class="pb-4">
+                        <small style="text-transform: uppercase;">
+                            {{Auth::user()->roles->pluck('display_name')->first()}}
+                        </small>
+                    </span>
+
+
                 </div>
-
-                <span><a href="{{route('profile')}}">Kenneth Paul Cabrillas</a></span>
-
-                <p >
-                    <small >DEVELOPER</small>
-                </p>
+                <div class="peer">
+                    <div class="mobile-toggle sidebar-toggle">
+                        <a class="td-n" v-on:click="isCollapsed = !isCollapsed">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-
         </div>
-        <ul class="sidebar-menu scrollable pos-r">
-            <li class="nav-item mT-30 active"><a class="sidebar-link" href="{{route('home')}}"><span class="icon-holder"><i
-                                class="c-blue-500 ti-home"></i> </span><span class="title">Dashboard</span></a></li>
-            <li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i
-                                class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>
-            <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
-                                class="c-blue-500 ti-alarm-clock"></i> </span><span
-                            class="title">Attendance Management</span></a></li>
-            <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
-                                class="c-blue-500 ti-eye"></i> </span><span class="title">Personnel Action</span></a>
-            </li>
-            <li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span
-                            class="icon-holder"><i class="c-blue-500 ti-layout-list-thumb"></i> </span><span
-                            class="title">Employee Management</span> <span class="arrow"><i
-                                class="ti-angle-right"></i></span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="sidebar-link" href="basic-table.html">Personnel List</a></li>
-                    <li><a class="sidebar-link" href="datatable.html">New Employee</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                <span class="icon-holder">
-                  <i class="c-blue-500 ti-settings"></i>
-                </span>
-                    <span class="title">Admin Setting</span>
-                    <span class="arrow">
-                  <i class="ti-angle-right"></i>
-                </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);">
-                            <span>Roles</span>
-                        </a>
+
+        <!-- ### $Sidebar Menu ### -->
+        <div class="remain-height pos-r scrollable pb-5">
+            <ul class="sidebar-menu ">
+                <li class="nav-item mT-30 active"><a class="sidebar-link" href="{{route('dashboard')}}"><span
+                                class="icon-holder"><i
+                                    class="c-blue-500 ti-home"></i> </span><span class="title">Dashboard</span></a></li>
+                <li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i
+                                    class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>
+
+                @if(Auth::user()->hasRole('titan'))
+                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
+                                        class="c-blue-500 ti-alarm-clock"></i> </span><span
+                                    class="title">Attendance Management</span></a></li>
+                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
+                                        class="c-blue-500 ti-eye"></i> </span><span class="title">Personnel Action</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);">
-                            <span>Company Masters</span>
-                            <span class="arrow">
-                      <i class="ti-angle-right"></i>
-                    </span>
-                        </a>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span
+                                    class="icon-holder"><i class="c-blue-500 ti-layout-list-thumb"></i> </span><span
+                                    class="title">Employee Management</span> <span class="arrow"><i
+                                        class="ti-angle-right"></i></span></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="javascript:void(0);">Departments</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">Positions</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">Companies</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">Teams</a>
-                            </li>
+                            <li><a class="sidebar-link" href="{{route('personnel')}}">Personnel List</a></li>
+                            <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
+                            <li><a class="sidebar-link" href="#">Reports</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="javascript:void(0);">
-                            <span>Other Masters</span>
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                        <i class="c-blue-500 ti-settings"></i>
+                        </span>
+                            <span class="title">Admin Setting</span>
                             <span class="arrow">
-                      <i class="ti-angle-right"></i>
-                    </span>
+                        <i class="ti-angle-right"></i>
+                        </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="javascript:void(0);">Address Types</a>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Manage Users</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);">Blood Types</a>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Role & Permission</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);">Civil Statuses</a>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Company Masters</span>
+                                    <span class="arrow">
+            <i class="ti-angle-right"></i>
+            </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="javascript:void(0);">Departments</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Positions</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Companies</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Teams</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);">Education Types</a>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Other Masters</span>
+                                    <span class="arrow">
+            <i class="ti-angle-right"></i>
+            </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="javascript:void(0);">Address Types</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Blood Types</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Civil Statuses</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Education Types</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
-                </ul>
-            </li>
-        </ul>
+                    @else
+                    <li class="nav-item"><a class="sidebar-link" href="{{route('personnel')}}"><span class="icon-holder"><i
+                                        class="c-blue-500 ti-list"></i> </span><span class="title">Personnel List</span></a></li>
+                    @endif
+
+            </ul>
+        </div>
     </div>
 </div>
+

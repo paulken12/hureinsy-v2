@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -40,5 +41,42 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         return '/dashboard';
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->confirmed())
+        {
+            $message = 'You must confirm your email address';
+
+            // Log the user out.
+            $this->logout($request);
+
+            // Return them to the log in form.
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    // This is where we are providing the error message.
+                    $this->username() => $message,
+                ]);
+        }
+
+        // if the user is Inactive == 2
+        if ($user->master_emp_status_key === 2) {
+
+            $message = 'Sorry, account has been deactivated';
+
+            // Log the user out.
+            $this->logout($request);
+
+            // Return them to the log in form.
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    // This is where we are providing the error message.
+                    $this->username() => $message,
+                ]);
+        }
+
     }
 }

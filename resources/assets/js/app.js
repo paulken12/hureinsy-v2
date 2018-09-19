@@ -1,4 +1,3 @@
-import PerfectScrollbar from "perfect-scrollbar";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26,21 +25,23 @@ const app = new Vue({
     data: function()
     {
         return{
-            isClose: false
+            isCollapsed: true,
         }
     },
 
-    created: function(){
+
+    mounted: function () {
+
+        $('#employee-list').DataTable();
 
         const scrollables = $('.scrollable');
         if (scrollables.length > 0) {
-            scrollables.each((index, el) => {
-                new PerfectScrollbar(el);
+            scrollables.each((index, element) => {
+                console.log(element);
+                new PerfectScrollbar(element);
             });
         }
-    },
 
-    mounted: function () {
         $('.sidebar .sidebar-menu li a').on('click', function () {
             const $this = $(this);
 
@@ -92,12 +93,24 @@ const app = new Vue({
                 const href = $(this).attr('href');
                 const pattern = href[0] === '/' ? href.substr(1) : href;
                 return pattern === (window.location.pathname).substr(1);
-            })
+            });
+
+        /**
+         * Wait untill sidebar fully toggled (animated in/out)
+         * then trigger window resize event in order to recalculate
+         * masonry layout widths and gutters.
+         */
+        // $('#sidebar-toggle').click(e => {
+        //     e.preventDefault();
+        //     setTimeout(() => {
+        //         window.dispatchEvent(window.EVENT);
+        //     }, 300);
+        // });
     },
 
     methods: {
         mouseHover: function() {
-            this.isClose = false;
+            this.isCollapsed = true;
         }
     }
 });

@@ -15,7 +15,7 @@ class CreateEmpTrainingsTable extends Migration
     {
         Schema::create('emp_trainings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_basic_info_id');
+            $table->integer('emp_basic_id');
             $table->string('title')->nullable();
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();

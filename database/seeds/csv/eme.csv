@@ -1,0 +1,124 @@
+emp_basic_id,first_name,last_name,middle_name,contact_num,relationship
+1,Julie,Desierto,,9951463686,Mother
+2,Manuel,Dumpit,A.,(074)4448969,Father
+3,Norma,Abad,,9473730402,Mother
+4,Severino,Amurao,,9174004388,Father
+5,Rita,Balingdan,B.,9483337630,Mother
+6,Warren,Belason,A.,9175780635,Spouse
+7,Evelyn,Besa,,9173969945,Mother
+8,Alma,Brillantes,,9253916253,Parent
+9,Renel,Cacho,,9771386626,Husband
+10,Sofia Leah,Castro,,9187447823,Mother
+11,Edith,Chavez,S.,9087134867,Mother
+12,Felicitas,Garcia,,9228973269,Mother
+13,Aerson Dave,Quinto,,9178193673,Boyfriend
+14,Victorino,De  Guzman Jr.,P.,9287503519,Father
+17,Elisa,Lapira,E.,9462587813,Mother
+18,Cyrille,Mendoza,,9061528130,
+19,"Estolero,",Jerecho,,9175139876,Brother
+20,Milagro,Gabertan,C.,9094323838,Guardian
+21,Flora May,Garcia,A.,9158364563,Mother
+22,Jealyn,Ginez,B.,9207807554,Sister
+23,Melady,Gabertan,,9772083876,
+24,Mark,Gragasin,,,Father
+25,Ma. Isabel,Jacinto,G.,9498408032,Mother
+26,Danny,Joaquin,,9065393820,Brother
+27,Vilma,Lacanilao,,9995531152,Mother
+28,Orlando Mario,Lagasca,,9283996244,Father
+29,Raul,Leung,,9305777075,Father
+30,Elma,Liceralde,,445-3868,Mother
+31,Anselmo,Lim,,9228432928,Father
+32,Maria,Lomboy,D.,9283815117,Mother
+33,Mary Ann,Gelogo,,9173376319,Mother
+34,Menrado,Monzon,C.,9179949230,Father
+35,Halda,Pagaduan,O.,9396418268,Mother
+36,Norman,Patnaan,M.,9435691915,
+37,Emie,Polonio,M.,9994001164,Wife
+38,Florida,Quinio,A.,9284844164,Mother
+39,Romuald,Ragadio,,9216129818,Father
+41,Leonora,Rodriguez,S.,9126982741,Mother
+43,Carmen,Gut-Omen,,9951443335,
+44,Sirikit,Santos,,9269720407,Sister
+45,Edna,Siruno,C.,9296414060,Mother
+46,Felicidad,Solomon,,9182222193,Mother
+47,Ralph Glenn,Stewart,,9175288461,Husband
+48,Felicidad,Tambuyat,L.,9164897370,Mother
+49,Myrna,Toriado,,9165270198,Mother
+50,Ronald,Biag,A.,9167764198,Father
+51,Caroline,Napadao,P.,9209672349,Parent
+52,Mark Anthony,Balabag,,9063076997,Live-in partner
+53,Marissa,Orpilla,T.,9361708006,Mother
+54,Donnell,Macam,Santiago,9996917949,Eldest Brother
+55,Rosa,Pascua-Flores,,9300230035,Mother
+56,Iluminada,Lacaba,S.,9487108949,Mother
+57,Shaila Marie,Buada,A.,9778150043,Common Law Partner
+58,Maryphy,Sabado,M.,9152359107,
+60,Mina,Andres,,9127954860,Mother
+61,Patty,Gañalongo,,9162368329,Mother
+62,Paul Randee,Kimayong,,923398501,Brother
+63,Juanita,Rafols,L.,9165053749,Mother
+64,Wilma,Corpuz,,9163444072,Mother
+65,Jennylyn,Maligaya,,9173070240,Sister
+66,Maria,Roy,,9193560254,Mother
+67,Brenda,Wansi,,9497844901,Mother
+68,Cybill,Rillo,B.,744456276,Spouse
+69,Charlene Mae,Miguel,,9205040234,Cousin
+70,Janet,Layug,,9192312397,Mother
+77,Cesar,Mendoza,L.,0930-299-7500,Father
+78,Fermina Laza,Chan,,0915-304-1167,Mother
+79,Carmelita,Fajardo,A.,0929-289-3332,Mother
+80,Rubirosa,Domingo,,0927-356-7370,Mother
+81,loida,camaya,,9208407888,mother
+82,Loida,Foronda,,9420405467,mother
+83,Johnny,Las-sin,,9164978789,Father
+85,Philip,Angiwan,C.,9952365998,Father
+86,Marilou,Austria,,920923655,Mother
+87,Leah,Arias,B.,9989987105,Aunt
+88,Frances,Buan,B.,9175002078,Sister
+89,Arcel,Cabotaje,L.,9198281256,Father
+90,Ester,Corpuz,,9297344659,Mother
+91,Maria Theresa,Heruela,,9276395553,Mother
+92,Lina Fe,Bautista,C.,0927-852-8517,Mother
+93,Ma. Regina,Dy Tioco,,0946-708-9750,Spouse
+94,Marilyn,Solis,H.,0918-449-0547,Mother
+95,Janin Alyssa,Gacusan,,0926-673-1674,Sister
+96,Divino,Larangan,,0905-755-9684,Father
+97,Myra,Salvaleon,,0915-110-7781,Wife
+98,Evelyn,Lleva,G.,445-8381,Mother
+99,Adela,Parrocha,,0921-668-9593,Mother
+100,Carlos,Del Rosario Jr,R.,0977-843-5489,Father
+101,Clarita,Soriano,,0995-144-4898,Mother
+102,Marlyn,Razote,F.,0912-751-9483,Wife/Spouse
+103,Gemma Mina Villa,Ilao,,0926-350-3932,WIFE
+104,Marlo,Cabrera,,0943-299-6112,Father
+105,Minerva,Bocaoto,V.,0920-976-7748,Mother
+106,Aida,Kiweng,S.,0912-726-8648,Mother
+107,Teofilo,Boado Jr.,A.,0909-810-4350,Father
+108,Mari Chris,Uy,L.,0929-813-9622,Aunt
+109,Mynne,Balinggan,P.,0927-330-1405,Wife
+110,Baljit,Kumar,,0915-204-3086,Father
+111,Jess,Eraquin,C.,0906-488-1429,Father
+112,Babelyn,Embernate,,0925-832-3349,Mother
+113,Camille,Cacas,,0936-391-6337,Sibling (Sisiter)
+114,Kay-Gee,Benauro,,0936-817-8272,Sister
+115,Fema,Mendez,,0912-693-2420,Sister
+116,Valeriana,Mauricio,,0975-008-0996,Mother
+117,Gladys Mae,Manalansan,V.,0908-524-2151,Mother
+118,Ruby,Mamenta,,0999-517-6468,Mother
+119,Janet,Madayag,,0947-473-3710,Mother
+120,Anita,Lacanlale,,0997-174-7395,Mother
+121,Eloisa,Rojas,T.,0977-811-7069,Mother
+122,Thelma,Quodala,R.,0916-494-7212,Mother
+123,Agnes,Pulido,V.,0920-603-7964,Mother
+125,Tessie,Palo,,0939-506-0099,Mother
+126,Rita,Ortigas,Garcia,0917-500-0042,Mother
+127,Brendalyn,Zamora,,0912-862-6269,Sister
+128,Dinnah,Solomon,DS.,9776237839,Mother
+130,Irene,Suyam,,9273559070,Mother
+131,Patrick,Coy-om Sr.,K.,9494988887,Father
+132,Jodarose,Vicente,,9078256379,Sister
+133,Jerrick Flovd,Alzaga,,9464492902,Common-Law
+134,Karen Joy,Malalis,,9217891408,Fiancee
+135,Maria Charito,Malalis,G.,9217891085,Mother
+136,Sheila Rose,Magno,,9306983466,Girlfriend
+137,Porton,Sab-it,,9302237467,Father
