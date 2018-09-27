@@ -13,12 +13,20 @@ class MasterEmployeeStatus extends Seeder
     {
         $values = [
             [
-                'key'=>'ua',
-                'employee_status'=>'Active'
+                'key'=>'project-based',
+                'employee_status'=>'Project-based'
             ],
             [
-                'key'=>'ui',
+                'key'=>'regular',
                 'employee_status'=>'Inactive'
+            ],
+            [
+                'key'=>'probationary',
+                'employee_status'=>'Probationary'
+            ],
+            [
+                'key'=>'resigned',
+                'employee_status'=>'Resigned'
             ],
 
         ];

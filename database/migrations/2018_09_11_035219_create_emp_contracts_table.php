@@ -16,13 +16,15 @@ class CreateEmpContractsTable extends Migration
         Schema::create('emp_contracts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('emp_basic_id');
+            $table->string('company_email')->nullable();
             $table->string('master_company_key');
-            $table->date('contract_start');
-            $table->date('contract_end');
+            $table->integer('master_job_title_id')->nullable();
+            $table->string('master_shift_key')->nullable();
+            $table->date('contract_start')->nullable();
+            $table->date('contract_end')->nullable();
             $table->string('employment_status');
             $table->date('resigned_date')->nullable();
-            $table->string('master_department_key');
-            $table->string('master_job_type_key');
+            $table->string('master_department_key')->nullable();
             $table->timestamps();
         });
     }

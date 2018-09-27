@@ -15,8 +15,8 @@ class CreateMasterJobTitlesTable extends Migration
     {
         Schema::create('master_job_titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
             $table->string('job_titles');
+            $table->string('description');
             $table->timestamps();
         });
     }

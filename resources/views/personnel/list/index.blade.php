@@ -23,30 +23,38 @@
                     </tfoot>
                     <tbody>
                     @foreach ($employees as $employee)
-                        <tr>
-                            <td class="text-center">
-                                <img class="bdrs-50p w-3r h-3r" alt="User Avatar"
-                                     src="{{$employee->user->avatar_path}}">
-                            </td>
-                            <td>
+                        @if($employee->isVerified($employee))
+                            <tr>
+                                <td class="text-center">
+                                    <img class="bdrs-50p w-3r h-3r" alt="User Avatar"
+                                         src="{{$employee->user->avatar_path}}">
+                                </td>
+                                <td>
 
-                                <div class="peer">
-                                    <h6 class="c-grey-900 mB-5"><a href="{{$employee->path()}}">{{$employee->first_name . " " . $employee->last_name}}</a></h6>
-                                    <div class="peer peer-greed">
-                                        <i class="mR-10 ti-id-badge"></i>
-                                        <span>{{$employee->company_id}}</span>
+                                    <div class="peer">
+                                        <h6 class="c-grey-900 mB-5"><a href="{{$employee->path()}}">{{$employee->first_name . " " . $employee->last_name}}</a></h6>
+                                        <div class="peer peer-greed">
+                                            <i class="mR-10 ti-id-badge"></i>
+                                            <span>{{$employee->company_id}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                My Team
-                            </td>
-                            <td>
-                                <a href="#"><span><i class="fa fa-print"></i> </span> <small> Print &nbsp;</small></a>
-                                <a href="#"><span><i class="fa fa-file-excel-o"></i></span> <small> Excel &nbsp;</small></a>
+                                </td>
+                                <td>
+                                    <div class="peer">
+                                        <p>My Team</p>
+                                        <div class="peer peer-greed">
+                                            <i class="mR-10 ti-id-badge"></i>
+                                            <span>Active</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#"><span><i class="fa fa-print"></i> </span> <small> Print &nbsp;</small></a>
+                                    <a href="#"><span><i class="fa fa-file-excel-o"></i></span> <small> Excel &nbsp;</small></a>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>

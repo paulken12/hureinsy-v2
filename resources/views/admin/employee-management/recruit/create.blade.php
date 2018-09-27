@@ -21,20 +21,26 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="ti-id-badge"></i></div>
                                             </div>
-                                            <input type="text" class="form-control" id="company_id" value="{{$company_id}}" readonly>
+                                            <input type="text" class="form-control" id="company_id"
+                                                   value="{{$company_id}}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <label class="sr-only" for="report_to">Report to</label>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text"><small>Reporting to</small></div>
+                                                <div class="input-group-text">
+                                                    <small>Reporting to</small>
+                                                </div>
                                             </div>
                                             <select name="report_to" id="report_to" class="form-control">
-                                                <option value="">Report to..</option>
-                                                {{--@foreach ($roles as $role)--}}
-                                                    {{--<option value="{{$role->name}}">{{$role->display_name}}</option>--}}
-                                                {{--@endforeach--}}
+                                                @foreach ($users as $user)
+                                                    @foreach ($admins as $admin)
+                                                        @if($user->roles->pluck('name')->first() === $admin->name)
+                                                            <option value="{{$user->id}}">{{$user->name ." - ". $admin->display_name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -72,7 +78,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="ti-email"></i></div>
                                                 </div>
-                                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                       placeholder="Email" required>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +102,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-success float-right" type="submit">Send Confirmation</button>
+                                    <button class="btn btn-success float-right" type="submit">Create Account</button>
                                 </div>
 
                             </form>

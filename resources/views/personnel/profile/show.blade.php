@@ -172,38 +172,7 @@
                          aria-labelledby="basic-tab">
                         <div class="profile-content-wrapper">
                             <!-- Header -->
-                            <div class="peers ai-c jc-sb pX-40 pY-30">
-                                <div class="peers peer-greed">
-                                    <div class="peer mR-20">
-                                        <img class="bdrs-50p w-6r h-6r" alt="User Avatar" src="{{$profile->user->avatar_path}}">
-                                    </div>
-                                    <div class="peer">
-                                        <h5 class="c-grey-900 mB-5">
-                                            {{$profile->first_name}} {{$profile->middle_name}} {{$profile->last_name}}
-                                            {{empty($profile->extension->name_extension) ? '':$profile->extension->name_extension}}
-                                        </h5>
-                                        <div class="peer peer-greed">
-                                            <i class="mR-10 ti-crown" title="Position"></i>
-                                            <span title="Position">Associate Software Engineer</span>
-                                        </div>
-                                        <div class="peer peer-greed">
-                                            <i class="mR-10 ti-email" title="Email"></i>
-                                            <span>{{$profile->user->email}}</span>
-                                        </div>
-                                        <div class="peer peer-greed">
-                                            <i class="mR-10 ti-write" title="Report to"></i>
-                                            <span><a href="{{route('profiles',$profile->reportToSlug())}}" title="Reporting to {{$profile->reportingTo()}}">{{$profile->reportingTo()}}</a></span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                                <div class="peer">
-                                    <i class="mR-10 ti-id-badge" title="Company ID"></i>
-                                    <span>{{$profile->company_id}}</span>
-                                    <br>
-                                </div>
-                            </div>
+                            @include('personnel.profile.include.info')
 
                             <!-- Content -->
                             <div class="bdT pX-40 pY-30">
@@ -225,12 +194,12 @@
                                         Civil Status: <span class="c-grey-900">{{$profile->civilStatus}}</span> <br>
                                         Citizenship: <span class="c-grey-900">{{$profile->citizenship}}</span> <br>
                                     </div>
-                                    <div class="col-7 p-0">
-                                        Birth date: <span class="c-grey-900">{{$profile->date_of_birth->format('jS \o\f F ,Y')}}</span> <br>
-                                        Birth place: <span class="c-grey-900">{{$profile->birth_place? : '-'}}</span> <br>
-                                    </div>
-
-
+                                    @can('view', $profile->user)
+                                        <div class="col-7 p-0">
+                                            Birth date: <span class="c-grey-900">{{$profile->date_of_birth->format('jS \o\f F ,Y')}}</span> <br>
+                                            Birth place: <span class="c-grey-900">{{$profile->birth_place? : '-'}}</span> <br>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -241,9 +210,20 @@
                         @permission('read-contract')
                             <div class="tab-pane fade profile-info" id="contract" role="tabpanel"
                                      aria-labelledby="contract-tab">
-                                    <div class="profile-info-body">
-                                        Contract
+                                <div class="profile-content-wrapper">
+                                    <!-- Header -->
+                                @include('personnel.profile.include.info')
+
+                                <!-- Content -->
+                                    <div class="bdT pX-40 pY-30">
+                                        <h5>Contract</h5>
+                                        <p>
+                                            Date Hired <br>
+                                            Employment status <br>
+
+                                        </p>
                                     </div>
+                                </div>
                             </div>
                         @endpermission
 

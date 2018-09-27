@@ -27,7 +27,7 @@ class CreateEmpBasicsTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('slug')->unique();
-            $table->integer('reporting_to');
+            $table->integer('reporting_to')->nullable();
             $table->timestamps();
         });
     }

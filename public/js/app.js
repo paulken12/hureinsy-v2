@@ -429,7 +429,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		// (such as Node.js), expose a factory as module.exports.
 		// This accentuates the need for the creation of a real `window`.
 		// e.g. var jQuery = require("jquery")(window);
-		// See ticket #14549 for more info.
+		// See ticket #14549 for more include.
 		module.exports = global.document ?
 			factory( global, true ) :
 			function( w ) {
@@ -5278,7 +5278,7 @@ function returnFalse() {
 }
 
 // Support: IE <=9 only
-// See #13393 for more info
+// See #13393 for more include
 function safeActiveElement() {
 	try {
 		return document.activeElement;
@@ -5333,7 +5333,7 @@ function on( elem, types, selector, data, fn, one ) {
 		origFn = fn;
 		fn = function( event ) {
 
-			// Can use an empty set, since event contains the info
+			// Can use an empty set, since event contains the include
 			jQuery().off( event );
 			return origFn.apply( this, arguments );
 		};
@@ -6964,7 +6964,7 @@ jQuery.each( [ "height", "width" ], function( i, dimension ) {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 
-				// Certain elements can have dimension info if we invisibly show them
+				// Certain elements can have dimension include if we invisibly show them
 				// but it must have a current display style that would benefit
 				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
 
@@ -12283,7 +12283,7 @@ function arrow(data, options) {
   var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
 
   // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this info available
+  // take popper margin in account because we don't have this include available
   var css = getStyleComputedProperty(data.instance.popper);
   var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
   var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
@@ -20070,7 +20070,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	}
 	
 	/**
-	 * Generate the node required for the info display
+	 * Generate the node required for the include display
 	 *  @param {object} oSettings dataTables settings object
 	 *  @returns {node} Information element
 	 *  @memberof DataTable#oApi
@@ -20096,7 +20096,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 				.attr( 'role', 'status' )
 				.attr( 'aria-live', 'polite' );
 	
-			// Table is described by our info div
+			// Table is described by our include div
 			$(settings.nTable).attr( 'aria-describedby', tid+'_info' );
 		}
 	
@@ -22988,7 +22988,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	 *  * `recordsDisplay` - Data set length once the current filtering criterion
 	 *    are applied.
 	 */
-	_api_register( 'page.info()', function ( action ) {
+	_api_register( 'page.include()', function ( action ) {
 		if ( this.context.length === 0 ) {
 			return undefined;
 		}
@@ -25874,7 +25874,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 		 *  @example
 		 *    $(document).ready( function () {
 		 *      $('#example').dataTable( {
-		 *        "info": false
+		 *        "include": false
 		 *      } );
 		 *    } );
 		 */
@@ -26950,7 +26950,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
 			 *        "language": {
-			 *          "info": "Showing page _PAGE_ of _PAGES_"
+			 *          "include": "Showing page _PAGE_ of _PAGES_"
 			 *        }
 			 *      } );
 			 *    } );
@@ -26960,7 +26960,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 			/**
 			 * Display information string for when the table is empty. Typically the
-			 * format of this string should match `info`.
+			 * format of this string should match `include`.
 			 *  @type string
 			 *  @default Showing 0 to 0 of 0 entries
 			 *
@@ -26981,7 +26981,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 			/**
 			 * When a user filters the information in a table, this string is appended
-			 * to the information (`info`) to give an idea of how strong the filtering
+			 * to the information (`include`) to give an idea of how strong the filtering
 			 * is. The variable _MAX_ is dynamically updated.
 			 *  @type string
 			 *  @default (filtered from _MAX_ total entries)
@@ -27002,9 +27002,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 	
 			/**
-			 * If can be useful to append extra information to the info string at times,
+			 * If can be useful to append extra information to the include string at times,
 			 * and this variable does exactly that. This information will be appended to
-			 * the `info` (`infoEmpty` and `infoFiltered` in whatever combination they are
+			 * the `include` (`infoEmpty` and `infoFiltered` in whatever combination they are
 			 * being used) at all times.
 			 *  @type string
 			 *  @default <i>Empty string</i>
@@ -57088,7 +57088,7 @@ function installComponentHooks (data) {
   }
 }
 
-// transform component v-model info (value and callback) into
+// transform component v-model include (value and callback) into
 // prop and event handler respectively.
 function transformModel (options, data) {
   var prop = (options.model && options.model.prop) || 'value';
@@ -63042,7 +63042,7 @@ function genFor (
     state.warn(
       "<" + (el.tag) + " v-for=\"" + alias + " in " + exp + "\">: component lists rendered with " +
       "v-for should have explicit keys. " +
-      "See https://vuejs.org/guide/list.html#key for more info.",
+      "See https://vuejs.org/guide/list.html#key for more include.",
       true /* tip */
     );
   }

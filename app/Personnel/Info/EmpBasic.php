@@ -126,18 +126,32 @@ class EmpBasic extends Model
     }
 
     public function reportingTo() {
-        $reporting = User::find($this->reporting_to)->basicInfo->first();
-        return $reporting->first_name." ".$reporting->last_name;
+        if(!empty($this->reporting_to))
+        {
+            $reporting = User::find($this->reporting_to)->basicInfo->first();
+            return $reporting->first_name." ".$reporting->last_name;
+        }
+        return "n/a";
     }
 
     public function reportToSlug() {
-        $report = User::find($this->reporting_to)->basicInfo->first();
-        return $report->slug;
+
+        if(!empty($this->reporting_to))
+        {
+            $report = User::find($this->reporting_to)->basicInfo->first();
+            return $report->slug;
+        }
+        return $this->slug;
+
     }
 
     public function scopeLastId() {
 
         $user_id = EmpBasic::orderBy('id','desc')->first();
         return $user_id->company_id + 1;
+    }
+
+    public function isVerified($employee) {
+        return $employee->user->verified === true ? true : false;
     }
 }

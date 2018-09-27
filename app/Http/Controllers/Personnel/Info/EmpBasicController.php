@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Personnel\Info;
 
 use App\Personnel\Info\EmpBasic;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

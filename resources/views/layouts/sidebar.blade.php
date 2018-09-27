@@ -33,13 +33,99 @@
                 <li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i
                                     class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>
 
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                        <i class="c-blue-500 ti-time"></i>
+                        </span>
+                        <span class="title">Attendace</span>
+                        <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if(Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Daily Time Record</span>
+                                    <span class="arrow">
+            <i class="ti-angle-right"></i>
+            </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="javascript:void(0);">Upload Raw Data</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Scheduler</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>SIL Management</span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
+                                    <span>Payroll Generator</span>
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0);">
+                                <span>My DTR</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0);">
+                                <span>Apprise Forms</span>
+                                <span class="arrow">
+            <i class="ti-angle-right"></i>
+            </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:void(0);">Late</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Absence</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Official Business</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Over Time</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Under Time</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Time In/Out Validation</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Under Time</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Change of Shift</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
                 @if(Auth::user()->hasRole('titan'))
-                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
-                                        class="c-blue-500 ti-alarm-clock"></i> </span><span
-                                    class="title">Attendance Management</span></a></li>
-                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
-                                        class="c-blue-500 ti-eye"></i> </span><span class="title">Personnel Action</span></a>
-                    </li>
+                    {{--<li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span--}}
+                                    {{--class="icon-holder"><i class="c-blue-500 ti-time"></i> </span><span--}}
+                                    {{--class="title">Attendance Management</span> <span class="arrow"><i--}}
+                                        {{--class="ti-angle-right"></i></span></a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--<li><a class="sidebar-link" href="#">DTR</a></li>--}}
+                            {{--<li><a class="sidebar-link" href="#">SIL Management</a></li>--}}
+                            {{--<li><a class="sidebar-link" href="#">Notify Supervisor</a></li>--}}
+                            {{--<li><a class="sidebar-link" href="#">Payroll Generator</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
                     <li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span
                                     class="icon-holder"><i class="c-blue-500 ti-layout-list-thumb"></i> </span><span
                                     class="title">Employee Management</span> <span class="arrow"><i
@@ -49,6 +135,9 @@
                             <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
                             <li><a class="sidebar-link" href="#">Reports</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
+                                        class="c-blue-500 ti-eye"></i> </span><span class="title">Personnel Action</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" href="javascript:void(0);">

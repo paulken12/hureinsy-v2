@@ -14,7 +14,7 @@ class MasterAddressType extends Seeder
         $values = [
             [
                 'key'=>'ra',
-                'address_type'=>'Residential Address'
+                'address_type'=>'Present Address'
             ],
             [
                 'key'=>'pa',

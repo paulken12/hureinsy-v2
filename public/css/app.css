@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+/*@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);*/
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10746,7 +10747,7 @@ hr {
   font-size: 10px;
   line-height: 40px;
   position: absolute;
-  right: 30px;
+  right: 20px;
   -webkit-transition: all 0.05s ease-in;
   transition: all 0.05s ease-in;
 }
