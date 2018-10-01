@@ -7,6 +7,8 @@ use App\Master\MasterCitizenship;
 use App\Master\MasterCivilStatus;
 use App\Master\MasterExtension;
 use App\Master\MasterGender;
+use App\Master\MasterJobTitle;
+use App\Team;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -154,4 +156,10 @@ class EmpBasic extends Model
     public function isVerified($employee) {
         return $employee->user->verified === true ? true : false;
     }
+
+    public function team($employee) {
+        $team = Team::where('id',$employee->roles->first()->pivot->team_id)->first();
+        return $team->display_name;
+    }
+
 }

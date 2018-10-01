@@ -1,5 +1,4 @@
-/*@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);*/
-/*!
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -75849,12 +75848,13 @@ table.dataTable.no-footer {
   margin: 1rem;
 }
 
-#employee-list_wrapper .table th {
+#employee-list_wrapper table th {
   cursor: cell;
 }
 
-#employee-list_wrapper .table td {
+#employee-list_wrapper table td {
   padding: 0.75rem;
+  vertical-align: middle;
   border-top: 1px solid #dee2e6;
 }
 

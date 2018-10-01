@@ -218,9 +218,18 @@
                                     <div class="bdT pX-40 pY-30">
                                         <h5>Contract</h5>
                                         <p>
-                                            Date Hired <br>
-                                            Employment status <br>
-
+                                            @foreach ($profile->contract as $contract)
+                                                Company Email : {{$contract->company_email}} <br>
+                                                Assignment : {{$contract->assignment}} <br>
+                                                Position : {{$contract->fullPosition}}<br>
+                                                Shift : {{$contract->master_shift_key}} <br>
+                                                Contract Start : {{$contract->contract_start}} <br>
+                                                Contract End : {{$contract->contract_end}} <br>
+                                                Resigned : {{$contract->resigned_date}}
+                                                <br>
+                                                Status : {{$contract->status}} <br>
+                                                Department : {{$contract->master_department_key}} <br>
+                                            @endforeach
                                         </p>
                                     </div>
                                 </div>

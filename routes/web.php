@@ -32,7 +32,7 @@ Route::group(['prefix'=>'raj-titans'], function ()
 
 /* ------------------ ADMINISTRATOR ------------------*/
 
-Route::group(['middleware' => ['auth','role:titan']],function()
+Route::group(['middleware' => ['auth','role:titan|admin']],function()
 {
     /* ------------------ RECRUIT ------------------*/
 

@@ -32,13 +32,14 @@
                                     class="c-blue-500 ti-home"></i> </span><span class="title">Dashboard</span></a></li>
                 <li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i
                                     class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>
-
+                <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
+                                    class="c-blue-500 ti-layout-tab"></i> </span><span class="title">Company Training</span></a></li>
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
                         <i class="c-blue-500 ti-time"></i>
                         </span>
-                        <span class="title">Attendace</span>
+                        <span class="title">Attendance</span>
                         <span class="arrow">
                         <i class="ti-angle-right"></i>
                         </span>

@@ -92,6 +92,7 @@
                                                     <div class="input-group-text"><i class="ti-eye"></i></div>
                                                 </div>
                                                 <select name="role_key" id="role_key" class="form-control">
+                                                    <option value="employee" readonly="">-Select Role-</option>
                                                     @foreach ($roles as $role)
                                                         <option value="{{$role->name}}">{{$role->display_name}}</option>
                                                     @endforeach
