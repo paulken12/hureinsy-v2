@@ -63,6 +63,45 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('/my-team', 'Personnel\Team\TeamController@index')->name('team');
 
+
+    /* ------------------ PAF MANAGER ------------------ */
+
+    Route::get('paf/search', 'Paf\RequestController@index')->name('paf.search');    
+
+    Route::post('paf/search/result', 'Paf\RequestController@search')->name('paf.search.result');
+
+    Route::get('paf/search/result/request/{emplid}', 'Paf\RequestController@show')->name('paf.search.result.show');    
+
+    Route::post('paf/search/result/request/submit', 'Paf\RequestController@store')->name('paf.search.result.store');
+
+    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.request.list');  
+
+    Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.list.reassess.show');
+
+    Route::post('paf/request/show/store/{form}', 'Paf\ReassessmentController@store')->name('paf.list.reassess.store');
+
+    /* ------------------ PAF HR ------------------ */ 
+
+    Route::get('paf/assessment/list', 'Paf\AssessmentController@list')->name('paf.assessment.list');    
+
+    Route::get('paf/assessment/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.assessment.list.show'); 
+
+    Route::post('paf/assessment/list/show/store', 'Paf\AssessmentController@assessment')->name('paf.assessment.list.store');
+
+    /* ------------------ PAF EXECUTIVE------------------ */
+
+    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.list.approval');
+
+    Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.list.approval.show');
+
+    Route::post('paf/approval/list/store', 'Paf\ApprovalController@store')->name('paf.list.approval.store');
+
+    /* ------------------ PAF USER ------------------ */
+
+    Route::get('paf/my_request/list', 'Paf\UserPafController@list')->name('paf.myrequest.list');
+
+    Route::get('paf/my_request/list/show/{form}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
+
 });
 
     /* ------------------ CONFIRMATION ------------------*/

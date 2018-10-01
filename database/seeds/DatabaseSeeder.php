@@ -33,6 +33,14 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterTeam::class);
         $this->call(MasterCompany::class);
         $this->call(RoleUser::class);
+        //Paf        
+        $this->call(MasterEmpStatusPaf::class);
+        $this->call(MasterStatusPaf::class);
+        $this->call(MasterSubStatusPaf::class);
+        $this->call(MasterScheduleTypePaf::class);
+        $this->call(StatusRole::class);
+        $this->call(SubStatusRole::class);
+
 //
 //        Schema::disableForeignKeyConstraints();
 //

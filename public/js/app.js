@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(5);
+var bind = __webpack_require__(6);
 var isBuffer = __webpack_require__(22);
 
 /*global toString:true*/
@@ -429,7 +429,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		// (such as Node.js), expose a factory as module.exports.
 		// This accentuates the need for the creation of a real `window`.
 		// e.g. var jQuery = require("jquery")(window);
-		// See ticket #14549 for more include.
+		// See ticket #14549 for more info.
 		module.exports = global.document ?
 			factory( global, true ) :
 			function( w ) {
@@ -5278,7 +5278,7 @@ function returnFalse() {
 }
 
 // Support: IE <=9 only
-// See #13393 for more include
+// See #13393 for more info
 function safeActiveElement() {
 	try {
 		return document.activeElement;
@@ -5333,7 +5333,7 @@ function on( elem, types, selector, data, fn, one ) {
 		origFn = fn;
 		fn = function( event ) {
 
-			// Can use an empty set, since event contains the include
+			// Can use an empty set, since event contains the info
 			jQuery().off( event );
 			return origFn.apply( this, arguments );
 		};
@@ -6964,7 +6964,7 @@ jQuery.each( [ "height", "width" ], function( i, dimension ) {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 
-				// Certain elements can have dimension include if we invisibly show them
+				// Certain elements can have dimension info if we invisibly show them
 				// but it must have a current display style that would benefit
 				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
 
@@ -10795,10 +10795,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   }
   return adapter;
 }
@@ -10873,10 +10873,119 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12283,7 +12392,7 @@ function arrow(data, options) {
   var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
 
   // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this include available
+  // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
   var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
   var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
@@ -13417,7 +13526,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13435,7 +13544,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13625,7 +13734,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13636,7 +13745,7 @@ var settle = __webpack_require__(25);
 var buildURL = __webpack_require__(27);
 var parseHeaders = __webpack_require__(28);
 var isURLSameOrigin = __webpack_require__(29);
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(9);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
@@ -13812,7 +13921,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13837,7 +13946,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13849,7 +13958,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13875,120 +13984,11 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(46);
+module.exports = __webpack_require__(49);
 
 
 /***/ }),
@@ -14014,6 +14014,7 @@ window.Vue = __webpack_require__(39);
 
 Vue.component('example-component', __webpack_require__(42));
 Vue.component('tab-profile', __webpack_require__(45));
+Vue.component('action-management', __webpack_require__(46));
 
 var app = new Vue({
     el: '#app',
@@ -14100,7 +14101,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 window._ = __webpack_require__(17);
-window.Popper = __webpack_require__(4).default;
+window.Popper = __webpack_require__(5).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -20070,7 +20071,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	}
 	
 	/**
-	 * Generate the node required for the include display
+	 * Generate the node required for the info display
 	 *  @param {object} oSettings dataTables settings object
 	 *  @returns {node} Information element
 	 *  @memberof DataTable#oApi
@@ -20096,7 +20097,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 				.attr( 'role', 'status' )
 				.attr( 'aria-live', 'polite' );
 	
-			// Table is described by our include div
+			// Table is described by our info div
 			$(settings.nTable).attr( 'aria-describedby', tid+'_info' );
 		}
 	
@@ -22988,7 +22989,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	 *  * `recordsDisplay` - Data set length once the current filtering criterion
 	 *    are applied.
 	 */
-	_api_register( 'page.include()', function ( action ) {
+	_api_register( 'page.info()', function ( action ) {
 		if ( this.context.length === 0 ) {
 			return undefined;
 		}
@@ -25874,7 +25875,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 		 *  @example
 		 *    $(document).ready( function () {
 		 *      $('#example').dataTable( {
-		 *        "include": false
+		 *        "info": false
 		 *      } );
 		 *    } );
 		 */
@@ -26950,7 +26951,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
 			 *        "language": {
-			 *          "include": "Showing page _PAGE_ of _PAGES_"
+			 *          "info": "Showing page _PAGE_ of _PAGES_"
 			 *        }
 			 *      } );
 			 *    } );
@@ -26960,7 +26961,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 			/**
 			 * Display information string for when the table is empty. Typically the
-			 * format of this string should match `include`.
+			 * format of this string should match `info`.
 			 *  @type string
 			 *  @default Showing 0 to 0 of 0 entries
 			 *
@@ -26981,7 +26982,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 			/**
 			 * When a user filters the information in a table, this string is appended
-			 * to the information (`include`) to give an idea of how strong the filtering
+			 * to the information (`info`) to give an idea of how strong the filtering
 			 * is. The variable _MAX_ is dynamically updated.
 			 *  @type string
 			 *  @default (filtered from _MAX_ total entries)
@@ -27002,9 +27003,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 	
 			/**
-			 * If can be useful to append extra information to the include string at times,
+			 * If can be useful to append extra information to the info string at times,
 			 * and this variable does exactly that. This information will be appended to
-			 * the `include` (`infoEmpty` and `infoFiltered` in whatever combination they are
+			 * the `info` (`infoEmpty` and `infoFiltered` in whatever combination they are
 			 * being used) at all times.
 			 *  @type string
 			 *  @default <i>Empty string</i>
@@ -47935,7 +47936,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(2), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(2), __webpack_require__(5)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -51889,7 +51890,7 @@ module.exports = __webpack_require__(21);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(5);
+var bind = __webpack_require__(6);
 var Axios = __webpack_require__(23);
 var defaults = __webpack_require__(3);
 
@@ -51924,9 +51925,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(10);
+axios.Cancel = __webpack_require__(11);
 axios.CancelToken = __webpack_require__(37);
-axios.isCancel = __webpack_require__(9);
+axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -52079,7 +52080,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(9);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -52512,7 +52513,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(34);
-var isCancel = __webpack_require__(9);
+var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(3);
 var isAbsoluteURL = __webpack_require__(35);
 var combineURLs = __webpack_require__(36);
@@ -52672,7 +52673,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(10);
+var Cancel = __webpack_require__(11);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -57088,7 +57089,7 @@ function installComponentHooks (data) {
   }
 }
 
-// transform component v-model include (value and callback) into
+// transform component v-model info (value and callback) into
 // prop and event handler respectively.
 function transformModel (options, data) {
   var prop = (options.model && options.model.prop) || 'value';
@@ -63042,7 +63043,7 @@ function genFor (
     state.warn(
       "<" + (el.tag) + " v-for=\"" + alias + " in " + exp + "\">: component lists rendered with " +
       "v-for should have explicit keys. " +
-      "See https://vuejs.org/guide/list.html#key for more include.",
+      "See https://vuejs.org/guide/list.html#key for more info.",
       true /* tip */
     );
   }
@@ -63990,14 +63991,14 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
@@ -64115,7 +64116,7 @@ if (false) {
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -64143,6 +64144,252 @@ module.exports = Component.exports
 
 /***/ }),
 /* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(47)
+/* template */
+var __vue_template__ = __webpack_require__(48)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\ActionManagement.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c502abe0", Component.options)
+  } else {
+    hotAPI.reload("data-v-c502abe0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['categories', 'subcategories'],
+
+	data: function data() {
+		return {
+			Categories: '',
+			SubCategories: ''
+		};
+	}
+});
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c("div", { staticClass: "input-group-prepend" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Categories,
+                expression: "Categories"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              name: "request_status",
+              id: "request_status",
+              required: ""
+            },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.Categories = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("--Select Category--")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category) {
+              return _c("option", { domProps: { value: category.id } }, [
+                _vm._v(_vm._s(category.request_status))
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.SubCategories,
+              expression: "SubCategories"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            name: "sub_request_status",
+            id: "sub_request_status",
+            required: ""
+          },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.SubCategories = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("--Select SubCategory--")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.subcategories, function(subcategory) {
+            return subcategory.master_id_status == _vm.Categories
+              ? _c("option", { domProps: { value: subcategory.id } }, [
+                  _vm._v(
+                    _vm._s(subcategory.sub_request_status) +
+                      " - " +
+                      _vm._s(subcategory.description)
+                  )
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    (_vm.Categories == "2" && _vm.SubCategories == "4") ||
+    _vm.SubCategories == "6"
+      ? _c("div", { staticClass: "row" }, [_vm._m(0)])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "proposed_effective_date" } }, [
+          _c("strong", [_vm._v("Date Effective")])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "date",
+            id: "date_effective",
+            name: "date_effective",
+            title: "Date_effective",
+            required: ""
+          }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c502abe0", module.exports)
+  }
+}
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

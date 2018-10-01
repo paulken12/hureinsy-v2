@@ -114,6 +114,45 @@
                     </ul>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                        <i class="c-blue-500 ti-write"></i>
+                        </span>
+                        <span class="title">Action Management</span>
+                        <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0);">
+                                <span>My request lists</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="{{route('paf.search')}}">
+                                <span>Request a form</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="{{route('paf.assessment.list')}}">
+                                <span>For Manager's reassessment</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="{{route('paf.assessment.list')}}">
+                                <span>For Hr's assessment</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0);">
+                                <span>For Executive's approval</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 @if(Auth::user()->hasRole('titan'))
                     {{--<li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span--}}
                                     {{--class="icon-holder"><i class="c-blue-500 ti-time"></i> </span><span--}}
