@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\PafNatureOfAction;
+use App\Paf\PafManagement;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
-use App\Helpers\Paf\PersonnelActionManagement;
+use App\Helper\Paf\PersonnelActionManagement;
 
 class ReassessmentController extends Controller
 {
     public function list()
     {
-    	$request_list = PafNatureOfAction::request();
+    	$request_list = PafManagement::request();
 
-    	return view('mpaf.list', compact('request_list'));
+    	return view('paf.mpaf.list', compact('request_list'));
     }
 
     public function show($form){
@@ -57,9 +57,9 @@ class ReassessmentController extends Controller
         $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('mpaf.showrequest', compact('form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status'));
+    	   return view('paf.mpaf.showrequest', compact('form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status'));
 		}else{
-    	   return view('mpaf.readrequest', compact('form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'hr_name', 'exec_name', 'get_paf_details'));
+    	   return view('paf.mpaf.readrequest', compact('form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'hr_name', 'exec_name', 'get_paf_details'));
         }
     }
 
@@ -67,7 +67,7 @@ class ReassessmentController extends Controller
     {
 
         $validator = $request->validate([
-            'employment_status' => 'exists:master_employment_statuses,key|required',
+            'employment_status' => 'exists:master_emp_status_pafs,key|required',
             'remarks'=>'required|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
@@ -143,6 +143,6 @@ class ReassessmentController extends Controller
 
         $compensation_update->save();
 
-    	return redirect(route('paf.list.reassess'))->with('success', 'Request form updated');
+    	return redirect(route('paf.reassess.list'))->with('success', 'Request form updated');
     }
 }

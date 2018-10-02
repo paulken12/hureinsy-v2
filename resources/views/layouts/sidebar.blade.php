@@ -119,14 +119,14 @@
                         <span class="icon-holder">
                         <i class="c-blue-500 ti-write"></i>
                         </span>
-                        <span class="title">Action Management</span>
+                        <span class="title">Personnel Action</span>
                         <span class="arrow">
                         <i class="ti-angle-right"></i>
                         </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="nav-item dropdown">
-                            <a href="javascript:void(0);">
+                            <a href="{{route('paf.myrequest.list')}}">
                                 <span>My request lists</span>
                             </a>
                         </li>
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="{{route('paf.assessment.list')}}">
+                            <a href="{{route('paf.reassess.list')}}">
                                 <span>For Manager's reassessment</span>
                             </a>
                         </li>
@@ -146,7 +146,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="javascript:void(0);">
+                            <a href="{{route('paf.approval.list')}}">
                                 <span>For Executive's approval</span>
                             </a>
                         </li>

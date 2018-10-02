@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\PafNatureOfAction;
+use App\Paf\PafManagement;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
-use App\Helpers\Paf\PersonnelActionManagement;
+use App\Helper\Paf\PersonnelActionManagement;
 
 class UserPafController extends Controller
 {
 
    public function list()
     {
-        $requestList = PafNatureOfAction::where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(15);
+        $requestList = PafManagement::where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(15);
 
-        return view('upaf.list', compact('requestList'));
+        return view('paf.upaf.list', compact('requestList'));
     }
 
     public function show($form){
@@ -46,6 +46,6 @@ class UserPafController extends Controller
 
         $sub_request_status = $user_role->sub_status;
 
-            return view('upaf.readpaf',compact('form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
+            return view('paf.upaf.readpaf',compact('form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
         }
 }

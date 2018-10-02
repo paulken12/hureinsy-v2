@@ -16,14 +16,14 @@
 
 		<div class="card">
 			<div class="card-header">
-				<h4><strong>Personnel Action Form (For Assessment)</strong></h4>
+				<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form (For Assessment)</strong></h4>
 			</div>
 
 			<form action="{{route('paf.assessment.list.store')}}" method="post">
 				<div class="card-body">
 					{{csrf_field()}}
 
-					<h4><strong>Employee Information</strong></h4>
+					<h4><i class="ti-user"></i> &nbsp; <strong>Employee Information</strong></h4>
 					<hr>
 
 					<div class="row">
@@ -73,7 +73,7 @@
 					</div>
 					
 					<hr>
-					<h4><strong>Nature of Action</strong></h4>
+					<h4><i class="ti-pencil"></i> &nbsp; <strong>Nature of Action</strong></h4>
 					<hr>
 
 					<div class="row">

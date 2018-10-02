@@ -74,11 +74,11 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::post('paf/search/result/request/submit', 'Paf\RequestController@store')->name('paf.search.result.store');
 
-    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.request.list');  
+    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
 
-    Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.list.reassess.show');
+    Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.reassess.list.show');
 
-    Route::post('paf/request/show/store/{form}', 'Paf\ReassessmentController@store')->name('paf.list.reassess.store');
+    Route::post('paf/request/show/store/{form}', 'Paf\ReassessmentController@store')->name('paf.reassess.list.store');
 
     /* ------------------ PAF HR ------------------ */ 
 
@@ -90,11 +90,11 @@ Route::group(['middleware' => ['auth']],function()
 
     /* ------------------ PAF EXECUTIVE------------------ */
 
-    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.list.approval');
+    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.approval.list');
 
-    Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.list.approval.show');
+    Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.approval.list.show');
 
-    Route::post('paf/approval/list/store', 'Paf\ApprovalController@store')->name('paf.list.approval.store');
+    Route::post('paf/approval/list/store', 'Paf\ApprovalController@store')->name('paf.approval.list.store');
 
     /* ------------------ PAF USER ------------------ */
 

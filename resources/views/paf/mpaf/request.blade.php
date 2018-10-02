@@ -81,7 +81,7 @@
 				</div>
 
 				<hr>
-				<h4><strong><i class="ti-pencil"></i> &nbsp; Nature of Action</strong></h4>
+				<h4><i class="ti-pencil"></i> &nbsp; <strong>Nature of Action</strong></h4>
 				<hr>
 
 				<div class="row">

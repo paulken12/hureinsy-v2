@@ -3,6 +3,7 @@
 namespace App\Paf;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use App\Master\MasterEmpStatusPaf;
 use App\Personnel\Info\EmpBasic;
 use App\Status;

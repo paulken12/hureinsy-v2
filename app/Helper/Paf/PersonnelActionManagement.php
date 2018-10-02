@@ -3,16 +3,17 @@
 namespace App\Helper\Paf;
  
 use App\User;
-use App\Personnel\Info\EmpBasic;
 use App\Master\MasterCompany;
 use App\Master\MasterJobTitle;
 use App\Master\MasterDepartment;
-use App\Paf\PafManagement;
-use App\Master\MasterScheduleTypePaf;
 use App\Master\MasterEmpStatusPaf;
+use App\Master\MasterScheduleTypePaf;
 use App\Paf\PafChangeJob;
+use App\Paf\PafManagement;
 use App\Paf\PafChangeSchedule;
 use App\Paf\PafChangeCompensation;
+use App\Personnel\Info\EmpBasic;
+use App\Personnel\Info\EmpContract;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 
@@ -68,6 +69,28 @@ class PersonnelActionManagement {
 
     public static function call_paf_lists(){
     	return PafManagement::paginate(10);
+    }
+
+    public static function call_contract(){
+        return EmpContract::all();
+    }
+
+    public static function register_date_effective(){
+
+        $get_effective_date = PafManagement::all();
+        $get_date_today = date('Y-m-d');
+        
+
+        foreach ($get_effective_date as $register_date) {
+
+            if ($get_date_today == $register_date->date_effective) {
+                /*
+                $getcom =  PafChangeCompensation::where('request_id', $register_date->id)->first();
+                $getcom->proposed_remarks_hr = 'lmao';
+                $getcom->save();    */
+            }
+        }
+            
     }
 
 }

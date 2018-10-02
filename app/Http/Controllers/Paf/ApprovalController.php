@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\EmpBasicInfo;
-use App\PafNatureOfAction;
+use App\Paf\PafManagement;
+use App\Personnel\Info\EmpBasic;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
-use App\Helpers\Paf\PersonnelActionManagement;
+use App\Helper\Paf\PersonnelActionManagement;
 
 class ApprovalController extends Controller
 {
     public function list()
     {
-        $requestList = PafNatureOfAction::where('master_id_sub_request_status', '2')->paginate(15);
+        $requestList = PafManagement::where('master_id_sub_request_status', '2')->paginate(15);
 
-        return view('epaf.list', compact('requestList'));
+        return view('paf.epaf.list', compact('requestList'));
     }
 
     public function show($form){
@@ -48,11 +48,11 @@ class ApprovalController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '2'){
 
-            return view('epaf.approval', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details'));
+            return view('paf.epaf.approval', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details'));
 
         }else{
 
-            return view('epaf.readapproval',compact('form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
+            return view('paf.epaf.readapproval',compact('form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
         }
 
     }
@@ -80,7 +80,7 @@ class ApprovalController extends Controller
 
         $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
-        $form_update->approved_by_company_id = EmpBasicInfo::where('user_id', Auth::user()->id)->first()->company_id;
+        $form_update->approved_by_company_id = EmpBasic::where('user_id', Auth::user()->id)->first()->company_id;
 
         $form_update->date_effective =$request->input('date_effective');
 
@@ -104,6 +104,6 @@ class ApprovalController extends Controller
 
         $compensation_update->save();
 
-        return redirect(route('paf.list.approval'))->with('success', 'Request form updated');
+        return redirect(route('paf.approval.list'))->with('success', 'Request form updated');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 	@if(session('error'))
@@ -18,7 +18,7 @@
 	@endif	
     <div class="card">
         <div class="card-header">
-            <h4><i class="fas fa-list"></i> &nbsp; Requests for approval</h4>
+            <h4><i class="ti-list"></i> &nbsp; Requests for approval</h4>
         </div>
         <div class="card-body">
 			<table class="table table-striped table-md">
@@ -42,7 +42,7 @@
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.list.approval.show', $lists->id)}}">View</a></td>
+							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.approval.list.show', $lists->id)}}">View</a></td>
 						</tr>
 					@endforeach
 				</tbody>

@@ -91,7 +91,7 @@
 					<select name="proposed_position_title" id="proposed_position_title" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach ($jobTitles as $titles)
-							<option value="{{$titles->key}}">{{$titles->job_titles}}</option>
+							<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
 						@endforeach
 					</select>
 				</div>

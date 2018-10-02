@@ -3,7 +3,7 @@
 	<div class="card-header" id="job-heading">
 		<div class="btn-toolbar justify-content-between">
 			<a href="" data-toggle="collapse" data-target="#collapse-job" aria-controls="collapse-job" style="text-decoration:none;color:#000000">
-				<h4><i class="fas fa-briefcase"></i> &nbsp; <strong>Change in Job Title, Duties, and Responsibilities Details</strong></h4>
+				<h4><i class="ti-briefcase"></i> &nbsp; <strong>Change in Job Title, Duties, and Responsibilities Details</strong></h4>
 			</a>
 		</div>
 	</div>
@@ -95,10 +95,10 @@
 			<div class="col">
 				<div class="form-group">
 					<select name="proposed_position_title" id="proposed_position_title" class="form-control">
-						<option style="display:none" value="{{empty($get_job_details->proposed_key_position_title) ? '' : $get_job_details->user->name}}" selected>{{empty($get_job_details->masterJobTitle->job_titles) ? '--select--' : $get_job_details->masterJobTitle->job_titles}}</option>
+						<option style="display:none" value="{{empty($get_job_details->proposed_key_position_title) ? '' : $get_job_details->user->name}}" selected>{{empty($get_job_details->masterJobTitle->job_titles) ? '--select--' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '('.$get_job_details->masterJobTitle->description.')'}}</option>
 						<option value="">--select--</option>
 						@foreach ($jobTitles as $titles)
-							<option value="{{$titles->key}}">{{$titles->job_titles}}</option>
+							<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
 						@endforeach
 					</select>
 				</div>
