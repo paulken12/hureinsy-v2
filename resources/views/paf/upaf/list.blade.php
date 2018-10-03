@@ -37,8 +37,8 @@
 					@foreach ($requestList as $lists)
 						<tr>
 							<th scope="row">{{$lists->id}}</th>
-							<td>{{$lists->employee_company_id}}</td>
-							<td>{{$lists->employmentStatus->employment_status}}</td>
+							<td>{{empty($lists->employee_company_id) ? '' : $lists->employee_company_id}}</td>
+							<td>{{empty($lists->employmentStatus->employee_status) ? '' : $lists->employmentStatus->employee_status}}</td>
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>

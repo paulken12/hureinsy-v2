@@ -41,12 +41,12 @@
 							</div>
 						</div>
 					</div>
-
+						
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
 								<label for="date_hired"><strong>Date Hired</strong></label>
-								<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" readonly>
+								<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" value="{{$employee_contract->contract_start}}" readonly>
 							</div>
 						</div>
 						<div class="col">
@@ -61,13 +61,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="position"><strong>Position</strong></label>
-								<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" readonly>
+								<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="department"><strong>Department</strong></label>
-								<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" readonly>
+								<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}"readonly>
 							</div>
 						</div>
 					</div>
@@ -80,7 +80,7 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="employment_status"><strong>Employment Status</strong></label>
-								<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employment_status) ? '' : $get_paf_details->employmentStatus->employment_status}}" readonly>
+								<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employee_status) ? '' : $get_paf_details->employmentStatus->employee_status}}" readonly>
 							</div>
 						</div>
 					</div>

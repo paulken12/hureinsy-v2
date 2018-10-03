@@ -6,7 +6,7 @@ use App\User;
 use App\Master\MasterCompany;
 use App\Master\MasterJobTitle;
 use App\Master\MasterDepartment;
-use App\Master\MasterEmpStatusPaf;
+use App\Master\MasterEmpStatus;
 use App\Master\MasterScheduleTypePaf;
 use App\Paf\PafChangeJob;
 use App\Paf\PafManagement;
@@ -36,7 +36,11 @@ class PersonnelActionManagement {
     }
 
     public static function get_employee_info($user_id){
-    	return EmpBasic::where('company_id', $user_id)->first();
+        return EmpBasic::where('company_id', $user_id)->first();
+    }
+
+    public static function get_employee_contract($user_id){
+        return EmpContract::where('emp_basic_id', $user_id)->first();
     }
 
     public static function call_user(){
@@ -64,7 +68,7 @@ class PersonnelActionManagement {
     }
 
     public static function call_master_employment_status(){
-    	return MasterEmpStatusPaf::all();
+    	return MasterEmpStatus::all();
     }
 
     public static function call_paf_lists(){
@@ -77,17 +81,33 @@ class PersonnelActionManagement {
 
     public static function register_date_effective(){
 
-        $get_effective_date = PafManagement::all();
+        $get_paf_info = PafManagement::all();
         $get_date_today = date('Y-m-d');
-        
 
-        foreach ($get_effective_date as $register_date) {
-
+       foreach ($get_paf_info as $register_date) {
             if ($get_date_today == $register_date->date_effective) {
-                /*
-                $getcom =  PafChangeCompensation::where('request_id', $register_date->id)->first();
-                $getcom->proposed_remarks_hr = 'lmao';
-                $getcom->save();    */
+
+                $get_emp_info = EmpBasic::where('company_id', $register_date->employee_company_id)->first();
+                
+                $get_paf_job = PafChangeJob::where('request_id', $register_date->id)->first();
+
+                $get_paf_sched = PafChangeSchedule::where('request_id', $register_date->id)->first();
+                
+                $get_emp_contract = EmpContract::where('emp_basic_id', $get_emp_info->id)->first();
+
+                $get_emp_contract->employment_status = $register_date->master_key_employment_status; 
+
+                $get_emp_info->reporting_to = $get_paf_job->proposed_reports_to;
+
+                $get_emp_contract->master_job_title_id = $get_paf_job->proposed_key_position_title;
+                
+                $get_emp_contract->master_company_key = $get_paf_job->proposed_key_project_assignment;
+                
+                $get_emp_contract->master_department_key = $get_paf_job->proposed_key_department;                
+/*
+                $get_emp_contract->master_shift_key = $get_paf_sched->proposed_type_of_shift;
+*/
+                $get_emp_contract->save();
             }
         }
             

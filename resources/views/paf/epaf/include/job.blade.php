@@ -39,7 +39,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}
 				</div>
 			</div>
 			<div class="col">
@@ -57,7 +57,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{$employee_name->reportingTo()}}
 				</div>
 			</div>
 			<div class="col">
@@ -75,7 +75,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}
 				</div>
 			</div>
 			<div class="col">
@@ -93,7 +93,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
 				</div>
 			</div>
 			<div class="col">

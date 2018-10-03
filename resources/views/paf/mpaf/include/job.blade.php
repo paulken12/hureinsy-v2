@@ -35,7 +35,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}
 				</div>
 			</div>
 			<div class="col">
@@ -58,7 +58,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{$employee_info->reportingTo()}}
 				</div>
 			</div>
 			<div class="col">
@@ -66,7 +66,7 @@
 					<select name="proposed_reportto" id="proposed_reportto" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach($reportTo as $report)
-							@foreach ($report->roles->whereNotIn('id', '6') as $reports)
+							@foreach ($report->roles->whereNotIn('id', '7') as $reports)
 								<option value="{{$report->id}}">{{$report->name}}</option>
 							@endforeach
 						@endforeach
@@ -83,7 +83,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}
 				</div>
 			</div>
 			<div class="col">
@@ -106,7 +106,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--placeholder here--}}
+					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
 				</div>
 			</div>
 			<div class="col">
@@ -114,7 +114,7 @@
 					<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach ($project_assignment as $assignment)
-							<option value="{{$assignment->key}}">{{$assignment->name}}</option>
+							<option value="{{$assignment->key}}">{{$assignment->name}} - {{$assignment->address}}</option>
 						@endforeach
 					</select>
 				</div>

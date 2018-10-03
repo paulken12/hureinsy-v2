@@ -56,14 +56,16 @@ class RequestController extends Controller
 
         $employee_info = PersonnelActionManagement::get_employee_info($emplid);  
 
-        return view('paf.mpaf.request', compact('employee_info', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
+        $employee_contract = PersonnelActionManagement::get_employee_contract($employee_info->id);
+
+        return view('paf.mpaf.request', compact('employee_contract','employee_info', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
         
     }
 
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'employment_status' => 'exists:master_emp_status_pafs,key|required',
+            'employment_status' => 'exists:master_emp_statuses,key|required',
             'remarks'=>'required|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',

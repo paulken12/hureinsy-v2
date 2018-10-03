@@ -8,7 +8,7 @@ use App\Master\MasterCivilStatus;
 use App\Master\MasterExtension;
 use App\Master\MasterGender;
 use App\User;
-use App\Paf\PafNatureOfAction;
+use App\Paf\PafManagement;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -156,7 +156,7 @@ class EmpBasic extends Model
         return $employee->user->verified === true ? true : false;
     }
 
-    public function natureOfAction() {
-        return $this->hasMany(PafNatureOfAction::class);
+    public function pafManagement() {
+        return $this->hasMany(PafManagement::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Paf;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use App\Master\MasterEmpStatusPaf;
+use App\Master\MasterEmpStatus;
 use App\Personnel\Info\EmpBasic;
 use App\Status;
 use App\SubStatus;
@@ -44,7 +44,7 @@ class PafManagement extends Model
     } 
     public function employmentStatus() 
     {
-        return $this->belongsTo(MasterEmpStatusPaf::class, 'master_key_employment_status');
+        return $this->belongsTo(MasterEmpStatus::class, 'master_key_employment_status');
     }
     public function scopeRequest(){
         return $this->where('requested_by_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(10);
