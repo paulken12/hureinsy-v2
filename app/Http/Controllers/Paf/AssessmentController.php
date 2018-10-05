@@ -13,12 +13,15 @@ use App\Helper\Paf\PersonnelActionManagement;
 class AssessmentController extends Controller
 {
 
-    public function list()
+    public function list($month, $year)
     {
+        
+        $requestList = PersonnelActionManagement::call_paf_lists($month, $year);
 
-        $requestList = PersonnelActionManagement::call_paf_lists();
+        $archives = PersonnelActionManagement::call_paf_archived();        
 
-        return view('paf.hpaf.list', compact('requestList'));
+        return view('paf.hpaf.list', compact('requestList', 'archives'));
+
     }
 
     /**
@@ -61,7 +64,12 @@ class AssessmentController extends Controller
         //Get Statuses
         $request_status = $user_role->status;
 
-        $sub_request_status = $user_role->sub_status;
+        if($get_schedule_details->proposed_key_schedule_type == 'emp'){
+            $sub_request_status = $user_role->sub_status;
+        }else{
+            $sub_request_status = $user_role->sub_status->whereNotIn('id', '4');
+        }
+
 
         if($get_paf_details->masterPafSubStatus->id == '1'){
 
@@ -118,7 +126,7 @@ class AssessmentController extends Controller
 
         $compensation_update->save();
 
-        return redirect(route('paf.assessment.list'))->with('success', 'Request form updated');
+        return redirect(route('paf.assessment.list', [date('m'), date('Y')]))->with('success', 'Request form updated');
     }
 
 }

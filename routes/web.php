@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::post('paf/search/result/request/submit', 'Paf\RequestController@store')->name('paf.search.result.store');
 
-    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
+    Route::get('paf/request/list/month={month}+year={year}', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
 
     Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.reassess.list.show');
 
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']],function()
 
     /* ------------------ PAF HR ------------------ */ 
 
-    Route::get('paf/assessment/list', 'Paf\AssessmentController@list')->name('paf.assessment.list');    
+    Route::get('paf/assessment/list/month={month}+year={year}', 'Paf\AssessmentController@list')->name('paf.assessment.list');    
 
     Route::get('paf/assessment/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.assessment.list.show'); 
 
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']],function()
 
     /* ------------------ PAF EXECUTIVE------------------ */
 
-    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.approval.list');
+    Route::get('paf/approval/list/month={month}+year={year}', 'Paf\ApprovalController@list')->name('paf.approval.list');
 
     Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.approval.list.show');
 
@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth']],function()
 
     /* ------------------ PAF USER ------------------ */
 
-    Route::get('paf/my_request/list', 'Paf\UserPafController@list')->name('paf.myrequest.list');
+    Route::get('paf/my_request/list/month={month}+year={year}', 'Paf\UserPafController@list')->name('paf.myrequest.list');
 
     Route::get('paf/my_request/list/show/{form}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
 

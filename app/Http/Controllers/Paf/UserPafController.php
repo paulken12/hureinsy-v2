@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Paf\PafManagement;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
 
 class UserPafController extends Controller
 {
-
-   public function list()
+   public function list($month, $year)
     {
-        $requestList = PafManagement::where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(15);
 
-        return view('paf.upaf.list', compact('requestList'));
+        $requestList = PersonnelActionManagement::call_paf_lists_user($month, $year);
+
+        $archives = PersonnelActionManagement::call_paf_archived();   
+
+        return view('paf.upaf.list', compact('requestList', 'archives'));
     }
 
     public function show($form){

@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Paf\PafManagement;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
 
 class ReassessmentController extends Controller
 {
-    public function list()
+    public function list($month, $year)
     {
-    	$request_list = PafManagement::request();
 
-    	return view('paf.mpaf.list', compact('request_list'));
+        $request_list = PersonnelActionManagement::call_paf_lists_manager($month, $year);
+
+        $archives = PersonnelActionManagement::call_paf_archived();   
+
+    	return view('paf.mpaf.list', compact('request_list', 'archives'));
     }
 
     public function show($form){
@@ -145,6 +147,6 @@ class ReassessmentController extends Controller
 
         $compensation_update->save();
 
-    	return redirect(route('paf.reassess.list'))->with('success', 'Request form updated');
+    	return redirect(route('paf.reassess.list', [date('m'), date('Y')]))->with('success', 'Request form updated');
     }
 }

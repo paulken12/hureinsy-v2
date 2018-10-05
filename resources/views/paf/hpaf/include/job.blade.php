@@ -80,7 +80,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_position_title" name="proposed_position_title" class="form-control-plaintext" title="Proposed_position_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} - {{empty($get_job_details->masterJobTitle->description) ? '' : $get_job_details->masterJobTitle->description}}" readonly>
+					<input type="text" id="proposed_position_title" name="proposed_position_title" class="form-control-plaintext" title="Proposed_position_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : $get_job_details->masterJobTitle->description}}" readonly>
 				</div>
 			</div>
 		</div>

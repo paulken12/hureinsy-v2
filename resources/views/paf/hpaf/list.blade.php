@@ -18,7 +18,19 @@
 	@endif	
     <div class="card">
         <div class="card-header">
-            <h4><i class="ti-list"></i> &nbsp; Requests for assessment</h4>
+			<div class="btn-toolbar justify-content-between">
+            	<h4><i class="ti-list"></i> &nbsp; Requests for assessment</h4>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Archives
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						@foreach($archives as $date)
+							<a class="dropdown-item" href="{{route('paf.assessment.list', [$date['month'], $date['year']])}}">{{$date['monthname'] .' '. $date['year']}}</a>
+						@endforeach		
+					</div>
+				</div>
+			</div>
         </div>
         <div class="card-body">
 			<table class="table table-striped table-md">
@@ -28,7 +40,6 @@
 						<th scope="col">Employee id</th>
 						<th scope="col">Purpose</th>
 						<th scope="col">Requested by</th>
-						<th scope="col">Assessed by</th>
 						<th scope="col">Status</th>
 						<th scope="col"></th>
 					</tr>
@@ -40,7 +51,6 @@
 							<td>{{empty($lists->employee_company_id) ? '' : $lists->employee_company_id}}</td>
 							<td>{{empty($lists->employmentStatus->employee_status) ? '' : $lists->employmentStatus->employee_status}}</td>
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
-							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
 							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.assessment.list.show', $lists->id)}}">View</a></td>
 						</tr>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Paf\PafManagement;
 use App\Personnel\Info\EmpBasic;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
@@ -12,11 +11,13 @@ use App\Helper\Paf\PersonnelActionManagement;
 
 class ApprovalController extends Controller
 {
-    public function list()
+    public function list($month, $year)
     {
-        $requestList = PafManagement::where('master_id_sub_request_status', '2')->paginate(15);
+        $requestList = PersonnelActionManagement::call_paf_lists($month, $year);
 
-        return view('paf.epaf.list', compact('requestList'));
+        $archives = PersonnelActionManagement::call_paf_archived();       
+
+        return view('paf.epaf.list', compact('requestList', 'archives'));
     }
 
     public function show($form){
@@ -51,7 +52,7 @@ class ApprovalController extends Controller
         //Get Status details.
         $user_role= Auth::user()->roles->first();
 
-        $request_status = $user_role->status;
+        $request_status = $user_role->status->whereNotIn('id', '1');
 
         $sub_request_status = $user_role->sub_status;
 
@@ -113,6 +114,6 @@ class ApprovalController extends Controller
 
         $compensation_update->save();
 
-        return redirect(route('paf.approval.list'))->with('success', 'Request form updated');
+        return redirect(route('paf.approval.list', [date('m'), date('Y')]))->with('success', 'Request form updated');
     }
 }

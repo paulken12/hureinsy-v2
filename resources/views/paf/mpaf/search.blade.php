@@ -20,6 +20,8 @@
 	<div class="card">
 		<div class="card-header">
 			<h4><i class="ti-user"></i> &nbsp; Request for Personnel Action Form</h4>
+			@inject('count', 'App\Helper\Paf\PersonnelActionManagement')
+			<span class="badge badge-danger">{{$count->count_open_man()}}</span>
 		</div>
 		<div class="card-body">
 			<div class="input-group">

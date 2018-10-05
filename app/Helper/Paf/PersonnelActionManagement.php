@@ -2,6 +2,7 @@
 
 namespace App\Helper\Paf;
  
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Master\MasterCompany;
 use App\Master\MasterJobTitle;
@@ -52,7 +53,7 @@ class PersonnelActionManagement {
     }
 
     public static function call_master_company(){
-    	return MasterCompany::all();
+        return MasterCompany::all();
     }
 
     public static function call_master_job_title(){
@@ -71,12 +72,75 @@ class PersonnelActionManagement {
     	return MasterEmpStatus::all();
     }
 
-    public static function call_paf_lists(){
-    	return PafManagement::paginate(10);
-    }
-
     public static function call_contract(){
         return EmpContract::all();
+    }
+
+    public static function count_complete_user(){
+        return PafManagement::where('master_id_request_status', '2')
+                            ->whereDate('created_at', date('Y-m-d'))
+                            ->count();
+    }    
+
+    public static function count_open_hr(){
+        $user_id = Auth::user()->basicInfo->pluck('company_id')->first();
+        return PafManagement::where('master_id_sub_request_status', '1')
+                            ->whereIn('assessed_by_company_id', [$user_id, ''])
+                            ->count();
+    }
+    
+    public static function count_open_exec(){
+        return PafManagement::where('master_id_request_status', '2')
+                            ->where('approved_by_company_id', '')
+                            ->count();
+    }
+
+    public static function count_open_man(){
+        return PafManagement::where('master_id_request_status', '3')
+                            ->where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())
+                            ->count();
+    }
+
+    public static function call_paf_lists($month, $year){
+        $user_id = Auth::user()->basicInfo->pluck('company_id')->first();
+        return PafManagement::when($user_id, function($query, $user_id){
+                                if (Auth::user()->hasRole('human-resource')) {
+                                    return $query->whereIn('assessed_by_company_id', [$user_id, '']);
+                                }else{
+                                    return null;
+                                }
+                            })
+                            ->whereYear('created_at', $year)
+                            ->whereMonth('created_at', $month)
+                            ->orderBy('master_id_request_status', 'asc')
+                            ->orderBy('id', 'desc')
+                            ->paginate(10);
+    }
+
+    public static function call_paf_lists_manager($month, $year){
+        return PafManagement::whereYear('created_at', $year)
+                            ->whereMonth('created_at', $month)
+                            ->where('requested_by_company_id', Auth::user()->basicInfo->pluck('company_id')->first())
+                            ->orderBy('master_id_request_status', 'asc')
+                            ->orderBy('id', 'desc')
+                            ->paginate(10);
+    }
+
+    public static function call_paf_lists_user($month, $year){
+        return PafManagement::whereYear('created_at', $year)
+                            ->whereMonth('created_at', $month)
+                            ->where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())
+                            ->orderBy('master_id_request_status', 'asc')
+                            ->orderBy('id', 'desc')
+                            ->paginate(10);
+    }
+
+    public static function call_paf_archived(){
+        return PafManagement::selectRaw('year(created_at) year, month(created_at) month, monthname(created_at) monthname, count(*) published')
+                            ->groupBy('year', 'month')
+                            ->orderByRaw('min(created_at) desc')
+                            ->get()
+                            ->toArray();
     }
 
     public static function register_date_effective(){

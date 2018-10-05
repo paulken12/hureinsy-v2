@@ -18,7 +18,19 @@
 	@endif	
     <div class="card">
         <div class="card-header">
-            <h4><i class="ti-list"></i> &nbsp; My request lists</h4>
+			<div class="btn-toolbar justify-content-between">
+            	<h4><i class="ti-list"></i> &nbsp; My request lists</h4>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Archives
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						@foreach($archives as $date)
+							<a class="dropdown-item" href="{{route('paf.myrequest.list', [$date['month'], $date['year']])}}">{{$date['monthname'] .' '. $date['year']}}</a>
+						@endforeach		
+					</div>
+				</div>
+			</div>
         </div>
         <div class="card-body">
 			<table class="table table-striped table-md">

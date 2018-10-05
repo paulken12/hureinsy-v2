@@ -115,6 +115,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
+                    @inject('count', 'App\Helper\Paf\PersonnelActionManagement')
                     <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
                         <i class="c-blue-500 ti-write"></i>
@@ -126,30 +127,39 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="nav-item dropdown">
-                            <a href="{{route('paf.myrequest.list')}}">
-                                <span>My request lists</span>
+                            <a href="{{route('paf.myrequest.list', [date('m'), date('Y')])}}">
+                                <span>My request lists <span class="badge badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : 'new'}}</span></span>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a href="{{route('paf.search')}}">
-                                <span>Request a form</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="{{route('paf.reassess.list')}}">
-                                <span>For Manager's reassessment</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="{{route('paf.assessment.list')}}">
-                                <span>For Hr's assessment</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="{{route('paf.approval.list')}}">
-                                <span>For Executive's approval</span>
-                            </a>
-                        </li>
+
+                        @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="{{route('paf.search')}}">
+                                    <span>Request a form</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="{{route('paf.reassess.list', [date('m'), date('Y')])}}">
+                                    <span>Reassessment <span class="badge badge-danger" title="Your request needs reassessment">{{empty($count->count_open_man()) ? '' : $count->count_open_man()}}</span></span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->hasRole('human-resource') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="{{route('paf.assessment.list', [date('m'), date('Y')])}}">
+                                    <span>Assessment <span class="badge badge-danger" title="You have request to assess">{{empty($count->count_open_hr()) ? '' : $count->count_open_hr()}}</span></span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->hasRole('executive') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="{{route('paf.approval.list', [date('m'), date('Y')])}}">
+                                    <span>Approval <span class="badge badge-danger" title="You have request to approve">{{empty($count->count_open_exec()) ? '' : $count->count_open_exec()}}</span></span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 

@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         PersonnelActionManagement::register_date_effective();
+
     }
 
     /**
