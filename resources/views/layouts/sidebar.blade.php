@@ -213,15 +213,15 @@
                                 <a href="javascript:void(0);">
                                     <span>Company Masters</span>
                                     <span class="arrow">
-            <i class="ti-angle-right"></i>
-            </span>
+                                        <i class="ti-angle-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="javascript:void(0);">Departments</a>
+                                        <a href="{{route('setting.masters.departments')}}">Departments</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Positions</a>
+                                        <a href="{{route('setting.masters.titles')}}">Positions</a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);">Companies</a>

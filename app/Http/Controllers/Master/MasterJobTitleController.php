@@ -15,7 +15,9 @@ class MasterJobTitleController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterJobTitle::paginate(7);
+
+        return view('admin.master.jobtitle.index', compact('master'));
     }
 
     /**
@@ -36,7 +38,22 @@ class MasterJobTitleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = $request->validate([
+            'job_title' => 'unique:master_job_titles,job_titles|required',
+            'description' => 'unique:master_job_titles,description|required',
+        ]);
+
+        MasterJobTitle::create([
+
+            'job_titles' => $request->input('job_title'),
+
+            'description' => $request->input('description'),
+
+        ]);
+
+        return redirect(route('setting.masters.titles'))->with('success', 'Data successfully created.');
+
     }
 
     /**
@@ -56,9 +73,11 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterJobTitle $masterJobTitle)
+    public function edit($id)
     {
-        //
+        $master = MasterJobTitle::where('id', $id)->first();
+
+        return view('admin.master.jobtitle.edit', compact('id', 'master'));
     }
 
     /**
@@ -68,9 +87,24 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterJobTitle $masterJobTitle)
+    public function update(Request $request, $id)
     {
-        //
+
+        $validator = $request->validate([
+            'job_title' => 'required',
+            'description' => 'required',
+        ]);
+        
+        $master_update = MasterJobTitle::where('id', $id)->first();
+
+        $master_update->job_titles = $request->input('job_title');
+
+        $master_update->description = $request->input('description');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.titles'))->with('success', 'Data successfully updated.');
+        
     }
 
     /**
@@ -79,8 +113,13 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterJobTitle $masterJobTitle)
+    public function destroy($id)
     {
-        //
+     
+        $master = MasterJobTitle::where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.titles'))->with('success', 'Data successfully deleted.');
     }
 }

@@ -34,11 +34,33 @@ Route::group(['prefix'=>'raj-titans'], function ()
 
 Route::group(['middleware' => ['auth','role:titan']],function()
 {
-    /* ------------------ RECRUIT ------------------*/
+    /* ------------------ RECRUIT ------------------ */
 
     Route::get('new/recruit', 'Recruit\RecruitController@create')->name('create.recruit');
 
     Route::post('store/recruit', 'Recruit\RecruitController@store')->name('store.recruit');
+
+    /* ------------------ MASTERS ------------------ */
+
+    Route::get('setting/masters/departments', 'Master\MasterDepartmenController@index')->name('setting.masters.departments');
+
+    Route::post('setting/masters/departments/store', 'Master\MasterDepartmenController@store')->name('setting.masters.departments.store');
+
+    Route::get('setting/masters/departments/edit={id}', 'Master\MasterDepartmenController@edit')->name('setting.masters.departments.edit');
+
+    Route::post('setting/masters/departments/update={id}', 'Master\MasterDepartmenController@update')->name('setting.masters.departments.update');
+
+    Route::get('setting/masters/departments/destroy={id}', 'Master\MasterDepartmenController@destroy')->name('setting.masters.departments.destroy');
+
+    Route::get('setting/masters/titles', 'Master\MasterJobTitleController@index')->name('setting.masters.titles');
+
+    Route::post('setting/masters/titles/store', 'Master\MasterJobTitleController@store')->name('setting.masters.titles.store');
+
+    Route::get('setting/masters/titles/edit={id}', 'Master\MasterJobTitleController@edit')->name('setting.masters.titles.edit');
+
+    Route::post('setting/masters/titles/update={id}', 'Master\MasterJobTitleController@update')->name('setting.masters.titles.update');
+
+    Route::get('setting/masters/titles/destroy={id}', 'Master\MasterJobTitleController@destroy')->name('setting.masters.titles.destroy');
 
 });
 

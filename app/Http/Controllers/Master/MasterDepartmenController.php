@@ -15,7 +15,9 @@ class MasterDepartmenController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterDepartment::paginate(7);
+
+        return view('admin.master.department.index', compact('master'));
     }
 
     /**
@@ -36,7 +38,22 @@ class MasterDepartmenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = $request->validate([
+            'key' => 'unique:master_departments,key|required',
+            'department' => 'unique:master_departments,department|required',
+        ]);
+
+        MasterDepartment::create([
+
+            'key' => $request->input('key'),
+
+            'department' => $request->input('department'),
+
+        ]);
+
+        return redirect(route('setting.masters.departments'))->with('success', 'Data successfully created.');
+
     }
 
     /**
@@ -45,7 +62,7 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function show(MasterDepartment $masterDepartment)
+    public function show()
     {
         //
     }
@@ -56,9 +73,11 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterDepartment $masterDepartment)
+    public function edit($id)
     {
-        //
+        $master = MasterDepartment::where('id', $id)->first();
+
+        return view('admin.master.department.edit', compact('id', 'master'));
     }
 
     /**
@@ -68,9 +87,23 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterDepartment $masterDepartment)
+    public function update(Request $request, $id)
     {
-        //
+
+        $validator = $request->validate([
+            'key' => 'required',
+            'department' => 'required',
+        ]);
+        
+        $master_update = MasterDepartment::where('id', $id)->first();
+
+        $master_update->key = $request->input('key');
+
+        $master_update->department = $request->input('department');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.departments'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -79,8 +112,12 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterDepartment $masterDepartment)
+    public function destroy($id)
     {
-        //
+        $master = MasterDepartment::where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.departments'))->with('success', 'Data successfully deleted.');
     }
 }
