@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Paf;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;    
@@ -13,34 +14,36 @@ class ReassessmentController extends Controller
     public function list($month, $year)
     {
 
-        $request_list = PersonnelActionManagement::call_paf_lists_manager($month, $year);
+        Cache::forever('call_paf_lists_manager', PersonnelActionManagement::call_paf_lists_manager($month, $year));
 
-        $archives = PersonnelActionManagement::call_paf_archived();   
+        $request_list = Cache::get('call_paf_lists_manager');
+
+        $archives = Cache::get('call_paf_lists_archived');   
 
     	return view('paf.mpaf.list', compact('request_list', 'archives'));
     }
 
     public function show($form){
 
+        Cache::forget('call_paf_lists_manager');
+
         //Get Status 
         $user_log = Auth::user()->roles->first(); 
-
         $get_status = $user_log->status;
-
         $get_sub_status =$user_log->sub_status;
 
         //Get Master details
-        $reportTo = PersonnelActionManagement::call_user();
+        $reportTo = Cache::get('call_user');
 
-        $jobTitles = PersonnelActionManagement::call_master_job_title();
+        $jobTitles = Cache::get('call_master_job_title');
 
-        $department = PersonnelActionManagement::call_master_department();
+        $department = Cache::get('call_master_department');
 
-        $sched_type = PersonnelActionManagement::call_master_paf_schedule_type();
+        $sched_type = Cache::get('call_master_paf_schedule_type');
 
-        $project_assignment = PersonnelActionManagement::call_master_company();
+        $project_assignment = Cache::get('call_master_company');
 
-        $employment_status = PersonnelActionManagement::call_master_employment_status();
+        $employment_status = Cache::get('call_master_employment_status');
 
         //Get paf details
         $get_paf_details = PersonnelActionManagement::get_paf_request($form);

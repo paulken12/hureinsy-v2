@@ -81,9 +81,9 @@
 				</div>	
 
 				<div id="accordion">
-					@include('paf.mpaf.include.readjob')
-					@include('paf.mpaf.include.readschedule')
-					@include('paf.mpaf.include.readcompensation')
+					@include('paf.include.readjob')
+					@include('paf.include.readschedule')
+					@include('paf.include.readcompensation')
 				</div>
 				<hr>
 

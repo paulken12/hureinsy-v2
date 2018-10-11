@@ -26,7 +26,7 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						@foreach($archives as $date)
-							<a class="dropdown-item" href="{{route('paf.assessment.list', [$date['month'], $date['year']])}}">{{$date['monthname'] .' '. $date['year']}}</a>
+							<a class="dropdown-item" href="{{route('paf.assessment.list', [$date['month'], $date['year']])}}">{{$date['monthname'] .' '. $date['year']}} <small><span class="badge badge-pill badge-info">{{$date['published']}}</span></small></a>
 						@endforeach		
 					</div>
 				</div>
@@ -52,7 +52,11 @@
 							<td>{{empty($lists->employmentStatus->employee_status) ? '' : $lists->employmentStatus->employee_status}}</td>
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.assessment.list.show', $lists->id)}}">View</a></td>
+							@if($lists->masterPafSubStatus->id == '1')
+									<td class="form-group text-center"><a class="btn btn-primary btn-sm" href="{{route('paf.assessment.list.show', $lists->id)}}">To Assess</a></td>
+							@else
+									<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.assessment.list.show', $lists->id)}}">View</a></td>
+							@endif
 						</tr>
 					@endforeach
 				</tbody>

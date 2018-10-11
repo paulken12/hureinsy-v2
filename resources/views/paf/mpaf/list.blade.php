@@ -52,7 +52,11 @@
 							<td>{{empty($lists->employmentStatus->employee_status) ? '' : $lists->employmentStatus->employee_status}}</td>
 							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.reassess.list.show', $lists->id)}}">View</a></td>
+							@if($lists->masterPafSubStatus->id == '3')
+								<td class="form-group text-center"><a class="btn btn-primary btn-sm" href="{{route('paf.reassess.list.show', $lists->id)}}">To Reassess</a></td>
+							@else
+								<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.reassess.list.show', $lists->id)}}">View</a></td>
+							@endif
 						</tr>
 					@endforeach
 				</tbody>

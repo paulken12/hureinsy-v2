@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Paf\PafManagement;
 use App\Paf\PafChangeJob;
 use App\Paf\PafChangeSchedule;
@@ -25,7 +26,9 @@ class RequestController extends Controller
     public function search(Request $request)
     {        
 
-        $employee_info = PersonnelActionManagement::get_employee_info($request->input('raj_id'));  
+        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($request->input('raj_id')));
+
+        $employee_info = Cache::get('get_employee_info');  
 
         if (empty($employee_info)) {
 
@@ -42,19 +45,19 @@ class RequestController extends Controller
     public function show($emplid)
     {   
 
-        $jobTitles = PersonnelActionManagement::call_master_job_title();
+        $jobTitles = Cache::get('call_master_job_title');
 
-        $department = PersonnelActionManagement::call_master_department();
+        $department = Cache::get('call_master_department');
 
-        $project_assignment = PersonnelActionManagement::call_master_company();
+        $project_assignment = Cache::get('call_master_company');
 
-        $employment_status = PersonnelActionManagement::call_master_employment_status();
+        $employment_status = Cache::get('call_master_employment_status');
 
-        $sched_type = PersonnelActionManagement::call_master_paf_schedule_type();
+        $sched_type = Cache::get('call_master_paf_schedule_type');
 
-        $reportTo = PersonnelActionManagement::call_user();
+        $reportTo = Cache::get('call_user');
 
-        $employee_info = PersonnelActionManagement::get_employee_info($emplid);  
+        $employee_info = Cache::get('get_employee_info');  
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_info->id);
 
@@ -142,7 +145,7 @@ class RequestController extends Controller
             'proposed_benefits' => $request->input('proposed_benefits'),
 
         ]);
-
+        
         return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+\@extends('layouts.dashboard')
 @section('content')
 <div class="full-container">
 	<div class="card  remain-height pos-r scrollable">
@@ -81,9 +81,9 @@
 				</div>	
 
 				<div id="accordion">
-					@include('paf.epaf.include.readjob')
-					@include('paf.epaf.include.readschedule')
-					@include('paf.epaf.include.readcompensation')
+					@include('paf.include.readjob')
+					@include('paf.include.readschedule')
+					@include('paf.include.readcompensation')
 				</div>
 				<hr>
 

@@ -54,7 +54,11 @@
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.approval.list.show', $lists->id)}}">View</a></td>
+							@if($lists->masterPafSubStatus->id == '2')
+								<td class="form-group text-center"><a class="btn btn-primary btn-sm" href="{{route('paf.approval.list.show', $lists->id)}}">To Approve</a></td>
+							@else
+								<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.approval.list.show', $lists->id)}}">View</a></td>
+							@endif
 						</tr>
 					@endforeach
 				</tbody>

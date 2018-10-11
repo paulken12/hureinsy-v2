@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Role;
 use App\Personnel\Info\EmpBasic;
 use App\Http\Controllers\Controller;    
@@ -15,12 +16,14 @@ class AssessmentController extends Controller
 
     public function list($month, $year)
     {
-        
-        $requestList = PersonnelActionManagement::call_paf_lists($month, $year);
 
-        $archives = PersonnelActionManagement::call_paf_archived();        
+        Cache::forever('call_paf_lists_hr', PersonnelActionManagement::call_paf_lists($month, $year));
 
-        return view('paf.hpaf.list', compact('requestList', 'archives'));
+        $requestList = Cache::get('call_paf_lists_hr');
+
+        $archives = Cache::get('call_paf_lists_archived');
+
+        return view('paf.hpaf.list', compact('requestList', 'archives', 'count_archives'));
 
     }
 
@@ -32,14 +35,16 @@ class AssessmentController extends Controller
      */
     public function show($form)
     {  
+        Cache::forget('call_paf_lists_hr');
+
         $user_role= Auth::user()->roles->first();
 
         //Get Master details
-        $jobTitles = PersonnelActionManagement::call_master_job_title();
+        $jobTitles = Cache::get('call_master_job_title');
         
-        $department = PersonnelActionManagement::call_master_department();
+        $department = Cache::get('call_master_department');
 
-        $project_assignment = PersonnelActionManagement::call_master_company();
+        $project_assignment = Cache::get('call_master_company');
 
         //Get Paf details
         $get_paf_details = PersonnelActionManagement::get_paf_request($form);

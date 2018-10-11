@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
@@ -13,14 +14,19 @@ class UserPafController extends Controller
    public function list($month, $year)
     {
 
-        $requestList = PersonnelActionManagement::call_paf_lists_user($month, $year);
+        Cache::forever('call_paf_lists_user', PersonnelActionManagement::call_paf_lists_user($month, $year));
 
-        $archives = PersonnelActionManagement::call_paf_archived();   
+        $requestList = Cache::get('call_paf_lists_user');
+
+        $archives =  Cache::get('call_paf_lists_archived');   
 
         return view('paf.upaf.list', compact('requestList', 'archives'));
+    
     }
 
     public function show($form){
+
+        Cache::forget('call_paf_lists_user');
 
         //Get Master details
         $jobTitles = PersonnelActionManagement::call_master_job_title();

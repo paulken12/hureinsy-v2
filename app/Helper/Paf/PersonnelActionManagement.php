@@ -2,6 +2,7 @@
 
 namespace App\Helper\Paf;
  
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Master\MasterCompany;
@@ -114,7 +115,7 @@ class PersonnelActionManagement {
                             ->whereMonth('created_at', $month)
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(10);
+                            ->paginate(7);
     }
 
     public static function call_paf_lists_manager($month, $year){
@@ -123,7 +124,7 @@ class PersonnelActionManagement {
                             ->where('requested_by_company_id', Auth::user()->basicInfo->pluck('company_id')->first())
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(10);
+                            ->paginate(7);
     }
 
     public static function call_paf_lists_user($month, $year){
@@ -132,7 +133,7 @@ class PersonnelActionManagement {
                             ->where('employee_company_id', Auth::user()->basicInfo->pluck('company_id')->first())
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(10);
+                            ->paginate(7);
     }
 
     public static function call_paf_archived(){

@@ -128,7 +128,7 @@
                     <ul class="dropdown-menu">
                         <li class="nav-item dropdown">
                             <a href="{{route('paf.myrequest.list', [date('m'), date('Y')])}}">
-                                <span>My request lists <span class="badge badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : 'new'}}</span></span>
+                                <span>My request lists<small><span class="badge badge-pill badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : 'new'}}</span></small></span>
                             </a>
                         </li>
 
@@ -142,21 +142,21 @@
                         @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.reassess.list', [date('m'), date('Y')])}}">
-                                    <span>Reassessment <span class="badge badge-danger" title="Your request needs reassessment">{{empty($count->count_open_man()) ? '' : $count->count_open_man()}}</span></span>
+                                    <span>Reassessment <small><span class="badge badge-pill badge-danger" title="Your request needs reassessment">{{empty($count->count_open_man()) ? '' : $count->count_open_man()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
                         @if(Auth::user()->hasRole('human-resource') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.assessment.list', [date('m'), date('Y')])}}">
-                                    <span>Assessment <span class="badge badge-danger" title="You have request to assess">{{empty($count->count_open_hr()) ? '' : $count->count_open_hr()}}</span></span>
+                                    <span>Assessment <small><span class="badge badge-pill badge-danger" title="You have request to assess">{{empty($count->count_open_hr()) ? '' : $count->count_open_hr()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
                         @if(Auth::user()->hasRole('executive') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.approval.list', [date('m'), date('Y')])}}">
-                                    <span>Approval <span class="badge badge-danger" title="You have request to approve">{{empty($count->count_open_exec()) ? '' : $count->count_open_exec()}}</span></span>
+                                    <span>Approval <small><span class="badge badge-pill badge-danger" title="You have request to approve">{{empty($count->count_open_exec()) ? '' : $count->count_open_exec()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
