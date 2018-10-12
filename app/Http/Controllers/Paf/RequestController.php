@@ -51,7 +51,7 @@ class RequestController extends Controller
 
         $project_assignment = Cache::get('call_master_company');
 
-        $employment_status = Cache::get('call_master_employment_status');
+        $employment_status = Cache::get('call_contract_change');
 
         $sched_type = Cache::get('call_master_paf_schedule_type');
 
@@ -68,7 +68,7 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'employment_status' => 'exists:master_emp_statuses,key|required',
+            'employment_status' => 'exists:master_contract_change_pafs,key|required',
             'remarks'=>'required|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',

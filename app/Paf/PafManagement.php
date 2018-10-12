@@ -4,7 +4,7 @@ namespace App\Paf;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use App\Master\MasterEmpStatus;
+use App\Master\MasterContractChangePaf;
 use App\Personnel\Info\EmpBasic;
 use App\Status;
 use App\SubStatus;
@@ -42,9 +42,9 @@ class PafManagement extends Model
     {
         return $this->belongsTo(SubStatus::class, 'master_id_sub_request_status');
     } 
-    public function employmentStatus() 
+    public function contractChange() 
     {
-        return $this->belongsTo(MasterEmpStatus::class, 'master_key_employment_status');
+        return $this->belongsTo(MasterContractChangePaf::class, 'master_key_employment_status');
     }
 
 }

@@ -8,7 +8,7 @@ use App\User;
 use App\Master\MasterCompany;
 use App\Master\MasterJobTitle;
 use App\Master\MasterDepartment;
-use App\Master\MasterEmpStatus;
+use App\Master\MasterContractChangePaf;
 use App\Master\MasterScheduleTypePaf;
 use App\Paf\PafChangeJob;
 use App\Paf\PafManagement;
@@ -69,8 +69,8 @@ class PersonnelActionManagement {
     	return MasterScheduleTypePaf::all();
     }
 
-    public static function call_master_employment_status(){
-    	return MasterEmpStatus::all();
+    public static function call_contract_change(){
+    	return MasterContractChangePaf::all();
     }
 
     public static function call_contract(){
@@ -160,8 +160,6 @@ class PersonnelActionManagement {
                 
                 $get_emp_contract = EmpContract::where('emp_basic_id', $get_emp_info->id)->first();
 
-                $get_emp_contract->employment_status = $register_date->master_key_employment_status; 
-
                 $get_emp_info->reporting_to = $get_paf_job->proposed_reports_to;
 
                 $get_emp_contract->master_job_title_id = $get_paf_job->proposed_key_position_title;
@@ -169,9 +167,9 @@ class PersonnelActionManagement {
                 $get_emp_contract->master_company_key = $get_paf_job->proposed_key_project_assignment;
                 
                 $get_emp_contract->master_department_key = $get_paf_job->proposed_key_department;                
-/*
+    /*
                 $get_emp_contract->master_shift_key = $get_paf_sched->proposed_type_of_shift;
-*/
+    */
                 $get_emp_contract->save();
             }
         }

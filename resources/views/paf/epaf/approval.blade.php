@@ -79,7 +79,7 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="employment_status"><strong>Employment Status</strong></label>
-								<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employee_status) ? '' : $get_paf_details->employmentStatus->employee_status}}" readonly>
+								<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}" readonly>
 							</div>
 						</div>
 					</div>

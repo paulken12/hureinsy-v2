@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterCompany::class);
         $this->call(RoleUser::class);
         //Paf        
-        $this->call(MasterEmpStatusPaf::class);
+        $this->call(MasterContractChangePaf::class);
         $this->call(MasterStatusPaf::class);
         $this->call(MasterSubStatusPaf::class);
         $this->call(MasterScheduleTypePaf::class);

@@ -91,7 +91,7 @@
 							<select name="employment_status" id="employment_status" class="form-control" required>
 								<option value="" >--select--</option>
 								@foreach ($employment_status as $employment)
-									<option value="{{$employment->key}}">{{$employment->employee_status}}</option>
+									<option value="{{$employment->key}}">{{$employment->change_type}}</option>
 								@endforeach
 							</select>
 						</div>

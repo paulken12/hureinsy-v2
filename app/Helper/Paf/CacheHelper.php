@@ -21,7 +21,7 @@ class CacheHelper{
         
         Cache::forever('call_master_paf_schedule_type', PersonnelActionManagement::call_master_paf_schedule_type());
         
-        Cache::forever('call_master_employment_status', PersonnelActionManagement::call_master_employment_status());
+        Cache::forever('call_contract_change', PersonnelActionManagement::call_contract_change());
 
         Cache::forever('call_contract', PersonnelActionManagement::call_contract());
 

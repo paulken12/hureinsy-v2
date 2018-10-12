@@ -124,7 +124,7 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="sched_type"><strong>Sched Type</strong></label>
+					<label for="sched_type"><strong>Schedule Request</strong></label>
 				</div>
 			</div>
 			<div class="col">

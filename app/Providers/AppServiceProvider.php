@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use App\Paf\PafManagement;
 use App\Helper\Paf\PersonnelActionManagement;
 use App\Helper\Paf\CacheHelper;
 

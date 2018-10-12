@@ -36,15 +36,15 @@ class MasterDepartmenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, MasterDepartment $MasterDepartment)
     {
 
         $validator = $request->validate([
-            'key' => 'unique:master_departments,key|required',
-            'department' => 'unique:master_departments,department|required',
+            'key' => 'unique:master_departments,key|string|max:255|required',
+            'department' => 'unique:master_departments,department|string|max:255|required',
         ]);
 
-        MasterDepartment::create([
+        $MasterDepartment->create([
 
             'key' => $request->input('key'),
 
@@ -73,9 +73,9 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MasterDepartment $MasterDepartment, $id)
     {
-        $master = MasterDepartment::where('id', $id)->first();
+        $master = $MasterDepartment->where('id', $id)->first();
 
         return view('admin.master.department.edit', compact('id', 'master'));
     }
@@ -87,15 +87,15 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MasterDepartment $MasterDepartment, Request $request, $id)
     {
 
         $validator = $request->validate([
-            'key' => 'required',
-            'department' => 'required',
+            'key' => 'string|max:255|required',
+            'department' => 'string|max:255|required',
         ]);
         
-        $master_update = MasterDepartment::where('id', $id)->first();
+        $master_update = $MasterDepartment->where('id', $id)->first();
 
         $master_update->key = $request->input('key');
 
@@ -112,7 +112,7 @@ class MasterDepartmenController extends Controller
      * @param  \App\Master\MasterDepartment  $masterDepartment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MasterDepartment $MasterDepartment, $id)
     {
         $master = MasterDepartment::where('id', $id)->first();
 

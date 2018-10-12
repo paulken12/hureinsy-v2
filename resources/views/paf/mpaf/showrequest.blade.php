@@ -79,9 +79,9 @@
 							<div class="form-group">
 								<label for="employment_status"><strong>Employment Status</strong></label>
 								<select name="employment_status" id="employment_status" class="form-control" required>
-									<option style="display:none" value="{{empty($get_paf_details->master_key_employment_status) ? '' : $get_paf_details->master_key_employment_status}}" selected>{{empty($get_paf_details->employmentStatus->employee_status) ? '--select--' : $get_paf_details->employmentStatus->employee_status}}</option>
+									<option style="display:none" value="{{empty($get_paf_details->master_key_employment_status) ? '' : $get_paf_details->master_key_employment_status}}" selected>{{empty($get_paf_details->contractChange->change_type) ? '--select--' : $get_paf_details->contractChange->change_type}}</option>
 									@foreach ($employment_status as $employment)
-										<option value="{{$employment->key}}">{{$employment->employee_status}}</option>
+										<option value="{{$employment->key}}">{{$employment->change_type}}</option>
 									@endforeach
 								</select>
 							</div>

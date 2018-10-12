@@ -36,15 +36,15 @@ class MasterJobTitleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterCompany $MasterCompany, Request $request)
     {
 
         $validator = $request->validate([
-            'job_title' => 'unique:master_job_titles,job_titles|required',
-            'description' => 'unique:master_job_titles,description|required',
+            'job_title' => 'unique:master_job_titles,job_titles|string|max:255|required',
+            'description' => 'unique:master_job_titles,description|string|max:255|required',
         ]);
 
-        MasterJobTitle::create([
+        $MasterJobTitle->create([
 
             'job_titles' => $request->input('job_title'),
 
@@ -73,9 +73,9 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MasterCompany $MasterCompany, $id)
     {
-        $master = MasterJobTitle::where('id', $id)->first();
+        $master = $MasterJobTitle->where('id', $id)->first();
 
         return view('admin.master.jobtitle.edit', compact('id', 'master'));
     }
@@ -87,15 +87,15 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MasterCompany $MasterCompany, Request $request, $id)
     {
 
         $validator = $request->validate([
-            'job_title' => 'required',
-            'description' => 'required',
+            'job_title' => 'string|max:255|required',
+            'description' => 'string|max:255|required',
         ]);
         
-        $master_update = MasterJobTitle::where('id', $id)->first();
+        $master_update = $MasterJobTitle->where('id', $id)->first();
 
         $master_update->job_titles = $request->input('job_title');
 
@@ -113,10 +113,10 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MasterCompany $MasterCompany, $id)
     {
      
-        $master = MasterJobTitle::where('id', $id)->first();
+        $master = $MasterJobTitle->where('id', $id)->first();
 
         $master->delete();
 

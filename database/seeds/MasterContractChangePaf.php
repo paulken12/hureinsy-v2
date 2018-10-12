@@ -14,50 +14,50 @@ class MasterContractChangePaf extends Seeder
         $values = [
             [
                 'key' => 'ren',
-                'type' => 'renewal',
+                'change_type' => 'renewal',
             ],
             [
                 'key' => 'eoc',
-                'type' => 'end of contract',
+                'change_type' => 'end of contract',
             ],
             [
                 'key' => 'tra',
-                'type' => 'transfer',
+                'change_type' => 'transfer',
             ],
             [
                 'key' => 'reh',
-                'type' => 'rehire',
+                'change_type' => 'rehire',
             ],
             [
                 'key' => 'ttp',
-                'type' => 'trainee to project',
+                'change_type' => 'trainee to project',
             ],
             [
                 'key' => 'reg',
-                'type' => 'regularization',
+                'change_type' => 'regularization',
             ],
             [
                 'key' => 'eop',
-                'type' => 'end of probationary period',
+                'change_type' => 'end of probationary period',
             ],
             [
                 'key' => 'sai',
-                'type' => 'salary increase',
+                'change_type' => 'salary increase',
             ],
             [
                 'key' => 'sfr',
-                'type' => 'separation for rehire',
+                'change_type' => 'separation for rehire',
             ],
             [
                 'key' => 'snr',
-                'type' => 'separation not for rehire',
+                'change_type' => 'separation not for rehire',
             ],
 
         ];
 
         foreach ($values as $value)
         {
-            \App\Master\ContractChangePaf::create($value);
+            \App\Master\MasterContractChangePaf::create($value);
         }
     }
 }

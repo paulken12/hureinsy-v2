@@ -43,7 +43,7 @@ class ReassessmentController extends Controller
 
         $project_assignment = Cache::get('call_master_company');
 
-        $employment_status = Cache::get('call_master_employment_status');
+        $employment_status = Cache::get('call_contract_change');
 
         //Get paf details
         $get_paf_details = PersonnelActionManagement::get_paf_request($form);
@@ -74,7 +74,7 @@ class ReassessmentController extends Controller
     {
 
         $validator = $request->validate([
-            'employment_status' => 'exists:master_emp_status_pafs,key|required',
+            'employment_status' => 'exists:master_contract_change_pafs,key|required',
             'remarks'=>'required|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',

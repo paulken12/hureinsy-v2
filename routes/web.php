@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth','role:titan']],function()
 
     /* ------------------ MASTERS ------------------ */
 
+    // DEPARTMENTS
+
     Route::get('setting/masters/departments', 'Master\MasterDepartmenController@index')->name('setting.masters.departments');
 
     Route::post('setting/masters/departments/store', 'Master\MasterDepartmenController@store')->name('setting.masters.departments.store');
@@ -52,6 +54,8 @@ Route::group(['middleware' => ['auth','role:titan']],function()
 
     Route::get('setting/masters/departments/destroy={id}', 'Master\MasterDepartmenController@destroy')->name('setting.masters.departments.destroy');
 
+    // TITLES
+
     Route::get('setting/masters/titles', 'Master\MasterJobTitleController@index')->name('setting.masters.titles');
 
     Route::post('setting/masters/titles/store', 'Master\MasterJobTitleController@store')->name('setting.masters.titles.store');
@@ -61,6 +65,57 @@ Route::group(['middleware' => ['auth','role:titan']],function()
     Route::post('setting/masters/titles/update={id}', 'Master\MasterJobTitleController@update')->name('setting.masters.titles.update');
 
     Route::get('setting/masters/titles/destroy={id}', 'Master\MasterJobTitleController@destroy')->name('setting.masters.titles.destroy');
+
+    // COMPANIES
+
+    Route::get('setting/masters/companies', 'Master\MasterCompanyController@index')->name('setting.masters.companies');
+
+    Route::post('setting/masters/companies/store', 'Master\MasterCompanyController@store')->name('setting.masters.companies.store');
+
+    Route::get('setting/masters/companies/edit={id}', 'Master\MasterCompanyController@edit')->name('setting.masters.companies.edit');
+
+    Route::post('setting/masters/companies/update={id}', 'Master\MasterCompanyController@update')->name('setting.masters.companies.update');
+
+    Route::get('setting/masters/companies/destroy={id}', 'Master\MasterCompanyController@destroy')->name('setting.masters.companies.destroy');
+
+    // EMPLOYEE STATUS 
+    
+    Route::get('setting/masters/employeestatuses', 'Master\MasterEmpStatuController@index')->name('setting.masters.employeestatuses');
+
+    Route::post('setting/masters/employeestatuses/store', 'Master\MasterEmpStatuController@store')->name('setting.masters.employeestatuses.store');
+
+    Route::get('setting/masters/employeestatuses/edit={id}', 'Master\MasterEmpStatuController@edit')->name('setting.masters.employeestatuses.edit');
+
+    Route::post('setting/masters/employeestatuses/update={id}', 'Master\MasterEmpStatuController@update')->name('setting.masters.employeestatuses.update');
+
+    Route::get('setting/masters/employeestatuses/destroy={id}', 'Master\MasterEmpStatuController@destroy')->name('setting.masters.employeestatuses.destroy');
+
+    // ADDRESS TYPES
+
+    Route::get('setting/masters/address', 'Master\MasterAddressTypeController@index')->name('setting.masters.address');
+
+    Route::post('setting/masters/address/store', 'Master\MasterAddressTypeController@store')->name('setting.masters.address.store');
+
+    Route::get('setting/masters/address/edit={id}', 'Master\MasterAddressTypeController@edit')->name('setting.masters.address.edit');
+
+    Route::post('setting/masters/address/update={id}', 'Master\MasterAddressTypeController@update')->name('setting.masters.address.update');
+
+    Route::get('setting/masters/address/destroy={id}', 'Master\MasterAddressTypeController@destroy')->name('setting.masters.address.destroy');
+
+    // BLOOD TYPES
+
+    Route::get('setting/masters/blood', 'Master\MasterBloodTypController@index')->name('setting.masters.blood');
+
+    Route::post('setting/masters/blood/store', 'Master\MasterBloodTypController@store')->name('setting.masters.blood.store');
+
+    Route::get('setting/masters/blood/edit={id}', 'Master\MasterBloodTypController@edit')->name('setting.masters.blood.edit');
+
+    Route::post('setting/masters/blood/update={id}', 'Master\MasterBloodTypController@update')->name('setting.masters.blood.update');
+
+    Route::get('setting/masters/blood/destroy={id}', 'Master\MasterBloodTypController@destroy')->name('setting.masters.blood.destroy');
+
+    // 
+
 
 });
 

@@ -224,7 +224,10 @@
                                         <a href="{{route('setting.masters.titles')}}">Positions</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Companies</a>
+                                        <a href="{{route('setting.masters.companies')}}">Companies</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('setting.masters.employeestatuses')}}">Employment Status</a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);">Teams</a>
@@ -235,15 +238,15 @@
                                 <a href="javascript:void(0);">
                                     <span>Other Masters</span>
                                     <span class="arrow">
-            <i class="ti-angle-right"></i>
-            </span>
+                                        <i class="ti-angle-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="javascript:void(0);">Address Types</a>
+                                        <a href="{{route('setting.masters.address')}}">Address Types</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Blood Types</a>
+                                        <a href="{{route('setting.masters.blood')}}">Blood Types</a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);">Civil Statuses</a>

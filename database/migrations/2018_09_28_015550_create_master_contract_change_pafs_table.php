@@ -16,7 +16,7 @@ class CreateMasterContractChangePafsTable extends Migration
         Schema::create('master_contract_change_pafs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key');
-            $table->string('type');
+            $table->string('change_type');
             $table->timestamps();
         });
     }

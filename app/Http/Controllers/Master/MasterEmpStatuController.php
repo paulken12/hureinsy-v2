@@ -15,7 +15,9 @@ class MasterEmpStatuController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterEmpStatus::paginate(7);
+
+        return view('admin.master.empstatus.index', compact('master'));
     }
 
     /**
@@ -34,9 +36,23 @@ class MasterEmpStatuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterEmpStatus $MasterEmpStatus, Request $request)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'unique:master_emp_statuses,key|string|max:255|required',
+            'employee_status' => 'unique:master_emp_statuses,employee_status|string|max:255|required',
+        ]);
+
+        $MasterEmpStatus->create([
+
+            'key' => $request->input('key'),
+
+            'employee_status' => $request->input('employee_status'),
+
+        ]);
+
+        return redirect(route('setting.masters.employeestatuses'))->with('success', 'Data successfully created.');
+    
     }
 
     /**
@@ -56,9 +72,11 @@ class MasterEmpStatuController extends Controller
      * @param  \App\Master\MasterEmpStatus  $masterEmpStatus
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterEmpStatus $masterEmpStatus)
+    public function edit(MasterEmpStatus $MasterEmpStatus, $id)
     {
-        //
+        $master = $MasterEmpStatus->where('id', $id)->first();
+
+        return view('admin.master.empstatus.edit', compact('id', 'master', 'masterEmpStatus'));
     }
 
     /**
@@ -68,9 +86,22 @@ class MasterEmpStatuController extends Controller
      * @param  \App\Master\MasterEmpStatus  $masterEmpStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterEmpStatus $masterEmpStatus)
+    public function update(MasterEmpStatus $MasterEmpStatus, Request $request, $id)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'string|max:255|required',
+            'employee_status' => 'string|max:255|required',
+        ]);
+        
+        $master_update = $MasterEmpStatus->where('id', $id)->first();
+
+        $master_update->key = $request->input('key');
+
+        $master_update->employee_status = $request->input('employee_status');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.employeestatuses'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -79,8 +110,12 @@ class MasterEmpStatuController extends Controller
      * @param  \App\Master\MasterEmpStatus  $masterEmpStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterEmpStatus $masterEmpStatus)
+    public function destroy(MasterEmpStatus $MasterEmpStatus, $id)
     {
-        //
+        $master = $MasterEmpStatus->where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.employeestatuses'))->with('success', 'Data successfully deleted.');
     }
 }

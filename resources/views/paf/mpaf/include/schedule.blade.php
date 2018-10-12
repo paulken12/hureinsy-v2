@@ -120,18 +120,24 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="sched_type"><strong>Sched Type</strong></label>
+					<label for="sched_type"><strong>Schedule Request</strong></label>
 				</div>
 			</div>
-
-			@foreach ($sched_type as $schedule)
 			<div class="col">
-				<div class="form-check-inline">
-					<input type="radio" name="sched_type" id="sched_type" value="{{$schedule->key}}"> {{$schedule->schedule_type}}
+				<div class="form-group">
 				</div>
 			</div>
-			@endforeach
+			<div class="col">
+				<div class="form-group">
+				<select name="sched_type" id="sched_type" class="form-control">
+					<option style="display:none" value="{{empty($get_schedule_details->schedType->key) ? '' : $get_schedule_details->schedType->key}}" selected>{{empty($get_schedule_details->schedType->schedule_type) ? '--select--' : $get_schedule_details->schedType->schedule_type}}</option>
+					<option value="">--select--</option>
+					@foreach ($sched_type as $schedule)
+						<option value="{{$schedule->key}}">{{$schedule->schedule_type}}</option>
+					@endforeach
+				</select>
+				</div>
+			</div>
 		</div>
-
 	</div>
 </div>

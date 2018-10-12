@@ -19,7 +19,7 @@
 			</button>
 		</div>
 	@endif
-	<form action="{{route('setting.masters.titles.update', $master->id)}}" method="post">	
+	<form action="{{route('setting.masters.employeestatuses.update', $master->id)}}" method="post">	
 		{{csrf_field()}}
 	    <div class="card">
 	        <div class="card-header">
@@ -32,8 +32,8 @@
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
-							<th scope="col">Job Title</th>
-							<th scope="col">Description</th>
+							<th scope="col">Key</th>
+							<th scope="col">Employee Status</th>
 							<th scope="col">Created at</th>
 							<th scope="col">Updated at</th>
 							<th scope="col" class="form-group text-center">Action</th>
@@ -42,13 +42,13 @@
 					<tbody>
 						<tr>	
 							<th scope="row">{{$master->id}}</th>
-							<td><input type="text" id="job_title" name="job_title" class="form-control" value="{{$master->job_titles}}" required	></td>
-							<td><input type="text" id="description" name="description" class="form-control" value="{{$master->description}}" required></td>
+							<td><input type="text" id="key" name="key" class="form-control" value="{{$master->key}}" required></td>
+							<td><input type="text" id="employee_status" name="employee_status" class="form-control" value="{{$master->employee_status}}" required></td>
 							<td>{{$master->created_at}}</td>
 							<td>{{$master->updated_at}}</td>
 							<td class="form-group text-center">
-								<a class="btn btn-danger btn-sm" href="{{route('setting.masters.titles.destroy', $id)}}">Delete</a>
-								<a class="btn btn-secondary btn-sm" href="{{route('setting.masters.titles')}}">Cancel</a>
+								<a class="btn btn-danger btn-sm" href="{{route('setting.masters.employeestatuses.destroy', $id)}}">Delete</a>
+								<a class="btn btn-secondary btn-sm" href="{{route('setting.masters.employeestatuses')}}">Cancel</a>
 								<button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
 							</td>
 						</tr>

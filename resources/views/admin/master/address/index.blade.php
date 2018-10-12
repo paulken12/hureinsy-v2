@@ -33,8 +33,8 @@
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
-						<th scope="col">Job Titles</th>
-						<th scope="col">Description</th>
+						<th scope="col">Key</th>
+						<th scope="col">Address type</th>
 						<th scope="col">Created at</th>
 						<th scope="col">Updated at</th>
 						<th scope="col" class="form-group text-center">Action</th>
@@ -44,13 +44,13 @@
 					@foreach($master as $list)
 						<tr>
 							<th scope="row">{{$list->id}}</th>
-							<td>{{$list->job_titles}}</td>
-							<td>{{$list->description}}</td>
+							<td>{{$list->key}}</td>
+							<td>{{$list->address_type}}</td>
 							<td>{{$list->created_at}}</td>
 							<td>{{$list->updated_at}}</td>
 							<td class="form-group text-center">
-								<a class="btn btn-primary btn-sm" href="{{route('setting.masters.titles.edit', $list->id)}}">Edit</a>
-								<a class="btn btn-danger btn-sm" href="{{route('setting.masters.titles.destroy', $list->id)}}">Delete</a>
+								<a class="btn btn-primary btn-sm" href="{{route('setting.masters.address.edit', $list->id)}}">Edit</a>
+								<a class="btn btn-danger btn-sm" href="{{route('setting.masters.address.destroy', $list->id)}}">Delete</a>
 							</td>
 						</tr>
 					@endforeach
@@ -63,19 +63,19 @@
     </div>
 
 {{--MODAL FOR CREATING--}}
-<form action="{{route('setting.masters.titles.store')}}" method="post">	
+<form action="{{route('setting.masters.address.store')}}" method="post">	
 	{{csrf_field()}}	
 	<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal_add_title">Add Job Title</h5>
+					<h5 class="modal-title" id="modal_add_title">Add Address</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				</div>
 				<div class="modal-body">
-					@include('admin.master.jobtitle.create')
+					@include('admin.master.address.create')
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

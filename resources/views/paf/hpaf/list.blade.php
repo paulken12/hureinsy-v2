@@ -49,7 +49,7 @@
 						<tr>
 							<th scope="row">{{empty($lists->id) ? '' : $lists->id}}</th>
 							<td>{{empty($lists->employee_company_id) ? '' : $lists->employee_company_id}}</td>
-							<td>{{empty($lists->employmentStatus->employee_status) ? '' : $lists->employmentStatus->employee_status}}</td>
+							<td>{{empty($lists->contractChange->change_type) ? '' : $lists->contractChange->change_type}}</td>
 							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
 							@if($lists->masterPafSubStatus->id == '1')
