@@ -114,6 +114,66 @@ Route::group(['middleware' => ['auth','role:titan']],function()
 
     Route::get('setting/masters/blood/destroy={id}', 'Master\MasterBloodTypController@destroy')->name('setting.masters.blood.destroy');
 
+    // CIVIL
+
+    Route::get('setting/masters/civil', 'Master\MasterCivilStatuController@index')->name('setting.masters.civil');
+
+    Route::post('setting/masters/civil/store', 'Master\MasterCivilStatuController@store')->name('setting.masters.civil.store');
+
+    Route::get('setting/masters/civil/edit={id}', 'Master\MasterCivilStatuController@edit')->name('setting.masters.civil.edit');
+
+    Route::post('setting/masters/civil/update={id}', 'Master\MasterCivilStatuController@update')->name('setting.masters.civil.update');
+
+    Route::get('setting/masters/civil/destroy={id}', 'Master\MasterCivilStatuController@destroy')->name('setting.masters.civil.destroy');
+
+    // EDUCATION
+
+    Route::get('setting/masters/education', 'Master\MasterEducationTypController@index')->name('setting.masters.education');
+
+    Route::post('setting/masters/education/store', 'Master\MasterEducationTypController@store')->name('setting.masters.education.store');
+
+    Route::get('setting/masters/education/edit={id}', 'Master\MasterEducationTypController@edit')->name('setting.masters.education.edit');
+
+    Route::post('setting/masters/education/update={id}', 'Master\MasterEducationTypController@update')->name('setting.masters.education.update');
+
+    Route::get('setting/masters/education/destroy={id}', 'Master\MasterEducationTypController@destroy')->name('setting.masters.education.destroy');
+
+    // CITIZENSHIP
+
+    Route::get('setting/masters/citizenship', 'Master\MasterCitizenshiController@index')->name('setting.masters.citizenship');
+
+    Route::post('setting/masters/citizenship/store', 'Master\MasterCitizenshiController@store')->name('setting.masters.citizenship.store');
+
+    Route::get('setting/masters/citizenship/edit={id}', 'Master\MasterCitizenshiController@edit')->name('setting.masters.citizenship.edit');
+
+    Route::post('setting/masters/citizenship/update={id}', 'Master\MasterCitizenshiController@update')->name('setting.masters.citizenship.update');
+
+    Route::get('setting/masters/citizenship/destroy={id}', 'Master\MasterCitizenshiController@destroy')->name('setting.masters.citizenship.destroy');
+
+    // EXTENSION
+
+    Route::get('setting/masters/extension', 'Master\MasterExtensionController@index')->name('setting.masters.extension');
+
+    Route::post('setting/masters/extension/store', 'Master\MasterExtensionController@store')->name('setting.masters.extension.store');
+
+    Route::get('setting/masters/extension/edit={id}', 'Master\MasterExtensionController@edit')->name('setting.masters.extension.edit');
+
+    Route::post('setting/masters/extension/update={id}', 'Master\MasterExtensionController@update')->name('setting.masters.extension.update');
+
+    Route::get('setting/masters/extension/destroy={id}', 'Master\MasterExtensionController@destroy')->name('setting.masters.extension.destroy');
+
+    // FAMILY TYPE
+
+    Route::get('setting/masters/family', 'Master\MasterFamilyTypController@index')->name('setting.masters.family');
+
+    Route::post('setting/masters/family/store', 'Master\MasterFamilyTypController@store')->name('setting.masters.family.store');
+
+    Route::get('setting/masters/family/edit={id}', 'Master\MasterFamilyTypController@edit')->name('setting.masters.family.edit');
+
+    Route::post('setting/masters/family/update={id}', 'Master\MasterFamilyTypController@update')->name('setting.masters.family.update');
+
+    Route::get('setting/masters/family/destroy={id}', 'Master\MasterFamilyTypController@destroy')->name('setting.masters.family.destroy');
+
     // 
 
 

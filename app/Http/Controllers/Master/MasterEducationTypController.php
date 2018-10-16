@@ -15,7 +15,9 @@ class MasterEducationTypController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterEducationType::paginate(7);
+
+        return view('admin.master.education.index', compact('master'));
     }
 
     /**
@@ -34,9 +36,22 @@ class MasterEducationTypController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterEducationType $MasterEducationType, Request $request)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'unique:master_education_types,key|string|max:255|required',
+            'educational_level' => 'unique:master_education_types,educational_level|string|max:255|required',
+        ]);
+
+        $MasterEducationType->create([
+
+            'key' => $request->input('key'),
+
+            'educational_level' => $request->input('educational_level'),
+
+        ]);
+
+        return redirect(route('setting.masters.education'))->with('success', 'Data successfully created.');
     }
 
     /**
@@ -56,9 +71,11 @@ class MasterEducationTypController extends Controller
      * @param  \App\Master\MasterEducationType  $masterEducationType
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterEducationType $masterEducationType)
+    public function edit(MasterEducationType $masterEducationType, $id)
     {
-        //
+        $master = $masterEducationType->where('id', $id)->first();
+
+        return view('admin.master.education.edit', compact('id', 'master'));
     }
 
     /**
@@ -68,9 +85,22 @@ class MasterEducationTypController extends Controller
      * @param  \App\Master\MasterEducationType  $masterEducationType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterEducationType $masterEducationType)
+    public function update(Request $request, MasterEducationType $masterEducationType, $id)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'string|max:255|required',
+            'educational_level' => 'string|max:255|required',
+        ]);
+        
+        $master_update = $masterEducationType->where('id', $id)->first();
+
+        $master_update->key = $request->input('key');
+
+        $master_update->educational_level = $request->input('educational_level');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.education'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -79,8 +109,12 @@ class MasterEducationTypController extends Controller
      * @param  \App\Master\MasterEducationType  $masterEducationType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterEducationType $masterEducationType)
+    public function destroy(MasterEducationType $masterEducationType, $id)
     {
-        //
+        $master = $masterEducationType->where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.education'))->with('success', 'Data successfully deleted.');
     }
 }

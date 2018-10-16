@@ -15,7 +15,9 @@ class MasterCivilStatuController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterCivilStatus::paginate(7);
+
+        return view('admin.master.civil.index', compact('master'));
     }
 
     /**
@@ -34,9 +36,22 @@ class MasterCivilStatuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterCivilStatus $MasterCivilStatus, Request $request)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'unique:master_civil_statuses,key|string|max:255|required',
+            'civil_status' => 'unique:master_civil_statuses,civil_status|string|max:255|required',
+        ]);
+
+        $MasterCivilStatus->create([
+
+            'key' => $request->input('key'),
+
+            'civil_status' => $request->input('civil_status'),
+
+        ]);
+
+        return redirect(route('setting.masters.civil'))->with('success', 'Data successfully created.');
     }
 
     /**
@@ -56,9 +71,11 @@ class MasterCivilStatuController extends Controller
      * @param  \App\Master\MasterCivilStatus  $masterCivilStatus
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterCivilStatus $masterCivilStatus)
+    public function edit(MasterCivilStatus $masterCivilStatus, $id)
     {
-        //
+        $master = $masterCivilStatus->where('id', $id)->first();
+
+        return view('admin.master.civil.edit', compact('id', 'master'));
     }
 
     /**
@@ -68,9 +85,22 @@ class MasterCivilStatuController extends Controller
      * @param  \App\Master\MasterCivilStatus  $masterCivilStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterCivilStatus $masterCivilStatus)
+    public function update(Request $request, MasterCivilStatus $masterCivilStatus, $id)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'string|max:255|required',
+            'civil_status' => 'string|max:255|required',
+        ]);
+        
+        $master_update = $masterCivilStatus->where('id', $id)->first();
+
+        $master_update->key = $request->input('key');
+
+        $master_update->civil_status = $request->input('civil_status');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.civil'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -79,8 +109,12 @@ class MasterCivilStatuController extends Controller
      * @param  \App\Master\MasterCivilStatus  $masterCivilStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterCivilStatus $masterCivilStatus)
+    public function destroy(MasterCivilStatus $masterCivilStatus, $id)
     {
-        //
+        $master = $masterCivilStatus->where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.civil'))->with('success', 'Data successfully deleted.');
     }
 }

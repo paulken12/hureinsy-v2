@@ -15,7 +15,9 @@ class MasterExtensionController extends Controller
      */
     public function index()
     {
-        //
+        $master = MasterExtension::paginate(7);
+
+        return view('admin.master.extension.index', compact('master'));
     }
 
     /**
@@ -34,9 +36,22 @@ class MasterExtensionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterExtension $MasterExtension, Request $request)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'unique:master_extensions,key|string|max:255|required',
+            'name_extension' => 'unique:master_extensions,name_extension|string|max:255|required',
+        ]);
+
+        $MasterExtension->create([
+
+            'key' => $request->input('key'),
+
+            'name_extension' => $request->input('name_extension'),
+
+        ]);
+
+        return redirect(route('setting.masters.extension'))->with('success', 'Data successfully created.');
     }
 
     /**
@@ -56,9 +71,11 @@ class MasterExtensionController extends Controller
      * @param  \App\Master\MasterExtension  $masterExtension
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterExtension $masterExtension)
+    public function edit(MasterExtension $masterExtension, $id)
     {
-        //
+        $master = $masterExtension->where('id', $id)->first();
+
+        return view('admin.master.extension.edit', compact('id', 'master'));
     }
 
     /**
@@ -68,9 +85,22 @@ class MasterExtensionController extends Controller
      * @param  \App\Master\MasterExtension  $masterExtension
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterExtension $masterExtension)
+    public function update(Request $request, MasterExtension $masterExtension, $id)
     {
-        //
+        $validator = $request->validate([
+            'key' => 'string|max:255|required',
+            'name_extension' => 'string|max:255|required',
+        ]);
+        
+        $master_update = $masterExtension->where('id', $id)->first();
+
+        $master_update->key = $request->input('key');
+
+        $master_update->name_extension = $request->input('name_extension');
+
+        $master_update->save();
+        
+        return redirect(route('setting.masters.extension'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -79,8 +109,12 @@ class MasterExtensionController extends Controller
      * @param  \App\Master\MasterExtension  $masterExtension
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterExtension $masterExtension)
+    public function destroy(MasterExtension $masterExtension, $id)
     {
-        //
+        $master = $masterExtension->where('id', $id)->first();
+
+        $master->delete();
+
+        return redirect(route('setting.masters.extension'))->with('success', 'Data successfully deleted.');
     }
 }

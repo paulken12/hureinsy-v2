@@ -249,10 +249,19 @@
                                         <a href="{{route('setting.masters.blood')}}">Blood Types</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Civil Statuses</a>
+                                        <a href="{{route('setting.masters.civil')}}">Civil Statuses</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Education Types</a>
+                                        <a href="{{route('setting.masters.education')}}">Education Types</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('setting.masters.citizenship')}}">Citizenship</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('setting.masters.extension')}}">Name Extension</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('setting.masters.family')}}">Family Type</a>
                                     </li>
                                 </ul>
                             </li>
