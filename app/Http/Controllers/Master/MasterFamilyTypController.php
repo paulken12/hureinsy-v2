@@ -15,9 +15,9 @@ class MasterFamilyTypController extends Controller
      */
     public function index()
     {
-/*        $master = MasterFamilyType::paginate(7);
+        $master = MasterFamilyType::paginate(7);
 
-        return view('admin.master.family.index', compact('master'));*/
+        return view('admin.master.family.index', compact('master'));
     }
 
     /**
@@ -38,7 +38,7 @@ class MasterFamilyTypController extends Controller
      */
     public function store(MasterFamilyType $MasterFamilyType, Request $request)
     {
-       /* $validator = $request->validate([
+       $validator = $request->validate([
             'key' => 'unique:master_family_types,key|string|max:255|required',
             'family_type' => 'unique:master_family_types,family_type|string|max:255|required',
         ]);
@@ -51,7 +51,7 @@ class MasterFamilyTypController extends Controller
 
         ]);
 
-        return redirect(route('setting.masters.family'))->with('success', 'Data successfully created.');*/
+        return redirect(route('setting.masters.family'))->with('success', 'Data successfully created.');
     }
 
     /**
@@ -73,9 +73,9 @@ class MasterFamilyTypController extends Controller
      */
     public function edit(MasterFamilyType $masterFamilyType, $id)
     {
- /*       $master = $masterFamilyType->where('id', $id)->first();
+        $master = $masterFamilyType->where('id', $id)->first();
 
-        return view('admin.master.family.edit', compact('id', 'master'));*/
+        return view('admin.master.family.edit', compact('id', 'master'));
     }
 
     /**
@@ -87,7 +87,7 @@ class MasterFamilyTypController extends Controller
      */
     public function update(Request $request, MasterFamilyType $masterFamilyType, $id)
     {
-/*        $validator = $request->validate([
+        $validator = $request->validate([
             'key' => 'string|max:255|required',
             'family_type' => 'string|max:255|required',
         ]);
@@ -100,7 +100,7 @@ class MasterFamilyTypController extends Controller
 
         $master_update->save();
         
-        return redirect(route('setting.masters.family'))->with('success', 'Data successfully updated.');*/
+        return redirect(route('setting.masters.family'))->with('success', 'Data successfully updated.');
     }
 
     /**
@@ -111,10 +111,10 @@ class MasterFamilyTypController extends Controller
      */
     public function destroy(MasterFamilyType $masterFamilyType, $id)
     {
-/*        $master = $masterFamilyType->where('id', $id)->first();
+        $master = $masterFamilyType->where('id', $id)->first();
 
         $master->delete();
 
-        return redirect(route('setting.masters.family'))->with('success', 'Data successfully deleted.');*/
+        return redirect(route('setting.masters.family'))->with('success', 'Data successfully deleted.');
     }
 }

@@ -1,16 +1,16 @@
-\@extends('layouts.dashboard')
+@extends('layouts.dashboard')
 @section('content')
 <div class="full-container">
 	<div class="card  remain-height pos-r scrollable">
 		<div class="card">
 			<div class="card-header">
-				<h4><i class="fab fa-wpforms"></i> &nbsp; <strong>Personnel Action Form</strong></h4>
+				<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form</strong></h4>
 			</div>
 
 			<div class="card-body">
 				{{csrf_field()}}
 
-				<h4><i class="fas fa-user"></i> &nbsp; <strong>Employee Information</strong></h4>
+				<h4><i class="ti-user"></i> &nbsp; <strong>Employee Information</strong></h4>
 				<hr>
 
 				<div class="row">
@@ -66,7 +66,7 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="employment_status"><strong>Employment Status</strong></label>
-							<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employee_status) ? '' : $get_paf_details->employmentStatus->employee_status}}" readonly>
+							<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}" readonly>
 						</div>
 					</div>
 				</div>

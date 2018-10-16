@@ -174,6 +174,30 @@ Route::group(['middleware' => ['auth','role:titan']],function()
 
     Route::get('setting/masters/family/destroy={id}', 'Master\MasterFamilyTypController@destroy')->name('setting.masters.family.destroy');
 
+    // CONTRACT CHANGE
+
+    Route::get('setting/masters/contract', 'Master\MasterContractChaController@index')->name('setting.masters.contract');
+
+    Route::post('setting/masters/contract/store', 'Master\MasterContractChaController@store')->name('setting.masters.contract.store');
+
+    Route::get('setting/masters/contract/edit={id}', 'Master\MasterContractChaController@edit')->name('setting.masters.contract.edit');
+
+    Route::post('setting/masters/contract/update={id}', 'Master\MasterContractChaController@update')->name('setting.masters.contract.update');
+
+    Route::get('setting/masters/contract/destroy={id}', 'Master\MasterContractChaController@destroy')->name('setting.masters.contract.destroy');
+
+    // SCHEDULE REQUEST
+
+    Route::get('setting/masters/schedrequest', 'Master\MasterScheduleReqController@index')->name('setting.masters.schedrequest');
+
+    Route::post('setting/masters/schedrequest/store', 'Master\MasterScheduleReqController@store')->name('setting.masters.schedrequest.store');
+
+    Route::get('setting/masters/schedrequest/edit={id}', 'Master\MasterScheduleReqController@edit')->name('setting.masters.schedrequest.edit');
+
+    Route::post('setting/masters/schedrequest/update={id}', 'Master\MasterScheduleReqController@update')->name('setting.masters.schedrequest.update');
+
+    Route::get('setting/masters/schedrequest/destroy={id}', 'Master\MasterScheduleReqController@destroy')->name('setting.masters.schedrequest.destroy');
+
     // 
 
 

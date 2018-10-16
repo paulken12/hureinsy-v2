@@ -41,6 +41,7 @@ const app = new Vue({
                 console.log(element);
                 new PerfectScrollbar(element);
             });
+
         }
 
         $('.sidebar .sidebar-menu li a').on('click', function () {

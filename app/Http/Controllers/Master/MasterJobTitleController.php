@@ -15,7 +15,7 @@ class MasterJobTitleController extends Controller
      */
     public function index()
     {
-        $master = MasterJobTitle::paginate(7);
+        $master = MasterJobTitle::all();
 
         return view('admin.master.jobtitle.index', compact('master'));
     }
@@ -36,7 +36,7 @@ class MasterJobTitleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MasterCompany $MasterCompany, Request $request)
+    public function store(MasterJobTitle $MasterJobTitle, Request $request)
     {
 
         $validator = $request->validate([
@@ -73,7 +73,7 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterCompany $MasterCompany, $id)
+    public function edit(MasterJobTitle $MasterJobTitle, $id)
     {
         $master = $MasterJobTitle->where('id', $id)->first();
 
@@ -87,7 +87,7 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(MasterCompany $MasterCompany, Request $request, $id)
+    public function update(MasterJobTitle $MasterJobTitle, Request $request, $id)
     {
 
         $validator = $request->validate([
@@ -113,7 +113,7 @@ class MasterJobTitleController extends Controller
      * @param  \App\Master\MasterJobTitle  $masterJobTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterCompany $MasterCompany, $id)
+    public function destroy(MasterJobTitle $MasterJobTitle, $id)
     {
      
         $master = $MasterJobTitle->where('id', $id)->first();

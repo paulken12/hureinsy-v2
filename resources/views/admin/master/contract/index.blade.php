@@ -27,7 +27,7 @@
 						<tr>
 							<th class="text-center">ID</th>
 							<th>Key</th>
-							<th>Address type</th>
+							<th>Change Type</th>
 							<th class="text-center">Action</th>
 							<th class="text-center">
                 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add"><i class="ti-plus"></i></button>
@@ -38,7 +38,7 @@
 						<tr>
 							<th class="text-center">ID</th>
 							<th>Key</th>
-							<th>Address type</th>
+							<th>Change Type</th>
 							<th class="text-center">Action</th>
 							<th class="text-center">
                 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add"><i class="ti-plus"></i></button>
@@ -50,10 +50,10 @@
 							<tr>
 								<td scope="row" class="text-center">{{$list->id}}</th>
 								<td>{{$list->key}}</td>
-								<td>{{$list->address_type}}</td>
+								<td>{{$list->change_type}}</td>
 								<td class="text-center">
-									<a class="btn btn-primary btn-sm" href="{{route('setting.masters.address.edit', $list->id)}}">Edit</a>
-									<a class="btn btn-danger btn-sm" href="{{route('setting.masters.address.destroy', $list->id)}}">Delete</a>
+									<a class="btn btn-primary btn-sm" href="{{route('setting.masters.contract.edit', $list->id)}}">Edit</a>
+									<a class="btn btn-danger btn-sm" href="{{route('setting.masters.contract.destroy', $list->id)}}">Delete</a>
 								</td>
 								<td class="text-center"></td>
 							</tr>
@@ -63,21 +63,21 @@
             </div>
         </div>
     </div>
-    
+
 {{--MODAL FOR CREATING--}}
-<form action="{{route('setting.masters.address.store')}}" method="post">	
+<form action="{{route('setting.masters.contract.store')}}" method="post">	
 	{{csrf_field()}}	
 	<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal_add_title">Add Address</h5>
+					<h5 class="modal-title" id="modal_add_title">Add Change Type</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				</div>
 				<div class="modal-body">
-					@include('admin.master.address.create')
+					@include('admin.master.contract.create')
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

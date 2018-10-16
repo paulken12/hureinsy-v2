@@ -236,6 +236,22 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="javascript:void(0);">
+                                    <span>Paf Masters</span>
+                                    <span class="arrow">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{route('setting.masters.contract')}}">Contract change</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('setting.masters.schedrequest')}}">Schedule type</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="javascript:void(0);">
                                     <span>Other Masters</span>
                                     <span class="arrow">
                                         <i class="ti-angle-right"></i>

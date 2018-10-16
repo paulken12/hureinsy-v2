@@ -1,65 +1,67 @@
 @extends('layouts.dashboard')
 
 @section('content')
-	@if(session('success'))
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			{{session('success')}}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	@endif	
-	@if(count($errors))
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			@foreach($errors->all() as $err)
-				<li>{!!$err!!}</li>
-			@endforeach
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	@endif
-    <div class="card">
-        <div class="card-header">
-			<div class="btn-toolbar justify-content-between">
-            	<h4><i class="ti-list"></i> &nbsp; Masters Lists</h4>
-				<div>
-					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add"><i class="ti-plus"></i></button>
-				</div>
-			</div>
-        </div>
-        <div class="card-body">
-			<table class="table table-striped table-md">
-				<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Key</th>
-						<th scope="col">Company</th>
-						<th scope="col">Created at</th>
-						<th scope="col">Updated at</th>
-						<th scope="col" class="form-group text-center">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($master as $list)
+    <div class="full-container">
+        <div class="remain-height pos-r scrollable">
+            <div class="bgc-white bdrs-3 ">
+				@if(session('success'))
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						{{session('success')}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif	
+				@if(count($errors))
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						@foreach($errors->all() as $err)
+							<li>{!!$err!!}</li>
+						@endforeach
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif
+                <table id="employee-list" class="table table-striped" cellspacing="0" width="100%">
+					<thead>
 						<tr>
-							<th scope="row">{{$list->id}}</th>
-							<td>{{$list->key}}</td>
-							<td>{{$list->name}}</td>
-							<td>{{$list->created_at}}</td>
-							<td>{{$list->updated_at}}</td>
-							<td class="form-group text-center">
-								<a class="btn btn-primary btn-sm" href="{{route('setting.masters.companies.edit', $list->id)}}">Edit</a>
-								<a class="btn btn-danger btn-sm" href="{{route('setting.masters.companies.destroy', $list->id)}}">Delete</a>
-							</td>
+							<th class="text-center">ID</th>
+							<th>Key</th>
+							<th>Company</th>
+							<th class="text-center">Action</th>
+							<th class="text-center">
+                				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add"><i class="ti-plus"></i></button>
+                			</th>
 						</tr>
-					@endforeach
-				</tbody>
-			</table>
-	    </div>
-	    <div class="row mt-2">
-	        <span class="mr-auto ml-auto">{{$master->links()}}</span>
-	    </div>
+					</thead>
+					<tfoot>
+						<tr>
+							<th class="text-center">ID</th>
+							<th>Key</th>
+							<th>Company</th>
+							<th class="text-center">Action</th>
+							<th class="text-center">
+                				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add"><i class="ti-plus"></i></button>
+                			</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						@foreach($master as $list)
+							<tr>
+								<td scope="row" class="text-center">{{$list->id}}</th>
+								<td>{{$list->key}}</td>
+								<td>{{$list->name}}</td>
+								<td class="text-center">
+									<a class="btn btn-primary btn-sm" href="{{route('setting.masters.companies.edit', $list->id)}}">Edit</a>
+									<a class="btn btn-danger btn-sm" href="{{route('setting.masters.companies.destroy', $list->id)}}">Delete</a>
+								</td>
+								<td class="text-center"></td>
+							</tr>
+						@endforeach
+					</tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 {{--MODAL FOR CREATING--}}
