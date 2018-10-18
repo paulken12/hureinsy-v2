@@ -91,8 +91,7 @@ class PersonnelActionManagement {
     }
     
     public static function count_open_exec(){
-        return PafManagement::where('master_id_request_status', '2')
-                            ->where('approved_by_company_id', '')
+        return PafManagement::where('master_id_sub_request_status', '2')
                             ->count();
     }
 

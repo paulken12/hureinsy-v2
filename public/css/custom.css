@@ -116,3 +116,34 @@
         overflow: auto !important;
     }
 }
+
+/*For data tables*/
+
+#masters-list_wrapper label, #paf-list_wrapper label {
+  margin: 1rem;
+}
+
+#masters-list_wrapper #masters-list_info, #paf-list_wrapper #paf-list_info {
+  margin: 1rem;
+}
+
+#masters-list_wrapper .current, #paf-list_wrapper .current {
+  background: #2196f3;
+}
+
+#masters-list_wrapper .paginate_button:hover, #paf-list_wrapper .paginate_button:hover {
+  background: #2196f3;
+}
+
+#masters-list_wrapper #masters-list_paginate, #paf-list_wrapper #paf-list_paginate, {
+  margin: 1rem;
+}
+
+#masters-list_wrapper .table th, #paf-list_wrapper .table th, {
+  cursor: cell;
+}
+
+#masters-list_wrapper .table td, #paf-list_wrapper .table td,  {
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+}

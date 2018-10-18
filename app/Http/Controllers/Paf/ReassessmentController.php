@@ -18,9 +18,11 @@ class ReassessmentController extends Controller
 
         $request_list = Cache::get('call_paf_lists_manager');
 
-        $archives = Cache::get('call_paf_lists_archived');   
+        $archives = Cache::get('call_paf_lists_archived');
 
-    	return view('paf.mpaf.list', compact('request_list', 'archives'));
+        $get_employee = Cache::get('call_emp_info');
+
+    	return view('paf.mpaf.list', compact('request_list', 'archives', 'get_employee'));
     }
 
     public function show($form){

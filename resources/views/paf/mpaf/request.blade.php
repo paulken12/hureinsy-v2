@@ -16,15 +16,7 @@
 		<div class="card-header">
 			<div class="btn-toolbar justify-content-between">
 				<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form</strong></h4>
-				<form action="{{route('paf.search.result')}}" method="post">
-					{{csrf_field()}}	
-					<div class="input-group">
-						<input type="text" id="raj_id" name="raj_id" class="form-control" title="employee ID" placeholder="Enter employee ID" required>
-						<div class="input-group-append">
-							<button class="btn btn-secondary" type="submit"><i class="ti-search"></i></button>
-						</div>	
-					</div>
-				</form>
+				<a href="{{route('paf.search')}}" class="btn btn-secondary" type="button">Back</a>
 			</div>
 		</div>
 

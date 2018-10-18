@@ -46,5 +46,4 @@ class PafManagement extends Model
     {
         return $this->belongsTo(MasterContractChangePaf::class, 'master_key_employment_status');
     }
-
 }

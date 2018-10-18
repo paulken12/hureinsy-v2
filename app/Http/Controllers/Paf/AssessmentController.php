@@ -19,11 +19,13 @@ class AssessmentController extends Controller
 
         Cache::forever('call_paf_lists_hr', PersonnelActionManagement::call_paf_lists($month, $year));
 
-        $requestList = Cache::get('call_paf_lists_hr');
+        $requestList = Cache::get('call_paf_lists_hr');       
 
         $archives = Cache::get('call_paf_lists_archived');
 
-        return view('paf.hpaf.list', compact('requestList', 'archives', 'count_archives'));
+        $get_employee = Cache::get('call_emp_info');
+
+        return view('paf.hpaf.list', compact('requestList', 'archives', 'count_archives', 'get_employee'));
 
     }
 

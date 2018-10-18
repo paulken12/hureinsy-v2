@@ -20,7 +20,9 @@ class UserPafController extends Controller
 
         $archives =  Cache::get('call_paf_lists_archived');   
 
-        return view('paf.upaf.list', compact('requestList', 'archives'));
+        $get_employee = Cache::get('call_emp_info');
+
+        return view('paf.upaf.list', compact('requestList', 'archives', 'get_employee'));
     
     }
 

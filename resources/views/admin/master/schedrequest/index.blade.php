@@ -3,26 +3,30 @@
 @section('content')
     <div class="full-container">
         <div class="remain-height pos-r scrollable">
-            <div class="bgc-white bdrs-3 ">
-				@if(session('success'))
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						{{session('success')}}
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-				@endif	
-				@if(count($errors))
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-						@foreach($errors->all() as $err)
-							<li>{!!$err!!}</li>
-						@endforeach
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-				@endif
-                <table id="employee-list" class="table table-striped" cellspacing="0" width="100%">
+            <div class="bgc-white bdrs-3">
+				<span class="align-middle">
+  					<h3 class="pt-3 text-center">Masters Lists</h3>
+					<hr>
+					@if(session('success'))
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							{{session('success')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif	
+					@if(count($errors))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							@foreach($errors->all() as $err)
+								<li>{!!$err!!}</li>
+							@endforeach
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif
+				</span>
+                <table id="masters-list" class="table" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th class="text-center">ID</th>
@@ -48,7 +52,7 @@
 					<tbody>
 						@foreach($master as $list)
 							<tr>
-								<td scope="row" class="text-center">{{$list->id}}</th>
+								<td class="text-center">{{$list->id}}</td>
 								<td>{{$list->key}}</td>
 								<td>{{$list->schedule_type}}</td>
 								<td class="text-center">
@@ -87,5 +91,4 @@
 			</div>
 		</div>
 	</form>
-
 @endsection

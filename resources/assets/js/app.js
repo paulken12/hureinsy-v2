@@ -34,6 +34,8 @@ const app = new Vue({
     mounted: function () {
 
         $('#employee-list').DataTable();
+        $('#masters-list').DataTable();
+        $('#paf-list').DataTable();
 
         const scrollables = $('.scrollable');
         if (scrollables.length > 0) {
@@ -43,6 +45,7 @@ const app = new Vue({
             });
 
         }
+
 
         $('.sidebar .sidebar-menu li a').on('click', function () {
             const $this = $(this);
@@ -108,6 +111,7 @@ const app = new Vue({
         //         window.dispatchEvent(window.EVENT);
         //     }, 300);
         // });
+
     },
 
     methods: {

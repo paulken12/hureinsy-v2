@@ -19,31 +19,16 @@ class RequestController extends Controller
     public function index()
     {  
 
-        return view('paf.mpaf.search');
+        $employee_info = Cache::get('call_emp_info');
+
+        return view('paf.mpaf.search', compact('get_contract', 'employee_info'));
         
     }
-
-    public function search(Request $request)
-    {        
-
-        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($request->input('raj_id')));
-
-        $employee_info = Cache::get('get_employee_info');  
-
-        if (empty($employee_info)) {
-
-            return redirect(route('paf.search'))->with('error', 'Mismatched identity, Try again.');
-
-        }else{
-
-            return redirect(route('paf.search.result.show', $employee_info->company_id));
-        
-        }
-    }
-
 
     public function show($emplid)
-    {   
+    {
+
+        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($emplid));   
 
         $jobTitles = Cache::get('call_master_job_title');
 

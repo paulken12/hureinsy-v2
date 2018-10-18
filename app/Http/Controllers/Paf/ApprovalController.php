@@ -19,9 +19,11 @@ class ApprovalController extends Controller
 
         $requestList = Cache::get('call_paf_lists_exec');
 
-        $archives = Cache::get('call_paf_lists_archived');;       
+        $archives = Cache::get('call_paf_lists_archived');    
 
-        return view('paf.epaf.list', compact('requestList', 'archives'));
+        $get_employee = Cache::get('call_emp_info');
+
+        return view('paf.epaf.list', compact('requestList', 'archives', 'get_employee'));
     }
 
     public function show($form){
