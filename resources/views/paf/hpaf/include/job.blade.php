@@ -106,13 +106,28 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
+					<label for="project_assignment"><strong>Team</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
 					<label for="proposed_remarks_job"><strong>HR Remarks</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control" title="proposed_remarks_job" value="{{empty($get_job_details->proposed_remarks_hr) ? '
-					' : $get_job_details->proposed_remarks_hr}}">
+					<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control" title="proposed_remarks_job" value="{{empty($get_job_details->proposed_remarks_hr) ? '' : $get_job_details->proposed_remarks_hr}}">
 				</div>
 			</div>
 		</div>

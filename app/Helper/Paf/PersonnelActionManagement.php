@@ -77,6 +77,10 @@ class PersonnelActionManagement {
         return EmpContract::all();
     }
 
+    public static function call_paf(){
+        return PafManagement::all();
+    }
+
     public static function count_complete_user(){
         return PafManagement::where('master_id_request_status', '2')
                             ->whereDate('created_at', date('Y-m-d'))

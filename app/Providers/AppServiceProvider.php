@@ -19,9 +19,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        PersonnelActionManagement::register_date_effective();
+        if (Schema::hasTable('paf_managements')) {            
 
-        CacheHelper::create_master_cache();
+            CacheHelper::create_master_cache();
+
+            PersonnelActionManagement::register_date_effective();
+        
+        }
 
     }
 

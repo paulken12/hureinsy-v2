@@ -246,7 +246,7 @@
                                         <a href="{{route('setting.masters.contract')}}">Contract change</a>
                                     </li>
                                     <li>
-                                        <a href="{{route('setting.masters.schedrequest')}}">Schedule type</a>
+                                        <a href="{{route('setting.masters.schedrequest')}}">Schedule Request</a>
                                     </li>
                                 </ul>
                             </li>

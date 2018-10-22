@@ -71,7 +71,7 @@ class AssessmentController extends Controller
         //Get Statuses
         $request_status = $user_role->status;
 
-        if($get_schedule_details->proposed_key_schedule_type == 'emp'){
+        if($get_schedule_details->proposed_key_schedule_type == 'empl'){
             $sub_request_status = $user_role->sub_status;
         }else{
             $sub_request_status = $user_role->sub_status->whereNotIn('id', '4');

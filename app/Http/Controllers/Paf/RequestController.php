@@ -19,9 +19,9 @@ class RequestController extends Controller
     public function index()
     {  
 
-        $employee_info = Cache::get('call_emp_info');
+        $employee_info = Cache::get('call_emp_info')->where('reporting_to', Auth::user()->basicInfo->pluck('id')->first());
 
-        return view('paf.mpaf.search', compact('get_contract', 'employee_info'));
+        return view('paf.mpaf.search', compact('employee_info'));
         
     }
 

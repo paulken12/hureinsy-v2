@@ -16,9 +16,10 @@ class CreatePafChangeCompensationsTable extends Migration
         Schema::create('paf_change_compensations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id')->unsigned();
-            $table->integer('proposed_salary')->nullable();
-            $table->string('proposed_bonus_allowance')->nullable();
-            $table->string('proposed_benefits')->nullable();
+            $table->string('proposed_key_job_grade')->nullable();
+            $table->string('proposed_key_base_salary')->nullable();
+            $table->string('proposed_key_bonus_allowance')->nullable();
+            $table->string('proposed_key_benefits')->nullable();
             $table->string('proposed_remarks_hr')->nullable();
             $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();

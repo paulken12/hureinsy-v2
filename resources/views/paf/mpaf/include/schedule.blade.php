@@ -1,3 +1,4 @@
+
 <div class="card">
 
 	<div class="card-header" id="schedule-heading">
@@ -30,7 +31,7 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="days_of_work"><strong>Days of Work</strong></label>
+					<label for="days_of_work"><strong>Schedule</strong></label>
 				</div>
 			</div>
 			<div class="col">
@@ -40,61 +41,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="work_hours_per_week"><strong>Work Hours per week</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{--Placeholder--}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="type_of_shift"><strong>Type of Shift</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{--Placeholder--}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="work_hours_per_day"><strong>Work Hours per Day</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{--Placeholder--}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day">
+					<input type="text" id="proposed_schedule" name="proposed_schedule" class="form-control" title="Proposed_schedule">
 				</div>
 			</div>
 		</div>
@@ -117,27 +64,5 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="sched_type"><strong>Schedule Request</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-				<select name="sched_type" id="sched_type" class="form-control">
-					<option style="display:none" value="{{empty($get_schedule_details->schedType->key) ? '' : $get_schedule_details->schedType->key}}" selected>{{empty($get_schedule_details->schedType->schedule_type) ? '--select--' : $get_schedule_details->schedType->schedule_type}}</option>
-					<option value="">--select--</option>
-					@foreach ($sched_type as $schedule)
-						<option value="{{$schedule->key}}">{{$schedule->schedule_type}}</option>
-					@endforeach
-				</select>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>

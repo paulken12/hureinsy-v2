@@ -51,23 +51,8 @@
 					</div>
 					<div class="col">
 						<div class="form-group">
-							<label for="team"><strong>Team</strong></label>
-							<input type="text" id="team" name="team" class="form-control-plaintext" title="Team" readonly>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col">
-						<div class="form-group">
-							<label for="position"><strong>Position</strong></label>
-							<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
-						</div>
-					</div>
-					<div class="col">
-						<div class="form-group">
-							<label for="department"><strong>Department</strong></label>
-							<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}"readonly>
+							<label for="team"><strong>Paf Requested by</strong></label>
+							<input type="text" id="requested_by" name="requested_by" class="form-control-plaintext" title="Requested_by" readonly>
 						</div>
 					</div>
 				</div>

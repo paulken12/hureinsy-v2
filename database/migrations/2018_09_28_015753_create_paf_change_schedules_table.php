@@ -15,13 +15,9 @@ class CreatePafChangeSchedulesTable extends Migration
     {
         Schema::create('paf_change_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('request_id')->unsigned();
-            $table->integer('proposed_days_of_work')->nullable();
-            $table->integer('proposed_work_hours_per_week')->nullable();
-            $table->string('proposed_type_of_shift')->nullable();
-            $table->integer('proposed_work_hours_per_day')->nullable();
-            $table->string('proposed_work_location')->nullable();
-            $table->string('proposed_key_schedule_type')->nullable();
+            $table->integer('request_id')->unsigned();                                                                       
+            $table->string('proposed_key_schedule')->nullable();
+            $table->string('proposed_key_work_location')->nullable();
             $table->string('proposed_remarks_hr')->nullable();
             $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();

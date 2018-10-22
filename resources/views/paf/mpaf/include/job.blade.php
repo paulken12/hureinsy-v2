@@ -121,6 +121,22 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+					<label for="project_assignment"><strong>Team</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
 	

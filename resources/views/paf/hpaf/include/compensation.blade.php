@@ -93,8 +93,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control" title="proposed_remarks_compensation" value="{{empty($get_compensation_details->proposed_remarks_hr) ? '
-					' : $get_compensation_details->proposed_remarks_hr}}">
+					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control" title="proposed_remarks_compensation" value="{{empty($get_compensation_details->proposed_remarks_hr) ? '' : $get_compensation_details->proposed_remarks_hr}}">
 				</div>
 			</div>
 		</div>

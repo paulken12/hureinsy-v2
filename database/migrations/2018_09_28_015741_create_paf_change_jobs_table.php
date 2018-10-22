@@ -20,6 +20,7 @@ class CreatePafChangeJobsTable extends Migration
             $table->string('proposed_reports_to')->nullable();
             $table->string('proposed_key_position_title')->nullable();
             $table->string('proposed_key_project_assignment')->nullable();
+            $table->string('proposed_key_team')->nullable();
             $table->string('proposed_remarks_hr')->nullable();
             $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();
