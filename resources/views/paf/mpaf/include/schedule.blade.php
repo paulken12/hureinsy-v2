@@ -36,7 +36,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--Placeholder--}}
+					<input type="text" id="current_schedule" name="current_schedule" class="form-control" title="Current_schedule">
 				</div>
 			</div>
 			<div class="col">
@@ -54,12 +54,17 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{--Placeholder--}}
+					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location">
+					<select name="proposed_work_location" id="proposed_work_location" class="form-control">
+						<option value="" selected>--select--</option>
+						@foreach ($project_assignment as $assignment)
+							<option value="{{$assignment->key}}">{{$assignment->name}} - {{$assignment->address}}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 		</div>

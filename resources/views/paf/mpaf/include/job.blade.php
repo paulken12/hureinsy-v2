@@ -30,12 +30,35 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
+					<label for="position_title"><strong>Job Title</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="text" id="current_job_title" name="current_job_title" class="form-control" title="current_job_title" value="{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<select name="proposed_job_title" id="proposed_job_title" class="form-control">
+						<option value="" selected>--select--</option>
+						@foreach ($jobTitles as $titles)
+							<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
 					<label for="department"><strong>Department</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}
+					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="	{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -53,17 +76,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="reportto"><strong>Report To</strong></label>
+					<label for="supervisor"><strong>Supervisor</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{$employee_info->reportingTo()}}
+					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="" readonly>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<select name="proposed_reportto" id="proposed_reportto" class="form-control">
+					<select name="proposed_supervisor" id="proposed_supervisor" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach($reportTo as $report)
 							@foreach ($report->roles->whereNotIn('id', '7') as $reports)
@@ -78,45 +101,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="position_title"><strong>Position/Title</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<select name="proposed_position_title" id="proposed_position_title" class="form-control">
-						<option value="" selected>--select--</option>
-						@foreach ($jobTitles as $titles)
-							<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
 					<label for="project_assignment"><strong>Project Assignment</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
+					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control" title="current_project_assignment" value="" readonly>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
-						<option value="" selected>--select--</option>
-						@foreach ($project_assignment as $assignment)
-							<option value="{{$assignment->key}}">{{$assignment->name}} - {{$assignment->address}}</option>
-						@endforeach
-					</select>
+					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control" title="Proposed_project_assignment">
 				</div>
 			</div>
 		</div>
@@ -124,15 +119,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="project_assignment"><strong>Team</strong></label>
+					<label for="Team"><strong>Team</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					<input type="text" id="current_team" name="current_team" class="form-control" title="Current_team">
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					<input type="text" id="proposed_team" name="proposed_team" class="form-control" title="Proposed_team">
 				</div>
 			</div>
 		</div>
