@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Personnel\Team;
 
+use App\Personnel\Info\EmpBasic;
 use App\Personnel\Team\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -15,7 +17,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return view('personnel.team.index');
+        $emp = EmpBasic::all();
+        $user_team_id = $emp->first()->myTeam();
+
+        return view('personnel.team.index', compact('emp','user_team_id'));
     }
 
     /**

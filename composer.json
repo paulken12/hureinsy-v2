@@ -1,4 +1,4 @@
-{
+ {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
@@ -11,7 +11,9 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.0",
-        "santigarcor/laratrust": "5.0.*"
+        "pusher/pusher-php-server": "^3.2",
+        "santigarcor/laratrust": "5.0.*",
+        "simshaun/recurr": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

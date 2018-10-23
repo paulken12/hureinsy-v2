@@ -35,7 +35,7 @@
                                     <span><i class="mR-10 ti-id-badge"></i> {{$employee->company_id}}</span>
                                 </td>
                                 <td>
-                                    <h6 class="c-grey-900 m-0 "><a href="{{$employee->path()}}">{{$employee->first_name . " " . $employee->last_name}}</a></h6>
+                                    <span><a href="{{$employee->path()}}">{{$employee->first_name . " " . $employee->last_name}}</a></span>
                                 </td>
                                 <td>
                                     <span style="font-size: 0.8rem">
@@ -43,7 +43,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{$employee->contract->first()->status}}
+                                    <span class="badge {{$employee->contract->first()->status=== 'Resigned' ? 'bgc-red-50 c-red-700' :'bgc-green-50 c-green-700'}} p-10 lh-0 tt-c badge-pill">{{$employee->contract->first()->status}}</span>
                                 </td>
                             </tr>
                         @endif

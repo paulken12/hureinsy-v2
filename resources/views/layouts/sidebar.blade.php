@@ -58,9 +58,9 @@
                                         <a href="javascript:void(0);">Upload Raw Data</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Scheduler</a>
+                                        <a href="{{route('attendances')}}">Schedule</a>
                                     </li>
-                                </ul>
+                               </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="javascript:void(0);">
@@ -134,7 +134,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="sidebar-link" href="{{route('personnel')}}">Personnel List</a></li>
                             <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
-                            <li><a class="sidebar-link" href="#">Reports</a></li>
+                            <li><a class="sidebar-link" href="{{route('reports')}}">Reports</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i

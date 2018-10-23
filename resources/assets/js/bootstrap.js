@@ -1,12 +1,16 @@
 import  PerfectScrollbar from 'perfect-scrollbar';
 import  DataTable from 'datatables';
+import  datepicker from 'bootstrap-datepicker';
+import  moment from  'moment';
+import Toasted from 'vue-toasted'
+import Form from './utilities/Form';
 
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 
 /**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+* We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
@@ -48,16 +52,26 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
+import Echo from 'laravel-echo'
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    encrypted: true
+});
+
+window.Echo.channel('EmployeeInformationForm')
+    .listen('NotifyAdminUpdate', e => {
+        console.log('Status has '+ e.notify.id+' been updated');
+        console.log(e);
+    });
 
 window.PerfectScrollbar = PerfectScrollbar;
 window.DataTable = DataTable;
+window.datepicker = datepicker;
+window.moment = moment;
+window.Toasted = Toasted;
+window.Form = Form;

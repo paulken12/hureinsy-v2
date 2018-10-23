@@ -87,9 +87,8 @@
 
                 @include('layouts.nav')
 
-                <main class="main-content bgc-grey-100">
-                    <div id="mainContent">
-
+                <main class="main-content bgc-grey-100 ">
+                    <div id="mainContent ">
                         @yield('content')
 
                     </div>

@@ -16,8 +16,8 @@ class RecruitController extends Controller
     public function create() {
 
         $company_id = EmpBasic::lastId();
-        $roles = Role::orderBy('id','desc')->get();
-        $admins = Role::all()->except(7);
+        $roles = Role::orderBy('id','desc')->get()->except(1);
+        $admins = Role::all()->except([1,7]);
         $users = User::all();
 
         return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users'));

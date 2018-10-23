@@ -11,14 +11,26 @@
 |
 */
 
+use App\Events\NotifyAdminUpdate;
 use Maatwebsite\Excel\Facades\Excel;
 
+class Order{
+    public $id;
+
+    public function __construct($id) {
+        $this->id = $id;
+    }
+}
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/export', function () {
-    return Excel::download(new \App\Exports\UsersExport(), 'users.xlsx');
+Route::get('/update',function(){
+    NotifyAdminUpdate::dispatch(new Order(4));
+});
+
+Route::get('/sample', function () {
+    return view('admin.role-management.role');
 });
 
 
@@ -40,6 +52,23 @@ Route::group(['middleware' => ['auth','role:titan|admin']],function()
 
     Route::post('store/recruit', 'Recruit\RecruitController@store')->name('store.recruit');
 
+    /* ------------------ REPORTS ------------------*/
+
+    Route::get('/reports', 'Personnel\Report\ReportController@index')->name('reports');
+
+    Route::post('/generate/report', 'Personnel\Report\ReportController@report')->name('generate.reports');
+
+    /* ------------------ ATTENDANCE ------------------*/
+
+    Route::get('/attendances', 'Attendance\Schedule\AttScheduleController@index')->name('attendances');
+
+    Route::get('/employee/attendance', 'Attendance\Schedule\AttScheduleController@create')->name('employee.attendance');
+
+    /* ------------------ ATTENDANCE ------------------*/
+
+    Route::get('/import', 'Attendance\Raw\ImportRawController@index')->name('import');
+
+    Route::post('/import/file', 'Attendance\Raw\ImportRawController@store')->name('import.file');
 });
 
 /* ------------------ PERSONNEL ------------------*/
@@ -62,6 +91,12 @@ Route::group(['middleware' => ['auth']],function()
     /* ------------------ TEAM ------------------*/
 
     Route::get('/my-team', 'Personnel\Team\TeamController@index')->name('team');
+
+    /* ------------------ CHANGE PASSWORD ------------------*/
+
+    Route::get('change-password', 'Auth\ChangePasswordController@show')->name('change.password');
+
+    Route::post('changing/password', 'Auth\ChangePasswordController@change')->name('changing.password');
 
 });
 

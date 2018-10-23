@@ -83,5 +83,4 @@ class User extends Authenticatable
     public function export() {
         return Excel::download(new UsersExport(), 'users.xlsx');
     }
-
 }
