@@ -46,11 +46,23 @@ class MasterContractChangePaf extends Seeder
             ],
             [
                 'key' => 'sfr',
-                'change_type' => 'separation for rehire',
+                'change_type' => 'employment separation for rehire',
             ],
             [
                 'key' => 'snr',
-                'change_type' => 'separation not for rehire',
+                'change_type' => 'employment separation not for rehire',
+            ],
+            [
+                'key' => 'ptr',
+                'change_type' => 'Project to Regular',
+            ],
+            [
+                'key' => 'pro',
+                'change_type' => 'promotion',
+            ],
+            [
+                'key' => 'dem',
+                'change_type' => 'demotion',
             ],
 
         ];

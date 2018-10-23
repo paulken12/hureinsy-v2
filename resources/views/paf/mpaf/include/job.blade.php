@@ -58,7 +58,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="	{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}" readonly>
+					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -76,12 +76,30 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
+					<label for="Team"><strong>Team</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="text" id="current_team" name="current_team" class="form-control" title="Current_team" value="default" readonly>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="text" id="proposed_team" name="proposed_team" class="form-control" title="Proposed_team">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
 					<label for="supervisor"><strong>Supervisor</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="" readonly>
+					<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -106,30 +124,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control" title="current_project_assignment" value="" readonly>
+					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control" title="current_project_assignment" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
 					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control" title="Proposed_project_assignment">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="Team"><strong>Team</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="current_team" name="current_team" class="form-control" title="Current_team">
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_team" name="proposed_team" class="form-control" title="Proposed_team">
 				</div>
 			</div>
 		</div>

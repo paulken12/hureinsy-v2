@@ -34,17 +34,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="department"><strong>Department</strong></label>
+					<label for="department"><strong>Job Title</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}
+					{{empty($get_curerent_job_details->masterJobTitle->job_titles) ? 'n/a' : $get_curerent_job_details->masterJobTitle->job_titles}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_department" name="proposed_department" class="form-control-plaintext" title="Proposed_department" value="{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}" readonly>
+					{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '-'. $get_job_details->masterJobTitle->description}}
 				</div>
 			</div>
 		</div>
@@ -52,53 +52,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="reportto"><strong>Report To</strong></label>
+					<label for="position_title"><strong>Department</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{$employee_name->reportingTo()}}
+					{{empty($get_curerent_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_reportto" name="proposed_reportto" class="form-control-plaintext" title="Proposed_reportto" value="{{empty($get_job_details->user->name) ? '' : $get_job_details->user->name}}" readonly>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="position_title"><strong>Position/Title</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_position_title" name="proposed_position_title" class="form-control-plaintext" title="Proposed_position_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : $get_job_details->masterJobTitle->description}}" readonly>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="project_assignment"><strong>Project Assignment</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{empty($get_job_details->masterCompany->name) ? '' : $get_job_details->masterCompany->name}}" readonly>
+					{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}
 				</div>
 			</div>
 		</div>
@@ -107,6 +71,38 @@
 			<div class="col-2">
 				<div class="form-group">
 					<label for="project_assignment"><strong>Team</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+					<label for="reportto"><strong>Supervisor</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+					<label for="project_assignment"><strong>Project Assignment</strong></label>
 				</div>
 			</div>
 			<div class="col">

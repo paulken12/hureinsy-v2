@@ -38,6 +38,10 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterStatusPaf::class);
         $this->call(MasterSubStatusPaf::class);
         $this->call(MasterScheduleTypePaf::class);
+        $this->call(MasterBehaviouralAssessmentPaf::class);
+        $this->call(MasterOverallRecommendationPaf::class);
+        $this->call(MasterPerformanceEvaluationPaf::class);
+        $this->call(MasterProficiencyTestPaf::class);
         $this->call(StatusRole::class);
         $this->call(SubStatusRole::class);
 

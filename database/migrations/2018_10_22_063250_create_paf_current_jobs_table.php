@@ -19,7 +19,7 @@ class CreatePafCurrentJobsTable extends Migration
             $table->string('current_key_job_title')->nullable();
             $table->string('current_key_department')->nullable();
             $table->string('current_key_team')->nullable();
-            $table->string('current_supervisor')->nullable();
+            $table->string('current_key_supervisor')->nullable();
             $table->string('current_key_project_assignment')->nullable();
             $table->timestamps();
 

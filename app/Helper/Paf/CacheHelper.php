@@ -20,6 +20,14 @@ class CacheHelper{
                 Cache::forever('call_master_job_title', PersonnelActionManagement::call_master_job_title());
 
                 Cache::forever('call_master_department', PersonnelActionManagement::call_master_department());
+                
+                Cache::forever('call_master_paf_behavioural_assessment', PersonnelActionManagement::call_master_paf_behavioural_assessment());
+
+                Cache::forever('call_master_paf_overall_recommendation', PersonnelActionManagement::call_master_paf_overall_recommendation());
+
+                Cache::forever('call_master_paf_performance_evaluation', PersonnelActionManagement::call_master_paf_performance_evaluation());
+
+                Cache::forever('call_master_paf_proficiency_test_paf', PersonnelActionManagement::call_master_paf_proficiency_test_paf());
 
                 Cache::forever('call_master_paf_schedule_type', PersonnelActionManagement::call_master_paf_schedule_type());
 

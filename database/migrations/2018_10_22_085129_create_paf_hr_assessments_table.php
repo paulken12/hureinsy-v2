@@ -15,7 +15,17 @@ class CreatePafHrAssessmentsTable extends Migration
     {
         Schema::create('paf_hr_assessments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('request_id')->unsigned();
+            $table->string('proficiency test')->nullable();
+            $table->string('other_remarks')->nullable();
+            $table->string('current_bonus_allowance')->nullable();
+            $table->string('overall_recommendation')->nullable();
             $table->timestamps();
+
+            $table->foreign('request_id')
+                ->references('id')
+                ->on('paf_managements')
+                ->onDelete('cascade');
         });
     }
 

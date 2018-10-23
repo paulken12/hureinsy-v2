@@ -35,7 +35,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_job_grade" name="current_job_grade" class="form-control" title="Current_job_grade" value="" readonly>
+					<input type="text" id="current_job_grade" name="current_job_grade" class="form-control" title="Current_job_grade" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -53,7 +53,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_base_salary" name="current_base_salary" class="form-control" title="Current_base_salary" value="" readonly>
+					<input type="text" id="current_base_salary" name="current_base_salary" class="form-control" title="Current_base_salary" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -71,7 +71,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_bonus_allowance" name="current_bonus_allowance" class="form-control" title="Current_bonus_allowance" value="" readonly>
+					<input type="text" id="current_bonus_allowance" name="current_bonus_allowance" class="form-control" title="Current_bonus_allowance" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">
@@ -89,7 +89,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_benefits" name="current_benefits" class="form-control" title="Current_benefits" value="" readonly>
+					<input type="text" id="current_benefits" name="current_benefits" class="form-control" title="Current_benefits" value="default" readonly>
 				</div>
 			</div>
 			<div class="col">

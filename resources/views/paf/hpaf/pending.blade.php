@@ -101,7 +101,112 @@
 					</div>
 					<hr>
 
-					<h4><strong>Action</strong></h4>
+					<h4><strong>HR Assessment</strong></h4>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto"><strong>Proficiency Test</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<select name="proficiency_test" id="proficiency_test" class="form-control">
+									<option value="" selected>--select--</option>
+									@foreach ($proficiency as $prof)
+										<option value="{{$prof->key}}">{{$prof->proficiency}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto"><strong>Behavioural Assessment</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<select name="proficiency_test" id="proficiency_test" class="form-control">
+									<option value="" selected>--select--</option>
+									@foreach ($behaviour as $beha)
+										<option value="{{$beha->key}}">{{$beha->behaviour}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto"><strong>Last Performance Evaluation</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<select name="proficiency_test" id="proficiency_test" class="form-control">
+									<option value="" selected>--select--</option>
+									@foreach ($evaluation as $eval)
+										<option value="{{$eval->key}}">{{$eval->evaluation}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto"><strong>Other Remarks</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<input type="text" id="proposed_department" name="proposed_department" class="form-control" title="Proposed_department">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto"><strong>Overall Recommendation</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<select name="proficiency_test" id="proficiency_test" class="form-control">
+									<option value="" selected>--select--</option>
+									@foreach ($overall as $over)
+										<option value="{{$over->key}}">{{$over->overall}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
 
 					<action-management 	
 						:categories="{{$request_status}}"

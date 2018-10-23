@@ -7,9 +7,9 @@ use App\Master\MasterDepartment;
 use App\Master\MasterJobTitle;
 use App\User;
 
-class PafChangeJob extends Model
+class PafCurrentJob extends Model
 {
-    protected $table = 'paf_change_jobs';
+    protected $table = 'paf_current_jobs';
     protected $guarded = [];
     
  	function natureOfAction() 

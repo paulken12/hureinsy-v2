@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Master\MasterScheduleTypePaf;
 use App\Master\MasterCompany;
 
-class PafChangeSchedule extends Model
+class PafCurrentSchedule extends Model
 {
-    protected $table = 'paf_change_schedules';
+    protected $table = 'paf_current_schedules';
     protected $guarded = [];
     
  	function natureOfAction() 

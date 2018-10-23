@@ -17,9 +17,9 @@ class CreatePafCurrentCompensationsTable extends Migration
             $table->increments('id');
             $table->integer('request_id')->unsigned();
             $table->string('current_key_job_grade')->nullable();
-            $table->string('current_key_base_salary')->nullable();
-            $table->string('current_key_bonus_allowance')->nullable();
-            $table->string('current_key_benefits')->nullable();
+            $table->string('current_base_salary')->nullable();
+            $table->string('current_bonus_allowance')->nullable();
+            $table->string('current_benefits')->nullable();
             $table->timestamps();
 
             $table->foreign('request_id')

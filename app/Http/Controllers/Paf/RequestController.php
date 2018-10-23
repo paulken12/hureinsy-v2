@@ -9,6 +9,9 @@ use App\Paf\PafManagement;
 use App\Paf\PafChangeJob;
 use App\Paf\PafChangeSchedule;
 use App\Paf\PafChangeCompensation;
+use App\Paf\PafCurrentJob;
+use App\Paf\PafCurrentSchedule;
+use App\Paf\PafCurrentCompensation;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
@@ -19,8 +22,8 @@ class RequestController extends Controller
     public function index()
     {  
 
-        $employee_info = Cache::get('call_emp_info')->where('reporting_to', Auth::user()->basicInfo->pluck('id')->first());
-
+        $employee_info = Cache::get('call_emp_info');
+//->where('reporting_to', Auth::user()->basicInfo->pluck('id')->first())
         return view('paf.mpaf.search', compact('employee_info'));
         
     }
@@ -55,18 +58,15 @@ class RequestController extends Controller
         $validator = $request->validate([
             'employment_status' => 'exists:master_contract_change_pafs,key|required',
             'remarks'=>'required|string|max:191',
+            'proposed_job_title' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
-            'proposed_department' => 'nullable|string|max:191',
-            'proposed_reportto' => 'nullable|string|max:191',
-            'proposed_position_title' => 'nullable|string|max:191',
+            'proposed_team' => 'nullable|string|max:191',
+            'proposed_supervisor' => 'nullable|string|max:191',
             'proposed_project_assignment' => 'nullable|string|max:191',
-            'proposed_days_of_work' => 'nullable|numeric|digits_between:0,10',
-            'proposed_work_hours_per_week' => 'nullable|numeric|digits_between:0,10',
-            'proposed_type_of_shift' => 'nullable|string|max:191',
-            'proposed_work_hours_per_day' => 'nullable|numeric|digits_between:0,10',
+            'proposed_schedule' => 'nullable|string|max:191',
             'proposed_work_location' => 'nullable|string|max:191',
-            'sched_type' => 'nullable|string|max:191',
-            'proposed_salary' => 'nullable|numeric|digits_between:0,10',
+            'proposed_job_grade' => 'nullable|string|max:191',
+            'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
        ]);
@@ -93,37 +93,57 @@ class RequestController extends Controller
 
             'request_id' => $request_id->id,
 
+            'proposed_key_job_title' => $request->input('proposed_job_title'),
+
             'proposed_key_department' => $request->input('proposed_department'),
 
-            'proposed_reports_to' => $request->input('proposed_reportto'),
+            'proposed_key_team' => $request->input('proposed_team'),
 
-            'proposed_key_position_title' => $request->input('proposed_position_title'),
+            'proposed_key_supervisor' => $request->input('proposed_supervisor'),
 
             'proposed_key_project_assignment' => $request->input('proposed_project_assignment'),
+        ]);
+
+        PafCurrentJob::create([
+
+            'request_id' => $request_id->id,
+
+            'current_key_job_title' => $request->input('current_job_title'),
+
+            'current_key_department' => $request->input('current_department'),
+
+            'current_key_team' => $request->input('current_team'),
+
+            'current_key_supervisor' => $request->input('current_supervisor'),
+
+            'current_key_project_assignment' => $request->input('current_project_assignment'),
         ]);
 
         PafChangeSchedule::create([
 
             'request_id' => $request_id->id,
 
-            'proposed_days_of_work' => $request->input('proposed_days_of_work'),
+            'proposed_key_schedule' => $request->input('proposed_schedule'),
 
-            'proposed_work_hours_per_week' => $request->input('proposed_work_hours_per_week'),
+            'proposed_key_work_location' => $request->input('proposed_work_location'),
+        ]);
 
-            'proposed_type_of_shift' => $request->input('proposed_type_of_shift'),
+        PafCurrentSchedule::create([
 
-            'proposed_work_hours_per_day' => $request->input('proposed_work_hours_per_day'),
+            'request_id' => $request_id->id,
 
-            'proposed_work_location' => $request->input('proposed_work_location'),
+            'current_key_schedule' => $request->input('current_schedule'),
 
-            'proposed_key_schedule_type' => $request->input('sched_type'),
+            'current_key_work_location' => $request->input('current_work_location'),
         ]);
 
         PafChangeCompensation::create([
 
             'request_id' => $request_id->id,
 
-            'proposed_salary' => $request->input('proposed_salary'),
+            'proposed_key_job_grade' => $request->input('proposed_job_grade'),
+
+            'proposed_base_salary' => $request->input('proposed_base_salary'),
 
             'proposed_bonus_allowance' => $request->input('proposed_bonus_allowance'),
 
@@ -131,6 +151,20 @@ class RequestController extends Controller
 
         ]);
         
+        PafCurrentCompensation::create([
+
+            'request_id' => $request_id->id,
+
+            'current_key_job_grade' => $request->input('current_job_grade'),
+
+            'current_base_salary' => $request->input('current_base_salary'),
+
+            'current_bonus_allowance' => $request->input('current_bonus_allowance'),
+
+            'current_benefits' => $request->input('current_benefits'),
+
+        ]);
+
         return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
     }
 }

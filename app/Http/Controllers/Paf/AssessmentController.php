@@ -41,6 +41,15 @@ class AssessmentController extends Controller
 
         $user_role= Auth::user()->roles->first();
 
+        //Get HR Assessment masters
+        $proficiency = Cache::get('call_master_paf_proficiency_test_paf');
+        
+        $behaviour = Cache::get('call_master_paf_behavioural_assessment');
+        
+        $evaluation = Cache::get('call_master_paf_performance_evaluation');
+        
+        $overall = Cache::get('call_master_paf_overall_recommendation');
+
         //Get Master details
         $jobTitles = Cache::get('call_master_job_title');
         
@@ -57,6 +66,12 @@ class AssessmentController extends Controller
 
         $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
+        $get_curerent_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
+
+        $get_curerent_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
+
+        $get_curerent_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+
         //Get Employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
@@ -71,20 +86,15 @@ class AssessmentController extends Controller
         //Get Statuses
         $request_status = $user_role->status;
 
-        if($get_schedule_details->proposed_key_schedule_type == 'empl'){
-            $sub_request_status = $user_role->sub_status;
-        }else{
-            $sub_request_status = $user_role->sub_status->whereNotIn('id', '4');
-        }
-
+        $sub_request_status = $user_role->sub_status;
 
         if($get_paf_details->masterPafSubStatus->id == '1'){
 
-            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details'));
+            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_curerent_job_details', 'get_curerent_schedule_details', 'get_curerent_compensation_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
 
         }else{
 
-            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
+            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_curerent_job_details', 'get_curerent_schedule_details', 'get_curerent_compensation_details'));
         }
 
     }

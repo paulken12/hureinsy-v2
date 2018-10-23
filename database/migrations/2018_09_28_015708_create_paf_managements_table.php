@@ -19,6 +19,7 @@ class CreatePafManagementsTable extends Migration
             $table->string('master_key_employment_status');
             $table->string('requested_by_company_id');
             $table->string('approved_by_company_id');
+            $table->string('assessed_by_company_id');
             $table->string('hr_assessment_id');
             $table->string('comfirmation_flag');
             $table->string('master_id_request_status');

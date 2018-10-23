@@ -10,10 +10,17 @@ use App\Master\MasterJobTitle;
 use App\Master\MasterDepartment;
 use App\Master\MasterContractChangePaf;
 use App\Master\MasterScheduleTypePaf;
+use App\Master\MasterBehaviouralAssessmentPaf;
+use App\Master\MasterOverallRecommendationPaf;
+use App\Master\MasterPerformanceEvaluationPaf;
+use App\Master\MasterProficiencyTestPaf;
 use App\Paf\PafChangeJob;
 use App\Paf\PafManagement;
 use App\Paf\PafChangeSchedule;
 use App\Paf\PafChangeCompensation;
+use App\Paf\PafCurrentJob;
+use App\Paf\PafCurrentSchedule;
+use App\Paf\PafCurrentCompensation;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpContract;
 use App\Http\Controllers\Controller;    
@@ -35,6 +42,18 @@ class PersonnelActionManagement {
 
     public static function get_paf_compensation_detail($paf_id){
         return PafChangeCompensation::where('request_id', $paf_id)->first();
+    }
+
+    public static function get_current_paf_job_detail($paf_id){
+        return PafCurrentJob::where('request_id', $paf_id)->first();
+    }
+
+    public static function get_current_paf_schedule_detail($paf_id){
+        return PafCurrentSchedule::where('request_id', $paf_id)->first();
+    }
+
+    public static function get_current_paf_compensation_detail($paf_id){
+        return PafCurrentCompensation::where('request_id', $paf_id)->first();
     }
 
     public static function get_employee_info($user_id){
@@ -69,8 +88,24 @@ class PersonnelActionManagement {
     	return MasterScheduleTypePaf::all();
     }
 
+    public static function call_master_paf_behavioural_assessment(){
+        return MasterBehaviouralAssessmentPaf::all();
+    }
+
+    public static function call_master_paf_overall_recommendation(){
+        return MasterOverallRecommendationPaf::all();
+    }
+
+    public static function call_master_paf_performance_evaluation(){
+        return MasterPerformanceEvaluationPaf::all();
+    }
+
+    public static function call_master_paf_proficiency_test_paf(){
+        return MasterProficiencyTestPaf::all();
+    }
+
     public static function call_contract_change(){
-    	return MasterContractChangePaf::all();
+        return MasterContractChangePaf::all();
     }
 
     public static function call_contract(){
