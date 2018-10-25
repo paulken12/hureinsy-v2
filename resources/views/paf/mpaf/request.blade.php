@@ -20,7 +20,7 @@
 			</div>
 		</div>
 
-		<form action="{{route('paf.search.result.store')}}" method="post">	
+		<form action="{{route('paf.search.result.store', $employee_info->company_id)}}" method="post">	
 			<div class="card-body">
 				{{csrf_field()}}
 
@@ -31,13 +31,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="raj_id"><strong>Employee ID:</strong></label>
-							<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_info->company_id}}" readonly>
+							<p>{{$employee_info->company_id}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="name"><strong>Name of Employee:</strong></label>
-							<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_info->first_name}} {{$employee_info->middle_name}} {{$employee_info->last_name}}" readonly>
+							<p>{{$employee_info->first_name}} {{$employee_info->middle_name}} {{$employee_info->last_name}}</p>
 						</div>
 					</div>
 				</div>
@@ -46,13 +46,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="date_hired"><strong>Date Hired</strong></label>
-							<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" value="{{$employee_contract->contract_start}}" readonly>
+							<p>{{$employee_contract->contract_start}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="team"><strong>Team</strong></label>
-							<input type="text" id="team" name="team" class="form-control-plaintext" title="Team" readonly>
+							<p></p>
 						</div>
 					</div>
 				</div>
@@ -61,13 +61,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="position"><strong>Position</strong></label>
-							<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
+							<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="department"><strong>Department</strong></label>
-							<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}"readonly>
+							<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
 						</div>
 					</div>
 				</div>

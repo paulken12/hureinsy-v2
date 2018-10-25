@@ -19,7 +19,7 @@
 				<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form (For Assessment)</strong></h4>
 			</div>
 
-			<form action="{{route('paf.assessment.list.store')}}" method="post">
+			<form action="{{route('paf.assessment.list.store', $get_paf_details->id)}}" method="post">
 				<div class="card-body">
 					{{csrf_field()}}
 
@@ -30,14 +30,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="raj_id"><strong>Employee ID:</strong></label>
-								<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
-								<input type="text" id="req_id" name="req_id" class="form-control-plaintext" title="req_id" value="{{$get_paf_details->id}}" readonly hidden>
+								<p>{{$employee_name->company_id}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="name"><strong>Name of Employee:</strong></label>
-								<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}" readonly>
+								<p>{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}</p>
 							</div>
 						</div>
 					</div>
@@ -46,13 +45,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="date_hired"><strong>Date Hired</strong></label>
-								<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" value="{{$employee_contract->contract_start}}" readonly>
+								<p>{{$employee_contract->contract_start}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="team"><strong>Team</strong></label>
-								<input type="text" id="team" name="team" class="form-control-plaintext" title="Team" readonly>
+								<p></p>
 							</div>
 						</div>
 					</div>
@@ -61,13 +60,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="position"><strong>Position</strong></label>
-								<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
+								<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="department"><strong>Department</strong></label>
-								<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}"readonly>
+								<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
 							</div>
 						</div>
 					</div>
@@ -80,7 +79,7 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="employment_status"><strong>Employment Status</strong></label>
-								<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}" readonly>
+								<p>{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}</p>
 							</div>
 						</div>
 					</div>
@@ -89,7 +88,7 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="remarks"><strong>Remarks</strong></label>
-								<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{$get_paf_details->remarks}}" readonly>
+								<p>{{$get_paf_details->remarks}}</p>
 							</div>
 						</div>
 					</div>	
@@ -106,13 +105,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="form-group">
-								<label for="reportto"><strong>Proficiency Test</strong></label>
+								<label for="proficiency_test"><strong>Proficiency Test</strong></label>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<select name="proficiency_test" id="proficiency_test" class="form-control">
-									<option value="" selected>--select--</option>
+									<option style="display:none" value="{{empty($get_hr_assessment_details->key_proficiency_test) ? '' : $get_hr_assessment_details->key_proficiency_test}}" selected>{{empty($get_hr_assessment_details->masterProficiency->proficiency) ? '--select--' : $get_hr_assessment_details->masterProficiency->proficiency}}</option>
 									@foreach ($proficiency as $prof)
 										<option value="{{$prof->key}}">{{$prof->proficiency}}</option>
 									@endforeach
@@ -128,13 +127,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="form-group">
-								<label for="reportto"><strong>Behavioural Assessment</strong></label>
+								<label for="behavioural_assessment"><strong>Behavioural Assessment</strong></label>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<select name="proficiency_test" id="proficiency_test" class="form-control">
-									<option value="" selected>--select--</option>
+								<select name="behavioural_assessment" id="behavioural_assessment" class="form-control">
+									<option style="display:none" value="{{empty($get_hr_assessment_details->key_behavioural_assessment) ? '' : $get_hr_assessment_details->key_behavioural_assessment}}" selected>{{empty($get_hr_assessment_details->masterBehavioural->behaviour) ? '--select--' : $get_hr_assessment_details->masterBehavioural->behaviour}}</option>
 									@foreach ($behaviour as $beha)
 										<option value="{{$beha->key}}">{{$beha->behaviour}}</option>
 									@endforeach
@@ -150,13 +149,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="form-group">
-								<label for="reportto"><strong>Last Performance Evaluation</strong></label>
+								<label for="performance_evaluation"><strong>Last Performance Evaluation</strong></label>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<select name="proficiency_test" id="proficiency_test" class="form-control">
-									<option value="" selected>--select--</option>
+								<select name="performance_evaluation" id="performance_evaluation" class="form-control">
+									<option style="display:none" value="{{empty($get_hr_assessment_details->key_performance_evaluation) ? '' : $get_hr_assessment_details->key_performance_evaluation}}" selected>{{empty($get_hr_assessment_details->masterEvaluation->evaluation) ? '--select--' : $get_hr_assessment_details->masterEvaluation->evaluation}}</option>
 									@foreach ($evaluation as $eval)
 										<option value="{{$eval->key}}">{{$eval->evaluation}}</option>
 									@endforeach
@@ -172,12 +171,12 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="form-group">
-								<label for="reportto"><strong>Other Remarks</strong></label>
+								<label for="other_remarks"><strong>Other Remarks</strong></label>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="text" id="proposed_department" name="proposed_department" class="form-control" title="Proposed_department">
+								<input type="text" id="other_remarks" name="other_remarks" class="form-control" title="Other_remarks" value="{{empty($get_hr_assessment_details->other_remarks) ? '' : $get_hr_assessment_details->other_remarks}}">
 							</div>
 						</div>
 						<div class="col">
@@ -189,13 +188,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="form-group">
-								<label for="reportto"><strong>Overall Recommendation</strong></label>
+								<label for="overall_recommendation"><strong>Overall Recommendation</strong></label>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<select name="proficiency_test" id="proficiency_test" class="form-control">
-									<option value="" selected>--select--</option>
+								<select name="overall_recommendation" id="overall_recommendation" class="form-control">
+									<option style="display:none" value="{{empty($get_hr_assessment_details->key_overall_recommendation) ? '' : $get_hr_assessment_details->key_overall_recommendation}}" selected>{{empty($get_hr_assessment_details->masterOverall->overall) ? '--select--' : $get_hr_assessment_details->masterOverall->overall}}</option>
 									@foreach ($overall as $over)
 										<option value="{{$over->key}}">{{$over->overall}}</option>
 									@endforeach

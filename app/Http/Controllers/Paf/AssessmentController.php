@@ -66,11 +66,13 @@ class AssessmentController extends Controller
 
         $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
-        $get_curerent_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
+        $get_current_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
 
-        $get_curerent_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
+        $get_current_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
 
-        $get_curerent_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+        $get_current_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+
+        $get_hr_assessment_details = PersonnelActionManagement::get_hr_assessment_detail($form);
 
         //Get Employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
@@ -90,21 +92,26 @@ class AssessmentController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '1'){
 
-            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_curerent_job_details', 'get_curerent_schedule_details', 'get_curerent_compensation_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
+            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
 
         }else{
 
-            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_curerent_job_details', 'get_curerent_schedule_details', 'get_curerent_compensation_details'));
+            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
 
     }
 
-    public function assessment(Request $request)
+    public function assessment(Request $request, $form)
     {
         $request->validate([
-            'proposed_remarks_job' => 'max:255|required_with:proposed_department,proposed_reportto,proposed_position_title,proposed_project_assignment',
-            'proposed_remarks_schedule' => 'max:255|required_with:proposed_days_of_work,proposed_work_hours_per_week,proposed_type_of_shift,proposed_work_hours_per_day,proposed_work_location,sched_type',
-            'proposed_remarks_compensation' => 'max:255|required_with:proposed_salary,proposed_bonus_allowance,proposed_benefits',
+            'proposed_remarks_job' => 'max:255|required_with:proposed_job_title,proposed_department,proposed_team,proposed_supervisor,proposed_project_assignment',
+            'proposed_remarks_schedule' => 'max:255|required_with:proposed_schedule,proposed_work_location',
+            'proposed_remarks_compensation' => 'max:255|required_with:proposed_job_grade,proposed_base_salary,proposed_bonus_allowance,proposed_benefits',
+            'proficiency_test' => 'exists:master_proficiency_test_pafs,key|required',
+            'behavioural_assessment' => 'exists:master_behavioural_assessment_pafs,key|required',
+            'performance_evaluation' => 'exists:master_performance_evaluation_pafs,key|required',
+            'other_remarks' => 'string|nullable',
+            'overall_recommendation' => 'exists:master_overall_recommendation_pafs,key|required',
             'request_status' => 'exists:statuses,id|required',
             'sub_request_status' => 'exists:sub_statuses,id|required',
         ],
@@ -115,7 +122,7 @@ class AssessmentController extends Controller
 
         ]);
 
-        $form_update = PersonnelActionManagement::get_paf_request($request->input('req_id'));
+        $form_update = PersonnelActionManagement::get_paf_request($form);
 
         $form_update->master_id_request_status = $request->input('request_status');
 
@@ -125,23 +132,37 @@ class AssessmentController extends Controller
 
         $form_update->save();
 
-        $job_update = PersonnelActionManagement::get_paf_job_detail($request->input('req_id')); 
+        $job_update = PersonnelActionManagement::get_paf_job_detail($form); 
 
         $job_update->proposed_remarks_hr = $request->input('proposed_remarks_job');
 
         $job_update->save();
 
-        $sched_update =  PersonnelActionManagement::get_paf_schedule_detail($request->input('req_id')); 
+        $sched_update =  PersonnelActionManagement::get_paf_schedule_detail($form); 
 
         $sched_update->proposed_remarks_hr = $request->input('proposed_remarks_schedule');
 
         $sched_update->save(); 
 
-        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($request->input('req_id')); 
+        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
         $compensation_update->proposed_remarks_hr = $request->input('proposed_remarks_compensation');
 
         $compensation_update->save();
+
+        $hr_assessment_update = PersonnelActionManagement::get_hr_assessment_detail($form);
+
+        $hr_assessment_update->key_proficiency_test = $request->input('proficiency_test');
+
+        $hr_assessment_update->key_behavioural_assessment = $request->input('behavioural_assessment');
+
+        $hr_assessment_update->key_performance_evaluation = $request->input('performance_evaluation');
+
+        $hr_assessment_update->other_remarks = $request->input('other_remarks');
+ 
+        $hr_assessment_update->key_overall_recommendation = $request->input('overall_recommendation');
+
+        $hr_assessment_update->save();   
 
         return redirect(route('paf.assessment.list', [date('m'), date('Y')]))->with('success', 'Request form updated');
     }

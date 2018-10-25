@@ -17,13 +17,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="raj_id"><strong>Employee ID:</strong></label>
-							<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
+							<p>{{$employee_name->company_id}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="name"><strong>Name of Employee:</strong></label>
-							<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}" readonly>
+							<p>{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}</p>
 						</div>
 					</div>
 				</div>
@@ -32,13 +32,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="date_hired"><strong>Date Hired</strong></label>
-							<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" value="{{$employee_contract->contract_start}}" readonly>
+							<p>{{$employee_contract->contract_start}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="team"><strong>Team</strong></label>
-							<input type="text" id="team" name="team" class="form-control-plaintext" title="Team" readonly>
+							<p></p>
 						</div>
 					</div>
 				</div>
@@ -47,13 +47,13 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="position"><strong>Position</strong></label>
-							<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
+							<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label for="department"><strong>Department</strong></label>
-							<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}"readonly>
+							<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="employment_status"><strong>Employment Status</strong></label>
-							<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}" readonly>
+							<p>{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}</p>
 						</div>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="remarks"><strong>Remarks</strong></label>
-							<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{empty($get_paf_details->remarks) ? '' : $get_paf_details->remarks}}" readonly>
+							<p>{{empty($get_paf_details->remarks) ? '' : $get_paf_details->remarks}}</p>
 						</div>
 					</div>
 				</div>	
@@ -85,41 +85,100 @@
 					@include('paf.include.readschedule')
 					@include('paf.include.readcompensation')
 				</div>
+			
 				<hr>
+				<h4><strong>HR Assessment</strong></h4>
 
 				<div class="row">
 					<div class="col-2">
 						<div class="form-group">
-							<label for="assessed_by">Assessed By</label>
+							<label for="proficiency_test"><strong>Proficiency Test</strong></label>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
-							<input type="text" id="assessed_by" name="assessed_by" class="form-control-plaintext" title="assessed_by" value="{{empty($hr_name->company_id) ? '' : $hr_name->company_id}} - {{empty($hr_name->last_name) ? '' : $hr_name->last_name}} {{empty($hr_name->first_name) ? '' : $hr_name->first_name}} {{empty($hr_name->middle_name) ? '' : $hr_name->middle_name}}" disabled>
+							{{empty($get_hr_assessment_details->masterProficiency->proficiency) ? '' : $get_hr_assessment_details->masterProficiency->proficiency}}
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label for="assessed_by"><strong>Assessed By:</strong></label>
+							&nbsp;
+							{{empty($hr_name->company_id) ? '' : $hr_name->company_id}} - {{empty($hr_name->last_name) ? '' : $hr_name->last_name}} {{empty($hr_name->first_name) ? '' : $hr_name->first_name}} {{empty($hr_name->middle_name) ? '' : $hr_name->middle_name}}
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-2">
 						<div class="form-group">
-							<label for="approved_by">Approved By</label>
+							<label for="behavioural_assessment"><strong>Behavioural Assessment</strong></label>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
-							<input type="text" id="approved_by" name="approved_by" class="form-control-plaintext" title="approved_by" value="{{empty($exec_name->company_id) ? '' : $exec_name->company_id}} - {{empty($exec_name->last_name) ? '' : $exec_name->last_name}} {{empty($exec_name->first_name) ? '' : $exec_name->first_name}} {{empty($exec_name->middle_name) ? '' : $exec_name->middle_name}}" disabled>
+							{{empty($get_hr_assessment_details->masterBehavioural->behaviour) ? '' : $get_hr_assessment_details->masterBehavioural->behaviour}}
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label for="approved_by"><strong>Approved By:</strong></label>
+							&nbsp;
+							{{empty($exec_name->company_id) ? '' : $exec_name->company_id}} - {{empty($exec_name->last_name) ? '' : $exec_name->last_name}} {{empty($exec_name->first_name) ? '' : $exec_name->first_name}} {{empty($exec_name->middle_name) ? '' : $exec_name->middle_name}}
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-2">
 						<div class="form-group">
-							<label for="reportto">Date Effective</label>
+							<label for="performance_evaluation"><strong>Last Performance Evaluation</strong></label>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
-							<input type="text" id="proposed_effective_date" name="proposed_effective_date" class="form-control-plaintext" title="proposed_effective_date" value="{{empty($get_paf_details->date_effective) ? '' : $get_paf_details->date_effective}}" disabled>
+							{{empty($get_hr_assessment_details->masterEvaluation->evaluation) ? '' : $get_hr_assessment_details->masterEvaluation->evaluation}}
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label for="date_effective"><strong>Date Effective:</strong></label>
+							&nbsp;
+							{{empty($get_paf_details->date_effective) ? '' : $get_paf_details->date_effective}}
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-2">
+						<div class="form-group">
+							<label for="other_remarks"><strong>Other Remarks</strong></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							{{empty($get_hr_assessment_details->other_remarks) ? '' : $get_hr_assessment_details->other_remarks}}
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-2">
+						<div class="form-group">
+							<label for="overall_recommendation"><strong>Overall Recommendation</strong></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							{{empty($get_hr_assessment_details->masterOverall->overall) ? '' : $get_hr_assessment_details->masterOverall->overall}}
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
 						</div>
 					</div>
 				</div>

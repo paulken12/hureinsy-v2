@@ -8,7 +8,7 @@
 		</div>
 	</div>
 
-	@if(!empty($get_job_details->proposed_key_department) || !empty($get_job_details->proposed_reports_to) || !empty($get_job_details->proposed_key_position_title) || !empty($get_job_details->proposed_key_project_assignment))
+	@if(!empty($get_job_details->proposed_key_department) || !empty($get_job_details->proposed_key_supervisor) || !empty($get_job_details->proposed_key_team) || !empty($get_job_details->proposed_key_job_title) || !empty($get_job_details->proposed_key_project_assignment))
 		<div class="card-body collapse show" id="collapse-job" aria-labledby="job-heading">
 	@else
 		<div class="card-body collapse" id="collapse-job" aria-labledby="job-heading">
@@ -39,12 +39,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($get_curerent_job_details->masterJobTitle->job_titles) ? 'n/a' : $get_curerent_job_details->masterJobTitle->job_titles}}
+					{{empty($get_current_job_details->masterJobTitle->job_titles) ? 'n/a' : $get_current_job_details->masterJobTitle->job_titles}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '-'. $get_job_details->masterJobTitle->description}}
+					<input type="text" id="proposed_job_title" name="proposed_job_title" class="form-control-plaintext" title="Proposed_job_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '-'. $get_job_details->masterJobTitle->description}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -57,12 +57,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($get_curerent_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}
+					{{empty($get_current_job_details->masterDepartment->department) ? '' : $get_current_job_details->masterDepartment->department}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}
+					<input type="text" id="proposed_department" name="proposed_department" class="form-control-plaintext" title="Proposed_department" value="{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -70,15 +70,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="project_assignment"><strong>Team</strong></label>
+					<label for="team"><strong>Team</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->current_key_team}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					<input type="text" id="proposed_team" name="proposed_team" class="form-control-plaintext" title="Proposed_team" value="{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -91,10 +93,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
+					{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->current_key_supervisor}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					<input type="text" id="proposed_supervisor" name="proposed_supervisor" class="form-control-plaintext" title="Proposed_supervisor" value="{{empty($get_job_details->proposed_key_supervisor) ? '' : $get_job_details->proposed_key_supervisor}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -107,10 +111,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
+					{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->current_key_project_assignment}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
+					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}" readonly>
 				</div>
 			</div>
 		</div>

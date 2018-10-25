@@ -8,7 +8,7 @@
 		</div>
 	</div>
 
-	@if(!empty($get_job_details->proposed_key_department) || !empty($get_job_details->proposed_reports_to) || !empty($get_job_details->proposed_key_position_title) || !empty($get_job_details->proposed_key_project_assignment))
+	@if(!empty($get_job_details->proposed_key_department) || !empty($get_job_details->proposed_key_supervisor) || !empty($get_job_details->proposed_key_team) || !empty($get_job_details->proposed_key_job_title) || !empty($get_job_details->proposed_key_project_assignment))
 		<div class="card-body collapse show" id="collapse-job" aria-labledby="job-heading">
 	@else
 		<div class="card-body collapse" id="collapse-job" aria-labledby="job-heading">
@@ -34,12 +34,30 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="department"><strong>Department</strong></label>
+					<label for="department"><strong>Job Title</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}
+					{{empty($get_current_job_details->masterJobTitle->job_titles) ? 'n/a' : $get_current_job_details->masterJobTitle->job_titles}}
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="text" id="proposed_job_title" name="proposed_job_title" class="form-control-plaintext" title="Proposed_job_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '-'. $get_job_details->masterJobTitle->description}}" readonly>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+					<label for="position_title"><strong>Department</strong></label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					{{empty($get_current_job_details->masterDepartment->department) ? '' : $get_current_job_details->masterDepartment->department}}
 				</div>
 			</div>
 			<div class="col">
@@ -52,17 +70,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="reportto"><strong>Report To</strong></label>
+					<label for="team"><strong>Team</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{$employee_name->reportingTo()}}
+					{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->current_key_team}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_reportto" name="proposed_reportto" class="form-control-plaintext" title="Proposed_reportto" value="{{empty($get_job_details->user->name) ? '' : $get_job_details->user->name}}" readonly>
+					<input type="text" id="proposed_team" name="proposed_team" class="form-control-plaintext" title="Proposed_team" value="{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -70,17 +88,17 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="position_title"><strong>Position/Title</strong></label>
+					<label for="reportto"><strong>Supervisor</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}
+					{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->current_key_supervisor}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_position_title" name="proposed_position_title" class="form-control-plaintext" title="Proposed_position_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : $get_job_details->masterJobTitle->description}}" readonly>
+					<input type="text" id="proposed_supervisor" name="proposed_supervisor" class="form-control-plaintext" title="Proposed_supervisor" value="{{empty($get_job_details->proposed_key_supervisor) ? '' : $get_job_details->proposed_key_supervisor}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -93,28 +111,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}
+					{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->current_key_project_assignment}}
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{empty($get_job_details->masterCompany->name) ? '' : $get_job_details->masterCompany->name}}" readonly>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="project_assignment"><strong>Team</strong></label>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
+					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -141,7 +143,7 @@
 				</div>
 				<div class="col">
 					<div class="form-group">
-						<input type="text" id="proposed_remarks_job_exec" name="proposed_remarks_job_exec" class="form-control" title="proposed_remarks_job_exec">
+						<input type="text" id="proposed_remarks_job_exec" name="proposed_remarks_job_exec" class="form-control" title="proposed_remarks_job_exec" value="{{$get_job_details->proposed_remarks_exec}}">
 					</div>
 				</div>
 			</div>

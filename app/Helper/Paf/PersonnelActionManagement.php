@@ -21,6 +21,7 @@ use App\Paf\PafChangeCompensation;
 use App\Paf\PafCurrentJob;
 use App\Paf\PafCurrentSchedule;
 use App\Paf\PafCurrentCompensation;
+use App\Paf\PafHrAssessment;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpContract;
 use App\Http\Controllers\Controller;    
@@ -54,6 +55,10 @@ class PersonnelActionManagement {
 
     public static function get_current_paf_compensation_detail($paf_id){
         return PafCurrentCompensation::where('request_id', $paf_id)->first();
+    }
+
+    public static function get_hr_assessment_detail($paf_id){
+        return PafHrAssessment::where('request_id', $paf_id)->first();
     }
 
     public static function get_employee_info($user_id){

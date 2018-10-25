@@ -29,13 +29,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="raj_id"><strong>Employee ID:</strong></label>
-								<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
+								<p>{{$employee_name->company_id}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="name"><strong>Name of Employee:</strong></label>
-								<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}" readonly>
+								<p>{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}</p>
 							</div>
 						</div>
 					</div>
@@ -44,13 +44,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="date_hired"><strong>Date Hired</strong></label>
-								<input type="text" id="date_hired" name="date_hired" class="form-control-plaintext" title="Date_hired" value="{{$employee_contract->contract_start}}" value="{{$employee_contract->contract_start}}" readonly>
+								<p>{{$employee_contract->contract_start}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="team"><strong>Team</strong></label>
-								<input type="text" id="team" name="team" class="form-control-plaintext" title="Team" readonly>
+								<p></p>
 							</div>
 						</div>
 					</div>
@@ -59,13 +59,13 @@
 						<div class="col">
 							<div class="form-group">
 								<label for="position"><strong>Position</strong></label>
-								<input type="text" id="position" name="position" class="form-control-plaintext" title="Position" value="{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}" readonly>
+								<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
 								<label for="department"><strong>Department</strong></label>
-								<input type="text" id="department" name="department" class="form-control-plaintext" title="Department" value="{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}" readonly>
+								<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,92 @@
 					</div>
 					<hr>
 
-					<h4><strong>Action</strong></h4>
+					<h4><strong>HR Assessment</strong></h4>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="proficiency_test"><strong>Proficiency Test</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								{{empty($get_hr_assessment_details->masterProficiency->proficiency) ? '' : $get_hr_assessment_details->masterProficiency->proficiency}}
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="behavioural_assessment"><strong>Behavioural Assessment</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								{{empty($get_hr_assessment_details->masterBehavioural->behaviour) ? '' : $get_hr_assessment_details->masterBehavioural->behaviour}}
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="performance_evaluation"><strong>Last Performance Evaluation</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								{{empty($get_hr_assessment_details->masterEvaluation->evaluation) ? '' : $get_hr_assessment_details->masterEvaluation->evaluation}}
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="other_remarks"><strong>Other Remarks</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								{{empty($get_hr_assessment_details->other_remarks) ? '' : $get_hr_assessment_details->other_remarks}}
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="overall_recommendation"><strong>Overall Recommendation</strong></label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								{{empty($get_hr_assessment_details->masterOverall->overall) ? '' : $get_hr_assessment_details->masterOverall->overall}}
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							</div>
+						</div>
+					</div>
 
 					<action-management 	
 							:categories="{{ $get_status}}"

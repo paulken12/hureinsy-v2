@@ -21,6 +21,6 @@ class PafChangeSchedule extends Model
     }
     public function masterCompany()
     {
-        return $this->belongsTo(MasterCompany::class, 'proposed_key_project_assignment');
+        return $this->belongsTo(MasterCompany::class, 'proposed_key_work_location');
     }
 }

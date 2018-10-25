@@ -12,6 +12,7 @@ use App\Paf\PafChangeCompensation;
 use App\Paf\PafCurrentJob;
 use App\Paf\PafCurrentSchedule;
 use App\Paf\PafCurrentCompensation;
+use App\Paf\PafHrAssessment;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
@@ -53,7 +54,7 @@ class RequestController extends Controller
         
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $form)
     {
         $validator = $request->validate([
             'employment_status' => 'exists:master_contract_change_pafs,key|required',
@@ -75,13 +76,15 @@ class RequestController extends Controller
 
         $request_id = PafManagement::create([
 
-            'employee_company_id' => $request->input('raj_id'),
+            'employee_company_id' => $form,
 
             'master_key_employment_status' => $request->input('employment_status'),
 
             'requested_by_company_id' => $user,
 
             'remarks' => $request->input('remarks'),
+
+            'comfirmation_flag' => 0,
 
             'master_id_request_status' => '1',
 
@@ -162,6 +165,22 @@ class RequestController extends Controller
             'current_bonus_allowance' => $request->input('current_bonus_allowance'),
 
             'current_benefits' => $request->input('current_benefits'),
+
+        ]);
+
+        PafHrAssessment::create([
+
+            'request_id' => $request_id->id,
+
+            'key_proficiency_test' => '',
+
+            'key_behavioural_assessment' => '',
+
+            'key_performance_evaluation' => '',
+
+            'other_remarks' => '',
+
+            'key_overall_recommendation' => '',
 
         ]);
 

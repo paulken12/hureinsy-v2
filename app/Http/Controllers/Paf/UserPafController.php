@@ -46,6 +46,14 @@ class UserPafController extends Controller
 
         $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
+        $get_current_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
+
+        $get_current_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
+
+        $get_current_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+
+        $get_hr_assessment_details = PersonnelActionManagement::get_hr_assessment_detail($form);
+
         //Get employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
@@ -64,6 +72,18 @@ class UserPafController extends Controller
 
         $sub_request_status = $user_role->sub_status;
 
-            return view('paf.upaf.readpaf',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
+            return view('paf.upaf.readpaf',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
+
+    public function store($form){
+
+        $get_paf_details = PersonnelActionManagement::get_paf_request($form);
+
+        $get_paf_details->comfirmation_flag = 1;
+
+        $get_paf_details->save();
+
+        return redirect(route('paf.myrequest.list', [date('m'), date('Y')]))->with('success', 'Your PAF reuqest is confirmed');
+    }
+
 }

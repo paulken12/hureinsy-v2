@@ -16,10 +16,11 @@ class CreatePafHrAssessmentsTable extends Migration
         Schema::create('paf_hr_assessments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id')->unsigned();
-            $table->string('proficiency test')->nullable();
+            $table->string('key_proficiency_test')->nullable();
+            $table->string('key_behavioural_assessment')->nullable();
+            $table->string('key_performance_evaluation')->nullable();
             $table->string('other_remarks')->nullable();
-            $table->string('current_bonus_allowance')->nullable();
-            $table->string('overall_recommendation')->nullable();
+            $table->string('key_overall_recommendation')->nullable();
             $table->timestamps();
 
             $table->foreign('request_id')

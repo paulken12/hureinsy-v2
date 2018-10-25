@@ -54,7 +54,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_schedule" name="current_schedule" class="form-control" title="Current_schedule" value="{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}" readonly>
+					<input type="text" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}" readonly>
 				</div>
 			</div>
 			<div class="col">

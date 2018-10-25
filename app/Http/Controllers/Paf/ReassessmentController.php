@@ -56,6 +56,14 @@ class ReassessmentController extends Controller
 
         $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
+        $get_current_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
+
+        $get_current_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
+
+        $get_current_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+
+        $get_hr_assessment_details = PersonnelActionManagement::get_hr_assessment_detail($form);
+
         //Get employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
@@ -66,9 +74,9 @@ class ReassessmentController extends Controller
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status'));
+    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
 		}else{
-    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'hr_name', 'exec_name', 'get_paf_details'));
+    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'hr_name', 'exec_name', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
     }
 
@@ -78,18 +86,15 @@ class ReassessmentController extends Controller
         $validator = $request->validate([
             'employment_status' => 'exists:master_contract_change_pafs,key|required',
             'remarks'=>'required|string|max:191',
+            'proposed_job_title' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
-            'proposed_department' => 'nullable|string|max:191',
-            'proposed_reportto' => 'nullable|string|max:191',
-            'proposed_position_title' => 'nullable|string|max:191',
+            'proposed_team' => 'nullable|string|max:191',
+            'proposed_supervisor' => 'nullable|string|max:191',
             'proposed_project_assignment' => 'nullable|string|max:191',
-            'proposed_days_of_work' => 'nullable|numeric|digits_between:0,10',
-            'proposed_work_hours_per_week' => 'nullable|numeric|digits_between:0,10',
-            'proposed_type_of_shift' => 'nullable|string|max:191',
-            'proposed_work_hours_per_day' => 'nullable|numeric|digits_between:0,10',
+            'proposed_schedule' => 'nullable|string|max:191',
             'proposed_work_location' => 'nullable|string|max:191',
-            'sched_type' => 'nullable|string|max:191',
-            'proposed_salary' => 'nullable|numeric|digits_between:0,10',
+            'proposed_job_grade' => 'nullable|string|max:191',
+            'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
             'request_status' => 'exists:statuses,id|required',
@@ -110,45 +115,35 @@ class ReassessmentController extends Controller
 
         $job_update = PersonnelActionManagement::get_paf_job_detail($form); 
 
+        $job_update->proposed_key_job_title = $request->input('proposed_position_title');
+
         $job_update->proposed_key_department = $request->input('proposed_department');
 
-        $job_update->proposed_reports_to = $request->input('proposed_reportto');
+        $job_update->proposed_key_team = $request->input('proposed_team');
 
-        $job_update->proposed_key_position_title = $request->input('proposed_position_title');
+        $job_update->proposed_key_supervisor = $request->input('proposed_supervisor');
 
         $job_update->proposed_key_project_assignment = $request->input('proposed_project_assignment');
-
-        $job_update->proposed_remarks_hr = $request->input('proposed_remarks_job');
 
         $job_update->save();
 
         $sched_update = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
-        $sched_update->proposed_days_of_work = $request->input('proposed_days_of_work');
+        $sched_update->proposed_key_schedule = $request->input('proposed_schedule');
 
-        $sched_update->proposed_work_hours_per_week = $request->input('proposed_work_hours_per_week');
-
-        $sched_update->proposed_type_of_shift = $request->input('proposed_type_of_shift');
-
-        $sched_update->proposed_work_hours_per_day = $request->input('proposed_work_hours_per_day');
-
-        $sched_update->proposed_work_location = $request->input('proposed_work_location');
-
-        $sched_update->proposed_key_schedule_type = $request->input('sched_type');
-
-        $sched_update->proposed_remarks_hr = $request->input('proposed_remarks_schedule');
+        $sched_update->proposed_key_work_location = $request->input('proposed_work_location');
 
         $sched_update->save(); 
 
         $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($form);
 
-        $compensation_update->proposed_salary = $request->input('proposed_salary');
+        $compensation_update->proposed_key_job_grade = $request->input('proposed_job_grade');
 
+        $compensation_update->proposed_base_salary = $request->input('proposed_base_salary');
+        
         $compensation_update->proposed_bonus_allowance = $request->input('proposed_bonus_allowance');
 
         $compensation_update->proposed_benefits = $request->input('proposed_benefits');
-
-        $compensation_update->proposed_remarks_hr = $request->input('proposed_remarks_compensation');
 
         $compensation_update->save();
 

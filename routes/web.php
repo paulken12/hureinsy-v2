@@ -233,7 +233,7 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('paf/search/result/request/{emplid}', 'Paf\RequestController@show')->name('paf.search.result.show');    
 
-    Route::post('paf/search/result/request/submit', 'Paf\RequestController@store')->name('paf.search.result.store');
+    Route::post('paf/search/result/request/submit/{form}', 'Paf\RequestController@store')->name('paf.search.result.store');
 
     Route::get('paf/request/list/month={month}+year={year}', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
 
@@ -247,7 +247,7 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('paf/assessment/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.assessment.list.show'); 
 
-    Route::post('paf/assessment/list/show/store', 'Paf\AssessmentController@assessment')->name('paf.assessment.list.store');
+    Route::post('paf/assessment/list/show/store/{form}', 'Paf\AssessmentController@assessment')->name('paf.assessment.list.store');
 
     /* ------------------ PAF EXECUTIVE------------------ */
 
@@ -255,13 +255,21 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.approval.list.show');
 
-    Route::post('paf/approval/list/store', 'Paf\ApprovalController@store')->name('paf.approval.list.store');
+    Route::post('paf/approval/list/store/{form}', 'Paf\ApprovalController@store')->name('paf.approval.list.store');
+
+    /* ------------------ PAF SUPERVISOR------------------ */
+
+    Route::get('paf/view/list/month={month}+year={year}', 'Paf\SupervisorPafController@list')->name('paf.view.list');
+
+    Route::get('paf/view/list/show/{form}', 'Paf\SupervisorPafController@show')->name('paf.view.list.show');
 
     /* ------------------ PAF USER ------------------ */
 
     Route::get('paf/my_request/list/month={month}+year={year}', 'Paf\UserPafController@list')->name('paf.myrequest.list');
 
     Route::get('paf/my_request/list/show/{form}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
+
+    Route::get('paf/my_request/list/show/accept/{form}', 'Paf\UserPafController@store')->name('paf.myrequest.list.store');
 
 });
 

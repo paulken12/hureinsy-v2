@@ -46,6 +46,14 @@ class ApprovalController extends Controller
 
         $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
+        $get_current_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
+
+        $get_current_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
+
+        $get_current_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
+
+        $get_hr_assessment_details = PersonnelActionManagement::get_hr_assessment_detail($form);
+
         //Get employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
@@ -60,28 +68,28 @@ class ApprovalController extends Controller
         //Get Status details.
         $user_role= Auth::user()->roles->first();
 
-        $request_status = $user_role->status->whereNotIn('id', '1');
+        $request_status = $user_role->status;
 
         $sub_request_status = $user_role->sub_status;
 
         if($get_paf_details->masterPafSubStatus->id == '2'){
 
-            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details'));
+            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
 
         }else{
 
-            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name'));
+            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
 
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, $form)
     {
         $validation = $request->validate([
-            'proposed_remarks_job_exec' => 'max:255|required_with:proposed_department,proposed_reportto,proposed_position_title,proposed_project_assignment,proposed_remarks_job_hr',
-            'proposed_remarks_schedule_exec' => 'max:255|required_with:proposed_days_of_work,proposed_work_hours_per_week,proposed_type_of_shift,proposed_work_hours_per_day,proposed_work_location,sched_type,proposed_remarks_schedule_hr',
-            'proposed_remarks_compensation_exec' => 'max:255|required_with:proposed_salary,proposed_bonus_allowance,proposed_benefits,proposed_remarks_compensation_hr',
+            'proposed_remarks_job_exec' => 'max:255|required_with:proposed_job_title,proposed_department,proposed_team,proposed_supervisor,proposed_project_assignment',
+            'proposed_remarks_schedule_exec' => 'max:255|required_with:proposed_schedule,proposed_work_location',
+            'proposed_remarks_compensation_exec' => 'max:255|required_with:proposed_job_grade,proposed_base_salary,proposed_bonus_allowance,proposed_benefits',
             'request_status' => 'exists:statuses,id|required',
             'sub_request_status' => 'exists:sub_statuses,id|required',
         ],
@@ -92,7 +100,7 @@ class ApprovalController extends Controller
 
         ]);
 
-        $form_update = PersonnelActionManagement::get_paf_request($request->input('req_id'));
+        $form_update = PersonnelActionManagement::get_paf_request($form);
 
         $form_update->master_id_request_status = $request->input('request_status');
 
@@ -104,19 +112,19 @@ class ApprovalController extends Controller
 
         $form_update->save();
 
-        $job_update = PersonnelActionManagement::get_paf_job_detail($request->input('req_id')); 
+        $job_update = PersonnelActionManagement::get_paf_job_detail($form); 
 
         $job_update->proposed_remarks_exec = $request->input('proposed_remarks_job_exec');
 
         $job_update->save();
 
-        $sched_update = PersonnelActionManagement::get_paf_schedule_detail($request->input('req_id')); 
+        $sched_update = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
         $sched_update->proposed_remarks_exec = $request->input('proposed_remarks_schedule_exec');
 
         $sched_update->save(); 
 
-        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($request->input('req_id')); 
+        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
         $compensation_update->proposed_remarks_exec = $request->input('proposed_remarks_compensation_exec');
 
