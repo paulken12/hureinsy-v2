@@ -5,7 +5,7 @@ namespace App\Paf;
 use Illuminate\Database\Eloquent\Model;
 use App\Master\MasterDepartment;
 use App\Master\MasterJobTitle;
-use App\User;
+use App\User;       
 
 class PafCurrentJob extends Model
 {
@@ -18,14 +18,14 @@ class PafCurrentJob extends Model
     }
     public function masterDepartment()
     {
-        return $this->belongsTo(MasterDepartment::class, 'proposed_key_department');
+        return $this->belongsTo(MasterDepartment::class, 'current_key_department');
     } 
     public function user() 
     {
-        return $this->belongsTo(User::class,'proposed_reports_to');
+        return $this->belongsTo(User::class,'current_key_supervisor');
     }
     public function masterJobTitle()
     {
-        return $this->belongsTo(MasterJobTitle::class, 'proposed_key_job_title');
+        return $this->belongsTo(MasterJobTitle::class, 'current_key_job_title');
     }	
 }

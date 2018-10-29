@@ -128,10 +128,17 @@
                     <ul class="dropdown-menu">
                         <li class="nav-item dropdown">
                             <a href="{{route('paf.myrequest.list', [date('m'), date('Y')])}}">
-                                <span>My request lists<small><span class="badge badge-pill badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : 'new'}}</span></small></span>
+                                <span>My request lists<small><span class="badge badge-pill badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : $count->count_complete_user()}}</span></small></span>
                             </a>
                         </li>
 
+                        @if(Auth::user()->hasRole('supervisor') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                            <li class="nav-item dropdown">
+                                <a href="{{route('paf.view.list', [date('m'), date('Y')])}}">
+                                    <span>View all paf request</span>
+                                </a>
+                            </li>
+                        @endif
                         @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.search')}}">
@@ -184,9 +191,6 @@
                             <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
                             <li><a class="sidebar-link" href="#">Reports</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
-                                        class="c-blue-500 ti-eye"></i> </span><span class="title">Personnel Action</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" href="javascript:void(0);">

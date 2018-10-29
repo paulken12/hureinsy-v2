@@ -105,7 +105,7 @@
 						<div class="form-group">
 							<label for="assessed_by"><strong>Assessed By:</strong></label>
 							&nbsp;
-							{{empty($hr_name->company_id) ? '' : $hr_name->company_id}} - {{empty($hr_name->last_name) ? '' : $hr_name->last_name}} {{empty($hr_name->first_name) ? '' : $hr_name->first_name}} {{empty($hr_name->middle_name) ? '' : $hr_name->middle_name}}
+							{{empty($get_paf_details->humBasicInfo->id) ? 'Waiting for assessment' : '('. $get_paf_details->humBasicInfo->company_id .') '. $get_paf_details->humBasicInfo->last_name .', '. $get_paf_details->humBasicInfo->first_name .' '. $get_paf_details->humBasicInfo->middle_name}}
 						</div>
 					</div>
 				</div>
@@ -125,7 +125,7 @@
 						<div class="form-group">
 							<label for="approved_by"><strong>Approved By:</strong></label>
 							&nbsp;
-							{{empty($exec_name->company_id) ? '' : $exec_name->company_id}} - {{empty($exec_name->last_name) ? '' : $exec_name->last_name}} {{empty($exec_name->first_name) ? '' : $exec_name->first_name}} {{empty($exec_name->middle_name) ? '' : $exec_name->middle_name}}
+							{{empty($get_paf_details->exeBasicInfo->id) ? 'Waiting for approval' : '('. $get_paf_details->exeBasicInfo->company_id .') '. $get_paf_details->exeBasicInfo->last_name .', '. $get_paf_details->exeBasicInfo->first_name .' '. $get_paf_details->exeBasicInfo->middle_name}}
 						</div>
 					</div>
 				</div>

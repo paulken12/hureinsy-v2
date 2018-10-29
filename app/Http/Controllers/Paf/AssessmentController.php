@@ -23,9 +23,7 @@ class AssessmentController extends Controller
 
         $archives = Cache::get('call_paf_lists_archived');
 
-        $get_employee = Cache::get('call_emp_info');
-
-        return view('paf.hpaf.list', compact('requestList', 'archives', 'count_archives', 'get_employee'));
+        return view('paf.hpaf.list', compact('requestList', 'archives', 'count_archives'));
 
     }
 
@@ -37,6 +35,7 @@ class AssessmentController extends Controller
      */
     public function show($form)
     {  
+
         Cache::forget('call_paf_lists_hr');
 
         $user_role= Auth::user()->roles->first();
@@ -77,12 +76,6 @@ class AssessmentController extends Controller
         //Get Employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
-        $manager_name = PersonnelActionManagement::get_employee_info($get_paf_details->requested_by_company_id);
-
-        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
-
-        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
-
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
         //Get Statuses
@@ -92,11 +85,11 @@ class AssessmentController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '1'){
 
-            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
+            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
 
         }else{
 
-            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
 
     }
@@ -107,13 +100,13 @@ class AssessmentController extends Controller
             'proposed_remarks_job' => 'max:255|required_with:proposed_job_title,proposed_department,proposed_team,proposed_supervisor,proposed_project_assignment',
             'proposed_remarks_schedule' => 'max:255|required_with:proposed_schedule,proposed_work_location',
             'proposed_remarks_compensation' => 'max:255|required_with:proposed_job_grade,proposed_base_salary,proposed_bonus_allowance,proposed_benefits',
-            'proficiency_test' => 'exists:master_proficiency_test_pafs,key|required',
-            'behavioural_assessment' => 'exists:master_behavioural_assessment_pafs,key|required',
-            'performance_evaluation' => 'exists:master_performance_evaluation_pafs,key|required',
+            'proficiency_test' => 'required|exists:master_proficiency_test_pafs,key',
+            'behavioural_assessment' => 'required|exists:master_behavioural_assessment_pafs,key',
+            'performance_evaluation' => 'required|exists:master_performance_evaluation_pafs,key',
             'other_remarks' => 'string|nullable',
-            'overall_recommendation' => 'exists:master_overall_recommendation_pafs,key|required',
-            'request_status' => 'exists:statuses,id|required',
-            'sub_request_status' => 'exists:sub_statuses,id|required',
+            'overall_recommendation' => 'required|exists:master_overall_recommendation_pafs,key',
+            'request_status' => 'required|exists:statuses,id',
+            'sub_request_status' => 'required|exists:sub_statuses,id',
         ],
         [
             'proposed_remarks_job.required_with' => 'You need to fill out remarks on change in job title, duties, and responsibilities details field.',
@@ -128,7 +121,7 @@ class AssessmentController extends Controller
 
         $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
-        $form_update->assessed_by_company_id = EmpBasic::where('user_id', Auth::user()->id)->first()->company_id;
+        $form_update->assessed_by_company_id = Auth::user()->basicInfo->pluck('id')->first();
 
         $form_update->save();
 

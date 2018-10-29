@@ -235,6 +235,8 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::post('paf/search/result/request/submit/{form}', 'Paf\RequestController@store')->name('paf.search.result.store');
 
+    Route::get('paf/search/result/request/emergency/{form}', 'Paf\RequestController@create')->name('paf.search.result.create');    
+
     Route::get('paf/request/list/month={month}+year={year}', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
 
     Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.reassess.list.show');
@@ -259,9 +261,9 @@ Route::group(['middleware' => ['auth']],function()
 
     /* ------------------ PAF SUPERVISOR------------------ */
 
-    Route::get('paf/view/list/month={month}+year={year}', 'Paf\SupervisorPafController@list')->name('paf.view.list');
+    Route::get('paf/view/list/month={month}+year={year}', 'Paf\ViewPafController@list')->name('paf.view.list');
 
-    Route::get('paf/view/list/show/{form}', 'Paf\SupervisorPafController@show')->name('paf.view.list.show');
+    Route::get('paf/view/list/show/{form}', 'Paf\ViewPafController@show')->name('paf.view.list.show');
 
     /* ------------------ PAF USER ------------------ */
 

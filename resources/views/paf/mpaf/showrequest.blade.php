@@ -1,211 +1,102 @@
 @extends('layouts.dashboard')
+
 @section('content')
 <div class="full-container">
-	<div class="card  remain-height pos-r scrollable">
-		@if(count($errors))
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				@foreach($errors->all() as $err)
-					<li>{!!$err!!}</li>
-				@endforeach
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		@endif
-
-		<div class="card">
-			<div class="card-header">
-				<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form (For Reassessment)</strong></h4>
-			</div>
-
-			<form action="{{route('paf.reassess.list.store', $get_paf_details->id)}}" method="post">
-				<div class="card-body">
-					{{csrf_field()}}
-
-					<h4><i class="ti-user"></i> &nbsp; <strong>Employee Information</strong></h4>
-					<hr>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group">
-								<label for="raj_id"><strong>Employee ID:</strong></label>
-								<p>{{$employee_name->company_id}}</p>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								<label for="name"><strong>Name of Employee:</strong></label>
-								<p>{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group">
-								<label for="date_hired"><strong>Date Hired</strong></label>
-								<p>{{$employee_contract->contract_start}}</p>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								<label for="team"><strong>Team</strong></label>
-								<p></p>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group">
-								<label for="position"><strong>Position</strong></label>
-								<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								<label for="department"><strong>Department</strong></label>
-								<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
-							</div>
-						</div>
-					</div>
-
-					<hr>
-					<h4><i class="ti-pencil"></i> &nbsp; <strong>Nature of Action</strong></h4>
-					<hr>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group">
-								<label for="employment_status"><strong>Employment Status</strong></label>
-								<select name="employment_status" id="employment_status" class="form-control" required>
-									<option style="display:none" value="{{empty($get_paf_details->master_key_employment_status) ? '' : $get_paf_details->master_key_employment_status}}" selected>{{empty($get_paf_details->contractChange->change_type) ? '--select--' : $get_paf_details->contractChange->change_type}}</option>
-									@foreach ($employment_status as $employment)
-										<option value="{{$employment->key}}">{{$employment->change_type}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group">
-								<label for="remarks"><strong>Remarks</strong></label>
-								<input type="text" id="remarks" name="remarks" class="form-control" title="Remarks" value="{{empty($get_paf_details->remarks) ? '' : $get_paf_details->remarks}}">
-							</div>
-						</div>
-					</div>	
-
-					<div id="accordion">
-						@include('paf.mpaf.include.showjob')
-						@include('paf.mpaf.include.showschedule')
-						@include('paf.mpaf.include.showcompensation')
-					</div>
-					<hr>
-
-					<h4><strong>HR Assessment</strong></h4>
-
-					<div class="row">
-						<div class="col-2">
-							<div class="form-group">
-								<label for="proficiency_test"><strong>Proficiency Test</strong></label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								{{empty($get_hr_assessment_details->masterProficiency->proficiency) ? '' : $get_hr_assessment_details->masterProficiency->proficiency}}
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-2">
-							<div class="form-group">
-								<label for="behavioural_assessment"><strong>Behavioural Assessment</strong></label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								{{empty($get_hr_assessment_details->masterBehavioural->behaviour) ? '' : $get_hr_assessment_details->masterBehavioural->behaviour}}
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-2">
-							<div class="form-group">
-								<label for="performance_evaluation"><strong>Last Performance Evaluation</strong></label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								{{empty($get_hr_assessment_details->masterEvaluation->evaluation) ? '' : $get_hr_assessment_details->masterEvaluation->evaluation}}
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-2">
-							<div class="form-group">
-								<label for="other_remarks"><strong>Other Remarks</strong></label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								{{empty($get_hr_assessment_details->other_remarks) ? '' : $get_hr_assessment_details->other_remarks}}
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-2">
-							<div class="form-group">
-								<label for="overall_recommendation"><strong>Overall Recommendation</strong></label>
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								{{empty($get_hr_assessment_details->masterOverall->overall) ? '' : $get_hr_assessment_details->masterOverall->overall}}
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							</div>
-						</div>
-					</div>
-
-					<action-management 	
-							:categories="{{ $get_status}}"
-							:subcategories="{{$get_sub_status}}">
-					</action-management>
-
-					<div class="row">
-						<div class="col">
-							<div class="form-group text-center">
-								<button class="btn btn-success" type="submit">Update</button>
-							</div>
+    <div class="remain-height pos-r scrollable">
+        <div class="bgc-white bdrs-3 ">
+			<div class="card">
+				<div class="card-header bg-white">
+					<div class="btn-toolbar justify-content-between">
+						<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form (For Reassessment)</strong></h4>
+						<div>	
+							<a href="{{route('paf.search')}}" class="btn btn-secondary btn-sm" type="button">Go Back</a>
 						</div>
 					</div>
 				</div>
-			</form>
 
+			@if(count($errors))
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					@foreach($errors->all() as $err)
+						<li>{!!$err!!}</li>
+					@endforeach
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			@endif
+
+			<form action="{{route('paf.reassess.list.store', $get_paf_details->id)}}" method="post">
+				{{csrf_field()}}
+
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+						<a class="nav-item nav-link active" id="nav-empinfo-tab" data-toggle="tab" href="#nav-empinfo" role="tab" aria-controls="nav-empinfo" aria-selected="true">Employee Info</a>
+
+						<a class="nav-item nav-link" id="nav-natact-tab" data-toggle="tab" href="#nav-natact" role="tab" aria-controls="nav-natact" aria-selected="false">Nature of Action</a>
+
+						<a class="nav-item nav-link" id="nav-job-tab" data-toggle="tab" href="#nav-job" role="tab" aria-controls="nav-job" aria-selected="false">Change in Job Title, Duties, and Responsibilities Details</a>
+
+						<a class="nav-item nav-link" id="nav-sched-tab" data-toggle="tab" href="#nav-sched" role="tab" aria-controls="nav-sched" aria-selected="false">Change in Work Schedule Details</a>
+
+						<a class="nav-item nav-link" id="nav-compe-tab" data-toggle="tab" href="#nav-compe" role="tab" aria-controls="nav-compe" aria-selected="false">Change in Compensation and Benefit Details</a>
+
+						<a class="nav-item nav-link" id="nav-rem-tab" data-toggle="tab" href="#nav-rem" role="tab" aria-controls="nav-rem" aria-selected="false">HR Assessment</a>
+						
+
+					</div>
+
+					<div class="tab-content" id="nav-tabContent">
+
+							<div class="tab-pane fade show active" id="nav-empinfo" role="tabpanel" aria-labelledby="nav-empinfo-tab">
+								<div class="card-body">
+									@include('paf.include.employee')
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="nav-natact" role="tabpanel" aria-labelledby="nav-natact-tab">
+								<div class="card-body">
+									@include('paf.mpaf.include.shownature')
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="nav-job" role="tabpanel" aria-labelledby="nav-job-tab">
+								<div class="card-body">
+									@include('paf.mpaf.include.showjob')
+								</div>
+							</div>
+							
+							<div class="tab-pane fade" id="nav-sched" role="tabpanel" aria-labelledby="nav-sched-tab">
+								<div class="card-body">
+									@include('paf.mpaf.include.showschedule')
+								</div>
+							</div>
+							
+							<div class="tab-pane fade" id="nav-compe" role="tabpanel" aria-labelledby="nav-compe-tab">
+								<div class="card-body">
+									@include('paf.mpaf.include.showcompensation')
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="nav-rem" role="tabpanel" aria-labelledby="nav-rem-tab">
+								<div class="card-body">
+									@include('paf.include.readremarks')
+								</div>
+							</div>	
+					</div>
+					<hr>
+		
+					<div class="container">				
+						<action-management 	
+							:categories="{{$get_status}}"
+							:subcategories="{{$get_sub_status}}">
+						</action-management>
+					</div>
+
+					<div class="form-group text-center">
+						<button class="btn btn-success" type="submit">Update</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

@@ -20,9 +20,7 @@ class ReassessmentController extends Controller
 
         $archives = Cache::get('call_paf_lists_archived');
 
-        $get_employee = Cache::get('call_emp_info');
-
-    	return view('paf.mpaf.list', compact('request_list', 'archives', 'get_employee'));
+    	return view('paf.mpaf.list', compact('request_list', 'archives'));
     }
 
     public function show($form){
@@ -67,16 +65,12 @@ class ReassessmentController extends Controller
         //Get employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
-        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
-
-        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
-
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
     	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
 		}else{
-    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'hr_name', 'exec_name', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
     }
 

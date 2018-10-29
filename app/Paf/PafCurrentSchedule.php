@@ -17,10 +17,10 @@ class PafCurrentSchedule extends Model
     }    
  	function schedType() 
  	{
-        return $this->belongsTo(MasterScheduleTypePaf::class, 'proposed_key_schedule_type');
+        return $this->belongsTo(MasterScheduleTypePaf::class, 'current_key_schedule');
     }
     public function masterCompany()
     {
-        return $this->belongsTo(MasterCompany::class, 'proposed_key_work_location');
+        return $this->belongsTo(MasterCompany::class, 'current_key_work_location');
     }
 }

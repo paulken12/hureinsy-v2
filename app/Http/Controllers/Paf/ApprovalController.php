@@ -21,9 +21,7 @@ class ApprovalController extends Controller
 
         $archives = Cache::get('call_paf_lists_archived');    
 
-        $get_employee = Cache::get('call_emp_info');
-
-        return view('paf.epaf.list', compact('requestList', 'archives', 'get_employee'));
+        return view('paf.epaf.list', compact('requestList', 'archives'));
     }
 
     public function show($form){
@@ -56,12 +54,6 @@ class ApprovalController extends Controller
 
         //Get employee details
         $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
-
-        $manager_name = PersonnelActionManagement::get_employee_info($get_paf_details->requested_by_company_id);
-
-        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
-
-        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
         
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
@@ -74,11 +66,11 @@ class ApprovalController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '2'){
 
-            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
 
         }else{
 
-            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'manager_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'hr_name', 'employee_name', 'exec_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'employee_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }
 
     }

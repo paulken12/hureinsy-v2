@@ -46,18 +46,87 @@ class RequestController extends Controller
 
         $reportTo = Cache::get('call_user');
 
-        $employee_info = Cache::get('get_employee_info');  
+        $employee_name = Cache::get('get_employee_info');  
 
-        $employee_contract = PersonnelActionManagement::get_employee_contract($employee_info->id);
+        $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
-        return view('paf.mpaf.request', compact('employee_contract','employee_info', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
+        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
         
+    }
+
+    public function create($form)
+    {
+
+        $user = Auth::user()->basicInfo->pluck('id')->first();
+
+        $request_id = PafManagement::create([
+
+            'employee_company_id' => $form,
+
+            'requested_by_company_id' => $user,
+
+            'remarks' => 'Emergency request by the manager respond asap',
+
+            'comfirmation_flag' => 0,
+
+            'master_id_request_status' => '1',
+
+            'master_id_sub_request_status' => '1',
+
+        ]);
+
+        PafChangeJob::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+
+        PafCurrentJob::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+
+        PafChangeSchedule::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+
+        PafCurrentSchedule::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+
+        PafChangeCompensation::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+        
+        PafCurrentCompensation::create([
+
+            'request_id' => $request_id->id,
+
+
+        ]);
+
+        PafHrAssessment::create([
+
+            'request_id' => $request_id->id,
+
+        ]);
+
+        return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
+
+
     }
 
     public function store(Request $request, $form)
     {
         $validator = $request->validate([
-            'employment_status' => 'exists:master_contract_change_pafs,key|required',
+            'employment_status' => 'required|exists:master_contract_change_pafs,key',
             'remarks'=>'required|string|max:191',
             'proposed_job_title' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
@@ -70,9 +139,9 @@ class RequestController extends Controller
             'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
-       ]);
+        ]);
 
-        $user = Auth::user()->basicInfo->pluck('company_id')->first();
+        $user = Auth::user()->basicInfo->pluck('id')->first();
 
         $request_id = PafManagement::create([
 
@@ -171,16 +240,6 @@ class RequestController extends Controller
         PafHrAssessment::create([
 
             'request_id' => $request_id->id,
-
-            'key_proficiency_test' => '',
-
-            'key_behavioural_assessment' => '',
-
-            'key_performance_evaluation' => '',
-
-            'other_remarks' => '',
-
-            'key_overall_recommendation' => '',
 
         ]);
 

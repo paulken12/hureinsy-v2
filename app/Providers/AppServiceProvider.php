@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use App\Helper\Paf\PersonnelActionManagement;
 use App\Helper\Paf\CacheHelper;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,13 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        if (Schema::hasTable('paf_managements')) {            
-
-            CacheHelper::create_master_cache();
-
-            PersonnelActionManagement::register_date_effective();
-        
-        }
 
     }
 
