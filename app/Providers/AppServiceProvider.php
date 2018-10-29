@@ -18,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        if (Schema::hasTable('paf_managements')) {            
+
+            CacheHelper::create_master_cache();
+        
+        }
 
     }
 

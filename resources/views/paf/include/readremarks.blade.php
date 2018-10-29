@@ -15,6 +15,9 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
+			<label for="assessed_by"><strong>Assessed By:</strong></label>
+			&nbsp;
+			{{empty($get_paf_details->humBasicInfo->id) ? 'Waiting for assessment' : '('. $get_paf_details->humBasicInfo->company_id .') '. $get_paf_details->humBasicInfo->last_name .', '. $get_paf_details->humBasicInfo->first_name .' '. $get_paf_details->humBasicInfo->middle_name}}
 		</div>
 	</div>
 </div>
@@ -32,6 +35,9 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
+			<label for="approved_by"><strong>Approved By:</strong></label>
+			&nbsp;
+			{{empty($get_paf_details->exeBasicInfo->id) ? 'Waiting for approval' : '('. $get_paf_details->exeBasicInfo->company_id .') '. $get_paf_details->exeBasicInfo->last_name .', '. $get_paf_details->exeBasicInfo->first_name .' '. $get_paf_details->exeBasicInfo->middle_name}}
 		</div>
 	</div>
 </div>
@@ -49,6 +55,9 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
+			<label for="date_effective"><strong>Date Effective:</strong></label>
+			&nbsp;
+			{{empty($get_paf_details->date_effective) ? '' : $get_paf_details->date_effective}}
 		</div>
 	</div>
 </div>

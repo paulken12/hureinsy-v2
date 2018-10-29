@@ -8,7 +8,7 @@
 					<div class="btn-toolbar justify-content-between">
 						<h4><i class="ti-write"></i> &nbsp; <strong>Personnel Action Form (For Approval)</strong></h4>
 						<div>	
-							<a href="{{route('paf.search')}}" class="btn btn-secondary btn-sm" type="button">Go Back</a>
+							<a href="{{route('paf.approval.list', [date('m'), date('Y')])}}" class="btn btn-secondary btn-sm" type="button">Go Back</a>
 						</div>
 					</div>
 				</div>
