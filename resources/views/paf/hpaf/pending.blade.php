@@ -39,9 +39,10 @@
 						<a class="nav-item nav-link" id="nav-sched-tab" data-toggle="tab" href="#nav-sched" role="tab" aria-controls="nav-sched" aria-selected="false">Change in Work Schedule Details</a>
 
 						<a class="nav-item nav-link" id="nav-compe-tab" data-toggle="tab" href="#nav-compe" role="tab" aria-controls="nav-compe" aria-selected="false">Change in Compensation and Benefit Details</a>
-
-						<a class="nav-item nav-link" id="nav-rem-tab" data-toggle="tab" href="#nav-rem" role="tab" aria-controls="nav-rem" aria-selected="false">HR Assessment</a>
 						
+						@if(!empty($get_paf_details->master_key_employment_status))
+							<a class="nav-item nav-link" id="nav-rem-tab" data-toggle="tab" href="#nav-rem" role="tab" aria-controls="nav-rem" aria-selected="false">HR Assessment</a>
+						@endif
 
 					</div>
 
@@ -77,11 +78,13 @@
 								</div>
 							</div>
 
-							<div class="tab-pane fade" id="nav-rem" role="tabpanel" aria-labelledby="nav-rem-tab">
-								<div class="card-body">
-									@include('paf.hpaf.include.remarks')
-								</div>
-							</div>	
+							@if(!empty($get_paf_details->master_key_employment_status))
+								<div class="tab-pane fade" id="nav-rem" role="tabpanel" aria-labelledby="nav-rem-tab">
+									<div class="card-body">
+										@include('paf.hpaf.include.remarks')
+									</div>
+								</div>	
+							@endif
 					</div>
 					<hr>
 		

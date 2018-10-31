@@ -21,7 +21,6 @@ Route::get('/export', function () {
     return Excel::download(new \App\Exports\UsersExport(), 'users.xlsx');
 });
 
-
 /* ------------------ LOGIN SYSTEM ------------------*/
 
 Route::group(['prefix'=>'raj-titans'], function ()

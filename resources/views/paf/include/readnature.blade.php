@@ -5,6 +5,7 @@
 	<div class="col">
 		<div class="form-group">
 			<label for="employment_status"><strong>Employment Status</strong></label>
+			<input type="hidden" name="emp" value="{{$get_paf_details->master_key_employment_status}}">
 			<p>{{empty($get_paf_details->contractChange->change_type) ? '' : $get_paf_details->contractChange->change_type}}</p>
 		</div>
 	</div>
