@@ -78,27 +78,34 @@
       }
     }
 
-      .profile-info {
-        position: relative;
+    .profile-info {
+      position: relative;
       .profile-info-body {
         padding: 30px 20px;
 
       }
+
+      small{
+        text-transform: uppercase;
+      }
+
+      span{
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.side-active {
+    .profile-side-nav {
+      @include to($breakpoint-md) {
+        left: 0;
       }
     }
 
-
-    &.side-active {
-      .profile-side-nav {
-        @include to($breakpoint-md) {
-          left: 0;
-        }
-      }
-
-      .profile-wrapper {
-        @include to($breakpoint-md) {
-          left: 250px;
-        }
+    .profile-wrapper {
+      @include to($breakpoint-md) {
+        left: 250px;
       }
     }
+  }
 }

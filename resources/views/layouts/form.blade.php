@@ -80,7 +80,7 @@
 @include('layouts.loader')
 
 <div id="app" style="height: 100vh; background: white">
-    <main class="main">
+    <main class="main p-0">
         <div class="container-fluid h-100 mb-5">
             @yield('content')
             <flash message="{{ session('flash') }}"></flash>

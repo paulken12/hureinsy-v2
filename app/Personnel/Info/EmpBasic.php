@@ -2,6 +2,8 @@
 
 namespace App\Personnel\Info;
 
+use App\Contract\Job;
+use App\Contract\Project;
 use App\Master\MasterAddressType;
 use App\Master\MasterCitizenship;
 use App\Master\MasterCivilStatus;
@@ -48,8 +50,20 @@ class EmpBasic extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function jobs() {
+        return $this->belongsToMany(Job::class);
+    }
+
+    public function projects() {
+        return $this->belongsToMany(Project::class);
+    }
+
     public function contract() {
         return $this->hasMany(EmpContract::class);
+    }
+
+    public function empContract() {
+        return $this->hasMany(Contract::class);
     }
 
     public function address() {

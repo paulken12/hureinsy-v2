@@ -4,7 +4,7 @@
         <!--      Wizard container        -->
 
         <div class="wizard-container">
-            <div class="card wizard-card" data-color="blue" id="wizard">
+            <div class="card wizard-card" data-col-smor="blue" id="wizard">
                 <form action="/register/confirmed" METHOD="POST" @submit.prevent="onSubmit"
                       @keydown="form.errors.clear($event.target.name)" enctype="multipart/form-data">
                     <div class="wizard-header">
@@ -21,6 +21,7 @@
                             <li><a href="#family" data-toggle="tab">Family</a></li>
                             <li><a href="#education" data-toggle="tab">Education</a></li>
                             <li><a href="#experience" data-toggle="tab">Experience</a></li>
+                            <li><a href="#training" data-toggle="tab">Training</a></li>
                             <li><a href="#reference" data-toggle="tab">Reference</a></li>
                             <li><a href="#complete" data-toggle="tab">Complete</a></li>
                         </ul>
@@ -31,7 +32,7 @@
                             <div class="container-fluid">
                                 <h4 class="info-text"> Let's start with the basic details</h4>
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-sm-2">
                                         <div class="picture-container">
                                             <div class="picture">
                                                 <img src="../../../../public/images/guest.png" class="picture-src"
@@ -41,9 +42,9 @@
                                             <h6>Choose Picture</h6>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-row">
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_first_name" class="sr-only">First Name</label>
                                                     <input type="text" id="basic_first_name" name="basic_first_name"
@@ -56,7 +57,7 @@
                                                            v-text="form.errors.get('basic_first_name')"></small>
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_middle_name" class="sr-only">Middle Name</label>
                                                     <input type="text" id="basic_middle_name" name="basic_middle_name"
@@ -69,7 +70,7 @@
                                                            v-text="form.errors.get('basic_middle_name')"></small>
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_last_name" class="sr-only">Last Name</label>
                                                     <input type="text" id="basic_last_name" name="basic_last_name"
@@ -81,7 +82,7 @@
                                                            v-text="form.errors.get('basic_last_name')"></small>
                                                 </div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="basic_extension" class="sr-only">Extension</label>
                                                     <select id="basic_extension" v-model="form.basic_extension_key"
@@ -96,7 +97,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col">
+                                            <div class="col-sm">
 
                                                 <div class="form-group">
                                                     <label for="basic_birth_date" class="sr-only">Date of birth</label>
@@ -106,7 +107,7 @@
                                                            title="Birth of birth" placeholder="Date of birth">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_civil_status_key" class="sr-only">Civil
                                                         Status</label>
@@ -120,7 +121,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_citizenship_key"
                                                            class="sr-only">Citizenship</label>
@@ -134,7 +135,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label for="gender_key" class="sr-only">Gender</label>
                                                     <select id="gender_key" class="form-control"
@@ -163,7 +164,7 @@
                             <div class="container-fluid">
                                 <h4 class="info-text">Provide your contact list </h4>
                                 <div class="form-row">
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="con_telephone_num" class="sr-only">Telephone no.</label>
                                             <input type="text" id="con_telephone_num" v-model="form.telephone_num"
@@ -171,7 +172,7 @@
                                                    placeholder="Telephone no.">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="con_mobile_num" class="sr-only">Mobile no.</label>
                                             <input type="text" id="con_mobile_num" v-model="form.mobile_num"
@@ -179,7 +180,7 @@
                                                    title="Mobile no." placeholder="Mobile no.">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="con_other_num" class="sr-only">Other no.</label>
                                             <input type="text" id="con_other_num" v-model="form.other_mobile"
@@ -187,7 +188,7 @@
                                                    title="Other no." placeholder="Other no.">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="email" class="sr-only">Email</label>
                                             <input type="text" id="email" v-model="form.email" class="form-control"
@@ -208,7 +209,7 @@
 
                                         <div class="row">
 
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_unit_num" class="sr-only">Unit no.</label>
                                                     <input type="text" id="add_unit_num"
@@ -216,14 +217,14 @@
                                                            class="form-control" title="Unit no." placeholder="Unit no.">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_block" class="sr-only">Block</label>
                                                     <input type="text" id="add_block" v-model="form.add_block[index]"
                                                            class="form-control" title="Block" placeholder="Block">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_street_name" class="sr-only">Street name</label>
                                                     <input type="text" id="add_street_name"
@@ -232,7 +233,7 @@
                                                            placeholder="Street name">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_subdivision" class="sr-only">Subdivision</label>
                                                     <input type="text" id="add_subdivision"
@@ -244,7 +245,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_barangay" class="sr-only">Barangay</label>
                                                     <input type="text" id="add_barangay"
@@ -252,7 +253,7 @@
                                                            class="form-control" title="Barangay" placeholder="Barangay">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_city" class="sr-only">City</label>
                                                     <input type="text" id="add_city" v-model="form.add_city[index]"
@@ -260,7 +261,7 @@
                                                            title="City" placeholder="City">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_province" class="sr-only">Province</label>
                                                     <input type="text" id="add_province"
@@ -268,7 +269,7 @@
                                                            class="form-control" title="Province" placeholder="Province">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="add_zip_code" class="sr-only">Zip code</label>
                                                     <input type="text" id="add_zip_code"
@@ -290,7 +291,7 @@
                                         <div class="card mb-4" v-for="(family, index) in form.family_type">
                                             <div class="card-body">
                                                 <div class="row m-0 p-0">
-                                                    <div class="col m-0 p-0">
+                                                    <div class="col-sm m-0 p-0">
                                                         <strong v-text="family" hidden></strong>
                                                         <label for="fam-type" class="sr-only">Family type</label>
                                                         <select id="fam-type" class="form-control w-25 border-info"
@@ -302,7 +303,7 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                    <div class="col m-0 p-0">
+                                                    <div class="col-sm m-0 p-0">
                                                         <a v-show="form.fam_hidden[index]"
                                                            class="btn btn-danger btn-sm float-right "
                                                            @click="removeSibling(index)">Remove</a>
@@ -312,7 +313,7 @@
                                                 <hr>
 
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_last_name" class="sr-only">Last name</label>
                                                             <input type="text" id="fam_last_name" class="form-control"
@@ -321,7 +322,7 @@
                                                                    placeholder="Last name">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_first_name" class="sr-only">First
                                                                 name</label>
@@ -330,7 +331,7 @@
                                                                    title="First name" placeholder="First name">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_date_of_birth" class="sr-only">Date of
                                                                 birth</label>
@@ -342,7 +343,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_gender_key" class="sr-only">Gender</label>
                                                             <select id="fam_gender_key" class="form-control"
@@ -355,7 +356,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_employer" class="sr-only">Employer</label>
                                                             <input type="text" id="fam_employer" class="form-control"
@@ -364,7 +365,7 @@
                                                                    placeholder="Employer">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-sm">
                                                         <div class="form-group">
                                                             <label for="fam_occupation"
                                                                    class="sr-only">Occupation</label>
@@ -386,14 +387,14 @@
                         </div>
                         <div class="tab-pane" id="education">
                             <div class="container-fluid">
-                                <div class="col-sm-12">
+                                <div class="col-sm-sm-12">
                                     <h4 class="info-text"> Education</h4>
                                 </div>
 
                                 <div class="card mb-4" v-for="(education, index) in form.education_type">
                                     <div class="card-body">
                                         <div class="form-row ">
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <strong v-text="education" hidden></strong>
                                                 <label for="edu-type" class="sr-only">Family type</label>
                                                 <select id="edu-type" class="form-control border-info"
@@ -404,7 +405,7 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="course" class="sr-only">Course</label>
                                                     <input type="text" id="course" class="form-control"
@@ -412,7 +413,7 @@
                                                            placeholder="Course">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="name_of_school" class="sr-only">School name</label>
                                                     <input type="text" id="name_of_school" class="form-control"
@@ -420,7 +421,7 @@
                                                            title="School name" placeholder="School name">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="year_graduated" class="sr-only">Year graduated</label>
                                                     <input type="text" id="year_graduated" class="form-control"
@@ -428,7 +429,7 @@
                                                            title="Year graduated" placeholder="Year graduated">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="award" class="sr-only">Award</label>
                                                     <input type="text" id="award" class="form-control"
@@ -454,13 +455,13 @@
 
                                 <div class="container-fluid p-0 m-0" v-for="(exp,index) in form.exp_company_name">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-sm">
                                             <div class="card mb-2">
                                                 <div class="card-body">
 
                                                     <div class="form-row">
                                                         <span v-text="exp" hidden></span>
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
                                                                 <label for="exp_position" class="sr-only">Job
                                                                     title</label>
@@ -471,7 +472,7 @@
                                                                        placeholder="Job title">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
                                                                 <label for="exp_company_name" class="sr-only">Company
                                                                     name</label>
@@ -481,7 +482,7 @@
                                                                        title="Company name" placeholder="Company name">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
                                                                 <label for="exp_company_address" class="sr-only">Company
                                                                     address</label>
@@ -494,7 +495,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
                                                                 <label for="exp_industry"
                                                                        class="sr-only">Industry</label>
@@ -505,7 +506,7 @@
                                                                        placeholder="Industry">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
                                                                 <label for="exp_salary" class="sr-only">Salary</label>
                                                                 <input type="text" id="exp_salary" class="form-control"
@@ -513,23 +514,21 @@
                                                                        placeholder="Salary">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-sm">
                                                             <div class="form-group">
-                                                                <label for="exp_reason_for_leaving" class="sr-only">Reason
-                                                                    for
-                                                                    leaving</label>
-                                                                <input type="text" id="exp_reason_for_leaving"
+                                                                <label for="responsibilities" class="sr-only">Responsibilities</label>
+                                                                <input type="text" id="responsibilities"
                                                                        class="form-control"
-                                                                       v-model="form.exp_reason_for_leaving[index]"
+                                                                       v-model="form.responsibilities[index]"
                                                                        title="Reason for leaving"
-                                                                       placeholder="Reason for leaving">
+                                                                       placeholder="Responsibilities">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-sm-2">
                                             <div class="card mb-2">
                                                 <div class="card-body">
                                                     <span v-text="exp" hidden></span>
@@ -540,6 +539,8 @@
                                                                    v-model="form.exp_date_from[index]"
                                                                    title="Date from"
                                                                    placeholder="Date from">
+                                                                   <!--data-date-format="yyyy-mm-dd"-->
+                                                                   <!--data-provide="datepicker">-->
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
@@ -569,6 +570,87 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane" id="training">
+                            <div class="container-fluid">
+                                <h4 class="info-text"> Training</h4>
+
+                                <div class="container-fluid p-0 m-0" v-for="(train,index) in form.train_title">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+
+                                            <div class="form-row">
+                                                <span v-text="train" hidden></span>
+                                                <div class="col-sm">
+                                                    <div class="form-group">
+                                                        <label for="exp_position" class="sr-only">Training Title</label>
+                                                        <input type="text" id="train_title" class="form-control"
+                                                               v-model="form.train_title[index]" title="First name"
+                                                               placeholder="Training title">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="train_date_from">Start Date</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <small>from</small>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text"
+                                                                   class="form-control bdc-grey-200 start-date"
+                                                                   id="train_date_from"
+                                                                   v-model="form.train_date_from[index]"
+                                                                   title="Training start date">
+                                                                   <!--data-date-format="yyyy-mm-dd"-->
+                                                                   <!--data-provide="datepicker">-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="train_date_to">End Date</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <small>to</small>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text"
+                                                                   class="form-control bdc-grey-200 end-date"
+                                                                   id="train_date_to"
+                                                                   v-model="form.train_date_to[index]"
+                                                                   title="Training end date">
+                                                                   <!--data-date-format="yyyy-mm-dd"-->
+                                                                   <!--data-provide="datepicker">-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <div class="form-group">
+                                                        <label for="train_place_seminar" class="sr-only">Location</label>
+                                                        <input type="text" id="train_place_seminar" class="form-control"
+                                                               v-model="form.train_place_seminar[index]"
+                                                               title="Training location"
+                                                               placeholder="Training location">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-sm">
+                                                    <a class="btn btn-danger btn-sm float-right "
+                                                       @click="removeTraining(index)">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid text-center">
+                                    <a class="btn btn-simple btn-sm " @click="addTraining">Add
+                                        Trainings</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane" id="reference">
                             <div class="container-fluid">
                                 <h4 class="info-text"> Reference</h4>
@@ -579,7 +661,7 @@
 
                                             <div class="form-row">
                                                 <span v-text="ref" hidden></span>
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_position" class="sr-only">First name</label>
                                                         <input type="text" id="ref_first_name" class="form-control"
@@ -587,7 +669,7 @@
                                                                placeholder="First name">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_company_address" class="sr-only">Last
                                                             name</label>
@@ -596,7 +678,7 @@
                                                                title="Last name" placeholder="Last name">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_date_from" class="sr-only">Middle name</label>
                                                         <input type="text" id="ref_middle_name" class="form-control"
@@ -607,7 +689,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_company_name" class="sr-only">Job title</label>
                                                         <input type="text" id="ref_job_title" class="form-control"
@@ -615,7 +697,7 @@
                                                                title="Job title" placeholder="Job title">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_date_to" class="sr-only">Company name</label>
                                                         <input type="text" id="ref_company_name" class="form-control"
@@ -624,7 +706,7 @@
                                                                placeholder="Company name">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_salary" class="sr-only">Contact no.</label>
                                                         <input type="text" id="ref_contact_num" class="form-control"
@@ -634,7 +716,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <div class="form-group">
                                                         <label for="exp_industry" class="sr-only">Company
                                                             address</label>
@@ -646,7 +728,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="col">
+                                                <div class="col-sm">
                                                     <a class="btn btn-danger btn-sm float-right "
                                                        @click="removeReference(index)">Remove</a>
                                                 </div>
@@ -667,7 +749,7 @@
                                 <div class="modal-content">
                                     <label for="tac" class="sr-only"></label>
                                     <textarea name="tac" id="tac" class="form-control" readonly
-                                              style="height: 480px; color: #000; cursor: default">Terms and Conditions for Hureinsy
+                                              style="height: 480px; col-smor: #000; cursor: default">Terms and Conditions for Hureinsy
 
 
 Introduction
@@ -756,8 +838,9 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                         <div class="pull-right">
                             <input type='button' class='btn btn-next btn-fill btn-success btn-wd btn-sm' name='next'
                                    value='Next'/>
-                            <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish' @click="onSubmit"
-                                   value='Submit'/>
+                            <input type="button" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish'
+                                   @click="onSubmit"
+                                   value='Submit' :disabled="submitted"/>
 
                         </div>
                         <div class="pull-left">
@@ -793,6 +876,8 @@ These Terms will be governed by and interpreted in accordance with the laws of t
         data: function () {
             return {
 
+                submitted: false,
+
                 tabs: [{
                     name: 'tab1',
                     id: 0,
@@ -817,7 +902,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                     other_mobile: '',
                     email: this.email(),
 
-                    address_type: ['Residential Address', 'Permanent Address'],
+                    address_type: ['Present Address', 'Permanent Address'],
                     master_address_key: ['ra', 'pa'],
                     add_unit_num: [],
                     add_block: [],
@@ -852,7 +937,12 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                     exp_date_to: [],
                     exp_industry: [],
                     exp_salary: [],
-                    exp_reason_for_leaving: [],
+                    responsibilities: [],
+
+                    train_title: [],
+                    train_date_from: [],
+                    train_date_to: [],
+                    train_place_seminar: [],
 
                     ref_job_title: [],
                     ref_first_name: [],
@@ -869,6 +959,19 @@ These Terms will be governed by and interpreted in accordance with the laws of t
             window.addEventListener('beforeunload', this.removeUser)
         },
 
+        mounted: function () {
+            $("#train_date_from").datepicker().on(
+                "changeDate", () => {
+                    this.form.train_date_from = $('#train_date_from').val()
+                }
+            );
+            $("#train_date_to").datepicker().on(
+                "changeDate", () => {
+                    this.form.train_date_to = $('#train_date_to').val()
+                }
+            );
+
+        },
 
         methods: {
 
@@ -881,6 +984,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
             },
 
             onSubmit() {
+                this.submitted = true;
                 this.form.post('/register/confirmed');
             },
 
@@ -894,15 +998,6 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 this.form.fam_gender_key.push('');
                 this.form.fam_employer.push('');
                 this.form.fam_occupation.push('');
-
-                // let wizardElement = document.getElementById('wizard');
-                // let wizard = new Wizard(wizardElement);
-                // let buttonNext = document.querySelector('.next');
-                // let buttonPrevious = document.querySelector('.previous');
-                // let buttonFamily = document.querySelector('.add-family');
-                //
-                // wizard.addControls(buttonPrevious, buttonNext,buttonFamily);
-
             },
 
             addEducation() {
@@ -921,7 +1016,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 this.form.exp_date_to.push('');
                 this.form.exp_industry.push('');
                 this.form.exp_salary.push('');
-                this.form.exp_reason_for_leaving.push('');
+                this.form.responsibilities.push('');
             },
 
             addReference() {
@@ -932,6 +1027,13 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 this.form.ref_company_name.push('');
                 this.form.ref_company_address.push('');
                 this.form.ref_contact_num.push('');
+            },
+
+            addTraining() {
+                this.form.train_title.push('');
+                this.form.train_date_from.push(moment().format('YYYY-MM-DD'));
+                this.form.train_date_to.push(moment().format('YYYY-MM-DD'));
+                this.form.train_place_seminar.push('');
             },
 
             removeSibling: function (index) {
@@ -965,7 +1067,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 this.form.exp_date_to.splice(index, 1);
                 this.form.exp_industry.splice(index, 1);
                 this.form.exp_salary.splice(index, 1);
-                this.form.exp_reason_for_leaving.splice(index, 1);
+                this.form.responsibilities.splice(index, 1);
             },
 
             removeReference: function (index) {
@@ -976,6 +1078,13 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 this.form.ref_company_name.splice(index, 1);
                 this.form.ref_company_address.splice(index, 1);
                 this.form.ref_contact_num.splice(index, 1);
+            },
+
+            removeTraining: function (index) {
+                this.form.train_title.splice(index, 1);
+                this.form.train_date_from.splice(index, 1);
+                this.form.train_date_to.splice(index, 1);
+                this.form.train_place_seminar.splice(index, 1);
             },
 
             setActive: function (tab) {

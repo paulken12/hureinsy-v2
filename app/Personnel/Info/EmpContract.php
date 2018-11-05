@@ -32,13 +32,6 @@ class EmpContract extends Model
         return EmpContract::where('employment_status', 'project-based')->get()->count();
     }
 
-
-
-//    public function position() {
-//        return  MasterJobTitle::findOrFail($this->master_job_title_id)->get()->pluck('job_titles')->first();
-//
-//    }
-
     public function position() {
         return $this->belongsTo(MasterJobTitle::class, 'master_job_title_id');
     }

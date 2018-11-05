@@ -52,22 +52,22 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo'
-
-window.Pusher = require('pusher-js');
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: true
-});
-
-window.Echo.channel('EmployeeInformationForm')
-    .listen('NotifyAdminUpdate', e => {
-        console.log('Status has '+ e.notify.id+' been updated');
-        console.log(e);
-    });
+// import Echo from 'laravel-echo'
+//
+// window.Pusher = require('pusher-js');
+//
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     encrypted: true
+// });
+//
+// window.Echo.channel('EmployeeInformationForm')
+//     .listen('NotifyAdminUpdate', e => {
+//         console.log('Status has '+ e.notify.id+' been updated');
+//         console.log(e);
+//     });
 
 window.PerfectScrollbar = PerfectScrollbar;
 window.DataTable = DataTable;

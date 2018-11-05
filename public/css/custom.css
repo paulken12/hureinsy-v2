@@ -116,3 +116,196 @@
         overflow: auto !important;
     }
 }
+
+/* Assignment */
+
+.assign-container *{
+    z-index: 0;
+    overflow: hidden;
+}
+.indicator {
+    cursor: pointer;
+}
+
+.assign {
+    background-color: #FFFFFF;
+}
+
+.reference {
+    position: absolute;
+    width: auto;
+    height: 60px;
+    padding: 20px 10px;
+    margin: calc((100vh - 400px) / 2);
+    font-weight: 500;
+}
+
+.reference a {
+    font-weight: 400;
+}
+
+.assign#assign-visitors {
+    position: relative;
+    /*width: 300px;*/
+    height: 400px;
+    /*margin: calc((100vh - 400px) / 2) auto;*/
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator {
+    display: none;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss label.indicator {
+    top: 5px;
+    left: 5px;
+    /*margin: calc(-30% - 25px) calc(50% - 25px) 0 0;*/
+    background-color: transparent;
+    transition: top 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, right 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, background-color 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0.6s, margin 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss label.indicator .open {
+    opacity: 0;
+    transition: opacity 0.2s cubic-bezier(0.4, 0.0, 0.2, 1) 0.2s;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss label.indicator .close {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: -webkit-transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s, -webkit-transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss .content .data {
+    opacity: 1;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.6s;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss .content .data .graph .vertical .day .line-container {
+    max-height: 80%;
+    transition: max-height 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0.9s;
+}
+
+.assign#assign-visitors input[type="checkbox"]#assign-visitors-indicator:checked + .headerss .content .float {
+    opacity: 1;
+    -webkit-transform: scale(20);
+    transform: scale(20);
+    transition: opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s;
+}
+
+.assign#assign-visitors .headerss {
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+}
+
+.assign#assign-visitors .headerss label.indicator {
+    position: absolute;
+    z-index: 5;
+    width: 50px;
+    height: 50px;
+    top: 5px;
+    right: 5px;
+    margin: 0;
+    transition: top 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, right 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s, background-color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, margin 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s;
+}
+
+.assign#assign-visitors .headerss label.indicator .open {
+    position: absolute;
+    margin: 11.5px 16px;
+    opacity: 1;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0.6s;
+}
+
+.assign#assign-visitors .headerss label.indicator .close {
+    margin: 12.5px 17.5px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    transition: -webkit-transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, -webkit-transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+}
+
+.assign#assign-visitors .headerss .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.assign#assign-visitors .headerss .content > * {
+    font-weight: 500;
+}
+
+.assign#assign-visitors .headerss .content .data {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #FFF;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+}
+
+.assign#assign-visitors .headerss .content .data .top {
+    width: 100%;
+}
+
+.assign#assign-visitors .headerss .content .data .top .title {
+    width: 100%;
+}
+
+.assign#assign-visitors .headerss .content .data .graph {
+    position: relative;
+    width: calc(100% - 40px);
+    height: 60%;
+    margin: 0 20px 20px 20px;
+}
+
+.assign#assign-visitors .headerss .content .title {
+    margin-top: 16px;
+    margin-left: 60px;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.assign#assign-visitors .headerss .content .date {
+    width: 100%;
+    opacity: .5;
+    text-align: center;
+}
+
+.assign#assign-visitors .headerss .content .float {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    right: calc(50% - 25px);
+    opacity: 0;
+    border-radius: 100%;
+    background-color: #F8F8F8;
+    transition: opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, opacity 0s cubic-bezier(0.4, 0.0, 0.2, 1) 0s, -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) 0s;
+}
+
+.assign#assign-visitors .info {
+    width: calc(100% - 40px);
+    height: calc(40% - 80px);
+    padding: 40px 20px;
+
+}
+
+.assign#assign-visitors .info .counter {
+    margin-top: 8px;
+
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.assign#assign-visitors .info .counter .unit {
+    font-size: 15px;
+}

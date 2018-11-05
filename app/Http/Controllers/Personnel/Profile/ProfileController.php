@@ -14,4 +14,8 @@ class ProfileController extends Controller
         return view('personnel.profile.show',compact('profile'));
 
     }
+
+    public function updateAddress(EmpBasic $profile) {
+
+    }
 }

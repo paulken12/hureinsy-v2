@@ -12,6 +12,7 @@
 */
 
 use App\Events\NotifyAdminUpdate;
+use App\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Order{
@@ -30,6 +31,12 @@ Route::get('/update',function(){
 });
 
 Route::get('/sample', function () {
+
+    $user = User::find(auth()->user()->id)->first();
+
+    $e = $user->basicInfo->pluck('id')->first();
+
+    dd($e);
     return view('admin.role-management.role');
 });
 
@@ -83,6 +90,8 @@ Route::group(['middleware' => ['auth']],function()
     /* ------------------ PROFILE ------------------*/
 
     Route::get('profile/{profile}', 'Personnel\Profile\ProfileController@show')->name('profiles');
+
+    Route::patch('profile/{profile}', 'Personnel\Profile\ProfileController@upadteAddress');
 
     /* ------------------ PERSONNEL LIST ------------------*/
 
