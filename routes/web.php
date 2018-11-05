@@ -11,14 +11,33 @@
 |
 */
 
+use App\Events\NotifyAdminUpdate;
+use App\User;
 use Maatwebsite\Excel\Facades\Excel;
 
+class Order{
+    public $id;
+
+    public function __construct($id) {
+        $this->id = $id;
+    }
+}
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/export', function () {
-    return Excel::download(new \App\Exports\UsersExport(), 'users.xlsx');
+Route::get('/update',function(){
+    NotifyAdminUpdate::dispatch(new Order(4));
+});
+
+Route::get('/sample', function () {
+
+    $user = User::find(auth()->user()->id)->first();
+
+    $e = $user->basicInfo->pluck('id')->first();
+
+    dd($e);
+    return view('admin.role-management.role');
 });
 
 /* ------------------ LOGIN SYSTEM ------------------*/
@@ -31,7 +50,7 @@ Route::group(['prefix'=>'raj-titans'], function ()
 
 /* ------------------ ADMINISTRATOR ------------------*/
 
-Route::group(['middleware' => ['auth','role:titan']],function()
+Route::group(['middleware' => ['auth','role:titan|admin']],function()
 {
     /* ------------------ RECRUIT ------------------ */
 
@@ -199,7 +218,23 @@ Route::group(['middleware' => ['auth','role:titan']],function()
 
     // 
 
+    /* ------------------ REPORTS ------------------*/
 
+    Route::get('/reports', 'Personnel\Report\ReportController@index')->name('reports');
+
+    Route::post('/generate/report', 'Personnel\Report\ReportController@report')->name('generate.reports');
+
+    /* ------------------ ATTENDANCE ------------------*/
+
+    Route::get('/attendances', 'Attendance\Schedule\AttScheduleController@index')->name('attendances');
+
+    Route::get('/employee/attendance', 'Attendance\Schedule\AttScheduleController@create')->name('employee.attendance');
+
+    /* ------------------ ATTENDANCE ------------------*/
+
+    Route::get('/import', 'Attendance\Raw\ImportRawController@index')->name('import');
+
+    Route::post('/import/file', 'Attendance\Raw\ImportRawController@store')->name('import.file');
 });
 
 /* ------------------ PERSONNEL ------------------*/
@@ -215,6 +250,8 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('profile/{profile}', 'Personnel\Profile\ProfileController@show')->name('profiles');
 
+    Route::patch('profile/{profile}', 'Personnel\Profile\ProfileController@upadteAddress');
+
     /* ------------------ PERSONNEL LIST ------------------*/
 
     Route::get('/personnel', 'Personnel\Info\EmpBasicController@index')->name('personnel');
@@ -222,7 +259,6 @@ Route::group(['middleware' => ['auth']],function()
     /* ------------------ TEAM ------------------*/
 
     Route::get('/my-team', 'Personnel\Team\TeamController@index')->name('team');
-
 
     /* ------------------ PAF MANAGER ------------------ */
 
@@ -271,6 +307,12 @@ Route::group(['middleware' => ['auth']],function()
     Route::get('paf/my_request/list/show/{form}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
 
     Route::get('paf/my_request/list/show/accept/{form}', 'Paf\UserPafController@store')->name('paf.myrequest.list.store');
+
+    /* ------------------ CHANGE PASSWORD ------------------*/
+
+    Route::get('change-password', 'Auth\ChangePasswordController@show')->name('change.password');
+
+    Route::post('changing/password', 'Auth\ChangePasswordController@change')->name('changing.password');
 
 });
 

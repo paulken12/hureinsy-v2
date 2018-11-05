@@ -87,11 +87,9 @@
 
                 @include('layouts.nav')
 
-                <main class="main-content bgc-grey-100">
-                    <div id="mainContent">
-
+                <main class="main-content bgc-grey-100 ">
+                    <div id="mainContent ">
                         @yield('content')
-
                     </div>
                 </main>
 
@@ -102,7 +100,12 @@
     </div>
 
 
-    <script type="text/javascript" src="{{asset('js/app.js')}}" defer></script>
 
+    <script type="text/javascript" src="{{asset('js/app.js')}}" ></script>
+
+    <script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery-validation/dist/additional-methods.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery-steps/jquery.steps.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/main.js')}}" defer></script>
 </body>
 </html>

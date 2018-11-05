@@ -1,3 +1,10 @@
+.datepicker{
+  z-index: 800;
+}
+td{
+  vertical-align: middle !important;
+}
+
 
 #employee-list_wrapper{
   label{
@@ -20,12 +27,13 @@
     margin: 1rem;
   }
 
-  .table{
+  table{
     th{
       cursor: cell;
     }
     td{
       padding: 0.75rem;
+      vertical-align: middle;
       border-top: 1px solid #dee2e6;
     }
   }

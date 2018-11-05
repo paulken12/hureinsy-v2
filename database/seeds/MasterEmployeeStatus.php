@@ -18,7 +18,7 @@ class MasterEmployeeStatus extends Seeder
             ],
             [
                 'key'=>'regular',
-                'employee_status'=>'Inactive'
+                'employee_status'=>'Regular'
             ],
             [
                 'key'=>'probationary',

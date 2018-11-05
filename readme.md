@@ -1,7 +1,7 @@
 # hureinsy
 Laravel Project
 
-- git clone https://github.com/paulken12/hureinsy.git
+- git clone https://github.com/paulken12/hureinsy-v2.git
 
 - cd to the project directory and run the command
 

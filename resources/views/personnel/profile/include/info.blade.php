@@ -10,7 +10,7 @@
             </h5>
             <div class="peer peer-greed">
                 <i class="mR-10 ti-crown" title="Position"></i>
-                <span title="Position">Associate Software Engineer</span>
+                <span title="Position">{{$profile->contract->first()->position}}</span>
             </div>
             <div class="peer peer-greed">
                 <i class="mR-10 ti-email" title="Email"></i>

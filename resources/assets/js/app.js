@@ -10,6 +10,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.use(Toasted);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,14 +20,35 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('tab-profile', require('./components/TabProfile.vue'));
 Vue.component('action-management', require('./components/ActionManagement.vue'));
+Vue.component('employee-form', require('./components/EmployeeForm.vue'));
+Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
+Vue.component('import-raw', require('./components/ImportRaw.vue'));
+Vue.component('employee-profile', require('./components/EmployeeProfile.vue'));
+Vue.component('address-form', require('./components/AddressForm.vue'));
 
 const app = new Vue({
     el: '#app',
+
+    props: ['objective', 'profile','address'],
 
     data: function()
     {
         return{
             isCollapsed: true,
+            editObjective: false,
+            editAddress: false,
+            empObjective: this.objective,
+
+            address_type: ['Present Address', 'Permanent Address'],
+            master_address_key: [],
+            add_unit_num: [],
+            add_block: [],
+            add_street_name: [],
+            add_subdivision: [],
+            add_barangay: [],
+            add_city: [],
+            add_province: [],
+            add_zip_code: [],
         }
     },
 
@@ -117,6 +139,21 @@ const app = new Vue({
     methods: {
         mouseHover: function() {
             this.isCollapsed = true;
+        },
+
+        updateObjective(){
+            alert('updated');
+
+            // axios.patch('/endpoint/'+this.objective,{
+            //     empObjective: this.empObjective
+            // });
+            this.editObjective = false;
+        },
+        updateAddress(){
+            axios.patch('profile/'+this.objective,{
+                empObjective: this.empObjective
+            });
+            this.editObjective = false;
         }
     }
 });

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contract\Job;
 use App\Exports\UsersExport;
 use App\Personnel\Info\EmpBasic;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -45,7 +46,6 @@ class User extends Authenticatable
 
         return $this->hasMany(EmpBasic::class);
     }
-
     /**
      * return if user has a image if null return default
      * @param $avatar
@@ -83,5 +83,4 @@ class User extends Authenticatable
     public function export() {
         return Excel::download(new UsersExport(), 'users.xlsx');
     }
-
 }

@@ -2,14 +2,19 @@
 
 namespace App\Personnel\Info;
 
+use App\Contract\Job;
+use App\Contract\Project;
 use App\Master\MasterAddressType;
 use App\Master\MasterCitizenship;
 use App\Master\MasterCivilStatus;
 use App\Master\MasterExtension;
 use App\Master\MasterGender;
+use App\Master\MasterJobTitle;
+use App\Team;
 use App\User;
 use App\Paf\PafManagement;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property mixed reporting_to
@@ -26,9 +31,9 @@ class EmpBasic extends Model
 
     public function getFullNameAttribute()
     {
-        return sprintf('%s %s',
-            $this->first_name,
-            $this->last_name
+        return sprintf('%s, %s',
+            $this->last_name,
+            $this->first_name
         );
     }
 
@@ -46,8 +51,20 @@ class EmpBasic extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function jobs() {
+        return $this->belongsToMany(Job::class);
+    }
+
+    public function projects() {
+        return $this->belongsToMany(Project::class);
+    }
+
     public function contract() {
         return $this->hasMany(EmpContract::class);
+    }
+
+    public function empContract() {
+        return $this->hasMany(Contract::class);
     }
 
     public function address() {
@@ -158,5 +175,14 @@ class EmpBasic extends Model
 
     public function pafManagement() {
         return $this->hasMany(PafManagement::class);
+    }
+
+    public function team($employee) {
+        $team = Team::where('id',$employee->roles->first()->pivot->team_id)->first();
+        return $team->display_name;
+    }
+
+    public function myTeam() {
+        return Auth::user()->roles->first()->pivot->team_id;
     }
 }

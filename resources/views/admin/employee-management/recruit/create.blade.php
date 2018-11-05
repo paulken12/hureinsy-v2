@@ -2,117 +2,213 @@
 
 @section('content')
     <div class="bd bgc-white">
-        <div class="layers">
-            <div class="layer w-100 p-20">
-                <h4 class="lh-1">New Recruit Details</h4>
-            </div>
-            <div class="layer w-100">
-                <div class="pr-5 pl-5 pb-5">
-                    <div class="peers ai-c jc-sb">
-                        <div class="peer peer-greed">
-                            <form action="{{route('store.recruit')}}" method="POST">
-                                {{csrf_field()}}
-
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label class="sr-only" for="company_id">Company ID</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="ti-id-badge"></i></div>
-                                            </div>
-                                            <input type="text" class="form-control" id="company_id"
-                                                   value="{{$company_id}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-8">
-                                        <label class="sr-only" for="report_to">Report to</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <small>Reporting to</small>
-                                                </div>
-                                            </div>
-                                            <select name="report_to" id="report_to" class="form-control">
-                                                @foreach ($users as $user)
-                                                    @foreach ($admins as $admin)
-                                                        @if($user->roles->pluck('name')->first() === $admin->name)
-                                                            <option value="{{$user->id}}">{{$user->name ." - ". $admin->display_name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <form method="POST" id="signup-form" class="signup-form" action="{{route('store.recruit')}}">
+            {{csrf_field()}}
+            <div>
+                <h3 title="test"></h3>
+                <fieldset>
+                    <h4 class="m-0"><i class="ti-info-alt size-ti"></i>&nbsp;&nbsp;Basic Information</h4>
+                    <hr>
+                    <div class="form-row m-0">
+                        <div class="col">
+                            <label class="sr-only" for="company_id">Company ID</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="ti-id-badge"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="company_id"
+                                       value="{{$company_id}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <label class="sr-only" for="report_to">Report to</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Reporting to</small>
                                     </div>
                                 </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name">First name</label>
-                                            <input type="text" id="first_name" name="first_name" class="form-control"
-                                                   title="First name" required>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="middle_name">Middle name</label>
-                                            <input type="text" id="middle_name" name="middle_name" class="form-control"
-                                                   title="Middle name" required>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="last_name">Last name</label>
-                                            <input type="text" id="last_name" name="last_name" class="form-control"
-                                                   title="Last name" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col-8">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="email">Email</label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="ti-email"></i></div>
-                                                </div>
-                                                <input type="email" class="form-control" name="email" id="email"
-                                                       placeholder="Email" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-
-                                            <label class="sr-only" for="role_key">Role</label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="ti-eye"></i></div>
-                                                </div>
-                                                <select name="role_key" id="role_key" class="form-control">
-                                                    @foreach ($roles as $role)
-                                                        <option value="{{$role->name}}">{{$role->display_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="btn btn-success float-right" type="submit">Create Account</button>
-                                </div>
-
-                            </form>
+                                <select name="report_to" id="report_to" class="form-control">
+                                    @foreach ($users as $user)
+                                        @foreach ($admins as $admin)
+                                            @if($user->roles->pluck('name')->first() === $admin->name)
+                                                <option value="{{$user->id}}">{{$user->name ." - ". $admin->display_name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-row m-0">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="first_name">First name</label>
+                                <input type="text" id="first_name" name="first_name" class="form-control"
+                                       title="First name" required placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="middle_name">Middle name</label>
+                                <input type="text" id="middle_name" name="middle_name" class="form-control"
+                                       title="Middle name" required placeholder="Middle name">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="last_name">Last name</label>
+                                <input type="text" id="last_name" name="last_name" class="form-control"
+                                       title="Last name" required placeholder="Last name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row m-0">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label class="sr-only" for="email">Email</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="ti-email"></i></div>
+                                    </div>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           placeholder="Email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+
+                                <label class="sr-only" for="role_key">Role</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="ti-eye"></i></div>
+                                    </div>
+                                    <select name="role_key" id="role_key" class="form-control">
+                                        <option value="employee" readonly="">-Select Role-</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{$role->name}}">{{$role->display_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <h3></h3>
+                <fieldset>
+                    <h4 class="m-0"><i class="ti-write size-ti"></i>&nbsp;&nbsp;Job Description
+                        <small><strong>| Annex A</strong></small>
+                    </h4>
+                    <hr>
+
+                    <div class="assign-container">
+                        <div class="assign" id="assign-visitors">
+                            <input type="checkbox" id="assign-visitors-indicator"/>
+                            <div class="headerss">
+                                <label class="indicator" for="assign-visitors-indicator">
+                                    <svg class="open" width="18" height="27">
+                                        <line x1="1.5" y1="12" x2="2" y2="25" stroke-linecap="round"
+                                              style="stroke: #2196f3; stroke-width: 3;"></line>
+                                        <line x1="9" y1="7" x2="9" y2="25" stroke-linecap="round"
+                                              style="stroke: #2196f3; stroke-width: 3;"></line>
+                                        <line x1="16.5" y1="2" x2="16.5" y2="25" stroke-linecap="round"
+                                              style="stroke: #2196f3; stroke-width: 3;"></line>
+                                    </svg>
+                                    <svg class="close" width="15" height="25">
+                                        <line x1="1.5" y1="13.5" x2="15" y2="0"
+                                              style="stroke: #2196f3; stroke-width: 3"></line>
+                                        <line x1="1.5" y1="11.5" x2="15" y2="25"
+                                              style="stroke: #2196f3; stroke-width: 3"></line>
+                                    </svg>
+                                </label>
+                                <div class="content">
+                                    <div class="data">
+                                        <div class="top">
+                                            <p class="title float-left">Project Assignment </p>
+                                        </div>
+                                        <div class="graph">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
+                                            aperiam culpa debitis deleniti error illo, natus, nisi nobis nostrum
+                                            odit porro, quas qui quibusdam ratione sequi totam ut vel vitae?
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="job_title">Job Title</label>
+                                            <input type="text" id="job_title" name="job_title" class="form-control"
+                                                   title="Job Title"
+                                                   placeholder="Job Title">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="float"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="date_effective">Date Effective</label>--}}
+                    {{--<input type="text" id="date_effective" name="date_effective" class="form-control"--}}
+                    {{--title="Date Effective">--}}
+                    {{--</div>--}}
+
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="job_title">Job Title</label>--}}
+                    {{--<input type="text" id="job_title" name="job_title" class="form-control" title="Job Title">--}}
+                    {{--</div>--}}
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="department">Department</label>--}}
+                    {{--<input type="text" id="department" name="department" class="form-control"--}}
+                    {{--title="Department">--}}
+                    {{--</div>--}}
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="team">Team</label>--}}
+                    {{--<input type="text" id="team" name="team" class="form-control" title="Team">--}}
+                    {{--</div>--}}
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="project_assign">Project Assignment</label>--}}
+                    {{--<input type="text" id="project_assign" name="project_assign" class="form-control"--}}
+                    {{--title="Project Assignment">--}}
+                    {{--</div>--}}
+
+                    {{--<div class="form-group">--}}
+                    {{--<label for="job_desc">Job Description</label>--}}
+                    {{--<input type="text" id="job_desc" name="job_desc" class="form-control"--}}
+                    {{--title="Job Description">--}}
+                    {{--</div>--}}
+
+
+                </fieldset>
+
+                <h3></h3>
+                <fieldset>
+                    <h4 class="m-0"><i class="ti-alarm-clock size-ti"></i>&nbsp;&nbsp;Schedule
+                        <small><strong>| Annex B</strong></small>
+                    </h4>
+                    <hr>
+                    <p class="desc">annex b</p>
+                </fieldset>
+
+                <h3></h3>
+                <fieldset>
+                    <h4 class="m-0"><i class="ti-envelope size-ti"></i>&nbsp;&nbsp;Benefit
+                        <small><strong>| Annex C</strong></small>
+                    </h4>
+                    <hr>
+                    <p class="desc">annex c</p>
+                </fieldset>
             </div>
-        </div>
-        {{--<div class="ta-c bdT w-100 p-20">--}}
-        {{--<a href="#">Check all the sales</a>--}}
-        {{--</div>--}}
+        </form>
     </div>
 @endsection

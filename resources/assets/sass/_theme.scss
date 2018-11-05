@@ -2,4 +2,15 @@
 @import 'spec/tools/index';
 @import "~bootstrap/scss/bootstrap";
 @import 'spec/index';
+@import '~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 @import 'vendor/index';
+@import 'gsdk-bootstrap-wizard';
+
+@import 'common/extend.scss';
+@import 'common/minxi.scss';
+@import 'common/variables.scss';
+@import 'common/global.scss';
+
+@import 'layouts/main.scss';
+
+@import 'layouts/responsive.scss';
