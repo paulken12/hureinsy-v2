@@ -12,10 +12,14 @@
                 <i class="mR-10 ti-crown" title="Position"></i>
                 <span title="Position">{{$profile->contract->first()->position}}</span>
             </div>
-            <div class="peer peer-greed">
-                <i class="mR-10 ti-email" title="Email"></i>
-                <span>{{$profile->user->email}}</span>
-            </div>
+
+            @can('view', $profile->user)
+                <div class="peer peer-greed">
+                    <i class="mR-10 ti-email" title="Email"></i>
+                    <span>{{$profile->user->email}}</span>
+                </div>
+            @endcan
+
             <div class="peer peer-greed">
                 <i class="mR-10 ti-write" title="Report to"></i>
                 <span><a href="{{route('profiles',$profile->reportToSlug())}}" title="Reporting to {{$profile->reportingTo()}}">{{$profile->reportingTo()}}</a></span>

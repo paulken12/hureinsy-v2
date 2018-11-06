@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="full-container">
+    <div class="full-container" xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="profile-app">
             <div class="profile-side-nav remain-height ov-h">
                 <div class="h-100 layers">
@@ -178,8 +178,10 @@
                             <div class="bdT pX-40 pY-30">
 
                                 <h5>Objective
-                                    <a href="#" class="btn btn-sm btn-link float-right" title="Edit objective" @click="editObjective = true"><i class="ti-pencil-alt"></i></a></h5>
-
+                                    @can('view', $profile->user)
+                                        <a href="#" class="btn btn-sm btn-link float-right" title="Edit objective" v-on:click="editObjective = !editObjective"><i class="ti-pencil-alt"></i></a>
+                                    @endcan
+                                </h5>
                                 <div v-if="editObjective">
                                     <div class="form-group">
                                         <label for="edit-objective" class="sr-only">Edit Objective</label>
@@ -285,73 +287,26 @@
                         <div class="tab-pane fade profile-info" id="address" role="tabpanel"
                              aria-labelledby="address-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Address</h4>
-                                        </div>
-                                    </div>
-                                    {{--@canAndOwns('update-address')--}}
-                                    <div class="peer">
-                                        <span><a href="#" title="Edit" class="btn btn-link" @click="editAddress = true"><i class="mR-10 ti-pencil-alt" ></i></a></span>
-                                    </div>
-                                    {{--@endOwns--}}
-                                </div>
 
-                                <hr>
-
-                                <div v-if="editAddress">
-                                    <address-form :address="{{$profile->address}}"></address-form>
-
-                                    <button class="btn btn-success btn-sm" @click="updateAddress">Update</button>
-                                    <button class="btn btn-link btn-sm" @click="editAddress = false">Cancel</button>
-                                </div>
-                                <div v-else>
-                                    @forelse ($profile->address as $address)
-                                        <h5>{{$address->address}} </h5>
-                                        <i class="ti-location-pin"></i> {{$address->unit_num}}
-                                        {{$address->block}}
-                                        {{$address->street_name}}
-                                        {{$address->subdivision}}
-                                        {{$address->barangay}}
-                                        {{$address->city}}
-                                        {{$address->province}}
-                                        {{$address->zip_code}}
-                                        <br>
-                                        <br>
-                                    @empty
-                                        <p class="text-center">No address provided</p>
-                                    @endforelse
-                                </div>
+                                <address-form
+                                        @emit-address="addressEdit"
+                                        :address="{{$profile->address}}"
+                                        :profile="{{$profile}}"
+                                ></address-form>
                             </div>
                         </div>
 
                         <div class="tab-pane fade profile-info" id="contact" role="tabpanel"
                              aria-labelledby="contact-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Contact</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <hr>
-                                @forelse ($profile->contact as $contact)
-                                    Telephone No. : <span class="c-grey-900">{{$contact->telephone_num ? :'n/a'}}</span>
-                                    <br>
-                                    Mobile No. : <span class="c-grey-900">{{$contact->mobile_num ? :'n/a'}}</span><br>
-                                    Other No. : <span class="c-grey-900">{{$contact->other_mobile ? :'n/a'}}</span><br>
-                                    Email. : <span class="c-grey-900">{{$profile->user->email}}</span><br>
-                                @empty
-                                    <p class="text-center">No contact available</p>
-                                @endforelse
+
+                                <contact-form
+                                        :profile="{{$profile}}"
+                                        :info="{{$profile->info}}"
+                                        :employee="{{$profile->user}}"
+                                        :owner="{{$isOwner}}">
+                                </contact-form>
+
                             </div>
                         </div>
 
@@ -423,64 +378,78 @@
                         <div class="tab-pane fade profile-info" id="education" role="tabpanel"
                              aria-labelledby="education-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Educational Background</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <hr>
-                                @forelse ($profile->education as $education)
-                                    <h5>Level: {{$education->background}}</h5>
-                                    Course: {{$education->course}}<br>
-                                    School name: {{$education->name_of_school? : 'Not specified'}} <br>
-                                    Year graduated: {{$education->year_graduated? : 'Not specified'}}<br>
-                                    Award: {{$education->award? : 'No Awards'}}<br><br>
-                                @empty
-                                    <p class="text-center">No educational background provided</p>
-                                @endforelse
+
+                                <education-form
+                                        :profile="{{$profile}}"
+                                        :educations="{{$profile->education}}"
+                                        :edu_type="{{$profile->education->pluck('background')}}"
+                                        :education_type="{{$education_type}}"
+                                        :owner="{{$isOwner}}">
+                                </education-form>
+                                {{--<div class="peers ai-c jc-sb">--}}
+                                    {{--<div class="peers peer-greed">--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<h4>Educational Background</h4>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--@can('view', $profile->user)--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
+                                                                 {{--title="Edit"></i></a></span>--}}
+                                        {{--</div>--}}
+                                    {{--@endcan--}}
+                                {{--</div>--}}
+                                {{--<hr>--}}
+                                {{--@forelse ($profile->education as $education)--}}
+                                    {{--<h5>Level: {{$education->background}}</h5>--}}
+                                    {{--Course: {{$education->course}}<br>--}}
+                                    {{--School name: {{$education->name_of_school? : 'Not specified'}} <br>--}}
+                                    {{--Year graduated: {{$education->year_graduated? : 'Not specified'}}<br>--}}
+                                    {{--Award: {{$education->award? : 'No Awards'}}<br><br>--}}
+                                {{--@empty--}}
+                                    {{--<p class="text-center">No educational background provided</p>--}}
+                                {{--@endforelse--}}
                             </div>
                         </div>
 
                         <div class="tab-pane fade profile-info" id="experience" role="tabpanel"
                              aria-labelledby="experience-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Work Experience</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <hr>
-                                @forelse ($profile->experience as $experience)
-                                    <h5>{{$experience->emp_work_experience}}</h5>
-                                    Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;<br>
-                                    Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;<br>
-                                    Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}
-                                    &nbsp;-
-                                    Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;
-                                    <br>
-                                    Industry: {{$experience->industry? : 'Not specified'}}&nbsp;<br>
-                                    Salary: {{$experience->salary? : 'Not specified'}}&nbsp;<br>
-                                    Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br>
-                                    <br>
-                                @empty
-                                    <p class="text-center">No work experience</p>
-                                @endforelse
+
+                                <experience-form
+                                        :profile="{{$profile}}"
+                                        :experience="{{$profile->experience}}"
+                                        :owner="{{$isOwner}}">
+                                </experience-form>
+                                {{--<div class="peers ai-c jc-sb">--}}
+                                    {{--<div class="peers peer-greed">--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<h4>Work Experience</h4>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--@can('view', $profile->user)--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
+                                                                 {{--title="Edit"></i></a></span>--}}
+                                        {{--</div>--}}
+                                    {{--@endcan--}}
+                                {{--</div>--}}
+                                {{--<hr>--}}
+                                {{--@forelse ($profile->experience as $experience)--}}
+                                    {{--<h5>{{$experience->emp_work_experience}}</h5>--}}
+                                    {{--Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;<br>--}}
+                                    {{--Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;<br>--}}
+                                    {{--Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}--}}
+                                    {{--&nbsp;---}}
+                                    {{--Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;--}}
+                                    {{--<br>--}}
+                                    {{--Industry: {{$experience->industry? : 'Not specified'}}&nbsp;<br>--}}
+                                    {{--Salary: {{$experience->salary? : 'Not specified'}}&nbsp;<br>--}}
+                                    {{--Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br>--}}
+                                    {{--<br>--}}
+                                {{--@empty--}}
+                                    {{--<p class="text-center">No work experience</p>--}}
+                                {{--@endforelse--}}
                             </div>
                         </div>
 
@@ -518,58 +487,23 @@
                         <div class="tab-pane fade profile-info" id="emergency" role="tabpanel"
                              aria-labelledby="emergency-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Emergency Contact</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-
-                                <hr>
-                                @forelse ($profile->emergency as $emergency)
-                                    Name: {{$emergency->first_name}}&nbsp;
-                                    {{$emergency->middle_name}}&nbsp;
-                                    {{$emergency->last_name}}<br>
-                                    Contact no.: {{$emergency->contact_num? : 'Not specified'}}<br>
-                                    Relationship: {{$emergency->relationship? : 'Not specified'}}&nbsp;
-                                @empty
-                                    <p class="text-center">No emergency contact</p>
-                                @endforelse
+                                <emergency-form
+                                    :profile="{{$profile}}"
+                                    :emergency="{{$profile->emergency}}"
+                                    :owner="{{$isOwner}}">
+                                </emergency-form>
                             </div>
                         </div>
 
                         <div class="tab-pane fade profile-info" id="medical" role="tabpanel"
                              aria-labelledby="medical-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Medical Information</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-
-                                <hr>
-                                @forelse ($profile->medical as $medical)
-                                    Blood type: {{$medical->bloodType ? : 'Not specified'}}<br>
-                                    Height(m): {{$medical->height ? : 'Not specified'}}<br>
-                                    Weight(kg): {{$medical->weight ? : 'Not specified'}}<br>
-                                @empty
-                                    <p class="text-center">No medical information</p>
-                                @endforelse
+                                <medical-form
+                                    :profile="{{$profile}}"
+                                    :medical="{{$profile->medical}}"
+                                    :blood="{{$blood}}"
+                                    :owner="{{$isOwner}}">
+                                </medical-form>
                             </div>
                         </div>
 

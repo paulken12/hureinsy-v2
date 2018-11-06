@@ -19,7 +19,6 @@ class CreateEmpContactsTable extends Migration
             $table->string('telephone_num')->nullable();
             $table->string('mobile_num')->nullable();
             $table->string('other_mobile')->nullable();
-            $table->integer('user_id'); // get the email from the user table
             $table->timestamps();
         });
     }

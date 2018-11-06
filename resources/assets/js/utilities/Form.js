@@ -92,15 +92,11 @@ class Form {
      */
     submit(requestType, url) {
 
-        console.log(this.data());
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then(response => {
-                    this.onSuccess(window.location = response.data.redirect);
-                    // window.location = response.data.redirect;
-                    // Toasted.$toasted.show(response.data.success);
-                    //
-
+                    this.onSuccess(response.data());
+                    // this.onSuccess(window.location = response.data.redirect);
                     resolve(response.data);
                 })
                 .catch(error => {

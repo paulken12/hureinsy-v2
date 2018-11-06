@@ -22,6 +22,11 @@ Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
 Vue.component('import-raw', require('./components/ImportRaw.vue'));
 Vue.component('employee-profile', require('./components/EmployeeProfile.vue'));
 Vue.component('address-form', require('./components/AddressForm.vue'));
+Vue.component('contact-form', require('./components/ContactForm.vue'));
+Vue.component('emergency-form', require('./components/EmergencyForm.vue'));
+Vue.component('medical-form', require('./components/MedicalForm.vue'));
+Vue.component('experience-form', require('./components/ExperienceForm.vue'));
+Vue.component('education-form', require('./components/EducationForm.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -146,6 +151,9 @@ const app = new Vue({
                 empObjective: this.empObjective
             });
             this.editObjective = false;
+        },
+        addressEdit(value){
+            this.editAddress = value;
         }
     }
 });

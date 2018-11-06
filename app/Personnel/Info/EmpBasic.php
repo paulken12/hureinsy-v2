@@ -70,7 +70,7 @@ class EmpBasic extends Model
         return $this->hasMany(EmpAddress::class);
     }
 
-    public function contact() {
+    public function info() {
         return $this->hasMany(EmpContact::class);
     }
 

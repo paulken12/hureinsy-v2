@@ -16,6 +16,7 @@ class CreateEmpSkillsTable extends Migration
         Schema::create('emp_skills', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('emp_basic_id');
+            $table->string('objective')->nullable();
             $table->string('special_skill')->nullable();
             $table->string('hobbies')->nullable();
             $table->string('membership')->nullable();

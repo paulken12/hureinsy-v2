@@ -91,7 +91,15 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('profile/{profile}', 'Personnel\Profile\ProfileController@show')->name('profiles');
 
-    Route::patch('profile/{profile}', 'Personnel\Profile\ProfileController@upadteAddress');
+    Route::patch('profile/{profile}/address', 'Personnel\Profile\ProfileController@updateAddress');
+
+    Route::patch('profile/{profile}/contact', 'Personnel\Profile\ProfileController@updateContact');
+
+    Route::patch('profile/{profile}/emergency', 'Personnel\Profile\ProfileController@updateEmergency');
+
+    Route::patch('profile/{profile}/medical', 'Personnel\Profile\ProfileController@updateMedical');
+
+    Route::patch('profile/{profile}/experience', 'Personnel\Profile\ProfileController@updateExperience');
 
     /* ------------------ PERSONNEL LIST ------------------*/
 
