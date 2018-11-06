@@ -13,6 +13,7 @@
 
 use App\Events\NotifyAdminUpdate;
 use App\User;
+use App\Events\PafEvent;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Order{
@@ -22,8 +23,13 @@ class Order{
         $this->id = $id;
     }
 }
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/notif', function() {
+    PafEvent::dispatch(new PafEvent(1));
 });
 
 Route::get('/update',function(){

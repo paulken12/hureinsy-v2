@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 //        $test->importCsv('perm.csv',\App\Permission::class);
 //        $test->importCsv('role.csv',\App\Role::class);
 
-//        $this->call(LaratrustSeeder::class);
+        $this->call(LaratrustSeeder::class);
         $this->call(InformationSeeder::class);
         $this->call(MasterAddressType::class);
         $this->call(MasterBloodType::class);

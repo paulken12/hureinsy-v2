@@ -77352,23 +77352,10 @@ p.desc {
   background-color: transparent;
   border: 1px solid transparent;
   text-transform: none;
-  -webkit-transition: border-color .15s ease-out, 
- color .25s ease-out, 
- background-color .15s ease-out,
- -webkit-box-shadow .15s ease-out;
-  transition: border-color .15s ease-out, 
- color .25s ease-out, 
- background-color .15s ease-out,
- -webkit-box-shadow .15s ease-out;
-  transition: border-color .15s ease-out, 
- color .25s ease-out, 
- background-color .15s ease-out,
- box-shadow .15s ease-out;
-  transition: border-color .15s ease-out, 
- color .25s ease-out, 
- background-color .15s ease-out,
- box-shadow .15s ease-out, 
- -webkit-box-shadow .15s ease-out;
+  -webkit-transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, -webkit-box-shadow .15s ease-out;
+  transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, -webkit-box-shadow .15s ease-out;
+  transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out;
+  transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out,  -webkit-box-shadow .15s ease-out;
 }
 
 .form-radio-flex input + label img {

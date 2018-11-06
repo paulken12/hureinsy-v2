@@ -48,7 +48,7 @@
 									<td>{{empty($lists->company_id) ? '' : $lists->last_name .', '. $lists->first_name}}</td>
 									<td>{{$lists->contract->pluck('employment_status')->first()}}</td>
 									<td>{{$lists->contract->pluck('contract_start')->first()}}</td>
-									@if($lists->contract->pluck('contract_start')->first() <= date('Y-m-d', strtotime(date('Y-m-d'). ' - 6 months')) && $lists->contract->pluck('contract_start')->first() != date('0000-00-00'))
+									@if($lists->contract->pluck('contract_start')->first() <= date('Y-m-d', strtotime(date('Y-m-d'). ' - 6 months')) && $lists->contract->pluck('employment_status')->first() != 'resigned')
 										<td>
 											<a class="btn btn-primary btn-sm" href="{{route('paf.search.result.show', $lists->id)}}">Request a form</a>
 										</td>

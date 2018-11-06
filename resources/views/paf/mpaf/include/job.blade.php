@@ -25,8 +25,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" id="current_job_title" name="current_job_title" class="form-control" title="current_job_title" value="{{$employee_contract->master_job_title_id}}">
-			<p>{{empty($employee_contract->master_job_title_id) ? 'n/a' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
+			<input type="hidden" id="current_job_title" name="current_job_title" class="form-control" title="current_job_title" value="{{$employee_contract->job_id}}">
+			<p>{{$employee_contract->jobs->job_title}} {{$employee_contract->jobs->job_description}}</p>
 		</div>
 	</div>
 	<div class="col">
@@ -49,8 +49,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="{{$employee_contract->master_department_key}}">
-			<p>{{empty($employee_contract->master_department_key) ? 'n/a' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
+			<input type="hidden" id="current_department" name="current_department" class="form-control" title="Current_department" value="{{$employee_contract->jobs->master_department_key}}">
+			<p>{{$employee_contract->jobs->department->department}}</p>
 		</div>
 	</div>
 	<div class="col">

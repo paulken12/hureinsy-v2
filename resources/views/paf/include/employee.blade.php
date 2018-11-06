@@ -35,13 +35,13 @@
 	<div class="col">
 		<div class="form-group">
 			<label for="position"><strong>Position</strong></label>
-			<p>{{empty($employee_contract->master_job_title_id) ? '' : $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('job_titles')->first() .' - '. $jobTitles->where('id', $employee_contract->master_job_title_id)->pluck('description')->first()}}</p>
+			<p>{{$employee_contract->jobs->job_title}} {{$employee_contract->jobs->job_description}}</p>
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<label for="department"><strong>Department</strong></label>
-			<p>{{empty($employee_contract->master_department_key) ? '' : $department->where('key', $employee_contract->master_department_key)->pluck('department')->first()}}</p>
+			<p>{{$employee_contract->jobs->department->department}}</p>
 		</div>
 	</div>
 </div>

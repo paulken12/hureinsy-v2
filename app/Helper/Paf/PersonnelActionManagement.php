@@ -23,7 +23,7 @@ use App\Paf\PafCurrentSchedule;
 use App\Paf\PafCurrentCompensation;
 use App\Paf\PafHrAssessment;
 use App\Personnel\Info\EmpBasic;
-use App\Personnel\Info\EmpContract;
+use App\Personnel\Info\Contract;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 
@@ -37,7 +37,7 @@ class PersonnelActionManagement {
         return PafChangeJob::where('request_id', $paf_id)->first();
     }
 
-    public static function get_paf_schedule_detail($paf_id){
+    public static function get_paf_schedule_detail($paf_id){    
         return PafChangeSchedule::where('request_id', $paf_id)->first();
     }
 
@@ -66,7 +66,7 @@ class PersonnelActionManagement {
     }
 
     public static function get_employee_contract($user_id){
-        return EmpContract::where('emp_basic_id', $user_id)->first();
+        return Contract::where('emp_basic_id', $user_id)->first();
     }
 
     public static function call_user(){
@@ -114,7 +114,7 @@ class PersonnelActionManagement {
     }
 
     public static function call_contract(){
-        return EmpContract::all();
+        return Contract::all();
     }
 
     public static function call_paf(){

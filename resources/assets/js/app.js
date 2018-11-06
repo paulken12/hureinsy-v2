@@ -18,7 +18,6 @@ Vue.use(Toasted);
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('tab-profile', require('./components/TabProfile.vue'));
 Vue.component('action-management', require('./components/ActionManagement.vue'));
 Vue.component('employee-form', require('./components/EmployeeForm.vue'));
 Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
