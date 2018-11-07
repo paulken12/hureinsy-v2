@@ -64,7 +64,7 @@ class PersonnelActionManagement {
     public static function get_employee_info($user_id){
         return EmpBasic::where('id', $user_id)->first();
     }
-
+    
     public static function get_employee_contract($user_id){
         return Contract::where('emp_basic_id', $user_id)->first();
     }

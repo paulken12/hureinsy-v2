@@ -112,7 +112,7 @@
 	<div class="row alert alert-primary">
 		<div class="col-2">
 			<div class="form-group">
-				<label for="proposed_remarks_job_hr"><strong>HR Remarks</strong></label>
+				<label for="proposed_remarks_hr"><strong>HR Remarks</strong></label>
 			</div>
 		</div>
 		<div class="col">

@@ -15,6 +15,7 @@ use App\Events\NotifyAdminUpdate;
 use App\User;
 use App\Events\PafEvent;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Helper\Paf\PersonnelActionManagement;
 
 class Order{
     public $id;
@@ -29,7 +30,7 @@ Route::get('/', function () {
 });
 
 Route::get('/notif', function() {
-    PafEvent::dispatch(new PafEvent(1));
+    PafEvent::dispatch(PersonnelActionManagement::get_employee_info(1));
 });
 
 Route::get('/update',function(){

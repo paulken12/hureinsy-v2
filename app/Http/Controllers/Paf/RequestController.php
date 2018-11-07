@@ -59,6 +59,8 @@ class RequestController extends Controller
 
         $user = Auth::user()->basicInfo->pluck('id')->first();
 
+        $employee_contract = PersonnelActionManagement::get_employee_contract($form); 
+
         $request_id = PafManagement::create([
 
             'employee_company_id' => $form,
@@ -84,6 +86,10 @@ class RequestController extends Controller
         PafCurrentJob::create([
 
             'request_id' => $request_id->id,
+
+            'current_key_job_title' => $employee_contract->job_id,
+
+            'current_key_department' => $employee_contract->jobs->master_department_key,
 
         ]);
 
