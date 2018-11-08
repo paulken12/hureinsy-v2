@@ -26,17 +26,17 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->masterJobTitle->job_titles) ? 'n/a' : $get_current_job_details->masterJobTitle->job_titles .'-'. $get_current_job_details->masterJobTitle->description}}
+			{{empty($get_current_job_details->current_key_job_title) ? 'n/a' : $get_current_job_details->masterJobTitle->job_title .' '. $get_current_job_details->masterJobTitle->job_description}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<select name="proposed_position_title" id="proposed_position_title" class="form-control">
 				<option style="display:none" value="{{empty($get_job_details->proposed_key_job_title) ? '' : $get_job_details->proposed_key_job_title}}" selected>
-						{{empty($get_job_details->masterJobTitle->job_titles) ? '--select--' : $get_job_details->masterJobTitle->job_titles}} {{empty($get_job_details->masterJobTitle->description) ? '' : '('.$get_job_details->masterJobTitle->description.')'}}
+						{{empty($get_job_details->masterJobTitle->job_title) ? '--select--' : $get_job_details->masterJobTitle->job_title .' '. $get_job_details->masterJobTitle->job_description}}
 				</option>
 				@foreach ($jobTitles as $titles)
-					<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
+					<option value="{{$titles->id}}">{{$titles->job_title .' '. $titles->job_description}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -111,12 +111,18 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->current_key_project_assignment}}
+			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc .' '. $get_current_job_details->masterProjectAssignment->company->name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control" title="Proposed_project_assignment" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}">
+			<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
+				<option style="display:none" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}" selected>
+						{{empty($get_job_details->proposed_key_project_assignment) ? '--select--' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc .' '. $get_job_details->masterProjectAssignment->company->name}}
+				@foreach($proj_assignment as $project)
+					<option value="{{$project->id}}">{{$project->project_title}} {{$project->project_desc}} {{$project->company->name}}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 </div>

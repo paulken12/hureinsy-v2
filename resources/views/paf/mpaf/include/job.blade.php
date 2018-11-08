@@ -34,7 +34,7 @@
 			<select name="proposed_job_title" id="proposed_job_title" class="form-control">
 				<option value="" selected>--select--</option>
 				@foreach ($jobTitles as $titles)
-					<option value="{{$titles->id}}">{{$titles->job_titles}}({{$titles->description}})</option>
+					<option value="{{$titles->id}}">{{$titles->job_title}} {{$titles->job_description}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -86,7 +86,7 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="supervisor"><strong>Supervisor</strong></label>
+			<label for="supervisor"><strong>Reporting to</strong></label>
 		</div>
 	</div>
 	<div class="col">
@@ -99,7 +99,7 @@
 			<select name="proposed_supervisor" id="proposed_supervisor" class="form-control">
 				<option value="" selected>--select--</option>
 				@foreach($reportTo as $report)
-					@foreach ($report->roles->whereNotIn('id', '7') as $reports)
+					@foreach ($report->roles as $reports)
 						<option value="{{$report->id}}">{{$report->name}}</option>
 					@endforeach
 				@endforeach
@@ -116,12 +116,19 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control" title="current_project_assignment" value="default" readonly>
+			<input type="hidden" id="current_project_assignment" name="current_project_assignment" class="form-control" title="current_project_assignment" value="{{$employee_contract->job_id}}" readonly>
+			<p>{{$employee_contract->project()->project_title}} {{$employee_contract->project()->project_desc}} {{$employee_contract->project()->company->name}}</p>
+
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control" title="Proposed_project_assignment">
+			<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
+				<option value="" selected>--select--</option>
+				@foreach($proj_assignment as $project)
+					<option value="{{$project->id}}">{{$project->project_title}} {{$project->project_desc}} {{$project->company->name}}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 </div>

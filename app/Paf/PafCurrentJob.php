@@ -5,6 +5,8 @@ namespace App\Paf;
 use Illuminate\Database\Eloquent\Model;
 use App\Master\MasterDepartment;
 use App\Master\MasterJobTitle;
+use App\Contract\Job;
+use App\Contract\Project;
 use App\User;       
 
 class PafCurrentJob extends Model
@@ -26,6 +28,10 @@ class PafCurrentJob extends Model
     }
     public function masterJobTitle()
     {
-        return $this->belongsTo(MasterJobTitle::class, 'current_key_job_title');
-    }	
+        return $this->belongsTo(Job::class, 'current_key_job_title');
+    }
+    public function masterProjectAssignment()
+    {
+        return $this->belongsTo(Project::class, 'current_key_project_assignment');
+    }   
 }

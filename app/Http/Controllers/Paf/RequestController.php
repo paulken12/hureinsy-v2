@@ -40,6 +40,8 @@ class RequestController extends Controller
 
         $project_assignment = Cache::get('call_master_company');
 
+        $proj_assignment = Cache::get('call_master_project_assignment');
+
         $employment_status = Cache::get('call_contract_change');
 
         $sched_type = Cache::get('call_master_paf_schedule_type');
@@ -50,7 +52,7 @@ class RequestController extends Controller
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
-        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
+        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment'));
         
     }
 

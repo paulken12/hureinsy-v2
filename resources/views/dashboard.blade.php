@@ -138,7 +138,7 @@
                                                     <h6 style="font-size: small">Birthday</h6>
                                                 </div>
                                                 <div class="peer">
-                                                    <span class="badge badge-pill bgc-blue-50 c-deep-purple-700 ml-1">4</span>
+                                                    <span class="badge badge-pill bgc-blue-50 c-deep-purple-700 ml-1">{{$birthdays}}</span>
                                                 </div>
                                             </div>
                                             <div class="peers ai-c jc-sb">
@@ -163,7 +163,7 @@
                                                     <h6 style="font-size: small">End of Contract</h6>
                                                 </div>
                                                 <div class="peer">
-                                                    <span class="badge badge-pill bgc-red-50 c-deep-purple-700 ml-1">4</span>
+                                                    <span class="badge badge-pill bgc-red-50 c-deep-purple-700 ml-1">{{$end_of_contracts}}</span>
                                                 </div>
                                             </div>
                                         </div>

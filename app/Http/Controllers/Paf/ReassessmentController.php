@@ -35,6 +35,8 @@ class ReassessmentController extends Controller
         //Get Master details
         $reportTo = Cache::get('call_user');
 
+        $proj_assignment = Cache::get('call_master_project_assignment');
+
         $jobTitles = Cache::get('call_master_job_title');
 
         $department = Cache::get('call_master_department');
@@ -68,7 +70,7 @@ class ReassessmentController extends Controller
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment'));
 		}else{
     	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
         }

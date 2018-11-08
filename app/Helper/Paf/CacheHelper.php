@@ -17,7 +17,7 @@ class CacheHelper{
 
                 Cache::forever('call_master_job_title', PersonnelActionManagement::call_master_job_title());
 
-                Cache::forever('call_master_job_title', PersonnelActionManagement::call_master_job_title());
+                Cache::forever('call_master_project_assignment', PersonnelActionManagement::call_master_project_assignment());
 
                 Cache::forever('call_master_department', PersonnelActionManagement::call_master_department());
                 

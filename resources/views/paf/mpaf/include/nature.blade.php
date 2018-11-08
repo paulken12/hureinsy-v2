@@ -5,7 +5,7 @@
 	<div class="col">
 		<div class="form-group">
 			<label for="employment_status"><strong>Employment Status</strong></label>
-			<select name="employment_status" id="employment_status" class="form-control" required>
+			<select name="employment_status" id="employment_status" class="form-control">
 				<option value="" >--select--</option>
 				@foreach ($employment_status as $employment)
 					<option value="{{$employment->key}}">{{$employment->change_type}}</option>

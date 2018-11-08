@@ -5,8 +5,9 @@ namespace App\Helper\Paf;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Contract\Job;
+use App\Contract\Project;
 use App\Master\MasterCompany;
-use App\Master\MasterJobTitle;
 use App\Master\MasterDepartment;
 use App\Master\MasterContractChangePaf;
 use App\Master\MasterScheduleTypePaf;
@@ -82,7 +83,11 @@ class PersonnelActionManagement {
     }
 
     public static function call_master_job_title(){
-    	return MasterJobTitle::all();
+        return Job::all();
+    }
+
+    public static function call_master_project_assignment(){
+        return Project::all();
     }
 
     public static function call_master_department(){

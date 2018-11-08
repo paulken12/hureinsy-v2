@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpContract;
+use App\Personnel\Info\EmpBasic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +32,10 @@ class DashboardController extends Controller
         $resigned_employees = EmpContract::resignedEmp();
         $project_employees = EmpContract::projectBasedEmp();
 
-        return view('dashboard',compact('regular_employees','active_employees','resigned_employees','project_employees'));
+        $end_of_contracts = Contract::whereDate('contract_end', date('Y-m-d'))->count();    
+        $birthdays = EmpBasic::whereMonth('date_of_birth', date('m'))->whereDay('date_of_birth', date('d'))->count();
+
+
+        return view('dashboard',compact('regular_employees','active_employees','resigned_employees','project_employees','end_of_contracts','birthdays'));
     }
 }
