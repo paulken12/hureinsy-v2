@@ -26,7 +26,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_job_title) ? 'n/a' : $get_current_job_details->masterJobTitle->job_title .' '. $get_current_job_details->masterJobTitle->job_description}}		</div>
+			{{empty($get_current_job_details->current_key_job_title) ? 'n/a' : $get_current_job_details->masterJobTitle->job_title .' '. $get_current_job_details->masterJobTitle->job_description}}</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
@@ -102,7 +102,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{$get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc .' '. $get_job_details->masterProjectAssignment->company->name}}
+			{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc .' '. $get_job_details->masterProjectAssignment->company->name}}
 		</div>
 	</div>
 </div>
