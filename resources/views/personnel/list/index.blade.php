@@ -25,7 +25,7 @@
                     </tfoot>
                     <tbody>
                     @foreach ($employees as $employee)
-                        @if($employee->isVerified($employee))
+                        @if($employee->user->verified)
                             <tr>
                                 <td class="text-center">
                                     <img class="bdrs-50p w-3r h-3r" alt="User Avatar"

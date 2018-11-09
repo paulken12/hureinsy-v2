@@ -30427,7 +30427,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(140);
-module.exports = __webpack_require__(206);
+module.exports = __webpack_require__(209);
 
 
 /***/ }),
@@ -30459,6 +30459,7 @@ Vue.component('personnel-form', __webpack_require__(194));
 Vue.component('import-raw', __webpack_require__(201));
 Vue.component('employee-profile', __webpack_require__(204));
 Vue.component('address-form', __webpack_require__(138));
+Vue.component('make-paf', __webpack_require__(206));
 
 var app = new Vue({
     el: '#app',
@@ -30481,7 +30482,10 @@ var app = new Vue({
             add_barangay: [],
             add_city: [],
             add_province: [],
-            add_zip_code: []
+            add_zip_code: [],
+
+            emp_name: '',
+            emp_id: ''
         };
     },
 
@@ -30561,6 +30565,11 @@ var app = new Vue({
                 empObjective: this.empObjective
             });
             this.editObjective = false;
+        },
+        modalShow: function modalShow(lists) {
+            $("#request-modal").modal('show');
+            this.emp_name = lists.first_name;
+            this.emp_id = lists.company_id;
         }
     }
 });
@@ -100857,6 +100866,206 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(207)
+/* template */
+var __vue_template__ = __webpack_require__(208)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\MakePaf.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-353acf20", Component.options)
+  } else {
+    hotAPI.reload("data-v-353acf20", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 207 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['emp_info'],
+
+	data: function data() {
+		return {
+			empl_name: '',
+			empl_id: ''
+
+		};
+	},
+
+	methods: {
+		PafRequested: function PafRequested(emp_info) {
+			this.empl_name = empl_info.first_name;
+			this.empl_id = empl_info.company_id;
+			$("#request-modal").modal('show');
+		}
+	}
+});
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "modal fade", attrs: { id: "request-modal" } }, [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("p", [_vm._v("Name: " + _vm._s(_vm.emp_name))]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Description: " + _vm._s(_vm.emp_id))])
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary btn-sm",
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              _vm.PafRequested(_vm.emp_info)
+            }
+          }
+        },
+        [_vm._v("ww")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Paf Request")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Save changes")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-353acf20", module.exports)
+  }
+}
+
+/***/ }),
+/* 209 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

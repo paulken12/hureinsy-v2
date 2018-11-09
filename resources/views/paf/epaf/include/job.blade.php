@@ -79,7 +79,7 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="reportto"><strong>Supervisor</strong></label>
+			<label for="reportto"><strong>Reporting to</strong></label>
 		</div>
 	</div>
 	<div class="col">

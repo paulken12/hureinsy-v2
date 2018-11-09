@@ -91,7 +91,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="default" readonly>
+			<input type="hidden" id="current_supervisor" name="current_supervisor" class="form-control" title="current_supervisor" value="{{$employee_name->reportingTo()}}" readonly>
+			{{$employee_name->reportingTo()}}
 		</div>
 	</div>
 	<div class="col">
@@ -99,8 +100,8 @@
 			<select name="proposed_supervisor" id="proposed_supervisor" class="form-control">
 				<option value="" selected>--select--</option>
 				@foreach($reportTo as $report)
-					@foreach ($report->roles as $reports)
-						<option value="{{$report->id}}">{{$report->name}}</option>
+					@foreach ($report->roles->whereNotIn('name', 'employee') as $reports)
+						<option value="{{$report->name}}">{{$report->name}} - {{$reports->display_name}}</option>
 					@endforeach
 				@endforeach
 			</select>

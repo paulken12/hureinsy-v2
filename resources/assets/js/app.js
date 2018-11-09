@@ -24,6 +24,7 @@ Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
 Vue.component('import-raw', require('./components/ImportRaw.vue'));
 Vue.component('employee-profile', require('./components/EmployeeProfile.vue'));
 Vue.component('address-form', require('./components/AddressForm.vue'));
+Vue.component('make-paf', require('./components/MakePaf.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -48,6 +49,9 @@ const app = new Vue({
             add_city: [],
             add_province: [],
             add_zip_code: [],
+
+            emp_name: '',
+            emp_id: '',
         }
     },
 
@@ -153,6 +157,12 @@ const app = new Vue({
                 empObjective: this.empObjective
             });
             this.editObjective = false;
+        },
+
+        modalShow(lists){
+            $("#request-modal").modal('show');
+            this.emp_name = lists.first_name;
+            this.emp_id = lists.company_id;
         }
     }
 });
