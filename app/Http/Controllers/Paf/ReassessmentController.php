@@ -33,7 +33,7 @@ class ReassessmentController extends Controller
         $get_sub_status =$user_log->sub_status;
 
         //Get Master details
-        $reportTo = Cache::get('call_user');
+        $reportingTo = Cache::get('call_emp_info');
 
         $proj_assignment = Cache::get('call_master_project_assignment');
 
@@ -46,6 +46,8 @@ class ReassessmentController extends Controller
         $project_assignment = Cache::get('call_master_company');
 
         $employment_status = Cache::get('call_contract_change');
+
+        $teams = Cache::get('call_team');
 
         //Get paf details
         $get_paf_details = PersonnelActionManagement::get_paf_request($form);
@@ -69,10 +71,12 @@ class ReassessmentController extends Controller
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
+        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
+
         if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment'));
+    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment', 'teams', 'employee_team'));
 		}else{
-    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
         }
     }
 
@@ -95,6 +99,7 @@ class ReassessmentController extends Controller
             'proposed_benefits' => 'nullable|string|max:191',
             'request_status' => 'exists:statuses,id|required',
             'sub_request_status' => 'exists:sub_statuses,id|required',
+            'date_effective' => 'required', 
        ]);
 
         $form_update = PersonnelActionManagement::get_paf_request($form);  
@@ -107,6 +112,8 @@ class ReassessmentController extends Controller
 
         $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
+        $form_update->date_effective =$request->input('date_effective');
+        
         $form_update->save();
 
         $job_update = PersonnelActionManagement::get_paf_job_detail($form); 

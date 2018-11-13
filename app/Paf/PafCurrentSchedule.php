@@ -4,7 +4,7 @@ namespace App\Paf;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Master\MasterScheduleTypePaf;
-use App\Master\MasterCompany;
+use App\Contract\Project;
 
 class PafCurrentSchedule extends Model
 {
@@ -19,8 +19,8 @@ class PafCurrentSchedule extends Model
  	{
         return $this->belongsTo(MasterScheduleTypePaf::class, 'current_key_schedule');
     }
-    public function masterCompany()
+    public function masterProjectAssignment()
     {
-        return $this->belongsTo(MasterCompany::class, 'current_key_work_location');
+        return $this->belongsTo(Project::class, 'current_key_work_location');
     }
 }

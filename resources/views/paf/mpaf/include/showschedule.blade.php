@@ -26,7 +26,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_schedule) ? '' : $get_current_schedule_details->current_key_schedule}}
+			{{empty($get_current_schedule_details->current_key_schedule) ? 'n/a' : $get_current_schedule_details->current_key_schedule}}
 		</div>
 	</div>
 	<div class="col">
@@ -44,7 +44,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? '' : $get_current_schedule_details->masterCompany->name}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->company->name}}
 		</div>
 	</div>
 	<div class="col">

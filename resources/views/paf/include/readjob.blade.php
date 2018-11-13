@@ -30,7 +30,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{$get_job_details->masterJobTitle->job_title .' '. $get_job_details->masterJobTitle->job_description}}
+			{{empty($get_job_details->proposed_key_job_title) ? 'n/a' : $get_job_details->masterJobTitle->job_title .' '. $get_job_details->masterJobTitle->job_description}}
 		</div>
 	</div>
 </div>
@@ -43,12 +43,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->masterDepartment->department) ? '' : $get_current_job_details->masterDepartment->department}}
+			{{empty($get_current_job_details->masterDepartment->department) ? 'n/a' : $get_current_job_details->masterDepartment->department}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{$get_job_details->masterDepartment->department}}
+			{{empty($get_job_details->masterDepartment->department) ? 'n/a' : $get_job_details->masterDepartment->department}}
 		</div>
 	</div>
 </div>
@@ -61,12 +61,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->current_key_team}}
+			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->display_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}
+			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->empTeam->display_name}}
 		</div>
 	</div>
 </div>
@@ -79,12 +79,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->current_key_supervisor}}
+			{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->empBasic->last_name .', '. $get_current_job_details->empBasic->first_name .' - '. $get_current_job_details->user->roles->pluck('display_name')->first()}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->proposed_key_supervisor) ? '' : $get_job_details->proposed_key_supervisor}}
+			{{empty($get_job_details->proposed_key_supervisor) ? 'n/a' : $get_job_details->empBasic->last_name .', '. $get_job_details->empBasic->first_name .' - '. $get_job_details->user->roles->pluck('display_name')->first()}}
 		</div>
 	</div>
 </div>
@@ -97,12 +97,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc .' '. $get_current_job_details->masterProjectAssignment->company->name}}
+			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc .' '. $get_job_details->masterProjectAssignment->company->name}}
+			{{empty($get_job_details->proposed_key_project_assignment) ? 'n/a' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc}}
 		</div>
 	</div>
 </div>

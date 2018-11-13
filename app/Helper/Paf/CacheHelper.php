@@ -39,6 +39,8 @@ class CacheHelper{
 
                 Cache::forever('call_paf', PersonnelActionManagement::call_paf());
 
+                Cache::forever('call_team', PersonnelActionManagement::call_team());
+
 	}
 
 }

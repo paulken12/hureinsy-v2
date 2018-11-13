@@ -15,6 +15,7 @@ class CreatePafManagementsTable extends Migration
     {
         Schema::create('paf_managements', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('rq_id')->default(200);
             $table->integer('employee_company_id');
             $table->string('master_key_employment_status');
             $table->string('requested_by_company_id');

@@ -13,11 +13,16 @@
 				<option v-for="subcategory in subcategories" v-bind:value="subcategory.id" v-if="subcategory.master_id_status == Categories">{{ subcategory.sub_request_status }} - {{ subcategory.description }}</option>
 			</select>
 		</div>
-		<div class="row" v-if="Categories == '2' && SubCategories == '4' || SubCategories == '6'">
+		<div class="row" v-if="SubCategories == 5">
 			<div class="col-2">
 				<div class="form-group">
 					<label for="proposed_effective_date"><strong>Date Effective</strong></label>
 					<input type="date" id="date_effective" name="date_effective" class="form-control" title="Date_effective" required>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<small>*you can change the proposed date effective here(not required)</small>
 				</div>
 			</div>
 		</div>

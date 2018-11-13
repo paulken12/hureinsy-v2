@@ -55,9 +55,6 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<label for="date_effective"><strong>Date Effective:</strong></label>
-			&nbsp;
-			{{empty($get_paf_details->date_effective) ? '' : $get_paf_details->date_effective}}
 		</div>
 	</div>
 </div>

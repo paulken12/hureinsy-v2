@@ -59,9 +59,9 @@
 					</tfoot>
 					<tbody>
 						@foreach ($requestList as $lists)
-							@if($lists->masterPafSubStatus->id == 4 || $lists->masterPafSubStatus->id == 6)
+							@if($lists->masterPafSubStatus->id == 5)
 								<tr>
-									<th class="text-center">{{empty($lists->id) ? '' : $lists->id}}</th>
+									<th class="text-center">{{empty($lists->rq_id) ? '' : $lists->rq_id}}</th>
 									<td>{{empty($lists->employee_company_id) ? '' : '('. $lists->empBasicInfo->company_id .') '. $lists->empBasicInfo->last_name .', '. $lists->empBasicInfo->first_name}}
 									</td>
 									<td>{{empty($lists->contractChange->change_type) ? '' : $lists->contractChange->change_type}}</td>

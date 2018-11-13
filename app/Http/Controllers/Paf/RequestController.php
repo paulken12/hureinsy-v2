@@ -36,6 +36,8 @@ class RequestController extends Controller
 
         $jobTitles = Cache::get('call_master_job_title');
 
+        $teams = Cache::get('call_team');
+
         $department = Cache::get('call_master_department');
 
         $project_assignment = Cache::get('call_master_company');
@@ -46,22 +48,24 @@ class RequestController extends Controller
 
         $sched_type = Cache::get('call_master_paf_schedule_type');
 
-        $reportTo = Cache::get('call_user');
+        $reportingTo = Cache::get('call_emp_info');
 
         $employee_name = Cache::get('get_employee_info');  
 
+        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam()); 
+
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
-        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment'));
+        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo'));
         
     }
 
     public function create($form)
     {
 
-        $user = Auth::user()->basicInfo->pluck('id')->first();
+        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($form));   
 
-        $employee_contract = PersonnelActionManagement::get_employee_contract($form); 
+        $user = Auth::user()->basicInfo->pluck('id')->first();
 
         $request_id = PafManagement::create([
 
@@ -88,10 +92,6 @@ class RequestController extends Controller
         PafCurrentJob::create([
 
             'request_id' => $request_id->id,
-
-            'current_key_job_title' => $employee_contract->job_id,
-
-            'current_key_department' => $employee_contract->jobs->master_department_key,
 
         ]);
 
@@ -126,6 +126,10 @@ class RequestController extends Controller
 
         ]);
 
+        $request_id->rq_id = $request_id->scopeLastId();
+
+        $request_id->save();
+
         return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
 
 
@@ -147,6 +151,7 @@ class RequestController extends Controller
             'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
+            'date_effective' => 'required',
         ]);
 
         $user = Auth::user()->basicInfo->pluck('id')->first();
@@ -166,6 +171,8 @@ class RequestController extends Controller
             'master_id_request_status' => '1',
 
             'master_id_sub_request_status' => '1',
+
+            'date_effective' => $request->input('date_effective'),
 
         ]);
 
@@ -250,6 +257,10 @@ class RequestController extends Controller
             'request_id' => $request_id->id,
 
         ]);
+
+        $request_id->rq_id = $request_id->scopeLastId();
+
+        $request_id->save();
 
         return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
     }

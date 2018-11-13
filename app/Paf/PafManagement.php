@@ -68,4 +68,11 @@ class PafManagement extends Model
     {
         return $this->belongsTo(MasterContractChangePaf::class, 'master_key_employment_status');
     }
+
+    public function scopeLastId() {
+
+        $req_id = PafManagement::orderBy('rq_id','desc')->first();
+        return $req_id->rq_id + 1;
+    
+    }
 }

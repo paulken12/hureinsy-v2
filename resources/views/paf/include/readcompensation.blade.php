@@ -26,12 +26,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_compensation_details->current_key_job_grade) ? '' : $get_current_compensation_details->current_key_job_grade}}
+			{{empty($get_current_compensation_details->current_key_job_grade) ? 'n/a' : $get_current_compensation_details->current_key_job_grade}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_key_job_grade) ? '' : $get_compensation_details->proposed_key_job_grade}}</p>
+			<p>{{empty($get_compensation_details->proposed_key_job_grade) ? 'n/a' : $get_compensation_details->proposed_key_job_grade}}</p>
 		</div>
 	</div>
 </div>
@@ -44,12 +44,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_compensation_details->current_base_salary) ? '' : $get_current_compensation_details->current_base_salary}}
+			{{empty($get_current_compensation_details->current_base_salary) ? 'n/a' : $get_current_compensation_details->current_base_salary}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_base_salary) ? '' : $get_compensation_details->proposed_base_salary}}</p>
+			<p>{{empty($get_compensation_details->proposed_base_salary) ? 'n/a' : $get_compensation_details->proposed_base_salary}}</p>
 		</div>
 	</div>
 </div>
@@ -62,12 +62,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_compensation_details->current_bonus_allowance) ? '' : $get_current_compensation_details->current_bonus_allowance}}
+			{{empty($get_current_compensation_details->current_bonus_allowance) ? 'n/a' : $get_current_compensation_details->current_bonus_allowance}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_bonus_allowance) ? '' : $get_compensation_details->proposed_bonus_allowance}}</p>
+			<p>{{empty($get_compensation_details->proposed_bonus_allowance) ? 'n/a' : $get_compensation_details->proposed_bonus_allowance}}</p>
 		</div>
 	</div>
 </div>
@@ -80,12 +80,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_compensation_details->current_benefits) ? '' : $get_current_compensation_details->current_benefits}}
+			{{empty($get_current_compensation_details->current_benefits) ? 'n/a' : $get_current_compensation_details->current_benefits}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_benefits) ? '' : $get_compensation_details->proposed_benefits}}</p>
+			<p>{{empty($get_compensation_details->proposed_benefits) ? 'n/a' : $get_compensation_details->proposed_benefits}}</p>
 		</div>
 	</div>
 </div>

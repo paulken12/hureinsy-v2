@@ -93042,6 +93042,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -93168,9 +93173,8 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    (_vm.Categories == "2" && _vm.SubCategories == "4") ||
-    _vm.SubCategories == "6"
-      ? _c("div", { staticClass: "row" }, [_vm._m(0)])
+    _vm.SubCategories == 5
+      ? _c("div", { staticClass: "row" }, [_vm._m(0), _vm._v(" "), _vm._m(1)])
       : _vm._e()
   ])
 }
@@ -93195,6 +93199,20 @@ var staticRenderFns = [
             required: ""
           }
         })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("small", [
+          _vm._v(
+            "*you can change the proposed date effective here(not required)"
+          )
+        ])
       ])
     ])
   }

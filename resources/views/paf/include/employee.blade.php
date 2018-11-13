@@ -26,7 +26,7 @@
 	<div class="col">
 		<div class="form-group">
 			<label for="team"><strong>Team</strong></label>
-			<p></p>
+			<p>{{$employee_team->display_name}}</p>
 		</div>
 	</div>
 </div>

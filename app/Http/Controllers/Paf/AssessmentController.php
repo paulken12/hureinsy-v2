@@ -17,7 +17,7 @@ class AssessmentController extends Controller
     public function list($month, $year)
     {
 
-        Cache::forever('call_paf_lists_hr', PersonnelActionManagement::call_paf_lists($month, $year));
+        Cache::forever('call_paf_lists_hr', PersonnelActionManagement::call_paf_lists_hr($month, $year));
 
         $requestList = Cache::get('call_paf_lists_hr');       
 
@@ -78,6 +78,8 @@ class AssessmentController extends Controller
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
+        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
+
         //Get Statuses
         $request_status = $user_role->status;
 
@@ -85,11 +87,11 @@ class AssessmentController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '1'){
 
-            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proficiency', 'behaviour', 'evaluation', 'overall'));
+            return view('paf.hpaf.pending', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proficiency', 'behaviour', 'evaluation', 'overall', 'employee_team'));
 
         }else{
 
-            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.hpaf.readpending',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
         }
 
     }

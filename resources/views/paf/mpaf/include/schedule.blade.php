@@ -44,8 +44,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->master_company_key}}">
-			<p>{{empty($employee_contract->master_company_key) ? 'n/a' : $project_assignment->where('key', $employee_contract->master_company_key)->pluck('name')->first() .' - '. $project_assignment->where('key', $employee_contract->master_company_key)->pluck('address')->first()}}</p>
+			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->job_id}}">
+			<p>{{$employee_contract->project()->company->name}}</p>
 		</div>
 	</div>
 	<div class="col">

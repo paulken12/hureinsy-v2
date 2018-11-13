@@ -24,6 +24,8 @@
 
 						<a class="nav-item nav-link" id="nav-sched-tab" data-toggle="tab" href="#nav-sched" role="tab" aria-controls="nav-sched" aria-selected="false">Change in Work Schedule Details</a>
 
+						<a class="nav-item nav-link" id="nav-compe-tab" data-toggle="tab" href="#nav-compe" role="tab" aria-controls="nav-compe" aria-selected="false">Change in Compensation and Benefit Details</a>
+
 					</div>
 
 					<div class="tab-content" id="nav-tabContent">
@@ -47,6 +49,12 @@
 							</div>
 							
 							<div class="tab-pane fade" id="nav-sched" role="tabpanel" aria-labelledby="nav-sched-tab">
+								<div class="card-body">
+									@include('paf.include.readschedule')
+								</div>
+							</div>
+							
+							<div class="tab-pane fade" id="nav-compe" role="tabpanel" aria-labelledby="nav-compe-tab">
 								<div class="card-body">
 									@include('paf.include.readschedule')
 								</div>

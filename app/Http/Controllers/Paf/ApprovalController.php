@@ -57,6 +57,8 @@ class ApprovalController extends Controller
         
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
+        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
+
         //Get Status details.
         $user_role= Auth::user()->roles->first();
 
@@ -66,11 +68,11 @@ class ApprovalController extends Controller
 
         if($get_paf_details->masterPafSubStatus->id == '2'){
 
-            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.epaf.approval', compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
 
         }else{
 
-            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'employee_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details'));
+            return view('paf.epaf.readapproval',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'employee_name', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
         }
 
     }
@@ -98,9 +100,11 @@ class ApprovalController extends Controller
 
         $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
-        $form_update->approved_by_company_id = EmpBasic::where('user_id', Auth::user()->id)->first()->company_id;
+        $form_update->approved_by_company_id = EmpBasic::where('user_id', Auth::user()->id)->first()->id;
 
-        $form_update->date_effective =$request->input('date_effective');
+        if($request->input('sub_request_status') == '5'){
+            $form_update->date_effective =$request->input('date_effective');
+        }
 
         $form_update->save();
 

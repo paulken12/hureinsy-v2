@@ -26,12 +26,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_schedule) ? '' : $get_current_schedule_details->current_key_schedule}}
+			{{empty($get_current_schedule_details->current_key_schedule) ? 'n/a' : $get_current_schedule_details->current_key_schedule}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_schedule" name="proposed_schedule" class="form-control-plaintext" title="Proposed_schedule" value="{{empty($get_schedule_details->proposed_key_schedule) ? '' : $get_schedule_details->proposed_key_schedule}}" readonly>
+			<input type="hidden" name="proposed_schedule" value="{{empty($get_schedule_details->proposed_key_schedule) ? '' : $get_schedule_details->proposed_key_schedule}}" readonly>
+			{{empty($get_schedule_details->proposed_key_schedule) ? 'n/a' : $get_schedule_details->proposed_key_schedule}}
 		</div>
 	</div>
 </div>
@@ -44,12 +45,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? '' : $get_current_schedule_details->current_key_work_location}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->company->name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control-plaintext" title="Proposed_work_location" value="{{empty($get_schedule_details->masterCompany->name) ? '' : $get_schedule_details->masterCompany->name}}" readonly>
+			<input type="hidden" name="proposed_work_location" value="{{empty($get_schedule_details->masterCompany->name) ? '' : $get_schedule_details->masterCompany->name}}" readonly>
+			{{empty($get_schedule_details->masterCompany->name) ? 'n/a' : $get_schedule_details->masterCompany->name}}
 		</div>
 	</div>
 </div>

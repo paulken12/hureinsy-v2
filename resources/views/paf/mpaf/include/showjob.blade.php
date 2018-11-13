@@ -75,12 +75,17 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->current_key_team}}
+			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->display_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_team" name="proposed_team" class="form-control" title="Proposed_team" value="{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}">
+			<select name="proposed_team" id="proposed_team" class="form-control">
+				<option style="display:none" value="{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}" selected>{{ empty($get_job_details->proposed_key_team) ? '--select--' :$get_job_details->empTeam->display_name}}
+				@foreach($teams as $team)
+					<option value="{{$team->id}}">{{$team->display_name}}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 </div>
@@ -93,17 +98,16 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->current_key_supervisor}}
+			{{empty($get_current_job_details->current_key_supervisor) ? 'n/a' : $get_current_job_details->empBasic->last_name .', '. $get_current_job_details->empBasic->first_name .' - '. $get_current_job_details->user->roles->pluck('display_name')->first()}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<select name="proposed_supervisor" id="proposed_supervisor" class="form-control">
-				<option style="display:none" value="{{empty($get_job_details->proposed_key_supervisor) ? '--select--' : $get_job_details->proposed_key_supervisor}}" selected>
-				<option value="">--select--</option>
-				@foreach($reportTo as $report)
-					@foreach ($report->roles->whereNotIn('name', 'employee') as $reports)
-						<option value="{{$report->name}}">{{$report->name}} - {{$reports->display_name}}</option>
+				<option style="display:none" value="{{empty($get_job_details->proposed_key_supervisor) ? '' : $get_job_details->proposed_key_supervisor}}" selected>{{ empty($get_job_details->proposed_key_supervisor) ? '--select--' :$get_job_details->empBasic->last_name .', '. $get_job_details->empBasic->first_name .' - '. $get_job_details->user->roles->pluck('display_name')->first()}}
+				@foreach($reportingTo->sortBy('last_name') as $report)
+					@foreach ($report->user->roles->whereNotIn('name', 'employee') as $reports)
+						<option value="{{$report->id}}">{{$report->last_name}}, {{$report->first_name}} - {{$reports->display_name}}</option>
 					@endforeach
 				@endforeach
 			</select>
@@ -119,16 +123,16 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc .' '. $get_current_job_details->masterProjectAssignment->company->name}}
+			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
 				<option style="display:none" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}" selected>
-						{{empty($get_job_details->proposed_key_project_assignment) ? '--select--' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc .' '. $get_job_details->masterProjectAssignment->company->name}}
+						{{empty($get_job_details->proposed_key_project_assignment) ? '--select--' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc}}
 				@foreach($proj_assignment as $project)
-					<option value="{{$project->id}}">{{$project->project_title}} {{$project->project_desc}} {{$project->company->name}}</option>
+					<option value="{{$project->id}}">{{$project->project_title}} {{$project->project_desc}}</option>
 				@endforeach
 			</select>
 		</div>

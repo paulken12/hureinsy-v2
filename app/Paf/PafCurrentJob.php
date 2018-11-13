@@ -7,7 +7,9 @@ use App\Master\MasterDepartment;
 use App\Master\MasterJobTitle;
 use App\Contract\Job;
 use App\Contract\Project;
-use App\User;       
+use App\Personnel\Info\EmpBasic;
+use App\User;
+use App\Team;
 
 class PafCurrentJob extends Model
 {
@@ -22,9 +24,13 @@ class PafCurrentJob extends Model
     {
         return $this->belongsTo(MasterDepartment::class, 'current_key_department');
     } 
-    public function user() 
+    public function empBasic() 
     {
-        return $this->belongsTo(User::class,'current_key_supervisor');
+        return $this->belongsTo(EmpBasic::class,'current_key_supervisor');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'current_key_supervisor');
     }
     public function masterJobTitle()
     {
@@ -33,5 +39,9 @@ class PafCurrentJob extends Model
     public function masterProjectAssignment()
     {
         return $this->belongsTo(Project::class, 'current_key_project_assignment');
+    }   
+    public function empTeam()
+    {
+        return $this->belongsTo(Team::class, 'current_key_team');
     }   
 }

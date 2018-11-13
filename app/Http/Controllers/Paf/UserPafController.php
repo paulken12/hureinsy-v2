@@ -55,6 +55,8 @@ class UserPafController extends Controller
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
         
+        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
+
         //Get Status details.
         $user_role= Auth::user()->roles->first();
 
@@ -62,7 +64,7 @@ class UserPafController extends Controller
 
         $sub_request_status = $user_role->sub_status;
 
-            return view('paf.upaf.readpaf',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details'));
+            return view('paf.upaf.readpaf',compact('jobTitles', 'department', 'project_assignment', 'employee_contract', 'form', 'employee_name', 'get_job_details', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'employee_team'));
         }
 
     public function store($form){
