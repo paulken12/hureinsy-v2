@@ -7,17 +7,21 @@ use App\Master\MasterEducationType;
 use App\Personnel\Info\EmpAddress;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpContract;
+use App\Personnel\Info\EmpExperience;
+use App\Personnel\Info\EmpReference;
+use App\Personnel\Info\EmpSkill;
 use function Complex\add;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
 
     public function show(EmpBasic $profile)
     {
+        $isOwner = Auth::user()->can('update-basic') ? 'true' : 'false';
 
-        $isOwner = $this->authorize('view', $profile->user) ? 'true' : 'false';
         $blood = MasterBloodType::all();
         $education_type= MasterEducationType::all();
 
@@ -148,4 +152,106 @@ class ProfileController extends Controller
         }
 
     }
+
+    public function updateExperience(Request $request, EmpBasic $profile) {
+
+        $experience = $request->validate([
+            'exp_id' => 'required',
+            'exp_position' => 'nullable',
+            'exp_company_name' => 'nullable',
+            'exp_company_address' => 'nullable',
+            'exp_date_from' => 'nullable',
+            'exp_date_to' => 'nullable',
+            'exp_industry' => 'nullable',
+            'exp_salary' => 'nullable',
+            'responsibilities' => 'nullable',
+        ]);
+
+
+        for($i=0; $i < count($experience['exp_id']); ++$i ) {
+            EmpExperience::updateOrCreate([
+                'id'=>$experience['exp_id'][$i],
+                'emp_basic_id' => $profile->id,
+            ],[
+                'master_job_title_key' => $experience['exp_position'][$i],
+                'company_name' => $experience['exp_company_name'][$i],
+                'company_address' =>$experience['exp_company_address'][$i],
+                'date_from' => $experience['exp_date_from'][$i],
+                'date_to' => $experience['exp_date_to'][$i],
+                'industry' => $experience['exp_industry'][$i],
+                'salary' => $experience['exp_salary'][$i],
+                'responsibilities' => $experience['responsibilities'][$i],
+            ]);
+        }
+
+        $exp = $profile->experience;
+
+        return response()->json(['data' =>$exp],200);
+    }
+
+    public function deleteExperience(EmpExperience $id) {
+        $id->delete();
+    }
+
+    public function updateReference(Request $request, EmpBasic $profile) {
+        $ref = $request->validate([
+            'ref_id'                 => 'required',
+            'ref_job_title'          => 'nullable',
+            'ref_first_name'         => 'nullable',
+            'ref_last_name'          => 'nullable',
+            'ref_middle_name'        => 'nullable',
+            'ref_company_name'       => 'nullable',
+            'ref_company_address'    => 'nullable',
+            'ref_contact_num'        => 'nullable',
+        ]);
+
+        for($i=0; $i < count($ref['ref_job_title']); ++$i ) {
+            EmpReference::updateOrCreate([
+                'id'=>$ref['ref_id'][$i],
+                'emp_basic_id' => $profile->id,
+            ],[
+                'job_title'=> $ref['ref_job_title'][$i],
+                'first_name'=> $ref['ref_first_name'][$i],
+                'last_name'=> $ref['ref_last_name'][$i],
+                'middle_name'=> $ref['ref_middle_name'][$i],
+                'company_name'=> $ref['ref_company_name'][$i],
+                'company_address'=> $ref['ref_company_address'][$i],
+                'contact_num'=> $ref['ref_contact_num'][$i],
+            ]);
+        }
+
+        $ref = $profile->reference;
+
+        return response()->json(['data' =>$ref],200);
+    }
+
+    public function updateObjective(Request $request, EmpBasic $profile) {
+        $skill = $request->validate([
+            'user_obj'=>'nullable'
+        ]);
+        foreach ($profile->skill as $skills) {
+            $skills->objective = $skill['user_obj'];
+            $skills->update();
+        }
+    }
+
+    public function deleteReference(EmpReference $id) {
+        $id->delete();
+    }
+
+    public function avatar()
+    {
+        request()->validate([
+            'avatar' => 'required|image'
+        ]);
+
+        auth()->user()->update([
+            'avatar_path' => request()->file('avatar')->store('avatars', 'public')
+        ]);
+
+        return response([], 204);
+    }
+
+
+
 }

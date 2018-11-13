@@ -35,9 +35,9 @@
                                     <div class="col-sm-2">
                                         <div class="picture-container">
                                             <div class="picture">
-                                                <img src="../../../../public/images/guest.png" class="picture-src"
-                                                     id="wizardPicturePreview" title=""/>
-                                                <input type="file" id="wizard-picture">
+                                                <img src="../../../../public/storage/avatars/guest.png" class="picture-src"
+                                                     title="" :src="avatar" id="avatar"/>
+                                                <input type="file" id="wizard-picture" accept="image/*" @change="image">
                                             </div>
                                             <h6>Choose Picture</h6>
                                         </div>
@@ -193,6 +193,57 @@
                                             <label for="email" class="sr-only">Email</label>
                                             <input type="text" id="email" v-model="form.email" class="form-control"
                                                    title="Email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <h4 class="info-text">Emergency contact</h4>
+
+                                <div class="form-row">
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="eme_first_name">First name</label>
+                                            <input type="text" id="eme_first_name" name="eme_first_name" v-model="form.eme_first_name"
+                                                   class="form-control" title="First name"
+                                                   placeholder="First name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="eme_middle_name">Middle name</label>
+                                            <input type="text" id="eme_middle_name" name="eme_middle_name" v-model="form.eme_middle_name"
+                                                   class="form-control" title="Middle name"
+                                                   placeholder="Middle name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="eme_last_name">Last name</label>
+                                            <input type="text" id="eme_last_name" name="eme_last_name" v-model="form.eme_last_name" class="form-control"
+                                                   title="Last name"
+                                                   placeholder="Last name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="eme_contact_num">Contact no.</label>
+                                            <input type="text" id="eme_contact_num" name="eme_contact_num" v-model="form.eme_contact_num"
+                                                   class="form-control" title="Contact no."
+                                                   placeholder="Contact no.">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="eme_relationship">Relationship</label>
+                                            <input type="text" id="eme_relationship" name="eme_relationship" v-model="form.eme_relationship"
+                                                   class="form-control" title="Relationship"
+                                                   placeholder="Relationship">
                                         </div>
                                     </div>
                                 </div>
@@ -840,7 +891,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                                    value='Next'/>
                             <input type="button" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish'
                                    @click="onSubmit"
-                                   value='Submit' :disabled="submitted"/>
+                                   value='Submit'/>
 
                         </div>
                         <div class="pull-left">
@@ -878,6 +929,12 @@ These Terms will be governed by and interpreted in accordance with the laws of t
 
                 submitted: false,
 
+                avatar: this.user.avatar_path,
+
+                avatar_source: '',
+
+                avatar_file: '',
+
                 tabs: [{
                     name: 'tab1',
                     id: 0,
@@ -896,6 +953,12 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                     basic_citizenship_key: '',
                     basic_gender_key: '',
                     basic_birth_place: '',
+
+                    eme_first_name: '',
+                    eme_middle_name: '',
+                    eme_last_name: '',
+                    eme_contact_num: '',
+                    eme_relationship : '',
 
                     telephone_num: '',
                     mobile_num: '',
@@ -1144,6 +1207,28 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 }
                 return ''
             },
+            image(e) {
+                if (! e.target.files.length) return;
+
+                let file = e.target.files[0];
+
+                let reader = new FileReader();
+
+                reader.readAsDataURL(file);
+
+                reader.onload = e => {
+                    this.avatar_source = e.target.result;
+
+                    this.persist(this.avatar_file);
+
+                };
+            },
+
+            persist(avatar) {
+                let data = new FormData();
+
+                data.append('avatar', avatar);
+            }
 
 
         },

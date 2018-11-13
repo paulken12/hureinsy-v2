@@ -11,7 +11,7 @@ class Project extends Model
 
     public function jobs()
     {
-        return $this->belongsToMany(Job::class);
+        return $this->belongsToMany(Job::class)->withPivot('job_id', 'project_id');
     }
 
     public function company() {

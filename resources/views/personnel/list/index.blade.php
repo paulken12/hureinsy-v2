@@ -25,11 +25,12 @@
                     </tfoot>
                     <tbody>
                     @foreach ($employees as $employee)
-                        @if($employee->isVerified($employee))
+                        {{--{{$employee->user()->pluck('verified')->first()}}--}}
+                        @if($employee->verified())
                             <tr>
                                 <td class="text-center">
                                     <img class="bdrs-50p w-3r h-3r" alt="User Avatar"
-                                         src="{{$employee->user->avatar_path}}">
+                                         src="{{($employee->user->avatar_path === '') ? 'n/a': $employee->user->avatar_path }}">
                                 </td>
                                 <td>
                                     <span><i class="mR-10 ti-id-badge"></i> {{$employee->company_id}}</span>
@@ -43,7 +44,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge {{$employee->contract->first()->status=== 'Resigned' ? 'bgc-red-50 c-red-700' :'bgc-green-50 c-green-700'}} p-10 lh-0 tt-c badge-pill">{{$employee->contract->first()->status}}</span>
+                                    <span class="badge {{$employee->conStatus === 'separated' ? 'bgc-red-50 c-red-700' :'bgc-green-50 c-green-700'}} p-10 lh-0 tt-c badge-pill">{{$employee->conStatus}}</span>
                                 </td>
                             </tr>
                         @endif

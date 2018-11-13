@@ -24,27 +24,27 @@ class InformationSeeder extends Seeder
 //        $test->importCsv('gov.csv',\App\Personnel\Info\EmpBenefit::class);
 //        $test->importCsv('med.csv',\App\Personnel\Info\EmpMedical::class);
 //        $test->importCsv('train.csv',\App\Personnel\Info\EmpTraining::class);
-//        $test->importCsv('cont.csv',\App\Personnel\Info\EmpContact::class);
+//        $test->importCsv('skill.csv',\App\Personnel\Info\EmpSkill::class);
 //        $test->importCsv('contract.csv',\App\Personnel\Info\EmpContract::class);
-//        $test->importCsv('new_contract.csv',\App\Personnel\Info\Contract::class);
+        $test->importCsv('new_contract.csv',\App\Personnel\Info\Contract::class);
 //        $test->importCsv('team.csv',\App\Team::class);
 //        $test->importCsv('pos.csv',\App\Master\MasterJobTitle::class);
 //        $test->importCsv('dept.csv',\App\Master\MasterDepartment::class);
-//        $test->importCsv('job_desc.csv',\App\Annex\JobDescription\AnnexJobDescription::class);
+////        $test->importCsv('job_desc.csv',\App\Annex\JobDescription\AnnexJobDescription::class);
 //        $test->importCsv('job_desc.csv',\App\Contract\Job::class);
-        $test->importCsv('assign.csv',\App\Contract\Project::class);
-        $test->importCsv('assign.csv',\App\Master\MasterProjectAssignment::class);
+//        $test->importCsv('assign.csv',\App\Contract\Project::class);
+////        $test->importCsv('assign.csv',\App\Master\MasterProjectAssignment::class);
 
-        Schema::disableForeignKeyConstraints();
-
-        $test = new \App\Helper\AppHelper();
-
-        $file = base_path().'/database/seeds/csv/job_assign.csv';
-
-        $customerArr = $test->csvToArray($file);
-
-        DB::table('job_project')->insert($customerArr);
-
-        Schema::enableForeignKeyConstraints();
+//        Schema::disableForeignKeyConstraints();
+//
+//        $test = new \App\Helper\AppHelper();
+//
+//        $file = base_path().'/database/seeds/csv/job_assign.csv';
+//
+//        $customerArr = $test->csvToArray($file);
+//
+//        DB::table('job_project')->insert($customerArr);
+//
+//        Schema::enableForeignKeyConstraints();
     }
 }

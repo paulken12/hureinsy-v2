@@ -50,6 +50,10 @@ class EmpBasic extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function users() {
+        return $this->belongsToMany(User::class,'user_id');
+    }
+
     public function jobs() {
         return $this->belongsToMany(Job::class);
     }
@@ -122,6 +126,14 @@ class EmpBasic extends Model
         return  $this->gender()->pluck('gender')->first();
     }
 
+    public function getConStatusAttribute() {
+        return  $this->empContract()->pluck('employment_status')->first();
+    }
+
+    public function getObjectiveAttribute() {
+        return  $this->skill()->pluck('objective')->first();
+    }
+
     public function civilStatus() {
         return $this->belongsTo(MasterCivilStatus::class, 'master_civil_status_key');
     }
@@ -169,12 +181,19 @@ class EmpBasic extends Model
     }
 
     public function isVerified($employee) {
-        return $employee->user->verified === true ? true : false;
+        return $employee->user->verified;
+    }
+
+    public function verified() {
+
+        $user = $this->user()->where('verified',true)->pluck('verified')->first();
+
+        return $user;
     }
 
     public function team($employee) {
-        $team = Team::where('id',$employee->roles->first()->pivot->team_id)->first();
-        return $team->display_name;
+        $team = Team::where('id',$employee->roles->first()->pivot->team_id)->get();
+        return !empty($team->display_name)?: 'n/a';
     }
 
     public function myTeam() {

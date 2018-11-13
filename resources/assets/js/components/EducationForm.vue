@@ -8,12 +8,12 @@
                 </div>
             </div>
 
-            <div v-if="own">
+            <!--<div v-if="own">-->
                 <div class="peer">
                 <span><a href="#" title="Edit/Close" class="btn btn-link" v-on:click="edit = !edit"><i
                         class="mR-10 ti-pencil-alt"></i></a></span>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
         <hr>
 
@@ -94,17 +94,20 @@
                     <div class="mb-4">
                         <span v-text="exp" hidden></span>
                         <h5><span v-text="form.education_type[index]"></span>
-                            <small>( <span v-text="form.edu_year_graduated[index]"></span> )
-                            </small>
+                            <small v-show="form.edu_year_graduated[index] !== ''">( <span v-text="form.edu_year_graduated[index]"></span> )</small>
                         </h5>
-                        <small>Course |</small>
-                        <span v-text="form.edu_course[index]"></span>
-                        <br>
-                        <small>School |</small>
-                        <span v-text="form.edu_name_of_school[index]"></span>
-                        <br>
-                        <small>Award |</small>
-                        <span v-text="form.edu_award[index]"></span><br>
+                        <span v-show="form.edu_course[index] !== ''">
+                            <small>Course |</small>
+                            <span v-text="form.edu_course[index]"></span><br>
+                        </span>
+                        <span v-show="form.edu_name_of_school[index] !== ''">
+                            <small>School |</small>
+                            <span v-text="form.edu_name_of_school[index]"></span><br>
+                        </span>
+                        <span v-show="form.edu_award[index] !== ''">
+                            <small>Award |</small>
+                            <span v-text="form.edu_award[index]"></span><br>
+                        </span>
 
                     </div>
                 </div>

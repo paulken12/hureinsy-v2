@@ -8,10 +8,14 @@
                 {{$profile->first_name}} {{$profile->middle_name}} {{$profile->last_name}}
                 {{empty($profile->extension->name_extension) ? '':$profile->extension->name_extension}}
             </h5>
-            <div class="peer peer-greed">
-                <i class="mR-10 ti-crown" title="Position"></i>
-                <span title="Position">{{$profile->contract->first()->position}}</span>
-            </div>
+            @foreach ($profile->empContract as $contract)
+                @if(!empty($contract->jobDescription !== null))
+                    <div class="peer peer-greed">
+                        <i class="mR-10 ti-crown" title="Position"></i>
+                        <span title="Position">{{$contract->jobDescription->job_title}}</span>
+                    </div>
+                @endif
+            @endforeach
 
             @can('view', $profile->user)
                 <div class="peer peer-greed">

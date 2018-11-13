@@ -7,7 +7,7 @@
             <div class="masonry-item  w-100">
                 <div class="row gap-20">
                     <!-- #Total Emp ==================== -->
-                    <div class='col-md-3'>
+                    <div class='col-md'>
                         <div class="layers bd bgc-white p-20">
                             <div class="layer w-100 mB-10">
                                 <h6 class="lh-1">Total Employees</h6>
@@ -23,7 +23,7 @@
                     </div>
 
                     <!-- #Total Resigned ==================== -->
-                    <div class='col-md-3'>
+                    <div class='col-md'>
                         <div class="layers bd bgc-white p-20">
                             <div class="layer w-100 mB-10">
                                 <h6 class="lh-1">No. of Resigned Employee</h6>
@@ -39,7 +39,7 @@
                     </div>
 
                     <!-- # Regular ==================== -->
-                    <div class='col-md-3'>
+                    <div class='col-md'>
                         <div class="layers bd bgc-white p-20">
                             <div class="layer w-100 mB-10">
                                 <h6 class="lh-1">No. of Regular Employee</h6>
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- #Total Project-based ==================== -->
-                    <div class='col-md-3'>
+                    <div class='col-md'>
                         <div class="layers bd bgc-white p-20">
                             <div class="layer w-100 mB-10">
                                 <h6 class="lh-1">No. of Project-based</h6>
@@ -64,6 +64,21 @@
                                 <div class="peers ai-sb fxw-nw">
                                     <div class="peer peer-greed">
                                         <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500">{{$project_employees}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md'>
+                        <div class="layers bd bgc-white p-20">
+                            <div class="layer w-100 mB-10">
+                                <h6 class="lh-1">No. of Probationary</h6>
+                            </div>
+                            <div class="layer w-100">
+                                <div class="peers ai-sb fxw-nw">
+                                    <div class="peer peer-greed">
+                                        <span class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500">{{$probe_employees}}</span>
                                     </div>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Personnel\Info;
 
 use App\Personnel\Info\EmpBasic;
 use App\User;
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,8 +19,11 @@ class EmpBasicController extends Controller
     public function index() {
 
         $employees = EmpBasic::all();
+//        foreach ($employees->user() as $item) {
+//            dd($item);
+//        }
 
-        return view('personnel.list.index',compact('employees'));
+        return view('personnel.list.index',compact('employees','users'));
     }
 
     /**

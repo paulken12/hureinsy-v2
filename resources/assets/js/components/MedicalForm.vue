@@ -4,16 +4,16 @@
         <div class="peers ai-c jc-sb">
             <div class="peers peer-greed">
                 <div class="peer">
-                    <h4>Medical Information</h4>
+                    <h4>Bio Stats</h4>
                 </div>
             </div>
 
-            <div v-if="own">
+            <!--<div v-if="own">-->
                 <div class="peer">
                 <span><a href="#" title="Edit/Close" class="btn btn-link" v-on:click="edit = !edit"><i
                         class="mR-10 ti-pencil-alt"></i></a></span>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
         <hr>
 

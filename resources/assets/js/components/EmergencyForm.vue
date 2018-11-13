@@ -8,12 +8,12 @@
                 </div>
             </div>
 
-            <div v-if="own">
+            <!--<div v-if="own">-->
                 <div class="peer">
                 <span><a href="#" title="Edit/Close" class="btn btn-link" v-on:click="edit = !edit"><i
                         class="mR-10 ti-pencil-alt"></i></a></span>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
         <hr>
 

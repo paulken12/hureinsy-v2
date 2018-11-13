@@ -4,6 +4,8 @@ import  datepicker from 'bootstrap-datepicker';
 import  moment from  'moment';
 import Toasted from 'vue-toasted'
 import Form from './utilities/Form';
+import VueTheMask from 'vue-the-mask'
+
 
 
 window._ = require('lodash');
@@ -74,4 +76,5 @@ window.DataTable = DataTable;
 window.datepicker = datepicker;
 window.moment = moment;
 window.Toasted = Toasted;
+window.VueTheMask = VueTheMask;
 window.Form = Form;

@@ -22,7 +22,7 @@
                             <li><a href=""
                                    class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="{{asset('images/avatars/raj_male.png')}}"
+                                                                 src="{{asset('storage/avatars/guest.png')}}"
                                                                  alt=""></div>
                                     <div class="peer peer-greed"><span><span
                                                     class="fw-500">John Doe</span> <span class="c-grey-600">approved <span
@@ -35,7 +35,7 @@
                             <li><a href=""
                                    class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="{{asset('images/avatars/raj_male.png')}}"
+                                                                 src="{{asset('storage/avatars/guest.png')}}"
                                                                  alt=""></div>
                                     <div class="peer peer-greed"><span><span
                                                     class="fw-500">Moo Doe</span> <span
@@ -48,7 +48,7 @@
                             <li><a href=""
                                    class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="{{asset('images/avatars/raj_male.png')}}"
+                                                                 src="{{asset('storage/avatars/guest.png')}}"
                                                                  alt=""></div>
                                     <div class="peer peer-greed"><span><span
                                                     class="fw-500">Lee Doe</span> <span

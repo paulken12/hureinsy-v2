@@ -69,7 +69,7 @@
                                         <div class="peers ai-c jc-sb">
                                             <div class="peer peer-greed">
                                                 <i class="mR-10 ti-heart"></i>
-                                                <span>Benefit</span>
+                                                <span>Registration No.</span>
                                             </div>
                                         </div>
                                     </a>
@@ -141,7 +141,7 @@
                                         <div class="peers ai-c jc-sb">
                                             <div class="peer peer-greed">
                                                 <i class="mR-10 ti-heart-broken"></i>
-                                                <span>Medical</span>
+                                                <span>Bio Stats</span>
                                             </div>
                                         </div>
                                     </a>
@@ -172,54 +172,13 @@
                          aria-labelledby="basic-tab">
                         <div class="profile-content-wrapper">
                             <!-- Header -->
-                        @include('personnel.profile.include.info')
+                            @include('personnel.profile.include.info')
 
-                        <!-- Content -->
-                            <div class="bdT pX-40 pY-30">
-
-                                <h5>Objective
-                                    @can('view', $profile->user)
-                                        <a href="#" class="btn btn-sm btn-link float-right" title="Edit objective" v-on:click="editObjective = !editObjective"><i class="ti-pencil-alt"></i></a>
-                                    @endcan
-                                </h5>
-                                <div v-if="editObjective">
-                                    <div class="form-group">
-                                        <label for="edit-objective" class="sr-only">Edit Objective</label>
-                                        <textarea name="edit-objective" class="form-control" id="edit-objective" cols="30" rows="5"></textarea>
-                                    </div>
-                                    <button class="btn btn-success btn-sm" @click="updateObjective">Update</button>
-                                    <button class="btn btn-link btn-sm" @click="editObjective = false">Cancel</button>
-                                </div>
-                                <div v-else>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </p>
-                                </div>
-
-                                <hr>
-
-                                <div class="row m-0 p-0">
-                                    <div class="col p-0">
-                                        Gender: <span class="c-grey-900">{{$profile->gender}}</span> <br>
-                                        Civil Status: <span class="c-grey-900">{{$profile->civilStatus}}</span> <br>
-                                        Citizenship: <span class="c-grey-900">{{$profile->citizenship}}</span> <br>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="col-7 p-0">
-                                            Birth date: <span
-                                                    class="c-grey-900">{{$profile->date_of_birth->format('F jS, Y')}}</span>
-                                            <br>
-                                            Birth place: <span
-                                                    class="c-grey-900">{{$profile->birth_place? : '-'}}</span> <br>
-                                        </div>
-                                    @endcan
-                                </div>
-                            </div>
+                            <objective-form
+                                    :profile="{{$profile}}"
+                                    :objective="{{$profile->skill}}"
+                                    :owner="{{$isOwner}}">
+                            </objective-form>
                         </div>
                     </div>
 
@@ -234,48 +193,51 @@
 
                             <!-- Content -->
                                 <div class="bdT pX-40 pY-30">
-                                    <h5>Contract</h5>
-
                                     @foreach ($profile->empContract as $contract)
-
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <small>Job Title |</small>
-                                                <span>{{$contract->jobDescription->job_title}}</span><br>
-                                                <small>Job Description |</small>
-                                                <span>{{$contract->jobDescription->job_description}}</span><br>
-                                                <small>Department |</small>
-                                                <span>{{$contract->jobDescription->jobDepartment->department}}</span><br>
-                                                <small>Effective |</small>
-                                                <span>{{$contract->job_description_effective === '0000-00-00' ? 'n/a' : $contract->job_description_effective }}</span>
-                                                <br>
-
+                                        @if($contract->jobDescription !== null)
+                                            <h5>Contract</h5>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <small>Job Title |</small>
+                                                    <span>{{$contract->jobDescription->job_title}}</span><br>
+                                                    <small>Job Description |</small>
+                                                    <span>{{$contract->jobDescription->job_description}}</span><br>
+                                                    <small>Department |</small>
+                                                    <span>{{$contract->jobDescription->jobDepartment->department}}</span><br>
+                                                    <small>Effective |</small>
+                                                    <span>{{$contract->job_description_effective === '0000-00-00' ? 'n/a' : $contract->job_description_effective }}</span>
+                                                    <br>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <small>Contract Start |</small>
+                                                    <span>{{$contract->contract_start === '0000-00-00' ? 'n/a' : $contract->contract_start }}</span><br>
+                                                    <small>Contract End |</small>
+                                                    <span>{{$contract->contract_end === '0000-00-00' ? 'n/a' : $contract->contract_end }}</span><br>
+                                                    <small>Employment Status |</small>
+                                                    <span> {{$contract->status->employee_status}}</span><br>
+                                                    <small>Resigned Date |</small>
+                                                    <span>{{$contract->resigned_date === '0000-00-00' ? 'n/a' : $contract->resigned_date }}</span><br>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-5">
-                                                <small>Contract Start |</small>
-                                                <span>{{$contract->contract_start === '0000-00-00' ? 'n/a' : $contract->contract_start }}</span><br>
-                                                <small>Contract End |</small>
-                                                <span>{{$contract->contract_end === '0000-00-00' ? 'n/a' : $contract->contract_end }}</span><br>
-                                                <small>Employment Status |</small>
-                                                <span> {{$contract->status->employee_status}}</span><br>
-                                                <small>Resigned Date |</small>
-                                                <span>{{$contract->resigned_date === '0000-00-00' ? 'n/a' : $contract->resigned_date }}</span><br>
+
+                                            <hr>
+
+                                            <small>Project Assignment |</small>
+                                            <span>{{$contract->project()->project_title}}</span><br>
+                                            <small>Project Description |</small>
+                                            <span>{{$contract->project()->project_desc}}</span><br>
+                                            <small>Duration |</small> <span>{{$contract->project()->project_start === '0000-00-00' ? 'n/a' : $contract->project()->project_start->format('M j, Y')}}
+                                                to {{$contract->project()->project_end === '0000-00-00' ? 'n/a' : $contract->project()->project_end->format('M j, Y')}}</span>
+                                            <br>
+                                            <small>Company/Client |</small>
+                                            <span>{{$contract->project()->company->name}}</span><br>
+                                            <small>Location |</small>
+                                            <span>{{$contract->project()->company->address}}</span><br>
+                                        @else
+                                            <div class="container-fluid text-center">
+                                                <span>Contract ended</span>
                                             </div>
-                                        </div>
-
-                                        <hr>
-
-                                        <small>Project Assignment |</small>
-                                        <span>{{$contract->project()->project_title}}</span><br>
-                                        <small>Project Description |</small>
-                                        <span>{{$contract->project()->project_desc}}</span><br>
-                                        <small>Duration |</small> <span>{{$contract->project()->project_start === '0000-00-00' ? 'n/a' : $contract->project()->project_start->format('M j, Y')}}
-                                            to {{$contract->project()->project_end === '0000-00-00' ? 'n/a' : $contract->project()->project_end->format('M j, Y')}}</span>
-                                        <br>
-                                        <small>Company/Client |</small>
-                                        <span>{{$contract->project()->company->name}}</span><br>
-                                        <small>Location |</small>
-                                        <span>{{$contract->project()->company->address}}</span><br>
+                                        @endif
 
                                     @endforeach
 
@@ -386,29 +348,7 @@
                                         :education_type="{{$education_type}}"
                                         :owner="{{$isOwner}}">
                                 </education-form>
-                                {{--<div class="peers ai-c jc-sb">--}}
-                                    {{--<div class="peers peer-greed">--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<h4>Educational Background</h4>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--@can('view', $profile->user)--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
-                                                                 {{--title="Edit"></i></a></span>--}}
-                                        {{--</div>--}}
-                                    {{--@endcan--}}
-                                {{--</div>--}}
-                                {{--<hr>--}}
-                                {{--@forelse ($profile->education as $education)--}}
-                                    {{--<h5>Level: {{$education->background}}</h5>--}}
-                                    {{--Course: {{$education->course}}<br>--}}
-                                    {{--School name: {{$education->name_of_school? : 'Not specified'}} <br>--}}
-                                    {{--Year graduated: {{$education->year_graduated? : 'Not specified'}}<br>--}}
-                                    {{--Award: {{$education->award? : 'No Awards'}}<br><br>--}}
-                                {{--@empty--}}
-                                    {{--<p class="text-center">No educational background provided</p>--}}
-                                {{--@endforelse--}}
+
                             </div>
                         </div>
 
@@ -421,66 +361,45 @@
                                         :experience="{{$profile->experience}}"
                                         :owner="{{$isOwner}}">
                                 </experience-form>
-                                {{--<div class="peers ai-c jc-sb">--}}
-                                    {{--<div class="peers peer-greed">--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<h4>Work Experience</h4>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--@can('view', $profile->user)--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
-                                                                 {{--title="Edit"></i></a></span>--}}
-                                        {{--</div>--}}
-                                    {{--@endcan--}}
-                                {{--</div>--}}
-                                {{--<hr>--}}
-                                {{--@forelse ($profile->experience as $experience)--}}
-                                    {{--<h5>{{$experience->emp_work_experience}}</h5>--}}
-                                    {{--Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;<br>--}}
-                                    {{--Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;<br>--}}
-                                    {{--Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}--}}
-                                    {{--&nbsp;---}}
-                                    {{--Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;--}}
-                                    {{--<br>--}}
-                                    {{--Industry: {{$experience->industry? : 'Not specified'}}&nbsp;<br>--}}
-                                    {{--Salary: {{$experience->salary? : 'Not specified'}}&nbsp;<br>--}}
-                                    {{--Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br>--}}
-                                    {{--<br>--}}
-                                {{--@empty--}}
-                                    {{--<p class="text-center">No work experience</p>--}}
-                                {{--@endforelse--}}
+
                             </div>
                         </div>
 
                         <div class="tab-pane fade profile-info" id="reference" role="tabpanel"
                              aria-labelledby="reference-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Character Reference</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
 
-                                <hr>
-                                @forelse ($profile->reference as $reference)
-                                    Job title: {{$reference->job_title}}<br>
-                                    Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}
-                                    &nbsp;{{$reference->last_name}}<br>
-                                    Company name: {{$reference->company_name? : 'Not specified'}}<br>
-                                    Company address: {{$reference->company_address? : 'Not specified'}}<br>
-                                    Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br><br>
-                                @empty
-                                    <p class="text-center">No character reference</p>
-                                @endforelse
+                                <reference-form
+                                        :profile="{{$profile}}"
+                                        :reference="{{$profile->reference}}"
+                                        :owner="{{$isOwner}}">
+                                </reference-form>
+
+                                {{--<div class="peers ai-c jc-sb">--}}
+                                    {{--<div class="peers peer-greed">--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<h4>Character Reference</h4>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--@can('view', $profile->user)--}}
+                                        {{--<div class="peer">--}}
+                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
+                                             {{--title="Edit"></i></a></span>--}}
+                                        {{--</div>--}}
+                                    {{--@endcan--}}
+                                {{--</div>--}}
+
+                                {{--<hr>--}}
+                                {{--@forelse ($profile->reference as $reference)--}}
+                                    {{--Job title: {{$reference->job_title}}<br>--}}
+                                    {{--Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}--}}
+                                    {{--&nbsp;{{$reference->last_name}}<br>--}}
+                                    {{--Company name: {{$reference->company_name? : 'Not specified'}}<br>--}}
+                                    {{--Company address: {{$reference->company_address? : 'Not specified'}}<br>--}}
+                                    {{--Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br><br>--}}
+                                {{--@empty--}}
+                                    {{--<p class="text-center">No character reference</p>--}}
+                                {{--@endforelse--}}
                             </div>
                         </div>
 
@@ -488,9 +407,9 @@
                              aria-labelledby="emergency-tab">
                             <div class="profile-info-body">
                                 <emergency-form
-                                    :profile="{{$profile}}"
-                                    :emergency="{{$profile->emergency}}"
-                                    :owner="{{$isOwner}}">
+                                        :profile="{{$profile}}"
+                                        :emergency="{{$profile->emergency}}"
+                                        :owner="{{$isOwner}}">
                                 </emergency-form>
                             </div>
                         </div>
@@ -499,10 +418,10 @@
                              aria-labelledby="medical-tab">
                             <div class="profile-info-body">
                                 <medical-form
-                                    :profile="{{$profile}}"
-                                    :medical="{{$profile->medical}}"
-                                    :blood="{{$blood}}"
-                                    :owner="{{$isOwner}}">
+                                        :profile="{{$profile}}"
+                                        :medical="{{$profile->medical}}"
+                                        :blood="{{$blood}}"
+                                        :owner="{{$isOwner}}">
                                 </medical-form>
                             </div>
                         </div>

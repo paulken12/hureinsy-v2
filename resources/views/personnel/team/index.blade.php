@@ -7,7 +7,7 @@
             <div class="bgc-light-blue-500 c-white p-15">
                 <div class="peers ai-c jc-sb gap-40">
                     <div class="peer peer-greed">
-                        <h5 class="lh-1">{{$emp->first()->team(Auth::user())}}</h5>
+                        <h5 class="lh-1">{{!empty($emp->first()->team(Auth::user()))}}</h5>
 
                     </div>
                     <div class="peer">

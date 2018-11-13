@@ -94,15 +94,22 @@ class Form {
 
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
-                .then(response => {
+                .then(({data}) => {
+                    resolve(data);
+                })
+                /*.then(response => {
                     this.onSuccess(response.data());
                     // this.onSuccess(window.location = response.data.redirect);
                     resolve(response.data);
-                })
+                })*/
                 .catch(error => {
-                    this.onFail(error.response.data);
+                    this.onFail(
+                        error.response.data,
+                        error.response.status,
+                        error.response.statusText
+                    );
 
-                    reject(error.response.data);
+                    reject(error);
                 });
         });
     }
@@ -117,14 +124,26 @@ class Form {
         this.reset();
     }
 
-
     /**
      * Handle a failed form submission.
      *
      * @param {object} errors
+     * @param {number} status
+     * @param {string} statusText
      */
-    onFail(errors) {
-        this.errors.record(errors);
+    onFail(errors, status, statusText) {
+
+        if (status === 422) {
+            this.errors.record(errors);
+        } else {
+            this.errors.record({
+                general: {
+                    0: status + ' ' + statusText
+                }
+            });
+        }
+
+        return this;
     }
 }
 

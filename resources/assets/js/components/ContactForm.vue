@@ -8,12 +8,12 @@
                 </div>
             </div>
 
-            <div v-if="own">
+            <!--<div v-if="own">-->
                 <div class="peer">
                 <span><a href="#" title="Edit/Close" class="btn btn-link" v-on:click="edit = !edit"><i
                         class="mR-10 ti-pencil-alt"></i></a></span>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
         <hr>
 
@@ -22,29 +22,47 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="con_telephone_num" class="sr-only">Telephone no.</label>
-                        <input type="text" id="con_telephone_num" v-model="form.telephone_num"
-                               class="form-control" title="Telephone no." placeholder="Telephone no.">
+                        <input type="text"
+                               id="con_telephone_num"
+                               v-model="form.telephone_num"
+                               class="form-control"
+                               v-mask="'(###)###-####'"
+                               title="Telephone no."
+                               placeholder="Telephone no.">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="con_mobile_num" class="sr-only">Mobile no.</label>
-                        <input type="text" id="con_mobile_num" v-model="form.mobile_num" class="form-control"
-                               title="Mobile no." placeholder="Mobile no.">
+                        <label for="con_mobile_num"
+                               class="sr-only">Mobile no.</label>
+                        <input type="text"
+                               id="con_mobile_num"
+                               v-model="form.mobile_num" class="form-control"
+                               title="Mobile no."
+                               v-mask="'(+##)###-###-####'"
+                               placeholder="Mobile no.">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="con_other_num" class="sr-only">Other no.</label>
-                        <input type="text" id="con_other_num" v-model="form.other_mobile" class="form-control"
-                               title="Other no." placeholder="Other no.">
+                        <input type="text"
+                               id="con_other_num"
+                               v-model="form.other_mobile"
+                               class="form-control"
+                               title="Other no."
+                               placeholder="Other no.">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="con_email" class="sr-only">Email</label>
-                        <input type="text" id="con_email" v-model="form.email" class="form-control"
-                               title="Email" placeholder="Email">
+                        <input type="text"
+                               id="con_email"
+                               v-model="form.email"
+                               class="form-control"
+                               title="Email"
+                               placeholder="Email">
                     </div>
                 </div>
             </div>
