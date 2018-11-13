@@ -165,7 +165,7 @@ class PersonnelActionManagement {
                             ->whereMonth('created_at', $month)
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(7);
+                            ->get();
     }
 
     public static function call_paf_lists_hr($month, $year){
@@ -175,7 +175,7 @@ class PersonnelActionManagement {
                             ->whereIn('assessed_by_company_id', [$user_id, ''])
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(7);
+                            ->get();
     }
 
     public static function call_paf_lists_manager($month, $year){
@@ -184,7 +184,7 @@ class PersonnelActionManagement {
                             ->where('requested_by_company_id', Auth::user()->basicInfo->pluck('id')->first())
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(7);
+                            ->get();
     }
 
     public static function call_paf_lists_user($month, $year){
@@ -193,7 +193,7 @@ class PersonnelActionManagement {
                             ->where('employee_company_id', Auth::user()->basicInfo->pluck('id')->first())
                             ->orderBy('master_id_request_status', 'asc')
                             ->orderBy('id', 'desc')
-                            ->paginate(7);
+                            ->get();
     }
 
     public static function call_paf_archived(){
