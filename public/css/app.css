@@ -11336,7 +11336,6 @@ hr {
 }
 
 .checkbox input[type="checkbox"]:checked + label::after {
-  font-family: 'FontAwesome';
   content: "\F00C";
   font-size: 13px;
 }
@@ -11540,7 +11539,6 @@ hr {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   opacity: 1;
-  display: default;
 }
 
 #loader.fadeOut {
@@ -76459,6 +76457,7 @@ h1 .subtitle {
   left: 0px;
   color: #FFFFFF;
   cursor: pointer;
+  background: #2CA8FF;
   font-weight: 500;
 }
 

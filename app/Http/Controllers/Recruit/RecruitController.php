@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers\Recruit;
 
+use App\Contract\Job;
+use App\Contract\Project;
+use App\Helper\Slug;
 use App\Mail\ConfirmEmail;
+use App\Master\MasterEmpStatus;
+use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpBasic;
+use App\Personnel\Info\EmpBenefit;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
+use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -16,15 +24,23 @@ class RecruitController extends Controller
     public function create() {
 
         $company_id = EmpBasic::lastId();
-        $roles = Role::orderBy('id','desc')->get()->except(1);
-        $admins = Role::all()->except([1,7]);
+        $roles = Role::orderBy('display_name','asc')->get()->except(1);
+        $admins = Role::orderBy('display_name','asc')->get()->except([1,7]);
+
         $users = User::all();
 
-        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users'));
+        $emp = EmpBasic::with('user')->orderBy('last_name','asc')->get();
+
+        $jobs = Job::all();
+        $projects = Project::all();
+        $statuses = MasterEmpStatus::all()->except(['separated']);
+
+        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users','jobs','projects','statuses','emp'));
     }
 
     public function store(Request $request) {
 
+        $slug = new Slug();
         $request->validate([
 
             'first_name'=>'required|string|max:255',
@@ -36,6 +52,27 @@ class RecruitController extends Controller
             'email'=>'required|string|email|max:255|unique:users',
 
             'role_key'=>'required',
+        ]);
+
+        $benefit = $request->validate([
+            'ben_sss' => 'nullable',
+            'ben_pag_ibig' => 'nullable',
+            'ben_philhealth' => 'nullable',
+            'ben_tin' => 'nullable',
+            'payroll_account' => 'nullable',
+        ]);
+
+
+        $job = $request->validate([
+            'job_description'=>'nullable',
+            'project_assignment'=>'nullable',
+            'job_date_effective'=>'nullable',
+        ]);
+
+        $contract = $request->validate([
+            'contract_start'=>'nullable',
+            'contract_end'=>'nullable',
+            'employment_status'=>'nullable',
         ]);
 
 
@@ -59,8 +96,10 @@ class RecruitController extends Controller
         //attach the given role
         $user->attachRole($request->input('role_key'));
 
+        $user_slug = $slug->createSlug($request->input('first_name').' '.$request->input('middle_name').' '.$request->input('last_name'));
+
         //insert the basic include provided by management
-        EmpBasic::create([
+        $emp = EmpBasic::create([
 
             'company_id' => EmpBasic::lastId(),
 
@@ -72,8 +111,33 @@ class RecruitController extends Controller
 
             'last_name' =>$request->input('last_name'),
 
+            'slug' => $user_slug,
+
             'reporting_to' =>$request->input('report_to'),
         ]);
+
+        EmpBenefit::create([
+            'emp_basic_id' => $emp->id,
+            'sss_num' => $benefit['ben_sss'],
+            'pagibig_num' => $benefit['ben_pag_ibig'],
+            'philhealth_num' => $benefit['ben_philhealth'],
+            'tin_num' => $benefit['ben_tin'],
+            'payroll_account' => $benefit['payroll_account'],
+        ]);
+
+        $con  = Contract::create([
+            'emp_basic_id'=>$emp->id,
+            'job_id'=> $job['job_description'],
+            'schedule_id'=>0,
+            'compensation_id'=>0,
+            'contract_start'=> $contract['contract_start'],
+            'contract_end'=> $contract['contract_end'],
+            'employment_status'=> $contract['employment_status'],
+            'resigned_date'=>'',
+            'job_description_effective'=> $job['job_date_effective'],
+        ]);
+
+        $con->attachProject($job['job_description'],$job['project_assignment']);
 
         // send the verification to the new employee
         Mail::to($user)->send(new ConfirmEmail($user,$password));

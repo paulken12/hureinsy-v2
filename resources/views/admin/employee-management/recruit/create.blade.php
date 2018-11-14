@@ -1,6 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+    {{--<contract-form--}}
+    {{--:company_id="{{$company_id}}"--}}
+    {{--:roles="{{$roles}}"--}}
+    {{--:role_name="{{$users->roles->pluck('name')}}"--}}
+    {{--:admins="{{$admins}}"--}}
+    {{--:users="{{$users}}"--}}
+    {{--:jobs="{{$jobs}}"--}}
+    {{--:projects="{{$projects}}"--}}
+    {{--></contract-form>--}}
     <div class="bd bgc-white">
         <form method="POST" id="signup-form" class="signup-form" action="{{route('store.recruit')}}">
             {{csrf_field()}}
@@ -20,6 +30,7 @@
                                        value="{{$company_id}}" readonly>
                             </div>
                         </div>
+
                         <div class="col-8">
                             <label class="sr-only" for="report_to">Report to</label>
                             <div class="input-group mb-2">
@@ -29,10 +40,10 @@
                                     </div>
                                 </div>
                                 <select name="report_to" id="report_to" class="form-control">
-                                    @foreach ($users as $user)
+                                    @foreach ($emp as $info)
                                         @foreach ($admins as $admin)
-                                            @if($user->roles->pluck('name')->first() === $admin->name)
-                                                <option value="{{$user->id}}">{{$user->name ." - ". $admin->display_name}}</option>
+                                            @if($info->user->roles->pluck('name')->first() === $admin->name)
+                                                <option value="{{$info->user->id}}">{{$info->last_name.' '.$info->first_name ." - ". $admin->display_name}}</option>
                                             @endif
                                         @endforeach
                                     @endforeach
@@ -80,7 +91,6 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-
                                 <label class="sr-only" for="role_key">Role</label>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
@@ -97,6 +107,10 @@
                         </div>
                     </div>
 
+                    <hr>
+
+                   <benefit-form></benefit-form>
+
                 </fieldset>
 
                 <h3></h3>
@@ -106,52 +120,103 @@
                     </h4>
                     <hr>
 
-                    <div class="assign-container">
-                        <div class="assign" id="assign-visitors">
-                            <input type="checkbox" id="assign-visitors-indicator"/>
-                            <div class="headerss">
-                                <label class="indicator" for="assign-visitors-indicator">
-                                    <svg class="open" width="18" height="27">
-                                        <line x1="1.5" y1="12" x2="2" y2="25" stroke-linecap="round"
-                                              style="stroke: #2196f3; stroke-width: 3;"></line>
-                                        <line x1="9" y1="7" x2="9" y2="25" stroke-linecap="round"
-                                              style="stroke: #2196f3; stroke-width: 3;"></line>
-                                        <line x1="16.5" y1="2" x2="16.5" y2="25" stroke-linecap="round"
-                                              style="stroke: #2196f3; stroke-width: 3;"></line>
-                                    </svg>
-                                    <svg class="close" width="15" height="25">
-                                        <line x1="1.5" y1="13.5" x2="15" y2="0"
-                                              style="stroke: #2196f3; stroke-width: 3"></line>
-                                        <line x1="1.5" y1="11.5" x2="15" y2="25"
-                                              style="stroke: #2196f3; stroke-width: 3"></line>
-                                    </svg>
-                                </label>
-                                <div class="content">
-                                    <div class="data">
-                                        <div class="top">
-                                            <p class="title float-left">Project Assignment </p>
-                                        </div>
-                                        <div class="graph">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-                                            aperiam culpa debitis deleniti error illo, natus, nisi nobis nostrum
-                                            odit porro, quas qui quibusdam ratione sequi totam ut vel vitae?
-                                        </div>
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <label class="sr-only" for="job_description">Job Description</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Job Description</small>
                                     </div>
-                                    <div class="container-fluid">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="job_title">Job Title</label>
-                                            <input type="text" id="job_title" name="job_title" class="form-control"
-                                                   title="Job Title"
-                                                   placeholder="Job Title">
-                                        </div>
-
-
-                                    </div>
-                                    <div class="float"></div>
                                 </div>
+                                <select name="job_description" id="job_description" class="form-control">
+                                    @foreach ($jobs as $job)
+                                        <option value="{{$job->id}}">{{$job->job_title ." - ". $job->job_description}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <label class="sr-only" for="project_assignment">Project Assignment</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Project Assignment</small>
+                                    </div>
+                                </div>
+                                <select name="project_assignment" id="project_assignment" class="form-control">
+                                    @foreach ($projects as $project)
+                                        <option value="{{$project->id}}">{{$project->project_title ." - ". $project->project_desc}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="sr-only" for="job_date_effective">Date Effective</label>
+                            <input type="text" id="job_date_effective" name="job_date_effective" class="form-control"
+                                   title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
+                                   value="{{date('Y-m-d')}}"
+                                   data-date-format="yyyy-mm-dd">
+                        </div>
+
+
+                    </div>
+
+
+                    {{--<div class="assign-container">--}}
+                    {{--<div class="assign" id="assign-visitors">--}}
+                    {{--<input type="checkbox" id="assign-visitors-indicator"/>--}}
+                    {{--<div class="headerss">--}}
+                    {{--<label class="indicator" for="assign-visitors-indicator">--}}
+                    {{--<svg class="open" width="18" height="27">--}}
+                    {{--<line x1="1.5" y1="12" x2="2" y2="25" stroke-linecap="round"--}}
+                    {{--style="stroke: #2196f3; stroke-width: 3;"></line>--}}
+                    {{--<line x1="9" y1="7" x2="9" y2="25" stroke-linecap="round"--}}
+                    {{--style="stroke: #2196f3; stroke-width: 3;"></line>--}}
+                    {{--<line x1="16.5" y1="2" x2="16.5" y2="25" stroke-linecap="round"--}}
+                    {{--style="stroke: #2196f3; stroke-width: 3;"></line>--}}
+                    {{--</svg>--}}
+                    {{--<svg class="close" width="15" height="25">--}}
+                    {{--<line x1="1.5" y1="13.5" x2="15" y2="0"--}}
+                    {{--style="stroke: #2196f3; stroke-width: 3"></line>--}}
+                    {{--<line x1="1.5" y1="11.5" x2="15" y2="25"--}}
+                    {{--style="stroke: #2196f3; stroke-width: 3"></line>--}}
+                    {{--</svg>--}}
+                    {{--</label>--}}
+                    {{--<div class="content">--}}
+                    {{--<div class="data">--}}
+                    {{--<div class="top">--}}
+                    {{--<p class="title float-left">Project Assignment </p>--}}
+                    {{--</div>--}}
+                    {{--<div class="graph">--}}
+                    {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium--}}
+                    {{--aperiam culpa debitis deleniti error illo, natus, nisi nobis nostrum--}}
+                    {{--odit porro, quas qui quibusdam ratione sequi totam ut vel vitae?--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="container-fluid">--}}
+                    {{--<div class="form-group">--}}
+                    {{--<label class="sr-only" for="job_title">Job Title</label>--}}
+                    {{--<input type="text" id="job_title" name="job_title" class="form-control"--}}
+                    {{--title="Job Title"--}}
+                    {{--placeholder="Job Title">--}}
+                    {{--</div>--}}
+
+
+                    {{--</div>--}}
+                    {{--<div class="float"></div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
 
                     {{--<div class="form-group">--}}
                     {{--<label for="date_effective">Date Effective</label>--}}
@@ -193,20 +258,60 @@
 
                 <h3></h3>
                 <fieldset>
-                    <h4 class="m-0"><i class="ti-alarm-clock size-ti"></i>&nbsp;&nbsp;Schedule
-                        <small><strong>| Annex B</strong></small>
+                    <h4 class="m-0"><i class="ti-alarm-clock size-ti"></i>&nbsp;&nbsp;Contract
+                        <small><strong>| Dates</strong></small>
                     </h4>
                     <hr>
-                    <p class="desc">annex b</p>
+
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <label class="sr-only" for="employment_status">Employment Status</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Employment Status</small>
+                                    </div>
+                                </div>
+                                <select name="employment_status" id="employment_status" class="form-control">
+                                    @foreach ($statuses as $status)
+                                        <option value="{{$status->key}}">{{$status->employee_status}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="contract_start">Contract Start</label>
+                                <input type="text" id="contract_start" name="contract_start" class="form-control"
+                                       title="Contract Start" placeholder="Contract Start" data-provide="datepicker"
+                                       value="{{date('Y-m-d')}}"
+                                       data-date-format="yyyy-mm-dd">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="contract_end">Contract End</label>
+                                <input type="text" id="contract_end" name="contract_end" class="form-control"
+                                       title="Contract End" placeholder="Contract End" data-provide="datepicker"
+                                       value="{{date('Y-m-d')}}"
+                                       data-date-format="yyyy-mm-dd">
+                            </div>
+                        </div>
+
+                    </div>
+
                 </fieldset>
 
                 <h3></h3>
                 <fieldset>
-                    <h4 class="m-0"><i class="ti-envelope size-ti"></i>&nbsp;&nbsp;Benefit
-                        <small><strong>| Annex C</strong></small>
-                    </h4>
-                    <hr>
-                    <p class="desc">annex c</p>
+                <h4 class="m-0"><i class="ti-envelope size-ti"></i>&nbsp;&nbsp;Benefit
+                <small><strong>| Annex C</strong></small>
+                </h4>
+                <hr>
+                <p class="desc">Coming soon</p>
                 </fieldset>
             </div>
         </form>

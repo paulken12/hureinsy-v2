@@ -25,8 +25,8 @@ class MasterEmployeeStatus extends Seeder
                 'employee_status'=>'Probationary'
             ],
             [
-                'key'=>'resigned',
-                'employee_status'=>'Resigned'
+                'key'=>'separated',
+                'employee_status'=>'Separated'
             ],
 
         ];

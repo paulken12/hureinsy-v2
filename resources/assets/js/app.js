@@ -1,9 +1,9 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 require('./bootstrap');
 
@@ -11,6 +11,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 Vue.use(Toasted);
+
+Vue.use(VueTheMask);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -25,6 +27,15 @@ Vue.component('import-raw', require('./components/ImportRaw.vue'));
 Vue.component('employee-profile', require('./components/EmployeeProfile.vue'));
 Vue.component('address-form', require('./components/AddressForm.vue'));
 Vue.component('make-paf', require('./components/MakePaf.vue'));
+Vue.component('contact-form', require('./components/ContactForm.vue'));
+Vue.component('emergency-form', require('./components/EmergencyForm.vue'));
+Vue.component('medical-form', require('./components/MedicalForm.vue'));
+Vue.component('experience-form', require('./components/ExperienceForm.vue'));
+Vue.component('education-form', require('./components/EducationForm.vue'));
+Vue.component('objective-form', require('./components/ObjectiveForm.vue'));
+Vue.component('contract-form', require('./components/ContractForm.vue'));
+Vue.component('reference-form', require('./components/ReferenceForm.vue'));
+Vue.component('benefit-form', require('./components/BenefitForm.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -163,6 +174,10 @@ const app = new Vue({
             $("#request-modal").modal('show');
             this.emp_name = lists.first_name;
             this.emp_id = lists.company_id;
+        }
+        
+        addressEdit(value){
+            this.editAddress = value;
         }
     }
 });

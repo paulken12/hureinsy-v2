@@ -57,7 +57,7 @@ Route::group(['prefix'=>'raj-titans'], function ()
 
 /* ------------------ ADMINISTRATOR ------------------*/
 
-Route::group(['middleware' => ['auth','role:titan|admin']],function()
+Route::group(['middleware' => ['auth','role:titan|admin','verified']],function()
 {
     /* ------------------ RECRUIT ------------------ */
 
@@ -246,7 +246,7 @@ Route::group(['middleware' => ['auth','role:titan|admin']],function()
 
 /* ------------------ PERSONNEL ------------------*/
 
-Route::group(['middleware' => ['auth']],function()
+Route::group(['middleware' => ['auth','verified']],function()
 {
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -257,7 +257,31 @@ Route::group(['middleware' => ['auth']],function()
 
     Route::get('profile/{profile}', 'Personnel\Profile\ProfileController@show')->name('profiles');
 
-    Route::patch('profile/{profile}', 'Personnel\Profile\ProfileController@upadteAddress');
+    Route::patch('profile/{profile}/address', 'Personnel\Profile\ProfileController@updateAddress');
+
+    Route::patch('profile/{profile}/contact', 'Personnel\Profile\ProfileController@updateContact');
+
+    Route::patch('profile/{profile}/emergency', 'Personnel\Profile\ProfileController@updateEmergency');
+
+    Route::patch('profile/{profile}/medical', 'Personnel\Profile\ProfileController@updateMedical');
+
+    Route::patch('profile/{profile}/experience', 'Personnel\Profile\ProfileController@updateExperience');
+
+//    Route::post('profile/{profile}/experience/insert', 'Personnel\Profile\ProfileController@storeExperience');
+
+    Route::delete('profile/experience/{id}', 'Personnel\Profile\ProfileController@deleteExperience');
+
+    Route::patch('profile/{profile}/education', 'Personnel\Profile\ProfileController@updateEducation');
+
+    Route::post('profile/{profile}/education/insert', 'Personnel\Profile\ProfileController@storeEducation');
+
+    Route::patch('profile/{profile}/family', 'Personnel\Profile\ProfileController@updateFamily');
+
+    Route::patch('profile/{profile}/objective', 'Personnel\Profile\ProfileController@updateObjective');
+
+    Route::patch('profile/{profile}/reference', 'Personnel\Profile\ProfileController@updateReference');
+
+    Route::delete('profile/reference/{id}', 'Personnel\Profile\ProfileController@deleteReference');
 
     /* ------------------ PERSONNEL LIST ------------------*/
 

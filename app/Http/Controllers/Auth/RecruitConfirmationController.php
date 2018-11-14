@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helper\Slug;
 use App\Master\MasterBloodType;
 use App\Master\MasterCitizenship;
 use App\Master\MasterCivilStatus;
@@ -12,6 +13,7 @@ use App\Master\MasterGender;
 use App\Personnel\Info\EmpAddress;
 use App\Personnel\Info\EmpContact;
 use App\Personnel\Info\EmpEducation;
+use App\Personnel\Info\EmpEmergencyContact;
 use App\Personnel\Info\EmpExperience;
 use App\Personnel\Info\EmpFamily;
 use App\Personnel\Info\EmpReference;
@@ -73,6 +75,7 @@ class RecruitConfirmationController extends Controller
     public function store(Request $request)
     {
         //get the user id
+        $slug = new Slug();
         $user = User::find(auth()->user()->id);
         $user_id = $user->basicInfo->pluck('id')->first();
 
@@ -87,11 +90,6 @@ class RecruitConfirmationController extends Controller
             'basic_date_of_birth'    => 'nullable',
             'basic_birth_place'      => 'nullable',
             'basic_citizenship_key'  => 'required',
-
-            'eme_first_name'         => 'nullable',
-            'eme_last_name'          => 'nullable',
-            'eme_middle_name'        => 'nullable',
-            'eme_contact_num'        => 'nullable',
 
             'med_blood_key'          => 'nullable',
             'med_height'             => 'nullable',
@@ -109,6 +107,14 @@ class RecruitConfirmationController extends Controller
 
             'has_crime'              => 'nullable',
             'comment'                => 'nullable',
+        ]);
+
+        $eme = $request->validate([
+            'eme_first_name'         => 'nullable',
+            'eme_last_name'          => 'nullable',
+            'eme_middle_name'        => 'nullable',
+            'eme_contact_num'        => 'nullable',
+            'eme_relationship'       => 'nullable',
         ]);
 
         $contact = $request->validate([
@@ -178,26 +184,7 @@ class RecruitConfirmationController extends Controller
             'train_place_seminar'    => 'nullable',
         ]);
 
-
-
-        error_log('con: '. count($contact));
-        error_log('add: '. count($address));
-        error_log('fam: '. count($family));
-        error_log('edu: '. count($education));
-        error_log('exp: '. count($experience));
-        error_log('ref: '. count($reference));
-
-
-        if(!empty($contact['telephone_num']) || !empty($contact['mobile_num']) || !empty($contact['other_mobile']))
-        {
-            EmpContact::create([
-                'emp_basic_id'=>$user_id,
-                'telephone_num'=> $contact['telephone_num'],
-                'mobile_num'=> $contact['mobile_num'],
-                'other_mobile'=> $contact['other_mobile'],
-            ]);
-        }
-
+        $user_slug = $slug->createSlug($info['basic_first_name'].' '.$info['basic_middle_name'].' '.$info['basic_last_name']);
 
         foreach ($user->basicInfo as $basicInfo) {
 
@@ -220,10 +207,31 @@ class RecruitConfirmationController extends Controller
 
             $basicInfo->master_citizenship_key = $info['basic_citizenship_key'];
 
+            $basicInfo->slug = $user_slug;
+
             $basicInfo->update();
         }
 
+        if(!empty($contact['telephone_num']) || !empty($contact['mobile_num']) || !empty($contact['other_mobile']))
+        {
+            EmpContact::create([
+                'emp_basic_id'=>$user_id,
+                'telephone_num'=> $contact['telephone_num'],
+                'mobile_num'=> $contact['mobile_num'],
+                'other_mobile'=> $contact['other_mobile'],
+            ]);
+        }
 
+        if(count($eme) !== 0){
+            EmpEmergencyContact::create([
+                'emp_basic_id'=>$user_id,
+                'first_name'=> $eme['eme_first_name'],
+                'last_name'=> $eme['eme_last_name'],
+                'middle_name'=> $eme['eme_middle_name'],
+                'contact_num'=> $eme['eme_contact_num'],
+                'relationship'=> $eme['eme_relationship'],
+            ]);
+        }
 
         for($i=0; $i < count($address['master_address_key']); ++$i ) {
             EmpAddress::create([
@@ -292,15 +300,15 @@ class RecruitConfirmationController extends Controller
             ]);
         }
 
-//        for($i=0; $i < count($training['train_title']); ++$i ) {
-//            EmpTraining::create([
-//                'emp_basic_id'=>$user_id,
-//                'title'=> $training['train_title'][$i],
-//                'date_from'=> $training['train_date_from'][$i],
-//                'date_to'=> $training['train_date_to'][$i],
-//                'place_seminar'=> $training['train_place_seminar'][$i],
-//            ]);
-//        }
+        for($i=0; $i < count($training['train_title']); ++$i ) {
+            EmpTraining::create([
+                'emp_basic_id'=>$user_id,
+                'title'=> $training['train_title'][$i],
+                'date_from'=> $training['train_date_from'][$i],
+                'date_to'=> $training['train_date_to'][$i],
+                'place_seminar'=> $training['train_place_seminar'][$i],
+            ]);
+        }
         //check if the user email is equal to the input field
         if($user->email != $request->input('email')) {
 
@@ -318,7 +326,7 @@ class RecruitConfirmationController extends Controller
 
         //government benefit to be encrypt and decrypt
 
-//        auth()->user()->verified();
+        auth()->user()->verified();
 
         return response()->json(['success' =>'Your data is successfully saved', 'redirect' => route('dashboard')],200);
 

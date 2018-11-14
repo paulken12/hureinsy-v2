@@ -46,6 +46,11 @@ class User extends Authenticatable
 
         return $this->hasMany(EmpBasic::class);
     }
+
+    public function info(){
+
+        return $this->belongsTo(EmpBasic::class);
+    }
     /**
      * return if user has a image if null return default
      * @param $avatar
@@ -53,7 +58,7 @@ class User extends Authenticatable
      */
     public function getAvatarPathAttribute($avatar){
 
-        return $avatar ? asset('storage/'.$avatar) :  asset('images/avatars/guest.png');
+        return $avatar ? asset('storage/'.$avatar) :  asset('storage/avatars/guest.png');
     }
 
     /**
@@ -82,5 +87,9 @@ class User extends Authenticatable
     
     public function export() {
         return Excel::download(new UsersExport(), 'users.xlsx');
+    }
+
+    public function isVerified() {
+        return $this->verified ? 'true': 'false';
     }
 }
