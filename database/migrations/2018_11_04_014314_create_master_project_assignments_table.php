@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,8 +15,12 @@ class CreateMasterProjectAssignmentsTable extends Migration
     {
         Schema::create('master_project_assignments', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('customer_reference_no')->nullable();
+            $table->string('customer_name')->nullable();
             $table->string('project_title')->nullable();
             $table->string('project_desc')->nullable();
+            $table->string('contact_person')->nullable();
+            $table->string('contact_num')->nullable();
             $table->string('master_company_key')->nullable();
             $table->date('project_start')->nullable();
             $table->date('project_end')->nullable();

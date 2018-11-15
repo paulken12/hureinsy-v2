@@ -32,9 +32,9 @@ class ReportExport implements FromCollection, WithHeadings
             foreach ($value as $v => $s) {
                 $keys[] = $v;
             }
+            return $keys;
         }
 
-        return $keys;
 
     }
 }

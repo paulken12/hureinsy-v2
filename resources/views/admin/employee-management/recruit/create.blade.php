@@ -107,9 +107,10 @@
                         </div>
                     </div>
 
-                    <hr>
+                   <benefit-form>
+                   </benefit-form>
 
-                   <benefit-form></benefit-form>
+                    <hr>
 
                 </fieldset>
 

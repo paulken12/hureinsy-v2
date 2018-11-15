@@ -64,7 +64,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control" title="proposed_remarks_schedule" placeholder="required" value="{{empty($get_schedule_details->proposed_remarks_hr) ? '' : $get_schedule_details->proposed_remarks_hr}}">
+			<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control" title="proposed_remarks_schedule" placeholder="Required" value="{{empty($get_schedule_details->proposed_remarks_hr) ? '' : $get_schedule_details->proposed_remarks_hr}}">
 		</div>
 	</div>
 </div>

@@ -34,8 +34,8 @@ Vue.component('experience-form', require('./components/ExperienceForm.vue'));
 Vue.component('education-form', require('./components/EducationForm.vue'));
 Vue.component('objective-form', require('./components/ObjectiveForm.vue'));
 Vue.component('contract-form', require('./components/ContractForm.vue'));
-Vue.component('reference-form', require('./components/ReferenceForm.vue'));
 Vue.component('benefit-form', require('./components/BenefitForm.vue'));
+Vue.component('reference-form', require('./components/ReferenceForm.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -45,6 +45,7 @@ const app = new Vue({
     data: function()
     {
         return{
+            
             isCollapsed: true,
             editObjective: false,
             editAddress: false,
@@ -174,10 +175,6 @@ const app = new Vue({
             $("#request-modal").modal('show');
             this.emp_name = lists.first_name;
             this.emp_id = lists.company_id;
-        }
-        
-        addressEdit(value){
-            this.editAddress = value;
         }
     }
 });

@@ -24,6 +24,7 @@ class CreateContractsTable extends Migration
             $table->string('employment_status')->nullable();
             $table->date('resigned_date')->nullable();
             $table->date('job_description_effective')->nullable();
+            $table->date('join_date')->nullable();
             $table->timestamps();
         });
     }

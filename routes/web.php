@@ -223,7 +223,6 @@ Route::group(['middleware' => ['auth','role:titan|admin','verified']],function()
 
     Route::get('setting/masters/schedrequest/destroy={id}', 'Master\MasterScheduleReqController@destroy')->name('setting.masters.schedrequest.destroy');
 
-    // 
 
     /* ------------------ REPORTS ------------------*/
 

@@ -1,20 +1,20 @@
 <template>
-    <!--<div>-->
-        <!--<div class="form-row">-->
-            <!--<div class="col-sm">-->
-                <!--<div class="form-group">-->
-                    <!--<label class="sr-only" for="ben_sss">SSS NO.</label>-->
-                    <!--<input type="text"-->
-                           <!--v-model="ben_sss"-->
-                           <!--v-mask="'####-###-####'"-->
-                           <!--id="ben_sss"-->
-                           <!--class="form-control"-->
-                           <!--title="SSS NO."-->
-                           <!--placeholder="SSS NO.">-->
-                <!--</div>-->
+    <div>
+        <div class="form-row"><!-- 
+            <div class="col-sm">
+                <div class="form-group">
+                    <label class="sr-only" for="ben_sss">SSS NO.</label>
+                    <input type="text"
+                           id="ben_sss"
+                           v-model="ben_sss"
+                           class="form-control"
+                           v-mask="'####-###-####'"
+                           title="SSS NO."
+                           placeholder="SSS NO.">
+                </div>
+            </div> -->
 
 
-            <!--</div>-->
             <!--<div class="col-sm">-->
                 <!--<div class="form-group">-->
                     <!--<label class="sr-only" for="ben_pag_ibig">PAGIBIG</label>-->
@@ -71,14 +71,13 @@
                            <!--title="Payroll Account"-->
                            <!--placeholder="Payroll Account">-->
                 <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+            <!-- </div> -->
+        <!-- </div> -->
+    </div>
 
-    <div>
         <div class="form-group">
             <label for="test" class="sr-only">Test</label>
-            <input type="text" id="test" class="form-control" v-model="test" title="" placeholder="">
+            <input type="text" id="test" class="form-control" v-model="test" title="" placeholder="">     
         </div>
 
 
@@ -88,18 +87,18 @@
 
 <script>
 
-    import Form from "../utilities/Form";
+    import Form from "../utilities/Form.js";
 
     export default {
 
         data: function() {
             return {
-                test:'',
+                test: '',
                 ben_sss: '',
                 ben_pag_ibig: '',
                 ben_philhealth: '',
                 ben_tin: '',
-                payroll_account: '',
+                payroll_account: ''
             }
         },
     }
