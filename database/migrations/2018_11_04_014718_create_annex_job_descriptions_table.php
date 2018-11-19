@@ -16,6 +16,7 @@ class CreateAnnexJobDescriptionsTable extends Migration
         Schema::create('annex_job_descriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('job_description_id')->nullable();
+            $table->string('department_key')->nullable();
             $table->string('project_id')->nullable();
             $table->string('reporting_to')->nullable();
             $table->string('team_id')->nullable();

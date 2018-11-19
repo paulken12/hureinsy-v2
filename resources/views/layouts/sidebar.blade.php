@@ -30,8 +30,7 @@
                 <li class="nav-item mT-30 active"><a class="sidebar-link" href="{{route('dashboard')}}"><span
                                 class="icon-holder"><i
                                     class="c-blue-500 ti-home"></i> </span><span class="title">Dashboard</span></a></li>
-                {{--<li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i--}}
-                                    {{--class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>--}}
+                <li class="nav-item"><a class="sidebar-link" href="{{route('team')}}"><span class="icon-holder"><i class="c-blue-500 ti-star"></i> </span><span class="title">My Team</span></a></li>
                 <li class="nav-item"><a class="sidebar-link" href="#"><span class="icon-holder"><i
                                     class="c-blue-500 ti-layout-tab"></i> </span><span class="title">Company Training</span></a></li>
                 <li class="nav-item dropdown">

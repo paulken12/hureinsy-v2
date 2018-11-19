@@ -44,7 +44,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->job_id}}">
+			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->project()->company->key}}">
 			<p>{{$employee_contract->project()->company->name}}</p>
 		</div>
 	</div>

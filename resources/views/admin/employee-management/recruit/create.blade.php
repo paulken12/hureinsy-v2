@@ -89,6 +89,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col">
                             <div class="form-group">
                                 <label class="sr-only" for="role_key">Role</label>
@@ -107,8 +108,69 @@
                         </div>
                     </div>
 
-                   <benefit-form>
-                   </benefit-form>
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="ben_sss">SSS NO.</label>
+                                <input type="text"
+                                       id="ben_sss"
+                                       name="ben_sss"
+                                       class="form-control"
+                                       title="SSS NO."
+                                       placeholder="SSS NO.">
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="ben_pag_ibig">PAGIBIG</label>
+                                <input type="text"
+                                       id="ben_pag_ibig"
+                                       name="ben_pag_ibig"
+                                       class="form-control"
+                                       title="PAGIBIG"
+                                       placeholder="PAGIBIG">
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="ben_philhealth">PHILHEALTH</label>
+                                <input type="text"
+                                       id="ben_philhealth"
+                                       name="ben_philhealth"
+                                       class="form-control"
+                                       title="PHILHEALTH"
+                                       placeholder="PHILHEALTH">
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label class="sr-only" for="ben_tin">TIN</label>
+                                <input type="text"
+                                       id="ben_tin"
+                                       name="ben_tin"
+                                       class="form-control"
+                                       title="TIN"
+                                       placeholder="TIN">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="sr-only" for="payroll_account">Payroll Account</label>
+                                <input type="text"
+                                       id="payroll_account"
+                                       name="payroll_account"
+                                       class="form-control"
+                                       title="Payroll Account"
+                                       placeholder="Payroll Account">
+                            </div>
+                        </div>
+                    </div>
 
                     <hr>
 
@@ -151,6 +213,24 @@
                                 <select name="project_assignment" id="project_assignment" class="form-control">
                                     @foreach ($projects as $project)
                                         <option value="{{$project->id}}">{{$project->project_title ." - ". $project->project_desc}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <label class="sr-only" for="department">Department</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Department</small>
+                                    </div>
+                                </div>
+                                <select name="department" id="department" class="form-control">
+                                    @foreach ($depts as $dept)
+                                        <option value="{{$dept->key}}">{{$dept->department}}</option>
                                     @endforeach
                                 </select>
                             </div>

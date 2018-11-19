@@ -83,7 +83,6 @@ const app = new Vue({
 
         }
 
-
         $('.sidebar .sidebar-menu li a').on('click', function () {
             const $this = $(this);
 
@@ -152,6 +151,7 @@ const app = new Vue({
     },
 
     methods: {
+
         mouseHover: function() {
             this.isCollapsed = true;
         },

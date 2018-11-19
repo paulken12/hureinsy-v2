@@ -30839,6 +30839,7 @@ var app = new Vue({
     },
 
     methods: {
+
         mouseHover: function mouseHover() {
             this.isCollapsed = true;
         },
@@ -105252,14 +105253,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -105287,38 +105280,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-sm" }, [
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { staticClass: "sr-only", attrs: { for: "ben_sss" } }, [
-              _vm._v("SSS NO.")
-            ]),
-            _vm._v(" "),
-            _c("masked-input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "ben_sss",
-                mask: "11/11/1111",
-                title: "SSS NO.",
-                placeholder: "SSS NO."
-              },
-              model: {
-                value: _vm.ben_sss,
-                callback: function($$v) {
-                  _vm.ben_sss = $$v
-                },
-                expression: "ben_sss"
-              }
-            })
-          ],
-          1
-        )
-      ])
-    ]),
+    _c("div", { staticClass: "form-row" }),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "sr-only", attrs: { for: "test" } }, [

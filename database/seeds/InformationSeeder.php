@@ -30,7 +30,7 @@ class InformationSeeder extends Seeder
         $test->importCsv('team.csv',\App\Team::class);
         $test->importCsv('pos.csv',\App\Master\MasterJobTitle::class);
         $test->importCsv('dept.csv',\App\Master\MasterDepartment::class);
-        $test->importCsv('job_desc.csv',\App\Annex\JobDescription\AnnexJobDescription::class);
+        $test->importCsv('annex_job_desc.csv',\App\Annex\JobDescription\AnnexJobDescription::class);
         $test->importCsv('job_desc.csv',\App\Contract\Job::class);
         $test->importCsv('assign.csv',\App\Contract\Project::class);
         $test->importCsv('assign.csv',\App\Master\MasterProjectAssignment::class);

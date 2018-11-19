@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Recruit;
 
+use App\Annex\JobDescription\AnnexJobDescription;
 use App\Contract\Job;
 use App\Contract\Project;
 use App\Helper\Slug;
 use App\Mail\ConfirmEmail;
 use App\Master\MasterEmpStatus;
+use App\Master\MasterDepartment;
 use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpBenefit;
 use App\Role;
+use App\Team;
 use App\User;
 use Carbon\Carbon;
 use function foo\func;
@@ -35,7 +38,10 @@ class RecruitController extends Controller
         $projects = Project::all();
         $statuses = MasterEmpStatus::all()->except(['separated']);
 
-        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users','jobs','projects','statuses','emp'));
+        $teams = Team::all();
+        $depts = MasterDepartment::all();
+
+        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users','jobs','projects','statuses','emp', 'teams', 'depts'));
     }
 
     public function store(Request $request) {
@@ -67,6 +73,7 @@ class RecruitController extends Controller
             'job_description'=>'nullable',
             'project_assignment'=>'nullable',
             'job_date_effective'=>'nullable',
+            'department'=>'nullable',
         ]);
 
         $contract = $request->validate([
@@ -125,9 +132,17 @@ class RecruitController extends Controller
             'payroll_account' => $benefit['payroll_account'],
         ]);
 
+        $annex_a = AnnexJobDescription::create([
+            'job_description_id' => $job['job_description'],
+            'department_key' => $job['department'],
+            'Project_id' => $job['project_assignment'],
+            'Reporting_to' => $request->input('report_to'),
+            'Team_id' => '',
+        ]);
+
         $con  = Contract::create([
             'emp_basic_id'=>$emp->id,
-            'job_id'=> $job['job_description'],
+            'job_id'=> $annex_a->id,
             'schedule_id'=>0,
             'compensation_id'=>0,
             'contract_start'=> $contract['contract_start'],
@@ -136,6 +151,7 @@ class RecruitController extends Controller
             'resigned_date'=>'',
             'job_description_effective'=> $job['job_date_effective'],
         ]);
+
 
         $con->attachProject($job['job_description'],$job['project_assignment']);
 
