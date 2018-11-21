@@ -53,7 +53,7 @@
 
                     <div class="form-group">
                         <label for="basic_birth_date" class="sr-only">Date of birth</label>
-                        <input type="text" id="basic_birth_date" v-model="basic_date_of_birth"
+                        <input type="date" id="basic_birth_date" v-model="basic_date_of_birth"
                                class="form-control"
                                title="Birth of birth" placeholder="Birth of birth" @change="handler('basic_date_of_birth')">
                     </div>

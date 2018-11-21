@@ -104,7 +104,9 @@
                                                     <input type="text" id="basic_birth_date"
                                                            v-model="form.basic_date_of_birth"
                                                            class="form-control"
-                                                           title="Birth of birth" placeholder="Date of birth">
+                                                           v-mask="'####-##-##'"
+                                                           data-provide="datepicker" data-date-format="yyyy-mm-dd"
+                                                           title="Birth of birth" placeholder="Date of birth" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm">
@@ -168,6 +170,7 @@
                                         <div class="form-group">
                                             <label for="con_telephone_num" class="sr-only">Telephone no.</label>
                                             <input type="text" id="con_telephone_num" v-model="form.telephone_num"
+                                                   v-mask="'(###)###-####'"
                                                    class="form-control" title="Telephone no."
                                                    placeholder="Telephone no.">
                                         </div>
@@ -176,6 +179,7 @@
                                         <div class="form-group">
                                             <label for="con_mobile_num" class="sr-only">Mobile no.</label>
                                             <input type="text" id="con_mobile_num" v-model="form.mobile_num"
+                                                   v-mask="'(+##)###-###-####'"
                                                    class="form-control"
                                                    title="Mobile no." placeholder="Mobile no.">
                                         </div>
@@ -256,6 +260,9 @@
                                 <div class="card mb-4" v-for="(address, index) in form.address_type">
                                     <div class="card-body">
                                         <h5 v-text="address"></h5>
+                                        <div v-if="index >= 1">
+                                        <button @click="checkboxToggle"> Same as present address</button>
+                                        </div>
                                         <hr>
 
                                         <div class="row">
@@ -389,6 +396,8 @@
                                                             <input type="text" id="fam_date_of_birth"
                                                                    class="form-control"
                                                                    v-model="form.fam_date_of_birth[index]"
+                                                                   v-mask="'####-##-##'"
+                                                                   data-provide="datepicker" data-date-format="yyyy-mm-dd"
                                                                    title="Date of birth" placeholder="Date of birth">
                                                         </div>
                                                     </div>
@@ -889,7 +898,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                         <div class="pull-right">
                             <input type='button' class='btn btn-next btn-fill btn-success btn-wd btn-sm' name='next'
                                    value='Next'/>
-                            <input type="button" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish'
+                            <input type="submit" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish'
                                    @click="onSubmit"
                                    value='Submit'/>
 
@@ -1037,6 +1046,12 @@ These Terms will be governed by and interpreted in accordance with the laws of t
         },
 
         methods: {
+
+            checkboxToggle(index){
+                this.form.add_unit_num[1] = this.form.add_unit_num[0];
+
+
+            },
 
             removeUser() {
                 alert("Leaving...");

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Recruit;
 
 use App\Annex\JobDescription\AnnexJobDescription;
+use App\Annex\Schedule\AnnexSchedule;
+use App\Annex\compensation\AnnexCompensation;
 use App\Contract\Job;
 use App\Contract\Project;
 use App\Helper\Slug;
 use App\Mail\ConfirmEmail;
+use App\Master\MasterCompany;
 use App\Master\MasterEmpStatus;
 use App\Master\MasterDepartment;
 use App\Personnel\Info\Contract;
@@ -40,8 +43,9 @@ class RecruitController extends Controller
 
         $teams = Team::all();
         $depts = MasterDepartment::all();
+        $companies = MasterCompany::all();
 
-        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users','jobs','projects','statuses','emp', 'teams', 'depts'));
+        return view('admin.employee-management.recruit.create',compact('company_id','roles','admins','users','jobs','projects','statuses','emp', 'teams', 'depts', 'companies'));
     }
 
     public function store(Request $request) {
@@ -74,9 +78,22 @@ class RecruitController extends Controller
             'project_assignment'=>'nullable',
             'job_date_effective'=>'nullable',
             'department'=>'nullable',
+            'team'=>'nullable',
+        ]);
+
+        $schedule = $request->validate([
+            'schedule_type'=>'nullable',
+            'work_location'=>'nullable',
+            'schedule_date_effective'=>'nullable',
         ]);
 
         $contract = $request->validate([
+            'contract_start'=>'nullable',
+            'contract_end'=>'nullable',
+            'employment_status'=>'nullable',
+        ]);
+
+        $compensation = $request->validate([
             'contract_start'=>'nullable',
             'contract_end'=>'nullable',
             'employment_status'=>'nullable',
@@ -137,7 +154,17 @@ class RecruitController extends Controller
             'department_key' => $job['department'],
             'Project_id' => $job['project_assignment'],
             'Reporting_to' => $request->input('report_to'),
-            'Team_id' => '',
+            'Team_id' => $job['team'],
+        ]);
+
+        $annex_b = AnnexSchedule::create([
+            'schedule_type' => $schedule['schedule_type'],
+            'work_location_key' => $schedule['work_location'],
+        ]);
+
+        $annex_c = AnnexSchedule::create([
+            'schedule_type' => $schedule['schedule_type'],
+            'work_location_key' => $schedule['work_location'],
         ]);
 
         $con  = Contract::create([
@@ -149,7 +176,8 @@ class RecruitController extends Controller
             'contract_end'=> $contract['contract_end'],
             'employment_status'=> $contract['employment_status'],
             'resigned_date'=>'',
-            'job_description_effective'=> $job['job_date_effective'],
+            'job_date_effective'=> $job['job_date_effective'],
+            'schedule_date_effective'=> $schedule['schedule_date_effective'],
         ]);
 
 

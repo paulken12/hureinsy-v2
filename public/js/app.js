@@ -94004,7 +94004,7 @@ var render = function() {
               ],
               staticClass: "form-control",
               attrs: {
-                type: "text",
+                type: "date",
                 id: "basic_birth_date",
                 title: "Birth of birth",
                 placeholder: "Birth of birth"
@@ -97211,6 +97211,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -97338,6 +97347,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        checkboxToggle: function checkboxToggle(index) {
+            this.form.add_unit_num[1] = this.form.add_unit_num[0];
+        },
         removeUser: function removeUser() {
             alert("Leaving...");
         },
@@ -97978,14 +97990,23 @@ var render = function() {
                                     rawName: "v-model",
                                     value: _vm.form.basic_date_of_birth,
                                     expression: "form.basic_date_of_birth"
+                                  },
+                                  {
+                                    name: "mask",
+                                    rawName: "v-mask",
+                                    value: "####-##-##",
+                                    expression: "'####-##-##'"
                                   }
                                 ],
                                 staticClass: "form-control",
                                 attrs: {
                                   type: "text",
                                   id: "basic_birth_date",
+                                  "data-provide": "datepicker",
+                                  "data-date-format": "yyyy-mm-dd",
                                   title: "Birth of birth",
-                                  placeholder: "Date of birth"
+                                  placeholder: "Date of birth",
+                                  required: ""
                                 },
                                 domProps: {
                                   value: _vm.form.basic_date_of_birth
@@ -98310,6 +98331,12 @@ var render = function() {
                                   rawName: "v-model",
                                   value: _vm.form.telephone_num,
                                   expression: "form.telephone_num"
+                                },
+                                {
+                                  name: "mask",
+                                  rawName: "v-mask",
+                                  value: "(###)###-####",
+                                  expression: "'(###)###-####'"
                                 }
                               ],
                               staticClass: "form-control",
@@ -98354,6 +98381,12 @@ var render = function() {
                                   rawName: "v-model",
                                   value: _vm.form.mobile_num,
                                   expression: "form.mobile_num"
+                                },
+                                {
+                                  name: "mask",
+                                  rawName: "v-mask",
+                                  value: "(+##)###-###-####",
+                                  expression: "'(+##)###-###-####'"
                                 }
                               ],
                               staticClass: "form-control",
@@ -98723,6 +98756,16 @@ var render = function() {
                               _c("h5", {
                                 domProps: { textContent: _vm._s(address) }
                               }),
+                              _vm._v(" "),
+                              index >= 1
+                                ? _c("div", [
+                                    _c(
+                                      "button",
+                                      { on: { click: _vm.checkboxToggle } },
+                                      [_vm._v(" Same as present address")]
+                                    )
+                                  ])
+                                : _vm._e(),
                               _vm._v(" "),
                               _c("hr"),
                               _vm._v(" "),
@@ -99395,12 +99438,20 @@ var render = function() {
                                                 ],
                                               expression:
                                                 "form.fam_date_of_birth[index]"
+                                            },
+                                            {
+                                              name: "mask",
+                                              rawName: "v-mask",
+                                              value: "####-##-##",
+                                              expression: "'####-##-##'"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
                                             type: "text",
                                             id: "fam_date_of_birth",
+                                            "data-provide": "datepicker",
+                                            "data-date-format": "yyyy-mm-dd",
                                             title: "Date of birth",
                                             placeholder: "Date of birth"
                                           },
@@ -101288,7 +101339,7 @@ var render = function() {
                   _c("input", {
                     staticClass:
                       "btn btn-finish btn-fill btn-success btn-wd btn-sm",
-                    attrs: { type: "button", name: "finish", value: "Submit" },
+                    attrs: { type: "submit", name: "finish", value: "Submit" },
                     on: { click: _vm.onSubmit }
                   })
                 ]),

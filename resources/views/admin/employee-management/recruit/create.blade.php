@@ -220,7 +220,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-sm-12">
+                        <div class="col-sm">
                             <label class="sr-only" for="department">Department</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
@@ -235,6 +235,21 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm">
+                            <label class="sr-only" for="team">Team</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Team</small>
+                                    </div>
+                                </div>
+                                <select name="team" id="team" class="form-control">
+                                    @foreach ($teams as $team)
+                                        <option value="{{$team->key}}">{{$team->sub_con}} - {{$team->display_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
@@ -242,13 +257,18 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="sr-only" for="job_date_effective">Date Effective</label>
-                            <input type="text" id="job_date_effective" name="job_date_effective" class="form-control"
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Date Effective</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="job_date_effective" name="job_date_effective" class="form-control"
                                    title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
                                    value="{{date('Y-m-d')}}"
                                    data-date-format="yyyy-mm-dd">
+                            </div>
                         </div>
-
-
                     </div>
 
 
@@ -337,9 +357,78 @@
 
                 </fieldset>
 
+
                 <h3></h3>
                 <fieldset>
-                    <h4 class="m-0"><i class="ti-alarm-clock size-ti"></i>&nbsp;&nbsp;Contract
+                <h4 class="m-0"><i class="ti-alarm-clock size-ti"></i>&nbsp;&nbsp;Schedule
+                <small><strong>| Annex B</strong></small>
+                </h4>
+                <hr>
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <label class="sr-only" for="schedule_type">Schedule Type</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Schedule Type</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="schedule_type" name="schedule_type" class="form-control"
+                                       title="Schedule Type" placeholder="Schedule Type">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <label class="sr-only" for="work_location">Work Location</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Work Location</small>
+                                    </div>
+                                </div>
+                                <select name="work_location" id="work_location" class="form-control">
+                                    @foreach ($companies as $company)
+                                        <option value="{{$company->key}}">{{$company->name}} - {{$company->address}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="sr-only" for="schedule_date_effective">Date Effective</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Date Effective</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="schedule_date_effective" name="schedule_date_effective" class="form-control"
+                                   title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
+                                   value="{{date('Y-m-d')}}"
+                                   data-date-format="yyyy-mm-dd">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <h3></h3>
+                <fieldset>
+                <h4 class="m-0"><i class="ti-envelope size-ti"></i>&nbsp;&nbsp;Benefit
+                <small><strong>| Annex C</strong></small>
+                </h4>
+                <hr>
+                <p class="desc">Coming soon</p>
+                </fieldset>
+
+                <h3></h3>
+                <fieldset>
+                    <h4 class="m-0"><i class="ti-paper size-ti"></i>&nbsp;&nbsp;Contract
                         <small><strong>| Dates</strong></small>
                     </h4>
                     <hr>
@@ -377,22 +466,12 @@
                                 <label for="contract_end">Contract End</label>
                                 <input type="text" id="contract_end" name="contract_end" class="form-control"
                                        title="Contract End" placeholder="Contract End" data-provide="datepicker"
-                                       value="{{date('Y-m-d')}}"
                                        data-date-format="yyyy-mm-dd">
                             </div>
                         </div>
 
                     </div>
 
-                </fieldset>
-
-                <h3></h3>
-                <fieldset>
-                <h4 class="m-0"><i class="ti-envelope size-ti"></i>&nbsp;&nbsp;Benefit
-                <small><strong>| Annex C</strong></small>
-                </h4>
-                <hr>
-                <p class="desc">Coming soon</p>
                 </fieldset>
             </div>
         </form>
