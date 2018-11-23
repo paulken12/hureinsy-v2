@@ -3,8 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-
+       
 require('./bootstrap');
 
 
@@ -62,6 +61,8 @@ const app = new Vue({
             add_province: [],
             add_zip_code: [],
 
+            email: [],
+
             emp_name: '',
             emp_id: '',
         }
@@ -74,6 +75,12 @@ const app = new Vue({
         $('#masters-list').DataTable();
         $('#paf-list').DataTable();
 
+
+        $(document).ready(function($){
+            $('.m-money').mask('000.000.000.000,00', {reverse: true});
+            $('.m-date').mask('0000-00-00');
+        });
+ 
         const scrollables = $('.scrollable');
         if (scrollables.length > 0) {
             scrollables.each((index, element) => {
@@ -151,7 +158,6 @@ const app = new Vue({
     },
 
     methods: {
-
         mouseHover: function() {
             this.isCollapsed = true;
         },

@@ -4,7 +4,8 @@ import  datepicker from 'bootstrap-datepicker';
 import  moment from  'moment';
 import Toasted from 'vue-toasted'
 import Form from './utilities/Form';
-import VueTheMask from 'vue-the-mask'
+import VueTheMask from 'vue-the-mask';
+import Mask from 'jquery-mask-plugin';
 
 
 

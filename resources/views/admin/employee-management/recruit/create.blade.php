@@ -2,6 +2,24 @@
 
 @section('content')
 
+    @if(session('flash'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('flash')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @elseif(count($errors))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @foreach($errors->all() as $err)
+                <li>{!!$err!!}</li>
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     {{--<contract-form--}}
     {{--:company_id="{{$company_id}}"--}}
     {{--:roles="{{$roles}}"--}}
@@ -97,7 +115,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="ti-eye"></i></div>
                                     </div>
-                                    <select name="role_key" id="role_key" class="form-control">
+                                    <select name="role_key" id="role_key" class="form-control" required>
                                         <option value="employee" readonly="">-Select Role-</option>
                                         @foreach ($roles as $role)
                                             <option value="{{$role->name}}">{{$role->display_name}}</option>
@@ -127,7 +145,7 @@
                                 <input type="text"
                                        id="ben_pag_ibig"
                                        name="ben_pag_ibig"
-                                       class="form-control"
+                                       class="form-control mask"
                                        title="PAGIBIG"
                                        placeholder="PAGIBIG">
                             </div>
@@ -161,13 +179,13 @@
                     <div class="form-row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="sr-only" for="payroll_account">Payroll Account</label>
+                                <label class="sr-only" for="payroll_account">Payroll Account Number</label>
                                 <input type="text"
                                        id="payroll_account"
                                        name="payroll_account"
                                        class="form-control"
-                                       title="Payroll Account"
-                                       placeholder="Payroll Account">
+                                       title="Payroll Account Number"
+                                       placeholder="Payroll Account Number">
                             </div>
                         </div>
                     </div>
@@ -192,7 +210,7 @@
                                         <small>Job Description</small>
                                     </div>
                                 </div>
-                                <select name="job_description" id="job_description" class="form-control">
+                                <select name="job_description" id="job_description" class="form-control" required>
                                     @foreach ($jobs as $job)
                                         <option value="{{$job->id}}">{{$job->job_title ." - ". $job->job_description}}</option>
                                     @endforeach
@@ -210,9 +228,9 @@
                                         <small>Project Assignment</small>
                                     </div>
                                 </div>
-                                <select name="project_assignment" id="project_assignment" class="form-control">
+                                <select name="project_assignment" id="project_assignment" class="form-control" required>
                                     @foreach ($projects as $project)
-                                        <option value="{{$project->id}}">{{$project->project_title ." - ". $project->project_desc}}</option>
+                                        <option value="{{$project->id}}">{{$project->project_title ." by ". $project->customer_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -228,7 +246,7 @@
                                         <small>Department</small>
                                     </div>
                                 </div>
-                                <select name="department" id="department" class="form-control">
+                                <select name="department" id="department" class="form-control" required>
                                     @foreach ($depts as $dept)
                                         <option value="{{$dept->key}}">{{$dept->department}}</option>
                                     @endforeach
@@ -243,9 +261,10 @@
                                         <small>Team</small>
                                     </div>
                                 </div>
-                                <select name="team" id="team" class="form-control">
+                                <select name="team" id="team" class="form-control" required>
+                                    <option value="1" readonly="" >-Select Team-</option>
                                     @foreach ($teams as $team)
-                                        <option value="{{$team->key}}">{{$team->sub_con}} - {{$team->display_name}}</option>
+                                        <option value="{{$team->id}}">{{$team->sub_con}} - {{$team->display_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -263,14 +282,13 @@
                                         <small>Date Effective</small>
                                     </div>
                                 </div>
-                                <input type="text" id="job_date_effective" name="job_date_effective" class="form-control"
-                                   title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
+                                <input type="text" id="job_date_effective" name="job_date_effective" class="form-control m-date"
+                                   title="Date Effective" placeholder="yyyy-mm-dd" data-provide="datepicker"
                                    value="{{date('Y-m-d')}}"
-                                   data-date-format="yyyy-mm-dd">
+                                   data-date-format="yyyy-mm-dd" required>
                             </div>
                         </div>
                     </div>
-
 
                     {{--<div class="assign-container">--}}
                     {{--<div class="assign" id="assign-visitors">--}}
@@ -374,7 +392,7 @@
                                     </div>
                                 </div>
                                 <input type="text" id="schedule_type" name="schedule_type" class="form-control"
-                                       title="Schedule Type" placeholder="Schedule Type">
+                                       title="Schedule Type" placeholder="Schedule Type" required>
                             </div>
                         </div>
                     </div>
@@ -388,7 +406,7 @@
                                         <small>Work Location</small>
                                     </div>
                                 </div>
-                                <select name="work_location" id="work_location" class="form-control">
+                                <select name="work_location" id="work_location" class="form-control" required>
                                     @foreach ($companies as $company)
                                         <option value="{{$company->key}}">{{$company->name}} - {{$company->address}}</option>
                                     @endforeach
@@ -408,10 +426,10 @@
                                         <small>Date Effective</small>
                                     </div>
                                 </div>
-                                <input type="text" id="schedule_date_effective" name="schedule_date_effective" class="form-control"
-                                   title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
+                                <input type="text" id="schedule_date_effective" name="schedule_date_effective" class="form-control m-date"
+                                   title="Date Effective" placeholder="yyyy-mm-dd" data-provide="datepicker"
                                    value="{{date('Y-m-d')}}"
-                                   data-date-format="yyyy-mm-dd">
+                                   data-date-format="yyyy-mm-dd" required>
                             </div>
                         </div>
                     </div>
@@ -423,7 +441,125 @@
                 <small><strong>| Annex C</strong></small>
                 </h4>
                 <hr>
-                <p class="desc">Coming soon</p>
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <label class="sr-only" for="job_grade">Job Grade</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Job Grade</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="job_grade" name="job_grade" class="form-control"
+                                       title="Job Grade" placeholder="Job Grade" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <label class="sr-only" for="Probationary Rate">Probationary rate</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Probationary rate</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="probi_rate" name="probi_rate" class="form-control m-money"
+                                       title="Probationary Rate" placeholder="0.00" required> 
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <small>php</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <label class="sr-only" for="Gross Salary">Gross Salary</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Gross Salary</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="gross_salary" name="gross_salary" class="form-control m-money"
+                                       title="Gross Salary" placeholder="0.00" required> 
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <small>php</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <label class="sr-only" for="Basic Salary">Basic Salary</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Basic Salary</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="basic_salary" name="basic_salary" class="form-control m-money"
+                                       title="Basic Salary" placeholder="0.00" required> 
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <small>php</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <label class="sr-only" for="Other Bonus Allowances">Other Bonus Allowances</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Other Bonus Allowances</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="other_bonus_allowance" name="other_bonus_allowance" class="form-control"
+                                       title="Other Bonus Allowances" placeholder="Other Bonus Allowances"> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm">
+                            <label class="sr-only" for="Other Benefits">Other Benefits</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Other Benefits</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="other_benefits" name="other_benefits" class="form-control"
+                                       title="Other Benefits" placeholder="Other Benefits"> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="sr-only" for="compensation_date_effective">Date Effective</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <small>Date Effective</small>
+                                    </div>
+                                </div>
+                                <input type="text" id="compensation_date_effective" name="compensation_date_effective" class="form-control m-date"
+                                   title="Date Effective" placeholder="Date Effective" data-provide="datepicker"
+                                   value="{{date('Y-m-d')}}"
+                                   data-date-format="yyyy-mm-dd">
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <h3></h3>
@@ -455,8 +591,8 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="contract_start">Contract Start</label>
-                                <input type="text" id="contract_start" name="contract_start" class="form-control"
-                                       title="Contract Start" placeholder="Contract Start" data-provide="datepicker"
+                                <input type="text" id="contract_start" name="contract_start" class="form-control m-date"
+                                       title="Contract Start" placeholder="yyyy-mm-dd" data-provide="datepicker"
                                        value="{{date('Y-m-d')}}"
                                        data-date-format="yyyy-mm-dd">
                             </div>
@@ -464,9 +600,9 @@
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="contract_end">Contract End</label>
-                                <input type="text" id="contract_end" name="contract_end" class="form-control"
-                                       title="Contract End" placeholder="Contract End" data-provide="datepicker"
-                                       data-date-format="yyyy-mm-dd">
+                                <input type="text" id="contract_end" name="contract_end" class="form-control m-date"
+                                       title="Contract End" placeholder="yyyy-mm-dd" data-provide="datepicker"
+                                       data-date-format="yyyy-mm-dd" value="0000-00-00">
                             </div>
                         </div>
 

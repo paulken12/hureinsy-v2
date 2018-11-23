@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js></script>
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>
     // Enable pusher logging - don't include this in production

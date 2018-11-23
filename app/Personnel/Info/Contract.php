@@ -3,6 +3,8 @@
 namespace App\Personnel\Info;
 
 use App\Annex\JobDescription\AnnexJobDescription;
+use App\Annex\Schedule\AnnexSchedule;
+use App\Annex\Compensation\AnnexCompensation;
 use App\Contract\Job;
 use App\Contract\Project;
 use App\Master\MasterCompany;
@@ -21,6 +23,14 @@ class Contract extends Model
 
     public function jobDescription() {
         return $this->belongsTo(AnnexJobDescription::class, 'job_id');
+    }
+
+    public function schedule() {
+        return $this->belongsTo(AnnexSchedule::class, 'schedule_id');
+    }
+
+    public function compensation() {
+        return $this->belongsTo(AnnexCompensation::class, 'compensation_id');
     }
 
     public function jobs() {

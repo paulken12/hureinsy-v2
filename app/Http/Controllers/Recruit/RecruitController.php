@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Recruit;
 
 use App\Annex\JobDescription\AnnexJobDescription;
 use App\Annex\Schedule\AnnexSchedule;
-use App\Annex\compensation\AnnexCompensation;
+use App\Annex\Compensation\AnnexCompensation;
 use App\Contract\Job;
 use App\Contract\Project;
 use App\Helper\Slug;
@@ -50,6 +50,8 @@ class RecruitController extends Controller
 
     public function store(Request $request) {
 
+        //dd($request->all());
+
         $slug = new Slug();
         $request->validate([
 
@@ -87,18 +89,28 @@ class RecruitController extends Controller
             'schedule_date_effective'=>'nullable',
         ]);
 
+        $compensation = $request->validate([
+            'job_grade'=>'nullable',
+            'probi_rate'=>'nullable',
+            'gross_salary'=>'nullable',
+            'basic_salary'=>'nullable',
+            'other_bonus_allowance'=>'nullable',
+            'other_benefits'=>'nullable',
+            'compensation_date_effective'=>'nullable',
+        ]);
+
         $contract = $request->validate([
             'contract_start'=>'nullable',
             'contract_end'=>'nullable',
             'employment_status'=>'nullable',
         ]);
 
-        $compensation = $request->validate([
-            'contract_start'=>'nullable',
-            'contract_end'=>'nullable',
-            'employment_status'=>'nullable',
-        ]);
-
+        //check if employee is probationary
+        if($contract['employment_status'] == 'probationary'){
+            $probi_flag = 1;
+        }else{
+            $probi_flag = 0;
+        }
 
         //generate temporary password
         $password = str_random(8);
@@ -162,26 +174,33 @@ class RecruitController extends Controller
             'work_location_key' => $schedule['work_location'],
         ]);
 
-        $annex_c = AnnexSchedule::create([
-            'schedule_type' => $schedule['schedule_type'],
-            'work_location_key' => $schedule['work_location'],
+        $annex_c = AnnexCompensation::create([
+            'is_probationary' => $probi_flag,
+            'job_grade' => $compensation['job_grade'],
+            'probationary_rate' => $compensation['probi_rate'],
+            'gross_salary' => $compensation['gross_salary'],
+            'basic_salary' => $compensation['basic_salary'],
+            'other_bonus_allowance' => $compensation['other_bonus_allowance'],
+            'other_benefits' => $compensation['other_benefits'],
         ]);
 
         $con  = Contract::create([
             'emp_basic_id'=>$emp->id,
             'job_id'=> $annex_a->id,
-            'schedule_id'=>0,
-            'compensation_id'=>0,
+            'schedule_id'=> $annex_b->id,
+            'compensation_id'=> $annex_c->id,
             'contract_start'=> $contract['contract_start'],
+            'join_date' => $contract['contract_start'],
             'contract_end'=> $contract['contract_end'],
             'employment_status'=> $contract['employment_status'],
             'resigned_date'=>'',
             'job_date_effective'=> $job['job_date_effective'],
             'schedule_date_effective'=> $schedule['schedule_date_effective'],
+            'compensation_date_effective'=> $compensation['compensation_date_effective'],
         ]);
 
 
-        $con->attachProject($job['job_description'],$job['project_assignment']);
+        //$con->attachProject($job['job_description'],$job['project_assignment']);
 
         // send the verification to the new employee
         Mail::to($user)->send(new ConfirmEmail($user,$password));

@@ -199,14 +199,17 @@
                                             <div class="row">
                                                 <div class="col-sm">
                                                     <small>Job Title |</small>
-                                                    <span>{{$contract->jobDescription->job_title}}</span><br>
+                                                    <span>{{$contract->jobDescription->job->job_title}}</span><br>
                                                     <small>Job Description |</small>
-                                                    <span>{{$contract->jobDescription->job_description}}</span><br>
+                                                    <span>{{$contract->jobDescription->job->job_description}}</span><br>
                                                     <small>Department |</small>
-                                                    <span>{{$contract->jobDescription->jobDepartment->department}}</span><br>
-                                                    <small>Effective |</small>
-                                                    <span>{{$contract->job_description_effective === '0000-00-00' ? 'n/a' : $contract->job_description_effective }}</span>
-                                                    <br>
+                                                    <span>{{$contract->jobDescription->job->department->department}}</span><br>
+                                                    <small>Job Date Effective |</small>
+                                                    <span>{{$contract->job_date_effective === '0000-00-00' ? 'n/a' : $contract->job_date_effective }}</span><br>
+                                                    <small>Schedule Date Effective |</small>
+                                                    <span>{{$contract->schedule_date_effective === '0000-00-00' ? 'n/a' : $contract->schedule_date_effective }}</span><br>
+                                                    <small>Compensation Date Effective |</small>
+                                                    <span>{{$contract->compensation_date_effective === '0000-00-00' ? 'n/a' : $contract->compensation_date_effective }}</span><br>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <small>Contract Start |</small>
@@ -223,11 +226,11 @@
                                             <hr>
 
                                             <small>Project Assignment |</small>
-                                            <span>{{$contract->project()->project_title}}</span><br>
-                                            <small>Project Description |</small>
-                                            <span>{{$contract->project()->project_desc}}</span><br>
-                                            <small>Duration |</small> <span>{{$contract->project()->project_start === '0000-00-00' ? 'n/a' : $contract->project()->project_start->format('M j, Y')}}
-                                                to {{$contract->project()->project_end === '0000-00-00' ? 'n/a' : $contract->project()->project_end->format('M j, Y')}}</span>
+                                            <span>{{$contract->jobDescription->project->project_title}}</span><br>
+                                            <small>Project Customer |</small>
+                                            <span>{{$contract->jobDescription->project->customer_name}}</span><br>
+                                            <small>Duration |</small> <span>{{$contract->jobDescription->project->project_start === '0000-00-00' ? 'n/a' : $contract->jobDescription->project->project_start->format('M j, Y')}}
+                                                to {{$contract->jobDescription->project->project_end === '0000-00-00' ? 'n/a' : $contract->jobDescription->project->project_end->format('M j, Y')}}</span>
                                             <br>
                                             <small>Company/Client |</small>
                                             <span>{{$contract->project()->company->name}}</span><br>
