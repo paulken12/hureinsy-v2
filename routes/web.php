@@ -57,7 +57,7 @@ Route::group(['prefix'=>'raj-titans'], function ()
 
 /* ------------------ ADMINISTRATOR ------------------*/
 
-Route::group(['middleware' => ['auth','role:titan|admin','verified']],function()
+Route::group(['middleware' => ['auth','role:titan|admin|human resource','verified']],function()
 {
     /* ------------------ RECRUIT ------------------ */
 

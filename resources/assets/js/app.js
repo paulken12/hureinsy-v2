@@ -32,9 +32,9 @@ Vue.component('medical-form', require('./components/MedicalForm.vue'));
 Vue.component('experience-form', require('./components/ExperienceForm.vue'));
 Vue.component('education-form', require('./components/EducationForm.vue'));
 Vue.component('objective-form', require('./components/ObjectiveForm.vue'));
-Vue.component('contract-form', require('./components/ContractForm.vue'));
 Vue.component('benefit-form', require('./components/BenefitForm.vue'));
 Vue.component('reference-form', require('./components/ReferenceForm.vue'));
+Vue.component('contract-form', require('./components/ContractForm.vue'));
 
 const app = new Vue({
     el: '#app',

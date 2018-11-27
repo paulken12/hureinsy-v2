@@ -30747,9 +30747,9 @@ Vue.component('medical-form', __webpack_require__(214));
 Vue.component('experience-form', __webpack_require__(217));
 Vue.component('education-form', __webpack_require__(140));
 Vue.component('objective-form', __webpack_require__(220));
-Vue.component('contract-form', __webpack_require__(223));
-Vue.component('benefit-form', __webpack_require__(226));
-Vue.component('reference-form', __webpack_require__(229));
+Vue.component('benefit-form', __webpack_require__(223));
+Vue.component('reference-form', __webpack_require__(226));
+Vue.component('contract-form', __webpack_require__(229));
 
 var app = new Vue({
     el: '#app',
@@ -105173,644 +105173,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ContractForm.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-42776ced", Component.options)
-  } else {
-    hotAPI.reload("data-v-42776ced", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 224 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['company_id', 'roles', 'admins', 'users', 'jobs', 'projects'],
-
-    data: function data() {
-        return {
-
-            role_name: [],
-            form: new Form({})
-        };
-    },
-
-    created: function created() {
-        this.pass();
-    },
-    methods: {
-        pass: function pass() {
-            var _this = this;
-
-            this.users.map(function (user) {
-                _this.role_name.push(user.roles);
-            });
-        },
-        onChange: function onChange() {
-            return this.$emit('emit-basic', this.$data);
-        },
-        onSubmit: function onSubmit() {
-            this.form.post('/store/recruit');
-        }
-    }
-
-});
-
-/***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "bd bgc-white" }, [
-      _c("div", { staticClass: "signup-form", attrs: { id: "signup-form" } }, [
-        _c("div", [
-          _c("h3", { attrs: { title: "test" } }),
-          _vm._v(" "),
-          _c("fieldset", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row m-0" }, [
-              _c("div", { staticClass: "col" }, [
-                _c(
-                  "label",
-                  { staticClass: "sr-only", attrs: { for: "company_id" } },
-                  [_vm._v("Company ID")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group mb-2" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.company_id,
-                        expression: "company_id"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", id: "company_id", readonly: "" },
-                    domProps: { value: _vm.company_id },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.company_id = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _vm._m(5)
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "m-0" }, [
-      _c("i", { staticClass: "ti-info-alt size-ti" }),
-      _vm._v("  Basic Information")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("div", { staticClass: "input-group-text" }, [
-        _c("i", { staticClass: "ti-id-badge" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row m-0" }, [
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "first_name" } },
-            [_vm._v("First name")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "first_name",
-              name: "first_name",
-              title: "First name",
-              required: "",
-              placeholder: "First name"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "middle_name" } },
-            [_vm._v("Middle name")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "middle_name",
-              name: "middle_name",
-              title: "Middle name",
-              required: "",
-              placeholder: "Middle name"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "sr-only", attrs: { for: "last_name" } }, [
-            _vm._v("Last name")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "last_name",
-              name: "last_name",
-              title: "Last name",
-              required: "",
-              placeholder: "Last name"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row m-0" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "sr-only", attrs: { for: "email" } }, [
-            _vm._v("Email")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group mb-2" }, [
-            _c("div", { staticClass: "input-group-prepend" }, [
-              _c("div", { staticClass: "input-group-text" }, [
-                _c("i", { staticClass: "ti-email" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                name: "email",
-                id: "email",
-                placeholder: "Email",
-                required: ""
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "sr-only", attrs: { for: "ben_sss" } }, [
-            _vm._v("SSS NO.")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "ben_sss",
-              name: "ben_sss",
-              title: "SSS NO.",
-              placeholder: "SSS NO."
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "ben_pag_ibig" } },
-            [_vm._v("PAGIBIG")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "ben_pag_ibig",
-              name: "ben_pag_ibig",
-              title: "PAGIBIG",
-              placeholder: "PAGIBIG"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "ben_philhealth" } },
-            [_vm._v("PHILHEALTH")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "ben_philhealth",
-              name: "ben_philhealth",
-              title: "PHILHEALTH",
-              placeholder: "PHILHEALTH"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticClass: "sr-only", attrs: { for: "ben_tin" } }, [
-            _vm._v("TIN")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "ben_tin",
-              name: "ben_tin",
-              title: "TIN",
-              placeholder: "TIN"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "payroll_account" } },
-            [_vm._v("Payroll Account")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "payroll_account",
-              name: "payroll_account",
-              title: "Payroll Account",
-              placeholder: "Payroll Account"
-            }
-          })
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-42776ced", module.exports)
-  }
-}
-
-/***/ }),
-/* 226 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(227)
-/* template */
-var __vue_template__ = __webpack_require__(228)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources\\assets\\js\\components\\BenefitForm.vue"
 
 /* hot reload */
@@ -105833,7 +105195,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 227 */
+/* 224 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105945,7 +105307,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 228 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105995,15 +105357,15 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(230)
+var __vue_script__ = __webpack_require__(227)
 /* template */
-var __vue_template__ = __webpack_require__(231)
+var __vue_template__ = __webpack_require__(228)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106042,7 +105404,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 230 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106310,7 +105672,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 231 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106890,6 +106252,409 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1405f570", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(230)
+/* template */
+var __vue_template__ = __webpack_require__(231)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\ContractForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-42776ced", Component.options)
+  } else {
+    hotAPI.reload("data-v-42776ced", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 230 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['contract', 'annex_a', 'annex_b', 'annex_c', 'job', 'dept', 'proj', 'reportto', 'team', 'workloc', 'projloc'],
+
+    data: function data() {
+        return {
+
+            edit: false,
+
+            form: new Form({
+                emp_status: this.contract.employment_status,
+                emp_reportto: '',
+                emp_constart: this.contract.contract_start,
+                emp_conend: this.contract.contract_end,
+                emp_resdate: this.contract.resigned_date,
+
+                emp_jobtitle: this.job.job_title,
+                emp_jobdesc: this.job.job_description,
+                emp_dept: this.dept.department,
+                emp_teamcon: this.team.sub_con,
+                emp_team: '',
+                emp_projass: '',
+                emp_projclient: '',
+                emp_projcust: '',
+                emp_projloc: '',
+                emp_projstart: '',
+                emp_projend: '',
+                emp_aeffect: '',
+
+                emp_workloc: '',
+                emp_sched: '',
+                emp_beffect: '',
+
+                emp_jobgrade: '',
+                emp_probirate: '',
+                emp_grossrate: '',
+                emp_basicrate: '',
+                emp_otherall: '',
+                emp_otherben: '',
+                emp_ceffect: ''
+
+            })
+        };
+    },
+
+    methods: {
+        updateContact: function updateContact() {
+            this.form.patch('/profile/' + this.profile.slug + '/contact');
+            this.edit = false;
+            var toast = this.$toasted.show("Toasted !!", {
+                theme: "bubble",
+                position: "top-right",
+                type: "success"
+            });
+
+            toast.text("Contract updated.").goAway(5000);
+        }
+    }
+});
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm" }, [
+        _c("small", [_vm._v("Employment Status |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_status) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Job Title |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_jobtitle) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Job Description |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_jobdesc) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Department |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_dept) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Team |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_team) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Work Location |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_workloc) }
+        }),
+        _c("br")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-5" }, [
+        _c("small", [_vm._v("Contract Start |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_constart) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Contract End |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_conend) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Resigned Date |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_resdate) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Annex A Date Effective |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_aeffect) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Annex B Date Effective |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_beffect) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Annex C Date Effective |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_ceffect) }
+        }),
+        _c("br")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm" }, [
+        _c("small", [_vm._v("Project Assignment |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_projass) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Project Customer |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_projcust) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Duration |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_projstart) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Company/Client |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_projclient) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Location |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_projloc) }
+        }),
+        _c("br")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-5" }, [
+        _c("small", [_vm._v("Job Grade |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_jobgrade) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Probationary Rate |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_probirate) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Gross Salary |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_grossrate) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Basic Salary |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_basicrate) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Other Allowance |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_otherall) }
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("small", [_vm._v("Other Benefits |")]),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "c-grey-900",
+          domProps: { textContent: _vm._s(_vm.form.emp_otherben) }
+        }),
+        _c("br")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "peers ai-c jc-sb" }, [
+      _c("div", { staticClass: "peers peer-greed" }, [
+        _c("div", { staticClass: "peer" }, [_c("h4", [_vm._v("Contract")])])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-42776ced", module.exports)
   }
 }
 

@@ -23,8 +23,7 @@
                                 </a>
                             </li>
 
-                            @can('view', $profile->user)
-
+                            @if(Auth::user()->hasRole('human resource') || Auth::user()->hasRole('executive') || Auth::user()->hasRole('titan') ||Auth::user()->hasRole('admin') || $profile->user == Auth::user()) 
                                 @permission('read-contract')
                                 <li class="nav-item">
                                     <a href="#contract" class="nav-link c-grey-800 cH-blue-500" id="contract-tab"
@@ -38,7 +37,9 @@
                                     </a>
                                 </li>
                                 @endpermission
+                            @endif
 
+                            @can('view', $profile->user)
                                 <li class="nav-item">
                                     <a href="#address" class="nav-link c-grey-800 cH-blue-500" id="address-tab"
                                        data-toggle="tab" role="tab" aria-controls="address" aria-selected="true">
@@ -182,79 +183,131 @@
                         </div>
                     </div>
 
-                    @can('view', $profile->user)
 
+                     @if(Auth::user()->hasRole('human resource') || Auth::user()->hasRole('executive') || Auth::user()->hasRole('titan') ||Auth::user()->hasRole('admin') || $profile->user == Auth::user()) 
                         @permission('read-contract')
                         <div class="tab-pane fade profile-info" id="contract" role="tabpanel"
                              aria-labelledby="contract-tab">
                             <div class="profile-content-wrapper">
-                                <!-- Header -->
-                            @include('personnel.profile.include.info')
-
                             <!-- Content -->
                                 <div class="bdT pX-40 pY-30">
                                     @foreach ($profile->empContract as $contract)
-                                        @if($contract->jobDescription !== null)
-                                            <h5>Contract</h5>
-                                            <div class="row">
-                                                <div class="col-sm">
-                                                    <small>Job Title |</small>
-                                                    <span>{{$contract->jobDescription->job->job_title}}</span><br>
-                                                    <small>Job Description |</small>
-                                                    <span>{{$contract->jobDescription->job->job_description}}</span><br>
-                                                    <small>Department |</small>
-                                                    <span>{{$contract->jobDescription->job->department->department}}</span><br>
-                                                    <small>Job Date Effective |</small>
-                                                    <span>{{$contract->job_date_effective === '0000-00-00' ? 'n/a' : $contract->job_date_effective }}</span><br>
-                                                    <small>Schedule Date Effective |</small>
-                                                    <span>{{$contract->schedule_date_effective === '0000-00-00' ? 'n/a' : $contract->schedule_date_effective }}</span><br>
-                                                    <small>Compensation Date Effective |</small>
-                                                    <span>{{$contract->compensation_date_effective === '0000-00-00' ? 'n/a' : $contract->compensation_date_effective }}</span><br>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <small>Contract Start |</small>
-                                                    <span>{{$contract->contract_start === '0000-00-00' ? 'n/a' : $contract->contract_start }}</span><br>
-                                                    <small>Contract End |</small>
-                                                    <span>{{$contract->contract_end === '0000-00-00' ? 'n/a' : $contract->contract_end }}</span><br>
-                                                    <small>Employment Status |</small>
-                                                    <span> {{$contract->status->employee_status}}</span><br>
-                                                    <small>Resigned Date |</small>
-                                                    <span>{{$contract->resigned_date === '0000-00-00' ? 'n/a' : $contract->resigned_date }}</span><br>
+                                        @if($contract->employment_status !== 'separated')
+
+                                            <div class="peers ai-c jc-sb">
+                                                <div class="peers peer-greed">
+                                                    <div class="peer">
+                                                        <h4>Contract</h4>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <hr>
 
-                                            <small>Project Assignment |</small>
-                                            <span>{{$contract->jobDescription->project->project_title}}</span><br>
-                                            <small>Project Customer |</small>
-                                            <span>{{$contract->jobDescription->project->customer_name}}</span><br>
-                                            <small>Duration |</small> <span>{{$contract->jobDescription->project->project_start === '0000-00-00' ? 'n/a' : $contract->jobDescription->project->project_start->format('M j, Y')}}
-                                                to {{$contract->jobDescription->project->project_end === '0000-00-00' ? 'n/a' : $contract->jobDescription->project->project_end->format('M j, Y')}}</span>
-                                            <br>
-                                            <small>Company/Client |</small>
-                                            <span>{{$contract->project()->company->name}}</span><br>
-                                            <small>Location |</small>
-                                            <span>{{$contract->project()->company->address}}</span><br>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <small>Employment Status |</small> 
+                                                    <span>{{$contract->employment_status}}</span><br>
+                                                    
+                                                    <small>Job Title |</small> 
+                                                    <span>{{$contract->jobDescription->job->job_title}}</span><br>
+                                                    
+                                                    <small>Job Description |</small> 
+                                                    <span>{{$contract->jobDescription->job->job_description}}</span><br>
+                                                    
+                                                    <small>Department |</small> 
+                                                    <span>{{$contract->jobDescription->department->department}}</span><br>
+                                                    
+                                                    <small>Team |</small> 
+                                                    <span>{{$contract->jobDescription->team->sub_con}}
+                                                          {{$contract->jobDescription->team->display_name}}</span><br>
+                                                    
+                                                    <small>Work Location |</small> 
+                                                    <span>{{$contract->schedule->company->name}}</span><br>
+                                                </div>
+
+                                                <div class="col-sm-5">
+                                                    <small>Contract Start |</small> 
+                                                    <span>{{$contract->contract_start == '0000-00-00' ? 'n/a' : $contract->contract_start}}</span><br>
+                                                    
+                                                    <small>Contract End |</small> 
+                                                    <span>{{$contract->contract_end == '0000-00-00' ? 'n/a' : $contract->contract_end}}</span><br>
+                                                    
+                                                    <small>Resigned Date |</small> 
+                                                    <span>{{$contract->resigned_date == '0000-00-00' ? 'n/a' : $contract->resigned_date}}</span><br>
+                                                    
+                                                    <small>Annex A Date Effective |</small> 
+                                                    <span>{{$contract->job_date_effective == '0000-00-00' ? 'n/a' : $contract->job_date_effective}}</span><br>
+                                                    
+                                                    <small>Annex B Date Effective |</small> 
+                                                    <span>{{$contract->schedule_date_effective == '0000-00-00' ? 'n/a' : $contract->schedule_date_effective}}</span><br>
+                                                    
+                                                    <small>Annex C Date Effective |</small> 
+                                                    <span>{{$contract->compensation_date_effective == '0000-00-00' ? 'n/a' : $contract->compensation_date_effective}}</span><br>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <small>Project Assignment |</small> 
+                                                    <span>{{$contract->jobDescription->project->project_title}}</span><br>
+                                                    
+                                                    <small>Project Customer |</small> 
+                                                    <span>{{$contract->jobDescription->project->customer_name}}</span><br>
+                                                    
+                                                    <small>Duration |</small> 
+                                                    <span>{{$contract->jobDescription->project->project_start .' up to '. $contract->jobDescription->project->project_end}}</span><br>
+                                                    
+                                                    <small>Company/Client |</small>
+                                                    <span>{{$contract->jobDescription->project->company->name}}</span><br>
+                                                    
+                                                    <small>Location |</small> 
+                                                    <span>{{$contract->jobDescription->project->company->address}}</span><br>
+                                                </div>
+
+                                                <div class="col-sm-5">
+                                                    <small>Job Grade |</small> 
+                                                    <span>{{$contract->compensation->job_grade}}</span><br>
+                                                    
+                                                    <small>Probationary Rate |</small> 
+                                                    <span>{{$contract->compensation->probationary_rate}}</span><br>
+                                                    
+                                                    <small>Gross Salary |</small> 
+                                                    <span>{{$contract->compensation->gross_salary}}</span><br>
+                                                    
+                                                    <small>Basic Salary |</small> 
+                                                    <span>{{$contract->compensation->basic_salary}}</span><br>
+                                                    
+                                                    <small>Other Allowance |</small> 
+                                                    <span>{{$contract->compensation->other_bonus_allowance}}</span><br>
+                                                    
+                                                    <small>Other Benefits |</small> 
+                                                    <span>{{$contract->compensation->other_benefits}}</span><br>
+                                                </div>
+                                            </div>
+
                                         @else
                                             <div class="container-fluid text-center">
                                                 <span>Contract ended</span>
                                             </div>
                                         @endif
-
                                     @endforeach
 
                                 </div>
                             </div>
                         </div>
                         @endpermission
+                    @endif
 
+                    @can('view', $profile->user)
                         <div class="tab-pane fade profile-info" id="address" role="tabpanel"
                              aria-labelledby="address-tab">
                             <div class="profile-info-body">
 
                                 <address-form
-                                        @emit-address="addressEdit"
+                                        {{-- @emit-address="addressEdit" --}}
                                         :address="{{$profile->address}}"
                                         :profile="{{$profile}}"
                                 ></address-form>

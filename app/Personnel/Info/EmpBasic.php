@@ -4,6 +4,7 @@ namespace App\Personnel\Info;
 
 use App\Contract\Job;
 use App\Contract\Project;
+use App\Personnel\Info\Contract;
 use App\Master\MasterAddressType;
 use App\Master\MasterCitizenship;
 use App\Master\MasterCivilStatus;

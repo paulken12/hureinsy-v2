@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Personnel\Profile;
 
 use App\Master\MasterBloodType;
 use App\Master\MasterEducationType;
+use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpAddress;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpContract;
 use App\Personnel\Info\EmpExperience;
 use App\Personnel\Info\EmpReference;
 use App\Personnel\Info\EmpSkill;
+use App\Role;
 use function Complex\add;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,7 +27,9 @@ class ProfileController extends Controller
         $blood = MasterBloodType::all();
         $education_type= MasterEducationType::all();
 
-        return view('personnel.profile.show', compact('profile','isOwner','blood','education_type'));
+        $role = Role::all();
+
+        return view('personnel.profile.show', compact('profile','isOwner','blood','education_type','role'));
     }
 
     public function updateAddress(Request $request,EmpBasic $profile)

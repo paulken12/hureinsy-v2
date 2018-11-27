@@ -139,21 +139,21 @@
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                        @if(Auth::user()->hasRole('operation manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.search')}}">
                                     <span>Request a form</span>
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->hasRole('manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                        @if(Auth::user()->hasRole('operation manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.reassess.list', [date('m'), date('Y')])}}">
                                     <span>Reassessment <small><span class="badge badge-pill badge-danger" title="Your request needs reassessment">{{empty($count->count_open_man()) ? '' : $count->count_open_man()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
-                        @if(Auth::user()->hasRole('human-resource') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
+                        @if(Auth::user()->hasRole('human resource') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="{{route('paf.assessment.list', [date('m'), date('Y')])}}">
                                     <span>Assessment <small><span class="badge badge-pill badge-danger" title="You have request to assess">{{empty($count->count_open_hr()) ? '' : $count->count_open_hr()}}</span></small></span>
@@ -170,7 +170,6 @@
                     </ul>
                 </li>
 
-                @if(Auth::user()->hasRole('titan'))
                     {{--<li class="nav-item dropdown"><a class="dropdown-toggle" href="javascript:void(0);"><span--}}
                                     {{--class="icon-holder"><i class="c-blue-500 ti-time"></i> </span><span--}}
                                     {{--class="title">Attendance Management</span> <span class="arrow"><i--}}
@@ -188,10 +187,14 @@
                                         class="ti-angle-right"></i></span></a>
                         <ul class="dropdown-menu">
                             <li><a class="sidebar-link" href="{{route('personnel')}}">Personnel List</a></li>
-                            <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
-                            <li><a class="sidebar-link" href="{{route('reports')}}">Reports</a></li>
+                            @if(Auth::user()->hasRole('titan') || Auth::user()->hasRole('human resource'))
+                                <li><a class="sidebar-link" href="{{route('create.recruit')}}">New Recruit</a></li>
+                                <li><a class="sidebar-link" href="{{route('reports')}}">Reports</a></li>
+                            @endif
                         </ul>
                     </li>
+
+                @if(Auth::user()->hasRole('titan'))
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
