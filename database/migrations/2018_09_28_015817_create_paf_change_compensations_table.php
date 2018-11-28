@@ -17,7 +17,9 @@ class CreatePafChangeCompensationsTable extends Migration
             $table->increments('id');
             $table->integer('request_id')->unsigned();
             $table->string('proposed_key_job_grade')->nullable();
-            $table->string('proposed_base_salary')->nullable();
+            $table->string('proposed_probi_rate')->nullable();
+            $table->string('proposed_basic_salary')->nullable();
+            $table->string('proposed_gross_salary')->nullable();
             $table->string('proposed_bonus_allowance')->nullable();
             $table->string('proposed_benefits')->nullable();
             $table->string('proposed_remarks_hr')->nullable();

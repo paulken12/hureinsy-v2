@@ -25,8 +25,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_job_title" value="{{$employee_contract->job_id}}">
-			<p>{{$employee_contract->jobs->job_title}} {{$employee_contract->jobs->job_description}}</p>
+			<input type="hidden" name="current_job_title" value="{{$employee_contract->jobDescription->job_id}}">
+			<p>{{$employee_contract->jobDescription->job->job_title}} {{$employee_contract->jobDescription->job->job_description}}</p>
 		</div>
 	</div>
 	<div class="col">
@@ -49,8 +49,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_department" value="{{$employee_contract->jobs->master_department_key}}">
-			<p>{{$employee_contract->jobs->department->department}}</p>
+			<input type="hidden" name="current_department" value="{{$employee_contract->jobDescription->job->department_key}}">
+			<p>{{$employee_contract->jobDescription->job->department->department}}</p>
 		</div>
 	</div>
 	<div class="col">
@@ -73,8 +73,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_team" value="{{empty($employee_team->id) ? '' : $employee_team->id}}" readonly>
-			<p>{{empty($employee_team->id) ? '' : $employee_team->display_name}}</p>
+			<input type="hidden" name="current_team" value="{{$employee_contract->jobDescription->job->team_id}}" readonly>
+			<p>{{$employee_contract->jobDescription->team->sub_con}} {{' - '. $employee_contract->jobDescription->team->display_name}}</p>
 		</div>
 	</div>
 	<div class="col">
@@ -82,7 +82,7 @@
 			<select name="proposed_team" id="proposed_team" class="form-control">
 				<option value="" selected>--select--</option>
 				@foreach($teams as $team)
-					<option value="{{$team->id}}">{{$team->display_name}}</option>
+					<option value="{{$team->id}}">{{$team->sub_con}} {{' - '. $team->display_name}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -97,7 +97,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_supervisor" value="{{empty($employee_name->reporting_to) ? '' : $employee_name->reporting_to}}" readonly>
+			<input type="hidden" name="current_supervisor" value="{{empty($employee_contract->jobDescription->reporting_to) ? '' : $employee_contract->jobDescription->reporting_to}}" readonly>
 			{{$employee_name->reportingTo()}}
 		</div>
 	</div>
@@ -123,8 +123,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_project_assignment" value="{{$employee_contract->job_id}}" readonly>
-			<p>{{$employee_contract->project()->project_title}} {{$employee_contract->project()->project_desc}}</p>
+			<input type="hidden" name="current_project_assignment" value="{{$employee_contract->jobDescription->project_id}}" readonly>
+			<p>{{$employee_contract->jobDescription->project->project_title}} {{$employee_contract->jobDescription->project->customer_name}}</p>
 
 		</div>
 	</div>

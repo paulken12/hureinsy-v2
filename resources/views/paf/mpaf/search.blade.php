@@ -41,13 +41,12 @@
 						</tfoot>
 						<tbody>
 							@foreach ($employee_info as $lists)
-								@if($lists->contract->pluck('employment_status')->first() != 'resigned')
 									<tr>
 										<th class="text-center">{{empty($lists->company_id) ? '' : $lists->company_id}}</th>
 										<td>{{empty($lists->company_id) ? '' : $lists->last_name .', '. $lists->first_name}}</td>
-										<td>{{$lists->contract->pluck('employment_status')->first()}}</td>
+										<td><span class="badge {{$lists->conStatus === 'separated' ? 'bgc-red-50 c-red-700' :'bgc-green-50 c-green-700'}} p-10 lh-0 tt-c badge-pill">{{$lists->conStatus}}</span></td>
 										<td>{{$lists->contract->pluck('contract_start')->first()}}</td>
-										@if($lists->contract->pluck('contract_start')->first() <= date('Y-m-d', strtotime(date('Y-m-d'). ' - 6 months')) && $lists->contract->pluck('employment_status')->first() != 'resigned')
+										@if($lists->contract->pluck('contract_start')->first() <= date('Y-m-d', strtotime(date('Y-m-d'). ' - 6 months')))
 											<td>
 												<a class="btn btn-primary btn-sm" href="{{route('paf.search.result.show', $lists->id)}}">Request Paf</a>
 											</td>
@@ -57,7 +56,6 @@
 											</td>
 										@endif
 									</tr>
-								@endif
 							@endforeach
 						</tbody>
 	                </table>

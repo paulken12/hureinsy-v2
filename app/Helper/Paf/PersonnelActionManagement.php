@@ -204,4 +204,13 @@ class PersonnelActionManagement {
                             ->toArray();
     }
 
+/*    public static function contractChange(){
+        return PafManagement::selectRaw('year(created_at) year, month(created_at) month, monthname(created_at) monthname, count(*) published')
+                            ->groupBy('year', 'month')
+                            ->orderByRaw('min(created_at) desc')
+                            ->get()
+                            ->toArray();
+    }*/
+
+
 }

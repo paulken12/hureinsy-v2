@@ -30707,7 +30707,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(143);
-module.exports = __webpack_require__(232);
+module.exports = __webpack_require__(235);
 
 
 /***/ }),
@@ -30750,11 +30750,12 @@ Vue.component('objective-form', __webpack_require__(220));
 Vue.component('benefit-form', __webpack_require__(223));
 Vue.component('reference-form', __webpack_require__(226));
 Vue.component('contract-form', __webpack_require__(229));
+Vue.component('nature-form', __webpack_require__(232));
 
 var app = new Vue({
     el: '#app',
 
-    props: ['objective', 'profile', 'address'],
+    props: ['employment_status', 'objective', 'profile', 'address'],
 
     data: function data() {
         return {
@@ -30789,7 +30790,7 @@ var app = new Vue({
         $('#paf-list').DataTable();
 
         $(document).ready(function ($) {
-            $('.m-money').mask('000.000.000.000,00', { reverse: true });
+            $('.m-money').mask('000,000,000.00', { reverse: true });
             $('.m-date').mask('0000-00-00');
         });
 
@@ -106660,6 +106661,178 @@ if (false) {
 
 /***/ }),
 /* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(233)
+/* template */
+var __vue_template__ = __webpack_require__(234)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\NatureForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-09dbff42", Component.options)
+  } else {
+    hotAPI.reload("data-v-09dbff42", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 233 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['contract_change', 'flag'],
+
+	data: function data() {
+		return {
+			employment_status: ''
+		};
+	}
+});
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.flag == "req"
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.employment_status,
+                        expression: "employment_status"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      name: "employment_status",
+                      id: "employment_status"
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.employment_status = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("--select--")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "" } })
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      : _c("div", [_vm._v("\n\t\tvue js is an ***\n\t")])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "employment_status" } }, [
+      _c("strong", [_vm._v("Employment Status")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-09dbff42", module.exports)
+  }
+}
+
+/***/ }),
+/* 235 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

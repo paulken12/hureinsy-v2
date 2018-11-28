@@ -35,11 +35,12 @@ Vue.component('objective-form', require('./components/ObjectiveForm.vue'));
 Vue.component('benefit-form', require('./components/BenefitForm.vue'));
 Vue.component('reference-form', require('./components/ReferenceForm.vue'));
 Vue.component('contract-form', require('./components/ContractForm.vue'));
+Vue.component('nature-form', require('./components/NatureForm.vue'));
 
 const app = new Vue({
     el: '#app',
 
-    props: ['objective', 'profile','address'],
+    props: ['employment_status', 'objective', 'profile','address'],
 
     data: function()
     {
@@ -77,7 +78,7 @@ const app = new Vue({
 
 
         $(document).ready(function($){
-            $('.m-money').mask('000.000.000.000,00', {reverse: true});
+            $('.m-money').mask('000,000,000.00', {reverse: true});
             $('.m-date').mask('0000-00-00');
         });
  

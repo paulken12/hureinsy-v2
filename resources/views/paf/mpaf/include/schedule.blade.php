@@ -26,12 +26,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="current_schedule" name="current_schedule" class="form-control" title="Current_schedule" value="default" readonly="">
+			<input type="hidden" id="current_schedule" name="current_schedule" class="form-control" title="Current_schedule" value="{{$employee_contract->schedule->schedule_type}}">
+			 <p>{{$employee_contract->schedule->schedule_type}}</p>
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="text" id="proposed_schedule" name="proposed_schedule" class="form-control" title="Proposed_schedule">
+			<input type="text" id="proposed_schedule" name="proposed_schedule" class="form-control" title="Proposed_schedule" placeholder="Schedule Type">
 		</div>
 	</div>
 </div>
@@ -44,8 +45,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->project()->company->key}}">
-			<p>{{$employee_contract->project()->company->name}}</p>
+			<input type="hidden" id="current_work_location" name="current_work_location" class="form-control" title="Current_schedule" value="{{$employee_contract->schedule->work_location_key}}">
+			<p>{{$employee_contract->schedule->company->name}} {{' - '. $employee_contract->schedule->company->address}}</p>
 		</div>
 	</div>
 	<div class="col">
