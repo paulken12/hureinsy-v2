@@ -40,7 +40,7 @@ Vue.component('nature-form', require('./components/NatureForm.vue'));
 const app = new Vue({
     el: '#app',
 
-    props: ['employment_status', 'objective', 'profile','address'],
+    props: ['objective', 'profile','address'],
 
     data: function()
     {

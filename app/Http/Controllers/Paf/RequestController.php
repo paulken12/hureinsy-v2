@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Paf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Master\MasterEmpStatus;
 use App\Paf\PafManagement;
 use App\Paf\PafChangeJob;
 use App\Paf\PafChangeSchedule;
@@ -46,6 +47,8 @@ class RequestController extends Controller
 
         $employment_status = Cache::get('call_contract_change');
 
+        $cont_change = MasterEmpStatus::all();
+
         $sched_type = Cache::get('call_master_paf_schedule_type');
 
         $reportingTo = Cache::get('call_emp_info');
@@ -56,7 +59,7 @@ class RequestController extends Controller
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
 
-        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo'));
+        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo', 'cont_change'));
         
     }
 
@@ -137,8 +140,14 @@ class RequestController extends Controller
 
     public function store(Request $request, $form)
     {
+
+        dd($request->all());
         $validator = $request->validate([
             'employment_status' => 'required|exists:master_contract_change_pafs,key',
+            'cont_change' => 'nullable',
+            'cont_start' => 'nullable',
+            'cont_end' => 'nullable',
+            'res_date' => 'nullable',
             'remarks'=>'required|string|max:191',
             'proposed_job_title' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
@@ -148,7 +157,9 @@ class RequestController extends Controller
             'proposed_schedule' => 'nullable|string|max:191',
             'proposed_work_location' => 'nullable|string|max:191',
             'proposed_job_grade' => 'nullable|string|max:191',
-            'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
+            'proposed_probi_rate' => 'nullable|string|max:191',
+            'proposed_gross_salary' => 'nullable|string|max:191',
+            'proposed_basic_salary' => 'nullable|string|digits_between:0,10',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
             'date_effective' => 'required',
@@ -156,11 +167,23 @@ class RequestController extends Controller
 
         $user = Auth::user()->basicInfo->pluck('id')->first();
 
+        if($request->input('employment_status') == 'eoc' || $request->input('employment_status') == 'snr'){
+            $cc = 'separated';
+        }else if($request->input('employment_status') == 'ttp'){
+            $cc = 'project-based';
+        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'reg'){
+            $cc = 'regular';
+        }else{
+            $cc = $request->input('cont_change');
+        }
+
         $request_id = PafManagement::create([
 
             'employee_company_id' => $form,
 
             'master_key_employment_status' => $request->input('employment_status'),
+
+            'master_key_change_of_contract' => $cc,
 
             'requested_by_company_id' => $user,
 
@@ -173,6 +196,12 @@ class RequestController extends Controller
             'master_id_sub_request_status' => '1',
 
             'date_effective' => $request->input('date_effective'),
+
+            'contract_start' => $request->input('cont_start'),
+            
+            'contract_end' => $request->input('cont_end'),
+
+            'resigned_date' => $request->input('res_date'),
 
         ]);
 

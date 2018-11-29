@@ -14,43 +14,43 @@ class MasterContractChangePaf extends Seeder
         $values = [
             [
                 'key' => 'ren',
-                'change_type' => 'renewal',
+                'change_type' => 'Renewal',
             ],
             [
                 'key' => 'eoc',
-                'change_type' => 'end of contract',
+                'change_type' => 'End of contract',
             ],
             [
                 'key' => 'tra',
-                'change_type' => 'transfer',
+                'change_type' => 'Transfer',
             ],
             [
                 'key' => 'reh',
-                'change_type' => 'rehire',
+                'change_type' => 'Rehire',
             ],
             [
                 'key' => 'ttp',
-                'change_type' => 'trainee to project',
+                'change_type' => 'Trainee to project',
             ],
             [
                 'key' => 'reg',
-                'change_type' => 'regularization',
+                'change_type' => 'Regularization',
             ],
             [
                 'key' => 'eop',
-                'change_type' => 'end of probationary period',
+                'change_type' => 'End of probationary period',
             ],
             [
                 'key' => 'sai',
-                'change_type' => 'salary increase',
+                'change_type' => 'Salary increase',
             ],
             [
                 'key' => 'sfr',
-                'change_type' => 'employment separation for rehire',
+                'change_type' => 'Employment separation for rehire',
             ],
             [
                 'key' => 'snr',
-                'change_type' => 'employment separation not for rehire',
+                'change_type' => 'Employment separation not for rehire',
             ],
             [
                 'key' => 'ptr',
@@ -58,11 +58,11 @@ class MasterContractChangePaf extends Seeder
             ],
             [
                 'key' => 'pro',
-                'change_type' => 'promotion',
+                'change_type' => 'Promotion',
             ],
             [
                 'key' => 'dem',
-                'change_type' => 'demotion',
+                'change_type' => 'Demotion',
             ],
 
         ];

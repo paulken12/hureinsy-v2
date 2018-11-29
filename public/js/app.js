@@ -30755,7 +30755,7 @@ Vue.component('nature-form', __webpack_require__(232));
 var app = new Vue({
     el: '#app',
 
-    props: ['employment_status', 'objective', 'profile', 'address'],
+    props: ['objective', 'profile', 'address'],
 
     data: function data() {
         return {
@@ -106737,15 +106737,103 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['contract_change', 'flag'],
+	props: ['contract_change', 'emp_stat', 'flag'],
 
 	data: function data() {
 		return {
-			employment_status: ''
+			employment_status: '',
+			cont_change: ''
+
 		};
+	},
+
+	mounted: function mounted() {
+
+		$(document).ready(function ($) {
+			$('.m-date').mask('0000-00-00');
+		});
 	}
 });
 
@@ -106798,18 +106886,343 @@ var render = function() {
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("--select--")
-                    ]),
+                    _c(
+                      "option",
+                      { attrs: { value: "", selected: "", hidden: "" } },
+                      [_vm._v("--Select Category--")]
+                    ),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "" } })
-                  ]
+                    _vm._l(_vm.contract_change, function(changes) {
+                      return _c(
+                        "option",
+                        { domProps: { value: changes.key } },
+                        [_vm._v(_vm._s(changes.change_type))]
+                      )
+                    })
+                  ],
+                  2
                 )
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
           ])
         ])
-      : _c("div", [_vm._v("\n\t\tvue js is an ***\n\t")])
+      : _c("div"),
+    _vm._v(" "),
+    _vm.employment_status == "reh" ||
+    _vm.employment_status == "sfr" ||
+    _vm.employment_status == "ren"
+      ? _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cont_change,
+                      expression: "cont_change"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "cont_change", id: "cont_change" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.cont_change = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", selected: "", hidden: "" } },
+                    [_vm._v("--Select Category--")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.emp_stat, function(stats) {
+                    return stats.key != "separated"
+                      ? _c("option", { domProps: { value: stats.key } }, [
+                          _vm._v(_vm._s(stats.employee_status))
+                        ])
+                      : _vm._e()
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "mask",
+                    rawName: "v-mask",
+                    value: "####-##-##",
+                    expression: "'####-##-##'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "cont_start",
+                  name: "cont_start",
+                  title: "Contract_start",
+                  "data-provide": "datepicker",
+                  "data-date-format": "yyyy-mm-dd",
+                  placeholder: "yyyy-mm-dd"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.cont_change != "regular"
+            ? _c("div", { staticClass: "col" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "mask",
+                        rawName: "v-mask",
+                        value: "####-##-##",
+                        expression: "'####-##-##'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "cont_end",
+                      name: "cont_end",
+                      title: "Contract_end",
+                      "data-provide": "datepicker",
+                      "data-date-format": "yyyy-mm-dd",
+                      placeholder: "yyyy-mm-dd"
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ])
+      : _vm.employment_status == "eop"
+        ? _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cont_change,
+                        expression: "cont_change"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "cont_change", id: "cont_change" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.cont_change = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "", selected: "", hidden: "" } },
+                      [_vm._v("--Select Category--")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.emp_stat, function(stats) {
+                      return _c("option", { domProps: { value: stats.key } }, [
+                        _vm._v(_vm._s(stats.employee_status))
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.cont_change != "separated"
+              ? _c("div", { staticClass: "col" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "####-##-##",
+                          expression: "'####-##-##'"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "cont_start",
+                        name: "cont_start",
+                        title: "Contract_start",
+                        "data-provide": "datepicker",
+                        "data-date-format": "yyyy-mm-dd",
+                        placeholder: "yyyy-mm-dd"
+                      }
+                    })
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.cont_change == "probationary" ||
+            _vm.cont_change == "project-based"
+              ? _c("div", { staticClass: "col" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "####-##-##",
+                          expression: "'####-##-##'"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "cont_end",
+                        name: "cont_end",
+                        title: "Contract_end",
+                        "data-provide": "datepicker",
+                        "data-date-format": "yyyy-mm-dd",
+                        placeholder: "yyyy-mm-dd"
+                      }
+                    })
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.cont_change == "separated"
+              ? _c("div", { staticClass: "col" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "####-##-##",
+                          expression: "'####-##-##'"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "res_date",
+                        name: "res_date",
+                        title: "Resignation_date",
+                        "data-provide": "datepicker",
+                        "data-date-format": "yyyy-mm-dd",
+                        placeholder: "yyyy-mm-dd"
+                      }
+                    })
+                  ])
+                ])
+              : _vm._e()
+          ])
+        : _vm.employment_status == "eoc" || _vm.employment_status == "snr"
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "mask",
+                        rawName: "v-mask",
+                        value: "####-##-##",
+                        expression: "'####-##-##'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "res_date",
+                      name: "res_date",
+                      title: "Resignation_date",
+                      "data-provide": "datepicker",
+                      "data-date-format": "yyyy-mm-dd",
+                      placeholder: "yyyy-mm-dd"
+                    }
+                  })
+                ])
+              ])
+            ])
+          : _vm.employment_status == "reg" || _vm.employment_status == "ptr"
+            ? _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "####-##-##",
+                          expression: "'####-##-##'"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "cont_start",
+                        name: "cont_start",
+                        title: "Contract_start",
+                        "data-provide": "datepicker",
+                        "data-date-format": "yyyy-mm-dd",
+                        placeholder: "yyyy-mm-dd"
+                      }
+                    })
+                  ])
+                ])
+              ])
+            : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -106819,6 +107232,106 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "employment_status" } }, [
       _c("strong", [_vm._v("Employment Status")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "proposed_effective_date" } }, [
+            _c("strong", [_vm._v("Proposed Date Effective")])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control m-date",
+            attrs: {
+              type: "text",
+              id: "date_effective",
+              name: "date_effective",
+              title: "Date_effective",
+              "data-provide": "datepicker",
+              "data-date-format": "yyyy-mm-dd",
+              placeholder: "yyyy-mm-dd",
+              required: ""
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_change" } }, [
+      _c("strong", [_vm._v("Change Contract Status")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_start" } }, [
+      _c("strong", [_vm._v("Contract Start")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_end" } }, [
+      _c("strong", [_vm._v("Contract End")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_change" } }, [
+      _c("strong", [_vm._v("Change Contract Status")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_start" } }, [
+      _c("strong", [_vm._v("Contract Start")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_end" } }, [
+      _c("strong", [_vm._v("Contract End")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "res_date" } }, [
+      _c("strong", [_vm._v("Resignation Date")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "res_date" } }, [
+      _c("strong", [_vm._v("Resignation Date")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cont_start" } }, [
+      _c("strong", [_vm._v("Start date")])
     ])
   }
 ]

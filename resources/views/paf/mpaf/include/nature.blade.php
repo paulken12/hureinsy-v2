@@ -3,6 +3,7 @@
 
 <nature-form
 	:contract_change="{{$employment_status}}"
+	:emp_stat = "{{$cont_change}}"
 	:flag="'req'"
 ></nature-form>
 
@@ -15,20 +16,6 @@
 	</div>
 </div>	
 
-<div class="row">
-	<div class="col">
-		<div class="form-group">
-			<label for="proposed_effective_date"><strong>Proposed Date Effective</strong></label>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-2">
-		<div class="form-group">
-			<input type="date" id="date_effective" name="date_effective" class="form-control" title="Date_effective" required>
-		</div>
-	</div>
-</div>
 
 {{-- <div class="row">
 	<div class="col">
