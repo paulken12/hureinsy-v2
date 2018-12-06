@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Paf;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Master\MasterEmpStatus;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 use App\Helper\Paf\PersonnelActionManagement;
@@ -47,6 +48,8 @@ class ReassessmentController extends Controller
 
         $employment_status = Cache::get('call_contract_change');
 
+        $cont_change = MasterEmpStatus::all();
+
         $teams = Cache::get('call_team');
 
         //Get paf details
@@ -74,7 +77,7 @@ class ReassessmentController extends Controller
         $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment', 'teams', 'employee_team'));
+    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment', 'teams', 'employee_team', 'cont_change'));
 		}else{
     	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
         }
@@ -84,7 +87,11 @@ class ReassessmentController extends Controller
     {
 
         $validator = $request->validate([
-            'employment_status' => 'exists:master_contract_change_pafs,key|required',
+            'employment_status' => 'required|exists:master_contract_change_pafs,key',
+            'cont_change' => 'nullable',
+            'cont_start' => 'nullable',
+            'cont_end' => 'nullable',
+            'res_date' => 'nullable',
             'remarks'=>'required|string|max:191',
             'proposed_job_title' => 'nullable|string|max:191',
             'proposed_department' => 'nullable|string|max:191',
@@ -94,13 +101,29 @@ class ReassessmentController extends Controller
             'proposed_schedule' => 'nullable|string|max:191',
             'proposed_work_location' => 'nullable|string|max:191',
             'proposed_job_grade' => 'nullable|string|max:191',
-            'proposed_base_salary' => 'nullable|numeric|digits_between:0,10',
+            'proposed_probi_rate' => 'nullable|string|max:191',
+            'proposed_gross_salary' => 'nullable|string|max:191',
+            'proposed_basic_salary' => 'nullable|string|max:191',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
-            'request_status' => 'exists:statuses,id|required',
-            'sub_request_status' => 'exists:sub_statuses,id|required',
-            'date_effective' => 'required', 
+            'date_effective' => 'required',
        ]);
+
+        $user = Auth::user()->basicInfo->pluck('id')->first();
+
+        if($request->input('employment_status') == 'eoc' || $request->input('employment_status') == 'snr'){
+            $cc = 'separated';
+        }else if($request->input('employment_status') == 'ttp'){
+            $cc = 'project-based';
+        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'reg'){
+            $cc = 'regular';
+        }else{
+            if(empty($request->input('cont_change'))){
+                $cc = 'project-based';
+            }else{
+                $cc = $request->input('cont_change');
+            }
+        }
 
         $form_update = PersonnelActionManagement::get_paf_request($form);  
 
@@ -142,7 +165,11 @@ class ReassessmentController extends Controller
 
         $compensation_update->proposed_key_job_grade = $request->input('proposed_job_grade');
 
-        $compensation_update->proposed_base_salary = $request->input('proposed_base_salary');
+        $compensation_update->proposed_probi_rate = $request->input('proposed_probi_rate');
+
+        $compensation_update->proposed_basic_salary = $request->input('proposed_basic_salary');
+
+        $compensation_update->proposed_gross_salary = $request->input('proposed_gross_salary');
         
         $compensation_update->proposed_bonus_allowance = $request->input('proposed_bonus_allowance');
 

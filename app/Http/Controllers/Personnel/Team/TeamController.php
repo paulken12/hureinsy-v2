@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Personnel\Team;
 
+use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Team\Team;
 use Illuminate\Http\Request;
@@ -18,9 +19,21 @@ class TeamController extends Controller
     public function index()
     {
         $emp = EmpBasic::all();
-        $user_team_id = $emp->first()->myTeam();
+        //$user_team_id = $emp->first()->myTeam();
+        $contract = Contract::all();
 
-        return view('personnel.team.index', compact('emp','user_team_id'));
+        $user_team = $contract->where('emp_basic_id', Auth::user()->basicInfo->pluck('id')->first())->first();  
+/*
+        foreach ($contract as $employee) {
+            dd($contract->jobDescription->team->display_name);
+        }*/
+
+/*
+        $user_team_id = Contract::
+
+        dd($user_team_id->id);*/
+
+        return view('personnel.team.index', compact('emp','contract', 'user_team'));
     }
 
     /**

@@ -68,8 +68,7 @@
 								</td>
 								<td>{{empty($lists->assessed_by_company_id) ? '' : '('. $lists->humBasicInfo->company_id .') '. $lists->humBasicInfo->last_name .', '. $lists->humBasicInfo->first_name}}
 								</td>
-								<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-
+								<td>{{$lists->application_flag == '1' ? 'PAF request has been applied to the contract' :$lists->masterPafStatus->request_status .' - '. $lists->masterPafSubStatus->sub_request_status}}</td>
 								<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.view.list.show', $lists->id)}}">View</a></td>
 							</tr>
 						@endforeach

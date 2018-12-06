@@ -64,13 +64,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->display_name}}
+			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->sub_con .' - '. $get_current_job_details->empTeam->display_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<input type="hidden" name="proposed_team" value="{{empty($get_job_details->proposed_key_team) ? '' : $get_job_details->proposed_key_team}}" readonly>
-			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->empTeam->display_name}}
+			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->empTeam->sub_con .' - '.  $get_job_details->empTeam->display_name}}
 		</div>
 	</div>
 </div>
@@ -102,13 +102,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc}}
+			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->customer_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<input type="hidden" name="proposed_project_assignment" value="{{empty($get_job_details->proposed_key_project_assignment) ? '' : $get_job_details->proposed_key_project_assignment}}" readonly>
-			{{empty($get_job_details->proposed_key_project_assignment) ? 'n/a' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc}}
+			{{empty($get_job_details->proposed_key_project_assignment) ? 'n/a' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->customer_name}}
 		</div>
 	</div>
 </div>

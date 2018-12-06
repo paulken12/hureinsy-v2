@@ -20,13 +20,13 @@
 	<div class="col">
 		<div class="form-group">
 			<label for="date_hired"><strong>Date Hired</strong></label>
-			<p>{{$employee_contract->contract_start}}</p>
+			<p>{{$employee_contract->join_date}}</p>
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<label for="team"><strong>Team</strong></label>
-			<p>{{$employee_team->display_name}}</p>
+			<p>{{$employee_contract->jobDescription->team->sub_con}} - {{$employee_contract->jobDescription->team->display_name}}</p>
 		</div>
 	</div>
 </div>

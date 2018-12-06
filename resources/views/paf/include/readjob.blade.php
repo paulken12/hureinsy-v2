@@ -26,7 +26,8 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_job_title) ? 'n/a' : $get_current_job_details->masterJobTitle->job_title .' '. $get_current_job_details->masterJobTitle->job_description}}</div>
+			{{empty($get_current_job_details->current_key_job_title) ? 'n/a' : $get_current_job_details->masterJobTitle->job_title .' '. $get_current_job_details->masterJobTitle->job_description}}
+		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
@@ -48,7 +49,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->masterDepartment->department) ? 'n/a' : $get_job_details->masterDepartment->department}}
+			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->masterDepartment->department}}
 		</div>
 	</div>
 </div>
@@ -61,12 +62,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->display_name}}
+			{{empty($get_current_job_details->current_key_team) ? 'n/a' : $get_current_job_details->empTeam->sub_con .' - '. $get_current_job_details->empTeam->display_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->empTeam->display_name}}
+			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->empTeam->sub_con .' - '.  $get_job_details->empTeam->display_name}}
 		</div>
 	</div>
 </div>
@@ -74,7 +75,7 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="reportto"><strong>Supervisor</strong></label>
+			<label for="reportto"><strong>Reporting to</strong></label>
 		</div>
 	</div>
 	<div class="col">
@@ -97,12 +98,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->project_desc}}
+			{{empty($get_current_job_details->current_key_project_assignment) ? 'n/a' : $get_current_job_details->masterProjectAssignment->project_title .' '. $get_current_job_details->masterProjectAssignment->customer_name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_job_details->proposed_key_project_assignment) ? 'n/a' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->project_desc}}
+			{{empty($get_job_details->proposed_key_project_assignment) ? 'n/a' : $get_job_details->masterProjectAssignment->project_title .' '. $get_job_details->masterProjectAssignment->customer_name}}
 		</div>
 	</div>
 </div>

@@ -97,7 +97,7 @@
            </div>
            <button class="btn btn-success btn-sm" @click="updateAddress">Update</button>
            <button class="btn btn-link btn-sm" @click="edit = false">Cancel</button>
-           <button class="btn btn-link btn-sm float-right">Present address same as Permanent</button>
+           <button class="btn btn-link btn-sm float-right " @click="copypresent">Same as present address</button>
        </div>
        <div v-else>
           <div  v-for="(address, index) in form.address_type">
@@ -178,6 +178,10 @@
             save(){
                 this.updateAddress();
                 // this.editAddress();
+            },
+
+            copypresent(){
+
             },
 
         }

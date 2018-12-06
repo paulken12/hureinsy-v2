@@ -7,6 +7,8 @@
             <div class="card wizard-card" data-col-smor="blue" id="wizard">
                 <form action="/register/confirmed" METHOD="POST" @submit.prevent="onSubmit"
                       @keydown="form.errors.clear($event.target.name)" enctype="multipart/form-data">
+<!-- 
+                    <input type="hidden" name="_token" :value="csrf"> -->
                     <div class="wizard-header">
                         <h3>
                             <b>Please complete your personal information</b> <br>
@@ -106,7 +108,7 @@
                                                            class="form-control"
                                                            v-mask="'####-##-##'"
                                                            data-provide="datepicker" data-date-format="yyyy-mm-dd"
-                                                           title="Birth of birth" placeholder="Date of birth" required>
+                                                           title="Birth of birth" placeholder="Date of birth">
                                                 </div>
                                             </div>
                                             <div class="col-sm">
@@ -259,10 +261,10 @@
 
                                 <div class="card mb-4" v-for="(address, index) in form.address_type">
                                     <div class="card-body">
-                                        <h5 v-text="address"></h5>
                                         <div v-if="index >= 1">
-                                        <button @click="checkboxToggle"> Same as present address</button>
+                                            <a class="btn btn-link btn-sm float-right" @click="checkboxToggle(index)">Same as present address</a>
                                         </div>
+                                        <h5 v-text="address"></h5>
                                         <hr>
 
                                         <div class="row">
@@ -803,15 +805,14 @@
                             </div>
                         </div>
 
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                             aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <label for="tac" class="sr-only"></label>
-                                    <textarea name="tac" id="tac" class="form-control" readonly
-                                              style="height: 480px; col-smor: #000; cursor: default">Terms and Conditions for Hureinsy
-
-
+                        <div class="tab-pane" id="complete">
+                            <div class="container">
+                                <h3>Terms and Conditions for HUREINSY</h3>
+                            </div>
+                            <div class="container-fluid text-center">
+                                <span>
+                                    <textarea id="tac" class="form-control"
+                                              style="height: 360px;color:black ;cursor: default" readonly="">
 Introduction
 These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Hureinsy accessible at hureinsy.com.
 
@@ -865,31 +866,13 @@ These Terms constitute the entire agreement between Hureinsy and you in relation
 
 Governing Law & Jurisdiction
 These Terms will be governed by and interpreted in accordance with the laws of the State of ph, and you submit to the non-exclusive jurisdiction of the state and federal courts located in ph for the resolution of any disputes.
-                                </textarea>
+                                    </textarea>
+                                </span>
+                                <br>
+                                <div class="custom-control mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="confirm" v-model="checked">
+                                    <label class="custom-control-label" for="confirm">I agree to the terms and conditions</label>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane" id="complete">
-                            <div class="container-fluid text-center">
-
-                                <h3>Complete</h3>
-                                <span>Thank you for filling out your information!</span>
-                                <br>
-                                <br>
-                                <button class="btn btn-fill btn-simple">Preview</button>
-                                <br>
-                                <br>
-                                <div class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" id="customControlValidation1"
-                                           required>
-                                    <label class="custom-control-label" for="customControlValidation1">I agree to the <a
-                                            href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Terms and
-                                        Conditions</a></label>
-                                </div>
-
-                                <span></span>
                             </div>
                         </div>
 
@@ -898,9 +881,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                         <div class="pull-right">
                             <input type='button' class='btn btn-next btn-fill btn-success btn-wd btn-sm' name='next'
                                    value='Next'/>
-                            <input type="submit" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish'
-                                   @click="onSubmit"
-                                   value='Submit'/>
+                            <input type="submit" class='btn btn-finish btn-fill btn-success btn-wd btn-sm' name='finish' value='Submit' :disabled="!checked"/>
 
                         </div>
                         <div class="pull-left">
@@ -935,6 +916,9 @@ These Terms will be governed by and interpreted in accordance with the laws of t
 
         data: function () {
             return {
+                csrf: '',
+
+                checked: false,
 
                 submitted: false,
 
@@ -1043,14 +1027,21 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 }
             );
 
+            this.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
         },
 
         methods: {
 
             checkboxToggle(index){
-                this.form.add_unit_num[1] = this.form.add_unit_num[0];
-
-
+                Vue.set(this.form.add_unit_num, index, this.form.add_unit_num[0]);
+                Vue.set(this.form.add_block, index, this.form.add_block[0]);
+                Vue.set(this.form.add_street_name, index, this.form.add_street_name[0]);
+                Vue.set(this.form.add_subdivision, index, this.form.add_subdivision[0]);
+                Vue.set(this.form.add_barangay, index, this.form.add_barangay[0]);
+                Vue.set(this.form.add_city, index, this.form.add_city[0]);
+                Vue.set(this.form.add_province, index, this.form.add_province[0]);
+                Vue.set(this.form.add_zip_code, index, this.form.add_zip_code[0]);
             },
 
             removeUser() {

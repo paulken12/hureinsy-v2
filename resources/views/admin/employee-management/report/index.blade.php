@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col bdT bdR p-0">
+                    {{-- <div class="col bdT bdR p-0">
                         <div class="p-10 bgc-grey-100 layer w-100 text-center">
                             Educational Background
                         </div>
@@ -172,7 +172,7 @@
                                 <label class="custom-control-label" for="train_loc">Location</label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>

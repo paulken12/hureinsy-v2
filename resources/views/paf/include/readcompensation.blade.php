@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="salary"><strong>Job Grade</strong></label>
+			<label for="Job Grade"><strong>Job Grade</strong></label>
 		</div>
 	</div>
 	<div class="col">
@@ -31,7 +31,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_key_job_grade) ? 'n/a' : $get_compensation_details->proposed_key_job_grade}}</p>
+			{{empty($get_compensation_details->proposed_key_job_grade) ? 'n/a' : $get_compensation_details->proposed_key_job_grade}}
 		</div>
 	</div>
 </div>
@@ -39,17 +39,17 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="bonus/allowance"><strong>Base Salary</strong></label>
+			<label for="Probationary Rate"><strong>Probationary Rate</strong></label>
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_compensation_details->current_base_salary) ? 'n/a' : $get_current_compensation_details->current_base_salary}}
+			{{empty($get_current_compensation_details->current_probi_rate) ? 'n/a' : $get_current_compensation_details->current_probi_rate .' php'}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_base_salary) ? 'n/a' : $get_compensation_details->proposed_base_salary}}</p>
+			{{empty($get_compensation_details->proposed_probi_rate) ? 'n/a' : $get_compensation_details->proposed_probi_rate .' php'}}
 		</div>
 	</div>
 </div>
@@ -57,7 +57,43 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="benefits"><strong>Bonus/Allowance</strong></label>
+			<label for="Gross Salary"><strong>Gross Salary</strong></label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-group">
+			{{empty($get_current_compensation_details->current_gross_salary) ? 'n/a' : $get_current_compensation_details->current_gross_salary .' php'}}
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-group">
+			{{empty($get_compensation_details->proposed_gross_salary) ? 'n/a' : $get_compensation_details->proposed_gross_salary .' php'}}
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-2">
+		<div class="form-group">
+			<label for="Basic Salary"><strong>Basic Salary</strong></label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-group">
+			{{empty($get_current_compensation_details->current_basic_salary) ? 'n/a' : $get_current_compensation_details->current_basic_salary .' php'}}
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-group">
+			{{empty($get_compensation_details->proposed_basic_salary) ? 'n/a' : $get_compensation_details->proposed_basic_salary .' php'}}
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-2">
+		<div class="form-group">
+			<label for="Bonus/Allowance"><strong>Bonus/Allowance</strong></label>
 		</div>
 	</div>
 	<div class="col">
@@ -67,7 +103,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_bonus_allowance) ? 'n/a' : $get_compensation_details->proposed_bonus_allowance}}</p>
+			{{empty($get_compensation_details->proposed_bonus_allowance) ? 'n/a' : $get_compensation_details->proposed_bonus_allowance}}
 		</div>
 	</div>
 </div>
@@ -75,7 +111,7 @@
 <div class="row">
 	<div class="col-2">
 		<div class="form-group">
-			<label for="benefits"><strong>Benefits</strong></label>
+			<label for="Benefits"><strong>Benefits</strong></label>
 		</div>
 	</div>
 	<div class="col">
@@ -85,7 +121,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<p>{{empty($get_compensation_details->proposed_benefits) ? 'n/a' : $get_compensation_details->proposed_benefits}}</p>
+			{{empty($get_compensation_details->proposed_benefits) ? 'n/a' : $get_compensation_details->proposed_benefits}}
 		</div>
 	</div>
 </div>

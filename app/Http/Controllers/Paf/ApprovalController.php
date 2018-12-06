@@ -83,7 +83,7 @@ class ApprovalController extends Controller
         $validation = $request->validate([
             'proposed_remarks_job_exec' => 'max:255|required_with:proposed_job_title,proposed_department,proposed_team,proposed_supervisor,proposed_project_assignment',
             'proposed_remarks_schedule_exec' => 'max:255|required_with:proposed_schedule,proposed_work_location',
-            'proposed_remarks_compensation_exec' => 'max:255|required_with:proposed_job_grade,proposed_base_salary,proposed_bonus_allowance,proposed_benefits',
+            'proposed_remarks_compensation_exec' => 'max:255|required_with:proposed_job_grade,proposed_probi_rate,proposed_gross_salary,proposed_basic_salary,proposed_bonus_allowance,proposed_benefits',
             'request_status' => 'exists:statuses,id|required',
             'sub_request_status' => 'exists:sub_statuses,id|required',
         ],

@@ -64,7 +64,7 @@
 								<td>{{empty($lists->contractChange->change_type) ? '' : $lists->contractChange->change_type}}</td>
 								<td>{{empty($lists->assessed_by_company_id) ? '' : '('. $lists->humBasicInfo->company_id .') '. $lists->humBasicInfo->last_name .', '. $lists->humBasicInfo->first_name}}
 								</td>
-								<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
+								<td>{{$lists->application_flag == '1' ? 'PAF request has been applied to the contract' :$lists->masterPafStatus->request_status .' - '. $lists->masterPafSubStatus->sub_request_status}}</td>
 								@if($lists->masterPafSubStatus->id == '3')
 									<td class="form-group text-center"><a class="btn btn-primary btn-sm" href="{{route('paf.reassess.list.show', $lists->id)}}">To Reassess</a></td>
 								@else

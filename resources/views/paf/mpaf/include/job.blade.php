@@ -25,7 +25,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_job_title" value="{{$employee_contract->jobDescription->job_id}}">
+			<input type="hidden" name="current_job_title" value="{{$employee_contract->jobDescription->job->id}}">
 			<p>{{$employee_contract->jobDescription->job->job_title}} {{$employee_contract->jobDescription->job->job_description}}</p>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_department" value="{{$employee_contract->jobDescription->job->department_key}}">
+			<input type="hidden" name="current_department" value="{{$employee_contract->jobDescription->department->key}}">
 			<p>{{$employee_contract->jobDescription->job->department->department}}</p>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="current_team" value="{{$employee_contract->jobDescription->job->team_id}}" readonly>
+			<input type="hidden" name="current_team" value="{{$employee_contract->jobDescription->team->id}}" readonly>
 			<p>{{$employee_contract->jobDescription->team->sub_con}} {{' - '. $employee_contract->jobDescription->team->display_name}}</p>
 		</div>
 	</div>
@@ -133,7 +133,7 @@
 			<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
 				<option value="" selected>--select--</option>
 				@foreach($proj_assignment as $project)
-					<option value="{{$project->id}}">{{$project->project_title}} {{$project->project_desc}}</option>
+					<option value="{{$project->id}}">{{$project->project_title}} {{$project->customer_name}}</option>
 				@endforeach
 			</select>
 		</div>

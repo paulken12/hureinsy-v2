@@ -101,7 +101,7 @@ class AssessmentController extends Controller
         $request->validate([
             'proposed_remarks_job' => 'max:255|required_with:proposed_job_title,proposed_department,proposed_team,proposed_supervisor,proposed_project_assignment',
             'proposed_remarks_schedule' => 'max:255|required_with:proposed_schedule,proposed_work_location',
-            'proposed_remarks_compensation' => 'max:255|required_with:proposed_job_grade,proposed_base_salary,proposed_bonus_allowance,proposed_benefits',
+            'proposed_remarks_compensation' => 'max:255|required_with:proposed_job_grade,proposed_probi_rate,proposed_gross_salary,proposed_basic_salary,proposed_bonus_allowance,proposed_benefits',
             'proficiency_test' => 'required_with:emp|exists:master_proficiency_test_pafs,key',
             'behavioural_assessment' => 'required_with:emp|exists:master_behavioural_assessment_pafs,key',
             'performance_evaluation' => 'required_with:emp|exists:master_performance_evaluation_pafs,key',

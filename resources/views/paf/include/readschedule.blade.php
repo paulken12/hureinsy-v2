@@ -44,12 +44,12 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->company->name}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterCompany->name .' - '. $get_current_schedule_details->masterCompany->address}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_schedule_details->masterCompany->name) ? 'n/a' : $get_schedule_details->masterCompany->name}}
+			{{empty($get_schedule_details->proposed_key_work_location) ? 'n/a' : $get_schedule_details->masterCompany->name .' - '. $get_schedule_details->masterCompany->address}}
 		</div>
 	</div>
 </div>

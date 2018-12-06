@@ -17,12 +17,7 @@
 			<div class="col-2">
 				<div class="form-group">
 					<label for="proposed_effective_date"><strong>Date Effective</strong></label>
-					<input type="date" id="date_effective" name="date_effective" class="form-control" title="Date_effective" required>
-				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<small>*you can change the proposed date effective here(not required)</small>
+					<input type="text" v-model="Date_effective" id="date_effective" name="date_effective" class="form-control" title="Date_effective"  data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd">
 				</div>
 			</div>
 		</div>
@@ -33,12 +28,24 @@
 <script>
 
 export default{ 
-	props: ['categories', 'subcategories'],
+	props: ['categories', 'subcategories', 'date_effective'],
 
 	data: function(){
 		return {
 			Categories: '',
-			SubCategories: ''
+			SubCategories: '',
+
+			Date_effective: this.d_e(),
+		}
+	},
+
+	methods: {
+		d_e(){
+			if(this.date_effective){
+				return this.date_effective.date_effective;
+			}else{
+				return new Date().toISOString().slice(0, 10);
+			}
 		}
 	}
 }

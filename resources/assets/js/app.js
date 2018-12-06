@@ -80,6 +80,11 @@ const app = new Vue({
         $(document).ready(function($){
             $('.m-money').mask('000,000,000.00', {reverse: true});
             $('.m-date').mask('0000-00-00');
+            $('#ben_sss').mask('00-0000000-0')
+            $('#ben_pag_ibig').mask('0000-0000-0000')
+            $('#ben_philhealth').mask('0000-0000-0000')
+            $('#ben_tin').mask('000-000-000')
+            $('#payroll_account').mask('000000000000')
         });
  
         const scrollables = $('.scrollable');

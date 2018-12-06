@@ -44,13 +44,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->company->name}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->name}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
 			<select name="proposed_work_location" id="proposed_work_location" class="form-control">
-				<option style="display:none" value="{{empty($get_schedule_details->proposed_key_work_location) ? '' : $get_schedule_details->proposed_key_work_location}}" selected>{{empty($get_schedule_details->masterCompany->name) ? '--select--' : $get_schedule_details->masterCompany->name}}</option>
+				<option style="display:none" value="{{empty($get_schedule_details->proposed_key_work_location) ? '' : $get_schedule_details->proposed_key_work_location}}" selected>{{empty($get_schedule_details->masterCompany->name) ? '--select--' : $get_schedule_details->masterCompany->name .' - '. $get_schedule_details->masterCompany->address}}</option>
 				@foreach ($project_assignment as $assignment)
 					<option value="{{$assignment->key}}">{{$assignment->name}} - {{$assignment->address}}</option>
 				@endforeach

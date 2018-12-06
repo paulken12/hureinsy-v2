@@ -74,6 +74,7 @@ class RecruitConfirmationController extends Controller
 
     public function store(Request $request)
     {
+
         //get the user id
         $slug = new Slug();
         $user = User::find(auth()->user()->id);
@@ -149,7 +150,7 @@ class RecruitConfirmationController extends Controller
         ]);
 
         $education = $request->validate([
-            'master_education_key'      => 'required',
+            'master_education_key'   => 'required',
             'edu_course'             => 'nullable',
             'edu_name_of_school'     => 'nullable',
             'edu_year_graduated'     => 'nullable',
@@ -284,8 +285,8 @@ class RecruitConfirmationController extends Controller
             'industry'=> $experience['exp_industry'][$i],
             'salary'=> $experience['exp_salary'][$i],
             'responsibilities'=> $experience['responsibilities'][$i],
-        ]);
-    }
+            ]);
+        }
 
         for($i=0; $i < count($reference['ref_job_title']); ++$i ) {
             EmpReference::create([
@@ -329,7 +330,5 @@ class RecruitConfirmationController extends Controller
         auth()->user()->verified();
 
         return response()->json(['success' =>'Your data is successfully saved', 'redirect' => route('dashboard')],200);
-
-
     }
 }

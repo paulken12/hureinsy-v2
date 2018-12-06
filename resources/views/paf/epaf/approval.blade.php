@@ -33,11 +33,11 @@
 
 						<a class="nav-item nav-link" id="nav-natact-tab" data-toggle="tab" href="#nav-natact" role="tab" aria-controls="nav-natact" aria-selected="false">Nature of Action</a>
 
-						<a class="nav-item nav-link" id="nav-job-tab" data-toggle="tab" href="#nav-job" role="tab" aria-controls="nav-job" aria-selected="false">Change in Job Title, Duties, and Responsibilities Details</a>
+						<a class="nav-item nav-link" id="nav-job-tab" data-toggle="tab" href="#nav-job" role="tab" aria-controls="nav-job" aria-selected="false">Annex A</a>
 
-						<a class="nav-item nav-link" id="nav-sched-tab" data-toggle="tab" href="#nav-sched" role="tab" aria-controls="nav-sched" aria-selected="false">Change in Work Schedule Details</a>
+						<a class="nav-item nav-link" id="nav-sched-tab" data-toggle="tab" href="#nav-sched" role="tab" aria-controls="nav-sched" aria-selected="false">Annex B</a>
 
-						<a class="nav-item nav-link" id="nav-compe-tab" data-toggle="tab" href="#nav-compe" role="tab" aria-controls="nav-compe" aria-selected="false">Change in Compensation and Benefit Details</a>
+						<a class="nav-item nav-link" id="nav-compe-tab" data-toggle="tab" href="#nav-compe" role="tab" aria-controls="nav-compe" aria-selected="false">Annex C</a>
 
 						<a class="nav-item nav-link" id="nav-rem-tab" data-toggle="tab" href="#nav-rem" role="tab" aria-controls="nav-rem" aria-selected="false">HR Assessment</a>
 						
@@ -88,7 +88,8 @@
 					<div class="container">				
 						<action-management 	
 							:categories="{{$request_status}}"
-							:subcategories="{{$sub_request_status}}">
+							:subcategories="{{$sub_request_status}}"
+							:date_effective="{{$get_paf_details}}">
 						</action-management>
 					</div>
 

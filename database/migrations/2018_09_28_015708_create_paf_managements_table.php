@@ -30,6 +30,7 @@ class CreatePafManagementsTable extends Migration
             $table->date('contract_start')->nullable();
             $table->date('contract_end')->nullable();
             $table->date('resigned_date')->nullable();
+            $table->string('application_flag');
             $table->timestamps();
         });
     }

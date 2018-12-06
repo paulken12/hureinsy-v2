@@ -29,8 +29,8 @@ class MasterSubStatusPaf extends Seeder
             ],
             [
                 'master_id_status'=>'2',
-                'sub_request_status'=>'HR Approved',
-                'description'=>'HR approved the PAF request but for employee request only'
+                'sub_request_status'=>'HR Denied',
+                'description'=>'HR denied has denied the paf request'
             ],
             [
                 'master_id_status'=>'2',

@@ -34,6 +34,7 @@ class ProfileController extends Controller
 
     public function updateAddress(Request $request,EmpBasic $profile)
     {
+
         $add = $request->validate([
 
             'master_address_key' => 'required',

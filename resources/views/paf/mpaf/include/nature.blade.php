@@ -4,7 +4,6 @@
 <nature-form
 	:contract_change="{{$employment_status}}"
 	:emp_stat = "{{$cont_change}}"
-	:flag="'req'"
 ></nature-form>
 
 <div class="row">

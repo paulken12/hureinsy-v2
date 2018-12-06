@@ -45,13 +45,13 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->company->name}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterCompany->name .' - '. $get_current_schedule_details->masterCompany->address}}
 		</div>
 	</div>
 	<div class="col">
 		<div class="form-group">
-			<input type="hidden" name="proposed_work_location" value="{{empty($get_schedule_details->masterCompany->name) ? '' : $get_schedule_details->masterCompany->name}}" readonly>
-			{{empty($get_schedule_details->masterCompany->name) ? 'n/a' : $get_schedule_details->masterCompany->name}}
+			<input type="hidden" name="proposed_work_location" value="{{empty($get_schedule_details->proposed_key_work_location) ? '' : $get_schedule_details->proposed_key_work_location}}" readonly>
+			{{empty($get_schedule_details->proposed_key_work_location) ? 'n/a' : $get_schedule_details->masterCompany->name .' - '. $get_schedule_details->masterCompany->address}}
 		</div>
 	</div>
 </div>

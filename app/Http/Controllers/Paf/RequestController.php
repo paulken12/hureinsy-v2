@@ -58,9 +58,10 @@ class RequestController extends Controller
         $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam()); 
 
         $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
-
-        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo', 'cont_change'));
         
+        $mamamo = date('Y-m-d');
+
+        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo', 'cont_change', 'mamamo'));
     }
 
     public function create($form)
@@ -83,6 +84,8 @@ class RequestController extends Controller
             'master_id_request_status' => '1',
 
             'master_id_sub_request_status' => '1',
+
+            'application_flag' => 0,
 
         ]);
 
@@ -141,7 +144,6 @@ class RequestController extends Controller
     public function store(Request $request, $form)
     {
 
-        dd($request->all());
         $validator = $request->validate([
             'employment_status' => 'required|exists:master_contract_change_pafs,key',
             'cont_change' => 'nullable',
@@ -159,7 +161,7 @@ class RequestController extends Controller
             'proposed_job_grade' => 'nullable|string|max:191',
             'proposed_probi_rate' => 'nullable|string|max:191',
             'proposed_gross_salary' => 'nullable|string|max:191',
-            'proposed_basic_salary' => 'nullable|string|digits_between:0,10',
+            'proposed_basic_salary' => 'nullable|string|max:191',
             'proposed_bonus_allowance' => 'nullable|string|max:191',
             'proposed_benefits' => 'nullable|string|max:191',
             'date_effective' => 'required',
@@ -171,7 +173,7 @@ class RequestController extends Controller
             $cc = 'separated';
         }else if($request->input('employment_status') == 'ttp'){
             $cc = 'project-based';
-        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'reg'){
+        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'ptr'){
             $cc = 'regular';
         }else{
             $cc = $request->input('cont_change');
@@ -202,6 +204,8 @@ class RequestController extends Controller
             'contract_end' => $request->input('cont_end'),
 
             'resigned_date' => $request->input('res_date'),
+
+            'application_flag' => 0,
 
         ]);
 
@@ -259,7 +263,11 @@ class RequestController extends Controller
 
             'proposed_key_job_grade' => $request->input('proposed_job_grade'),
 
-            'proposed_base_salary' => $request->input('proposed_base_salary'),
+            'proposed_probi_rate' => $request->input('proposed_probi_rate'),
+
+            'proposed_gross_salary' => $request->input('proposed_gross_salary'),
+
+            'proposed_basic_salary' => $request->input('proposed_basic_salary'),
 
             'proposed_bonus_allowance' => $request->input('proposed_bonus_allowance'),
 
@@ -273,7 +281,11 @@ class RequestController extends Controller
 
             'current_key_job_grade' => $request->input('current_job_grade'),
 
-            'current_base_salary' => $request->input('current_base_salary'),
+            'current_probi_rate' => $request->input('current_probi_rate'),
+
+            'current_gross_salary' => $request->input('current_gross_salary'),
+
+            'current_basic_salary' => $request->input('current_basic_salary'),
 
             'current_bonus_allowance' => $request->input('current_bonus_allowance'),
 

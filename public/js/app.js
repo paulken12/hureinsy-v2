@@ -30792,6 +30792,11 @@ var app = new Vue({
         $(document).ready(function ($) {
             $('.m-money').mask('000,000,000.00', { reverse: true });
             $('.m-date').mask('0000-00-00');
+            $('#ben_sss').mask('00-0000000-0');
+            $('#ben_pag_ibig').mask('0000-0000-0000');
+            $('#ben_philhealth').mask('0000-0000-0000');
+            $('#ben_tin').mask('000-000-000');
+            $('#payroll_account').mask('000000000000');
         });
 
         var scrollables = $('.scrollable');
@@ -93796,21 +93801,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['categories', 'subcategories'],
+	props: ['categories', 'subcategories', 'date_effective'],
 
 	data: function data() {
 		return {
 			Categories: '',
-			SubCategories: ''
+			SubCategories: '',
+
+			Date_effective: this.d_e()
 		};
+	},
+
+	methods: {
+		d_e: function d_e() {
+			if (this.date_effective) {
+				return this.date_effective.date_effective;
+			} else {
+				return new Date().toISOString().slice(0, 10);
+			}
+		}
 	}
 });
 
@@ -93928,7 +93940,49 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.SubCategories == 5
-      ? _c("div", { staticClass: "row" }, [_vm._m(0), _vm._v(" "), _vm._m(1)])
+      ? _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Date_effective,
+                    expression: "Date_effective"
+                  },
+                  {
+                    name: "mask",
+                    rawName: "v-mask",
+                    value: "####-##-##",
+                    expression: "'####-##-##'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "date_effective",
+                  name: "date_effective",
+                  title: "Date_effective",
+                  "data-provide": "datepicker",
+                  "data-date-format": "yyyy-mm-dd",
+                  placeholder: "yyyy-mm-dd"
+                },
+                domProps: { value: _vm.Date_effective },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.Date_effective = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
+        ])
       : _vm._e()
   ])
 }
@@ -93937,37 +93991,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "proposed_effective_date" } }, [
-          _c("strong", [_vm._v("Date Effective")])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "date",
-            id: "date_effective",
-            name: "date_effective",
-            title: "Date_effective",
-            required: ""
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("small", [
-          _vm._v(
-            "*you can change the proposed date effective here(not required)"
-          )
-        ])
-      ])
+    return _c("label", { attrs: { for: "proposed_effective_date" } }, [
+      _c("strong", [_vm._v("Date Effective")])
     ])
   }
 ]
@@ -96212,7 +96237,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         save: function save() {
             this.updateAddress();
             // this.editAddress();
-        }
+        },
+        copypresent: function copypresent() {}
     }
 });
 
@@ -96633,9 +96659,14 @@ var render = function() {
               [_vm._v("Cancel")]
             ),
             _vm._v(" "),
-            _c("button", { staticClass: "btn btn-link btn-sm float-right" }, [
-              _vm._v("Present address same as Permanent")
-            ])
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link btn-sm float-right ",
+                on: { click: _vm.copypresent }
+              },
+              [_vm._v("Same as present address")]
+            )
           ],
           2
         )
@@ -97824,25 +97855,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -97861,6 +97873,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
+            csrf: '',
+
+            checked: false,
 
             submitted: false,
 
@@ -97967,11 +97982,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $("#train_date_to").datepicker().on("changeDate", function () {
             _this.form.train_date_to = $('#train_date_to').val();
         });
+
+        this.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     },
 
     methods: {
         checkboxToggle: function checkboxToggle(index) {
-            this.form.add_unit_num[1] = this.form.add_unit_num[0];
+            Vue.set(this.form.add_unit_num, index, this.form.add_unit_num[0]);
+            Vue.set(this.form.add_block, index, this.form.add_block[0]);
+            Vue.set(this.form.add_street_name, index, this.form.add_street_name[0]);
+            Vue.set(this.form.add_subdivision, index, this.form.add_subdivision[0]);
+            Vue.set(this.form.add_barangay, index, this.form.add_barangay[0]);
+            Vue.set(this.form.add_city, index, this.form.add_city[0]);
+            Vue.set(this.form.add_province, index, this.form.add_province[0]);
+            Vue.set(this.form.add_zip_code, index, this.form.add_zip_code[0]);
         },
         removeUser: function removeUser() {
             alert("Leaving...");
@@ -98628,8 +98652,7 @@ var render = function() {
                                   "data-provide": "datepicker",
                                   "data-date-format": "yyyy-mm-dd",
                                   title: "Birth of birth",
-                                  placeholder: "Date of birth",
-                                  required: ""
+                                  placeholder: "Date of birth"
                                 },
                                 domProps: {
                                   value: _vm.form.basic_date_of_birth
@@ -99376,19 +99399,27 @@ var render = function() {
                         _vm._l(_vm.form.address_type, function(address, index) {
                           return _c("div", { staticClass: "card mb-4" }, [
                             _c("div", { staticClass: "card-body" }, [
-                              _c("h5", {
-                                domProps: { textContent: _vm._s(address) }
-                              }),
-                              _vm._v(" "),
                               index >= 1
                                 ? _c("div", [
                                     _c(
-                                      "button",
-                                      { on: { click: _vm.checkboxToggle } },
-                                      [_vm._v(" Same as present address")]
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-link btn-sm float-right",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.checkboxToggle(index)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Same as present address")]
                                     )
                                   ])
                                 : _vm._e(),
+                              _vm._v(" "),
+                              _c("h5", {
+                                domProps: { textContent: _vm._s(address) }
+                              }),
                               _vm._v(" "),
                               _c("hr"),
                               _vm._v(" "),
@@ -101946,9 +101977,69 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(5),
-                _vm._v(" "),
-                _vm._m(6)
+                _c(
+                  "div",
+                  { staticClass: "tab-pane", attrs: { id: "complete" } },
+                  [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "container-fluid text-center" }, [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "custom-control mb-3" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checked,
+                              expression: "checked"
+                            }
+                          ],
+                          staticClass: "custom-control-input",
+                          attrs: { type: "checkbox", id: "confirm" },
+                          domProps: {
+                            checked: Array.isArray(_vm.checked)
+                              ? _vm._i(_vm.checked, null) > -1
+                              : _vm.checked
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.checked,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.checked = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.checked = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-control-label",
+                            attrs: { for: "confirm" }
+                          },
+                          [_vm._v("I agree to the terms and conditions")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "wizard-footer" }, [
@@ -101962,8 +102053,12 @@ var render = function() {
                   _c("input", {
                     staticClass:
                       "btn btn-finish btn-fill btn-success btn-wd btn-sm",
-                    attrs: { type: "submit", name: "finish", value: "Submit" },
-                    on: { click: _vm.onSubmit }
+                    attrs: {
+                      type: "submit",
+                      name: "finish",
+                      value: "Submit",
+                      disabled: !_vm.checked
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -102091,105 +102186,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade bd-example-modal-lg",
-        attrs: {
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myLargeModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog modal-lg" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("label", { staticClass: "sr-only", attrs: { for: "tac" } }),
-            _vm._v(" "),
-            _c(
-              "textarea",
-              {
-                staticClass: "form-control",
-                staticStyle: {
-                  height: "480px",
-                  "col-smor": "#000",
-                  cursor: "default"
-                },
-                attrs: { name: "tac", id: "tac", readonly: "" }
-              },
-              [
-                _vm._v(
-                  'Terms and Conditions for Hureinsy\n\n\nIntroduction\nThese Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Hureinsy accessible at hureinsy.com.\n\nThese Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.\n\nMinors or people below 18 years old are not allowed to use this Website.\n\nIntellectual Property Rights\nOther than the content you own, under these Terms, Hureinsy and/or its licensors own all the intellectual property rights and materials contained in this Website.\n\nYou are granted limited license only for purposes of viewing the material contained on this Website.\n\nRestrictions\nYou are specifically restricted from all of the following:\n\npublishing any Website material in any other media;\nselling, sublicensing and/or otherwise commercializing any Website material;\npublicly performing and/or showing any Website material;\nusing this Website in any way that is or may be damaging to this Website;\nusing this Website in any way that impacts user access to this Website;\nusing this Website contrary to applicable laws and regulations, or in any way may cause harm to the Website, or to any person or business entity;\nengaging in any data mining, data harvesting, data extracting or any other similar activity in relation to this Website;\nusing this Website to engage in any advertising or marketing.\nCertain areas of this Website are restricted from being access by you and Hureinsy may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.\n\nYour Content\nIn these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant Hureinsy a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.\n\nYour Content must be your own and must not be invading any third-party’s rights. Hureinsy reserves the right to remove any of Your Content from this Website at any time without notice.\n\nNo warranties\nThis Website is provided "as is," with all faults, and Hureinsy express no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.\n\nLimitation of liability\nIn no event shall Hureinsy, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.  Hureinsy, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.\n\nIndemnification\nYou hereby indemnify to the fullest extent Hureinsy from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.\n\nSeverability\nIf any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein.\n\nVariation of Terms\nHureinsy is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.\n\nAssignment\nThe Hureinsy is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.\n\nEntire Agreement\nThese Terms constitute the entire agreement between Hureinsy and you in relation to your use of this Website, and supersede all prior agreements and understandings.\n\nGoverning Law & Jurisdiction\nThese Terms will be governed by and interpreted in accordance with the laws of the State of ph, and you submit to the non-exclusive jurisdiction of the state and federal courts located in ph for the resolution of any disputes.\n                                '
-                )
-              ]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "container" }, [
+      _c("h3", [_vm._v("Terms and Conditions for HUREINSY")])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tab-pane", attrs: { id: "complete" } }, [
-      _c("div", { staticClass: "container-fluid text-center" }, [
-        _c("h3", [_vm._v("Complete")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Thank you for filling out your information!")]),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-fill btn-simple" }, [
-          _vm._v("Preview")
-        ]),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("div", { staticClass: "custom-control custom-checkbox mb-3" }, [
-          _c("input", {
-            staticClass: "custom-control-input",
-            attrs: {
-              type: "checkbox",
-              id: "customControlValidation1",
-              required: ""
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "custom-control-label",
-              attrs: { for: "customControlValidation1" }
-            },
-            [
-              _vm._v("I agree to the "),
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "#",
-                    "data-toggle": "modal",
-                    "data-target": ".bd-example-modal-lg"
-                  }
-                },
-                [
-                  _vm._v(
-                    "Terms and\n                                        Conditions"
-                  )
-                ]
-              )
-            ]
+    return _c("span", [
+      _c(
+        "textarea",
+        {
+          staticClass: "form-control",
+          staticStyle: { height: "360px", color: "black", cursor: "default" },
+          attrs: { id: "tac", readonly: "" }
+        },
+        [
+          _vm._v(
+            'Introduction\nThese Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Hureinsy accessible at hureinsy.com.\n\nThese Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.\n\nMinors or people below 18 years old are not allowed to use this Website.\n\nIntellectual Property Rights\nOther than the content you own, under these Terms, Hureinsy and/or its licensors own all the intellectual property rights and materials contained in this Website.\n\nYou are granted limited license only for purposes of viewing the material contained on this Website.\n\nRestrictions\nYou are specifically restricted from all of the following:\n\npublishing any Website material in any other media;\nselling, sublicensing and/or otherwise commercializing any Website material;\npublicly performing and/or showing any Website material;\nusing this Website in any way that is or may be damaging to this Website;\nusing this Website in any way that impacts user access to this Website;\nusing this Website contrary to applicable laws and regulations, or in any way may cause harm to the Website, or to any person or business entity;\nengaging in any data mining, data harvesting, data extracting or any other similar activity in relation to this Website;\nusing this Website to engage in any advertising or marketing.\nCertain areas of this Website are restricted from being access by you and Hureinsy may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.\n\nYour Content\nIn these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant Hureinsy a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.\n\nYour Content must be your own and must not be invading any third-party’s rights. Hureinsy reserves the right to remove any of Your Content from this Website at any time without notice.\n\nNo warranties\nThis Website is provided "as is," with all faults, and Hureinsy express no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.\n\nLimitation of liability\nIn no event shall Hureinsy, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.  Hureinsy, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.\n\nIndemnification\nYou hereby indemnify to the fullest extent Hureinsy from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.\n\nSeverability\nIf any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein.\n\nVariation of Terms\nHureinsy is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.\n\nAssignment\nThe Hureinsy is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.\n\nEntire Agreement\nThese Terms constitute the entire agreement between Hureinsy and you in relation to your use of this Website, and supersede all prior agreements and understandings.\n\nGoverning Law & Jurisdiction\nThese Terms will be governed by and interpreted in accordance with the laws of the State of ph, and you submit to the non-exclusive jurisdiction of the state and federal courts located in ph for the resolution of any disputes.\n                                    '
           )
-        ]),
-        _vm._v(" "),
-        _c("span")
-      ])
+        ]
+      )
     ])
   },
   function() {
@@ -106808,24 +106826,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['contract_change', 'emp_stat', 'flag'],
+	props: ['contract_change', 'emp_stat', 'cur_paf'],
 
 	data: function data() {
 		return {
-			employment_status: '',
-			cont_change: ''
-
+			employment_status: this.c_cc(),
+			cont_change: this.e_cc(),
+			p_date: new Date().toISOString().slice(0, 10),
+			e_date: this.ed(),
+			r_date: this.rd(),
+			s_date: this.sd()
 		};
 	},
 
@@ -106834,6 +106847,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		$(document).ready(function ($) {
 			$('.m-date').mask('0000-00-00');
 		});
+	},
+
+	methods: {
+		c_cc: function c_cc() {
+			if (this.cur_paf) {
+				return this.cur_paf.master_key_employment_status;
+			} else {
+				return 'ren';
+			}
+		},
+		e_cc: function e_cc() {
+			if (this.cur_paf) {
+				return this.cur_paf.master_key_change_of_contract;
+			} else {
+				return 'project-based';
+			}
+		},
+		ed: function ed() {
+			if (this.cur_paf) {
+				return this.cur_paf.contract_end;
+			} else {
+				return new Date().toISOString().slice(0, 10);
+			}
+		},
+		rd: function rd() {
+			if (this.cur_paf) {
+				return this.cur_paf.resigned_date;
+			} else {
+				return new Date().toISOString().slice(0, 10);
+			}
+		},
+		sd: function sd() {
+			if (this.cur_paf) {
+				return this.cur_paf.contract_start;
+			} else {
+				return new Date().toISOString().slice(0, 10);
+			}
+		}
 	}
 });
 
@@ -106846,69 +106897,72 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.flag == "req"
-      ? _c("div", [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.employment_status,
-                        expression: "employment_status"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "employment_status",
-                      id: "employment_status"
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.employment_status = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "", selected: "", hidden: "" } },
-                      [_vm._v("--Select Category--")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.contract_change, function(changes) {
-                      return _c(
-                        "option",
-                        { domProps: { value: changes.key } },
-                        [_vm._v(_vm._s(changes.change_type))]
-                      )
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.employment_status,
+                  expression: "employment_status"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "employment_status", id: "employment_status" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
                     })
-                  ],
-                  2
-                )
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.employment_status = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.contract_change, function(changes) {
+              return _c("option", { domProps: { value: changes.key } }, [
+                _vm._v(_vm._s(changes.change_type))
               ])
-            ]),
+            })
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _vm._m(1),
             _vm._v(" "),
-            _vm._m(1)
+            _c("input", {
+              staticClass: "form-control m-date",
+              attrs: {
+                type: "text",
+                id: "date_effective",
+                name: "date_effective",
+                title: "Date_effective",
+                "data-provide": "datepicker",
+                "data-date-format": "yyyy-mm-dd",
+                placeholder: "yyyy-mm-dd",
+                required: ""
+              },
+              domProps: { value: _vm.p_date }
+            })
           ])
         ])
-      : _c("div"),
+      ])
+    ]),
     _vm._v(" "),
     _vm.employment_status == "reh" ||
     _vm.employment_status == "sfr" ||
@@ -106947,22 +107001,13 @@ var render = function() {
                     }
                   }
                 },
-                [
-                  _c(
-                    "option",
-                    { attrs: { value: "", selected: "", hidden: "" } },
-                    [_vm._v("--Select Category--")]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.emp_stat, function(stats) {
-                    return stats.key != "separated"
-                      ? _c("option", { domProps: { value: stats.key } }, [
-                          _vm._v(_vm._s(stats.employee_status))
-                        ])
-                      : _vm._e()
-                  })
-                ],
-                2
+                _vm._l(_vm.emp_stat, function(stats) {
+                  return stats.key != "separated"
+                    ? _c("option", { domProps: { value: stats.key } }, [
+                        _vm._v(_vm._s(stats.employee_status))
+                      ])
+                    : _vm._e()
+                })
               )
             ])
           ]),
@@ -106989,7 +107034,8 @@ var render = function() {
                   "data-provide": "datepicker",
                   "data-date-format": "yyyy-mm-dd",
                   placeholder: "yyyy-mm-dd"
-                }
+                },
+                domProps: { value: _vm.s_date }
               })
             ])
           ]),
@@ -107017,7 +107063,8 @@ var render = function() {
                       "data-provide": "datepicker",
                       "data-date-format": "yyyy-mm-dd",
                       placeholder: "yyyy-mm-dd"
-                    }
+                    },
+                    domProps: { value: _vm.e_date }
                   })
                 ])
               ])
@@ -107058,20 +107105,11 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { value: "", selected: "", hidden: "" } },
-                      [_vm._v("--Select Category--")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.emp_stat, function(stats) {
-                      return _c("option", { domProps: { value: stats.key } }, [
-                        _vm._v(_vm._s(stats.employee_status))
-                      ])
-                    })
-                  ],
-                  2
+                  _vm._l(_vm.emp_stat, function(stats) {
+                    return _c("option", { domProps: { value: stats.key } }, [
+                      _vm._v(_vm._s(stats.employee_status))
+                    ])
+                  })
                 )
               ])
             ]),
@@ -107099,7 +107137,8 @@ var render = function() {
                         "data-provide": "datepicker",
                         "data-date-format": "yyyy-mm-dd",
                         placeholder: "yyyy-mm-dd"
-                      }
+                      },
+                      domProps: { value: _vm.s_date }
                     })
                   ])
                 ])
@@ -107129,7 +107168,8 @@ var render = function() {
                         "data-provide": "datepicker",
                         "data-date-format": "yyyy-mm-dd",
                         placeholder: "yyyy-mm-dd"
-                      }
+                      },
+                      domProps: { value: _vm.e_date }
                     })
                   ])
                 ])
@@ -107158,7 +107198,8 @@ var render = function() {
                         "data-provide": "datepicker",
                         "data-date-format": "yyyy-mm-dd",
                         placeholder: "yyyy-mm-dd"
-                      }
+                      },
+                      domProps: { value: _vm.r_date }
                     })
                   ])
                 ])
@@ -107188,7 +107229,8 @@ var render = function() {
                       "data-provide": "datepicker",
                       "data-date-format": "yyyy-mm-dd",
                       placeholder: "yyyy-mm-dd"
-                    }
+                    },
+                    domProps: { value: _vm.r_date }
                   })
                 ])
               ])
@@ -107217,7 +107259,8 @@ var render = function() {
                         "data-provide": "datepicker",
                         "data-date-format": "yyyy-mm-dd",
                         placeholder: "yyyy-mm-dd"
-                      }
+                      },
+                      domProps: { value: _vm.s_date }
                     })
                   ])
                 ])
@@ -107238,28 +107281,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "proposed_effective_date" } }, [
-            _c("strong", [_vm._v("Proposed Date Effective")])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control m-date",
-            attrs: {
-              type: "text",
-              id: "date_effective",
-              name: "date_effective",
-              title: "Date_effective",
-              "data-provide": "datepicker",
-              "data-date-format": "yyyy-mm-dd",
-              placeholder: "yyyy-mm-dd",
-              required: ""
-            }
-          })
-        ])
-      ])
+    return _c("label", { attrs: { for: "proposed_effective_date" } }, [
+      _c("strong", [_vm._v("Proposed Date Effective")])
     ])
   },
   function() {
