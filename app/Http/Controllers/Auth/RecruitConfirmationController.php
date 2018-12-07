@@ -251,6 +251,9 @@ class RecruitConfirmationController extends Controller
 
 
         for($i=0; $i < count($family['master_family_key']); ++$i ) {
+            if(empty($family['date_of_birth'][$i])){
+                $family['date_of_birth'][$i] = '0000-00-00'; 
+            }
             EmpFamily::create([
                 'emp_basic_id'=>$user_id,
                 'master_family_key'=> $family['master_family_key'][$i],
@@ -261,7 +264,8 @@ class RecruitConfirmationController extends Controller
                 'employer'=> $family['fam_employer'][$i],
                 'master_gender_key'=> $family['fam_occupation'][$i],
             ]);
-        }
+            }
+
 
         for($i=0; $i < count($education['master_education_key']); ++$i ) {
             EmpEducation::create([
@@ -287,6 +291,7 @@ class RecruitConfirmationController extends Controller
             'responsibilities'=> $experience['responsibilities'][$i],
             ]);
         }
+        dd($training);
 
         for($i=0; $i < count($reference['ref_job_title']); ++$i ) {
             EmpReference::create([
