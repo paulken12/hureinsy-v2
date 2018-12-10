@@ -100,15 +100,20 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-sm">
-
                                                 <div class="form-group">
                                                     <label for="basic_birth_date" class="sr-only">Date of birth</label>
-                                                    <input type="text" id="basic_birth_date"
+                                                    <!-- <input type="text" id="basic_birth_date"
                                                            v-model="form.basic_date_of_birth"
                                                            class="form-control"
                                                            v-mask="'####-##-##'"
-                                                           data-provide="datepicker" data-date-format="yyyy-mm-dd"
-                                                           title="Birth of birth" placeholder="Date of birth">
+                                                           title="Birth of birth" placeholder="yyyy-mm-dd"> -->
+                                                    <datepicker v-model="form.basic_date_of_birth" 
+                                                                :format="'yyyy-MM-dd'"
+                                                                :bootstrap-styling="true"
+                                                                :typeable="true"
+                                                                v-mask="'####-##-##'"
+                                                                placeholder="Date of Birth">
+                                                    </datepicker>
                                                 </div>
                                             </div>
                                             <div class="col-sm">
@@ -153,6 +158,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="basic_birth_place" class="sr-only">Birth Place</label>
                                             <input type="text" id="basic_birth_place" v-model="form.basic_birth_place"
@@ -395,12 +401,18 @@
                                                         <div class="form-group">
                                                             <label for="fam_date_of_birth" class="sr-only">Date of
                                                                 birth</label>
-                                                            <input type="text" id="fam_date_of_birth"
+                                                            <!-- <input type="date" id="fam_date_of_birth"
                                                                    class="form-control"
                                                                    v-model="form.fam_date_of_birth[index]"
                                                                    v-mask="'####-##-##'"
-                                                                   data-provide="datepicker" data-date-format="yyyy-mm-dd"
-                                                                   title="Date of birth" placeholder="Date of birth">
+                                                                   title="Date of birth" placeholder="Date of birth"> -->
+                                                            <datepicker v-model="form.fam_date_of_birth[index]" 
+                                                                        :format="'yyyy-MM-dd'"
+                                                                        :bootstrap-styling="true"
+                                                                        :typeable="true"
+                                                                        v-mask="'####-##-##'"
+                                                                        placeholder="Date of Birth">
+                                                            </datepicker>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -597,21 +609,35 @@
                                                     <div class="form-row">
                                                         <div class="form-group">
                                                             <label for="exp_date_from" class="sr-only">Date from</label>
-                                                            <input type="text" id="exp_date_from" class="form-control"
+                                                            <!-- <input type="date" id="exp_date_from" class="form-control"
                                                                    v-model="form.exp_date_from[index]"
                                                                    title="Date from"
-                                                                   placeholder="Date from">
-                                                                   <!--data-date-format="yyyy-mm-dd"-->
-                                                                   <!--data-provide="datepicker">-->
+                                                                   placeholder="Date from"
+                                                                   v-mask="'####-##-##'"> -->
+                                                            <datepicker v-model="form.exp_date_from[index]" 
+                                                                :format="'yyyy-MM-dd'"
+                                                                :bootstrap-styling="true"
+                                                                :typeable="true"
+                                                                v-mask="'####-##-##'"
+                                                                placeholder="Date of Birth">
+                                                            </datepicker>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group">
                                                             <label for="exp_date_to" class="sr-only">Date to</label>
-                                                            <input type="text" id="exp_date_to" class="form-control"
+                                                            <!-- <input type="date" id="exp_date_to" class="form-control"
                                                                    v-model="form.exp_date_to[index]"
                                                                    title="Date to"
-                                                                   placeholder="Date to">
+                                                                   placeholder="Date to"
+                                                                   v-mask="'####-##-##'"> -->
+                                                            <datepicker v-model="form.exp_date_to[index]" 
+                                                                :format="'yyyy-MM-dd'"
+                                                                :bootstrap-styling="true"
+                                                                :typeable="true"
+                                                                v-mask="'####-##-##'"
+                                                                placeholder="Date of Birth">
+                                                            </datepicker>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -659,13 +685,20 @@
                                                                     <small>from</small>
                                                                 </div>
                                                             </div>
-                                                            <input type="text"
+                                                            <!-- <input type="text"
                                                                    class="form-control bdc-grey-200 start-date"
                                                                    id="train_date_from"
                                                                    v-model="form.train_date_from[index]"
-                                                                   title="Training start date">
-                                                                   <!--data-date-format="yyyy-mm-dd"-->
-                                                                   <!--data-provide="datepicker">-->
+                                                                   title="Training start date"
+                                                                   data-date-format="yyyy-mm-dd"
+                                                                   data-provide="datepicker"> -->
+                                                            <datepicker v-model="form.train_date_from[index]" 
+                                                                :format="'yyyy-MM-dd'"
+                                                                :bootstrap-styling="true"
+                                                                :typeable="true"
+                                                                v-mask="'####-##-##'"
+                                                                placeholder="Date of Birth">
+                                                            </datepicker>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -678,13 +711,20 @@
                                                                     <small>to</small>
                                                                 </div>
                                                             </div>
-                                                            <input type="text"
+                                                            <!-- <input type="text"
                                                                    class="form-control bdc-grey-200 end-date"
                                                                    id="train_date_to"
                                                                    v-model="form.train_date_to[index]"
                                                                    title="Training end date">
-                                                                   <!--data-date-format="yyyy-mm-dd"-->
-                                                                   <!--data-provide="datepicker">-->
+                                                                   data-date-format="yyyy-mm-dd"
+                                                                   data-provide="datepicker">-->
+                                                            <datepicker v-model="form.train_date_to[index]" 
+                                                                :format="'yyyy-MM-dd'"
+                                                                :bootstrap-styling="true"
+                                                                :typeable="true"
+                                                                v-mask="'####-##-##'"
+                                                                placeholder="Date of Birth">
+                                                            </datepicker>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -901,12 +941,13 @@ These Terms will be governed by and interpreted in accordance with the laws of t
 <script>
 
     import FamilyTab from './FamilyTab.vue';
+    import Datepicker from 'vuejs-datepicker';
 
     export default {
 
         props: ['user', 'profile', 'gender', 'citizenship', 'civil', 'extension', 'educations', 'families'],
 
-        components: {FamilyTab},
+        components: {FamilyTab, Datepicker},
 
         ready: function () {
             window.beforeunload = this.leaving;
@@ -1016,7 +1057,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
         },
 
         mounted: function () {
-            $("#train_date_from").datepicker().on(
+/*            $("#train_date_from").datepicker().on(
                 "changeDate", () => {
                     this.form.train_date_from = $('#train_date_from').val()
                 }
@@ -1026,6 +1067,10 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                     this.form.train_date_to = $('#train_date_to').val()
                 }
             );
+
+            $(document).ready(function($){
+                $('.m-date').mask('0000-00-00');
+            });*/
 
             this.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -1234,8 +1279,7 @@ These Terms will be governed by and interpreted in accordance with the laws of t
                 let data = new FormData();
 
                 data.append('avatar', avatar);
-            }
-
+            },
 
         },
 
