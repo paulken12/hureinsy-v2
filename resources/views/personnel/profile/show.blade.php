@@ -46,7 +46,7 @@
                                         <div class="peers ai-c jc-sb">
                                             <div class="peer peer-greed">
                                                 <i class="mR-10 ti-direction-alt"></i>
-                                                <span>Address </span>
+                                                <span>Address</span>
                                             </div>
                                         </div>
                                     </a>
@@ -331,65 +331,31 @@
                         <div class="tab-pane fade profile-info" id="benefit" role="tabpanel"
                              aria-labelledby="benefit-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Benefits</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <hr>
-                                @forelse($profile->benefit as $benefit)
-                                    SSS No. : <span class="c-grey-900">{{$benefit->sss_num? :'n/a'}}</span> <br>
-                                    PAGIBIG No. : <span class="c-grey-900">{{$benefit->pagibig_num? :'n/a'}}</span><br>
-                                    PHILHEALTH No. : <span
-                                            class="c-grey-900">{{$benefit->philhealth_num? :'n/a'}}</span> <br>
-                                    TIN No. : <span class="c-grey-900">{{$benefit->tin_num? :'n/a'}}</span><br>
-                                    PAYROLL No. : <span class="c-grey-900">{{$benefit->payroll_account? :'n/a'}}</span>
-                                    <br>
-                                @empty
-                                    <p class="text-center">This human doesn't have it</p>
-                                @endforelse
+
+                                <benefit-form
+                                        :profile="{{$profile}}"
+                                        :benefit="{{$profile->benefit}}"
+                                        :owner="{{$isOwner}}">
+                                </benefit-form>
+
                             </div>
                         </div>
 
                         <div class="tab-pane fade profile-info" id="family" role="tabpanel"
                              aria-labelledby="family-tab">
                             <div class="profile-info-body">
-                                <div class="peers ai-c jc-sb">
-                                    <div class="peers peer-greed">
-                                        <div class="peer">
-                                            <h4>Family Background</h4>
-                                        </div>
-                                    </div>
-                                    @can('view', $profile->user)
-                                        <div class="peer">
-                                            <span><a href="#"><i class="mR-10 ti-pencil-alt"
-                                                                 title="Edit"></i></a></span>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <hr>
-                                @forelse ($profile->family as $family)
-                                    <br>
-                                    <h5>{{$family->family}}</h5>
-                                    <br>
-                                    Name: {{$family->last_name}},&nbsp;{{$family->first_name}} <br>
-                                    Birth
-                                    date: {{$family->date_of_birth === '0000-00-00' ?  '-' : $family->date_of_birth }}
-                                    <br>
-                                    Occupation: {{$family->occupation? : 'Not specified'}}<br>
-                                    Employer: {{$family->employer? : 'Not specified' }}<br>
-                                    Gender: {{$family->gender}}<br>
-                                @empty
-                                    <p class="text-center">This alien doesn't have family</p>
-                                @endforelse
+
+                                <family-form
+                                    :profile="{{$profile}}"
+                                    :families="{{$profile->family}}"
+                                    :fam_type="{{$profile->family->pluck('family')}}"
+                                    :family_type="{{$family_type}}"
+                                    :gen_type="{{$profile->family->pluck('gender')}}"
+                                    :gender_type="{{$gender_type}}"
+                                    :owner="{{$isOwner}}"
+                                ></family-form>
+
+
                             </div>
                         </div>
 
@@ -431,31 +397,6 @@
                                         :owner="{{$isOwner}}">
                                 </reference-form>
 
-                                {{--<div class="peers ai-c jc-sb">--}}
-                                    {{--<div class="peers peer-greed">--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<h4>Character Reference</h4>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--@can('view', $profile->user)--}}
-                                        {{--<div class="peer">--}}
-                                            {{--<span><a href="#"><i class="mR-10 ti-pencil-alt"--}}
-                                             {{--title="Edit"></i></a></span>--}}
-                                        {{--</div>--}}
-                                    {{--@endcan--}}
-                                {{--</div>--}}
-
-                                {{--<hr>--}}
-                                {{--@forelse ($profile->reference as $reference)--}}
-                                    {{--Job title: {{$reference->job_title}}<br>--}}
-                                    {{--Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}--}}
-                                    {{--&nbsp;{{$reference->last_name}}<br>--}}
-                                    {{--Company name: {{$reference->company_name? : 'Not specified'}}<br>--}}
-                                    {{--Company address: {{$reference->company_address? : 'Not specified'}}<br>--}}
-                                    {{--Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br><br>--}}
-                                {{--@empty--}}
-                                    {{--<p class="text-center">No character reference</p>--}}
-                                {{--@endforelse--}}
                             </div>
                         </div>
 
@@ -487,48 +428,11 @@
                     <div class="tab-pane fade profile-info" id="training" role="tabpanel"
                          aria-labelledby="training-tab">
                         <div class="profile-info-body">
-                            <div class="peers ai-c jc-sb">
-                                <div class="peers peer-greed">
-                                    <div class="peer">
-                                        <h4>Trainings</h4>
-                                    </div>
-                                </div>
-                                @can('view', $profile->user)
-                                    <div class="peer">
-                                        <span><a href="#"><i class="mR-10 ti-pencil-alt" title="Edit"></i></a></span>
-                                    </div>
-                                @endcan
-                            </div>
-
-                            <table class="table table-sm w-100 mt-3">
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Date from</th>
-                                    <th>Date to</th>
-                                    <th>Location</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @forelse ($profile->training as $training)
-                                    <tr>
-                                        <td>{{$training->title}}</td>
-                                        <td>{{$training->date_from === '0000-00-00' ? '':$training->date_from}}</td>
-                                        <td>{{$training->date_to === '0000-00-00' ? '':$training->date_to}}</td>
-                                        <td>{{$training->place_seminar}}</td>
-                                    </tr>
-
-                                @empty
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-right">No Training</td>
-                                        <td class="text-left">Attended</td>
-                                        <td></td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
-
+                            <training-form
+                                    :profile="{{$profile}}"
+                                    :training="{{$profile->training}}"
+                                    :owner="{{$isOwner}}">
+                            </training-form>
                         </div>
                     </div>
 

@@ -35,7 +35,9 @@ Vue.component('objective-form', require('./components/ObjectiveForm.vue'));
 Vue.component('benefit-form', require('./components/BenefitForm.vue'));
 Vue.component('reference-form', require('./components/ReferenceForm.vue'));
 Vue.component('contract-form', require('./components/ContractForm.vue'));
+Vue.component('family-form', require('./components/FamilyForm.vue'));
 Vue.component('nature-form', require('./components/NatureForm.vue'));
+Vue.component('training-form', require('./components/TrainingForm.vue'));
 
 const app = new Vue({
     el: '#app',

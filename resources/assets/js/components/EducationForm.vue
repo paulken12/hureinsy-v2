@@ -18,11 +18,11 @@
         <hr>
 
         <div v-if="edit">
-            <div class="container-fluid p-0 m-0" v-for="(education, index) in form.education_type">
+            <div class="container-fluid p-0 m-0" v-for="(edu, index) in form.education_id">
                 <div class="row">
                     <div class="col-sm">
-                        <strong v-text="education" hidden></strong>
-                        <label for="edu-type" class="sr-only">Family type</label>
+                        <strong v-text="edu" hidden></strong>
+                        <label for="edu-type" class="sr-only">Education type</label>
                         <select id="edu-type" class="form-control border-info"
                                 v-model="form.master_education_key[index]">
                             <option disabled value="">Education type</option>
@@ -67,7 +67,7 @@
                 <div class="row mb-3">
                     <div class="container-fluid">
                         <a class="btn btn-danger btn-sm float-right "
-                           @click="removeEducation(index)"><i class="ti-eraser" style="color: white"></i></a>
+                           @click="removeEducation(index,edu)"><i class="ti-eraser" style="color: white"></i></a>
                     </div>
                 </div>
             </div>
@@ -75,14 +75,8 @@
                 <a class="btn btn-light " @click="addEducation">Add education</a>
             </div>
 
-            <div v-if="educations.length === 0">
-                <button class="btn btn-success btn-sm" @click="insertEducation">Add</button>
-                <button class="btn btn-link btn-sm" @click="edit = false">Cancel</button>
-            </div>
-            <div v-else>
-                <button class="btn btn-success btn-sm" @click="updateEducation">Update</button>
-                <button class="btn btn-link btn-sm" @click="edit = false">Cancel</button>
-            </div>
+            <button class="btn btn-success btn-sm" @click="updateEducation">Update</button>
+            <button class="btn btn-link btn-sm" @click="edit = false">Cancel</button>
 
         </div>
         <div v-else>
@@ -90,9 +84,9 @@
                 <div class="text-center">No educational background provided</div>
             </div>
             <div v-else>
-                <div class="container-fluid p-0 m-0" v-for="(exp,index) in form.education_type">
+                <div class="container-fluid p-0 m-0" v-for="(edu,index) in form.education_id">
                     <div class="mb-4">
-                        <span v-text="exp" hidden></span>
+                        <span v-text="edu" hidden></span>
                         <h5><span v-text="form.education_type[index]"></span>
                             <small v-show="form.edu_year_graduated[index] !== ''">( <span v-text="form.edu_year_graduated[index]"></span> )</small>
                         </h5>
@@ -132,6 +126,7 @@
                 own: this.owner,
 
                 form: new Form({
+                    education_id:[],
                     education_type: [],
                     master_education_key: [],
                     edu_course: [],
@@ -144,6 +139,7 @@
         },
         created: function () {
             this.educations.map((edu) => {
+                this.form.education_id.push(edu.id);
                 this.form.master_education_key.push(edu.master_education_key);
                 this.form.edu_course.push(edu.course);
                 this.form.edu_name_of_school.push(edu.name_of_school);
@@ -161,6 +157,7 @@
             insertEducation() {
 
             },
+
             updateEducation() {
                 this.form.patch('/profile/' + this.profile.slug + '/education');
                 this.edit = false;
@@ -173,7 +170,21 @@
                 toast.text("Education information updated.").goAway(5000);
             },
 
+            deleteEducation(edu) {
+                this.form.delete('/profile/education/' + edu);
+                    // .then(response => {
+                    //     this.work_exp = response.data;
+                    // });
+                let toast = this.$toasted.show("Toasted !!", {
+                    theme: "bubble",
+                    position: "top-right",
+                    type: "danger",
+                });
+                toast.text("Education deleted.").goAway(5000);
+            },
+
             addEducation() {
+                this.form.education_id.push('');
                 this.form.education_type.push('Vocational');
                 this.form.master_education_key.push('voc');
                 this.form.edu_course.push('');
@@ -182,14 +193,18 @@
                 this.form.edu_award.push('');
             },
 
-            removeEducation: function (index) {
-
+            removeEducation: function (index, edu) {
+                this.form.education_id.splice(index, 1);
                 this.form.education_type.splice(index, 1);
                 this.form.master_education_key.splice(index, 1);
                 this.form.edu_course.splice(index, 1);
                 this.form.edu_name_of_school.splice(index, 1);
                 this.form.edu_year_graduated.splice(index, 1);
                 this.form.edu_award.splice(index, 1);
+
+                if (edu !== '') {
+                    this.deleteEducation(edu);
+                }
             },
         }
     }

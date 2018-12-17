@@ -185,9 +185,14 @@ class RecruitConfirmationController extends Controller
             'train_place_seminar'    => 'nullable',
         ]);
 
-        $user_slug = $slug->createSlug($info['basic_first_name'].' '.$info['basic_middle_name'].' '.$info['basic_last_name']);
+         $user_slug = $slug->createSlug($info['basic_first_name'].' '.$info['basic_middle_name'].' '.$info['basic_last_name']);
 
         foreach ($user->basicInfo as $basicInfo) {
+            if(!empty($info['basic_date_of_birth'])){
+                $info['basic_date_of_birth'] = date('Y-m-d', strtotime($info['basic_date_of_birth']));
+            }else{
+                $info['basic_date_of_birth'] = strtotime('0000-00-00');
+            }
 
             //update basic info
             $basicInfo->first_name = $info['basic_first_name'];
@@ -202,7 +207,7 @@ class RecruitConfirmationController extends Controller
 
             $basicInfo->master_gender_key = $info['basic_gender_key'];
 
-            $basicInfo->date_of_birth =$info['basic_date_of_birth'];
+            $basicInfo->date_of_birth = $info['basic_date_of_birth'];
 
             $basicInfo->birth_place = $info['basic_birth_place'];
 
@@ -251,6 +256,11 @@ class RecruitConfirmationController extends Controller
 
 
         for($i=0; $i < count($family['master_family_key']); ++$i ) {
+            if(!empty($family['fam_date_of_birth'][$i])){
+               $family['fam_date_of_birth'][$i] = date('Y-m-d', strtotime($family['fam_date_of_birth'][$i]));
+            }else{
+                $family['fam_date_of_birth'][$i] = strtotime('0000-00-00');
+            }
             EmpFamily::create([
                 'emp_basic_id'=>$user_id,
                 'master_family_key'=> $family['master_family_key'][$i],
@@ -275,6 +285,16 @@ class RecruitConfirmationController extends Controller
         }
 
         for($i=0; $i < count($experience['exp_position']); ++$i ) {
+            if(!empty($experience['exp_date_from'][$i])){
+               $experience['exp_date_from'][$i] = date('Y-m-d', strtotime($experience['exp_date_from'][$i]));
+            }else{
+               $experience['exp_date_from'][$i] = strtotime('0000-00-00');
+            }
+            if(!empty($experience['exp_date_to'][$i])){
+               $experience['exp_date_to'][$i] = date('Y-m-d', strtotime($experience['exp_date_to'][$i]));
+            }else{   
+               $experience['exp_date_to'][$i] = strtotime('0000-00-00');
+            }
             EmpExperience::create([
             'emp_basic_id'=>$user_id,
             'master_job_title_key'=> $experience['exp_position'][$i],
@@ -302,6 +322,16 @@ class RecruitConfirmationController extends Controller
         }
 
         for($i=0; $i < count($training['train_title']); ++$i ) {
+            if(!empty($training['train_date_from'][$i])){
+               $training['train_date_from'][$i] = date('Y-m-d', strtotime($training['train_date_from'][$i]));
+            }else{
+               $training['train_date_from'][$i] = strtotime('0000-00-00');
+            }
+            if(!empty($training['train_date_to'][$i])){
+               $training['train_date_to'][$i] = date('Y-m-d', strtotime($training['train_date_to'][$i]));
+            }else{
+               $training['train_date_to'][$i] = strtotime('0000-00-00');
+            }
             EmpTraining::create([
                 'emp_basic_id'=>$user_id,
                 'title'=> $training['train_title'][$i],

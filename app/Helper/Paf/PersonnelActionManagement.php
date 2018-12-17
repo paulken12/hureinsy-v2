@@ -247,13 +247,13 @@ class PersonnelActionManagement {
                 $contract->jobDescription->department_key = $changes->annexa->proposed_key_department;
             }
             if(!empty($changes->annexa->proposed_key_team)){
-                $contract->jobDescription->project_id = $changes->annexa->proposed_key_team;
+                $contract->jobDescription->team_id = $changes->annexa->proposed_key_team;
             }
             if(!empty($changes->annexa->proposed_key_supervisor)){
                 $contract->jobDescription->reporting_to = $changes->annexa->proposed_key_supervisor;
             }
             if(!empty($changes->annexa->proposed_key_project_assignment)){
-                $contract->jobDescription->team_id = $changes->annexa->proposed_key_project_assignment;
+                $contract->jobDescription->project_id = $changes->annexa->proposed_key_project_assignment;
             }
 
             $contract->jobDescription->save();

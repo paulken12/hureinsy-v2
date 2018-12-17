@@ -129,6 +129,8 @@ class ReassessmentController extends Controller
 
         $form_update->master_key_employment_status = $request->input('employment_status');
 
+        $form_update->master_key_change_of_contract = $request->input('cont_change');
+
         $form_update->remarks = $request->input('remarks');
 
         $form_update->master_id_request_status = $request->input('request_status');
@@ -136,6 +138,12 @@ class ReassessmentController extends Controller
         $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
         $form_update->date_effective =$request->input('date_effective');
+        
+        $form_update->contract_start =$request->input('cont_start');
+        
+        $form_update->contract_end =$request->input('cont_end');
+        
+        $form_update->resigned_date =$request->input('res_date');
         
         $form_update->save();
 

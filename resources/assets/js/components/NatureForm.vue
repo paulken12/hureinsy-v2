@@ -10,14 +10,22 @@
 					</select>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<div class="form-group">
-						<label for="proposed_effective_date"><strong>Proposed Date Effective</strong></label>
-						<input type="text" id="date_effective" name="date_effective" class="form-control m-date" title="Date_effective" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" v-bind:value="p_date" required>
-					</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label for="proposed_effective_date"><strong>Proposed Date Effective</strong></label>
+					<!-- <input type="text" id="date_effective" name="date_effective" class="form-control m-date" title="Date_effective" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" v-bind:value="p_date" required> -->
+					<datepicker v-model="p_date" 
+								name="date_effective"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
-			</div>	
+			</div>
 		</div>
 
 		<div class="row" v-if="employment_status == 'reh' || employment_status == 'sfr' || employment_status == 'ren' ">
@@ -32,13 +40,33 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="cont_start"><strong>Contract Start</strong></label>
-					<input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date">
+					<!-- <input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date"> -->
+					<datepicker v-model="s_date" 
+								name="cont_start"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 			<div class="col" v-if="cont_change != 'regular'">
 				<div class="form-group">
 					<label for="cont_end"><strong>Contract End</strong></label>
-					<input type="text" id="cont_end" name="cont_end" class="form-control" title="Contract_end" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="e_date">
+					<!-- <input type="text" id="cont_end" name="cont_end" class="form-control" title="Contract_end" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="e_date"> -->
+					<datepicker v-model="e_date" 
+								name="cont_end"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 		</div>
@@ -55,19 +83,49 @@
 			<div v-if="cont_change != 'separated'" class="col">
 				<div class="form-group">
 					<label for="cont_start"><strong>Contract Start</strong></label>
-					<input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date">
+					<!-- <input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date"> -->
+					<datepicker v-model="s_date" 
+								name="cont_start"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 			<div v-if="cont_change == 'probationary' || cont_change == 'project-based'" class="col">
 				<div class="form-group">
 					<label for="cont_end"><strong>Contract End</strong></label>
-					<input type="text" id="cont_end" name="cont_end" class="form-control" title="Contract_end" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="e_date">
+					<!-- <input type="text" id="cont_end" name="cont_end" class="form-control" title="Contract_end" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="e_date"> -->
+					<datepicker v-model="e_date" 
+								name="cont_end"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 			<div v-if="cont_change == 'separated'" class="col">
 				<div class="form-group">
 					<label for="res_date"><strong>Resignation Date</strong></label>
-					<input type="text" id="res_date" name="res_date" class="form-control" title="Resignation_date" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="r_date">
+					<!-- <input type="text" id="res_date" name="res_date" class="form-control" title="Resignation_date" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="r_date"> -->
+					<datepicker v-model="r_date" 
+								name="res_date"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 		</div>
@@ -76,7 +134,17 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="res_date"><strong>Resignation Date</strong></label>
-					<input type="text" id="res_date" name="res_date" class="form-control" title="Resignation_date" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="r_date">
+					<!-- <input type="text" id="res_date" name="res_date" class="form-control" title="Resignation_date" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="r_date"> -->
+					<datepicker v-model="r_date" 
+								name="res_date"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 		</div>
@@ -85,7 +153,17 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="cont_start"><strong>Start date</strong></label>
-					<input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date">
+					<!-- <input type="text" id="cont_start" name="cont_start" class="form-control" title="Contract_start" data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd" v-bind:value="s_date"> -->
+					<datepicker v-model="s_date" 
+								name="cont_start"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date of Birth">
+                    </datepicker>
 				</div>
 			</div>
 		</div>
@@ -96,68 +174,79 @@
 
 <script>
 
-export default{ 
-	props: ['contract_change', 'emp_stat', 'cur_paf'],
+    import Datepicker from 'vuejs-datepicker';
 
-	data: function(){
-		return {
-			employment_status: this.c_cc(),
-			cont_change: this.e_cc(),
-			p_date: new Date().toISOString().slice(0, 10),
-			e_date: this.ed(),
-			r_date: this.rd(),
-			s_date: this.sd(),
-		}
-	},
+	export default{ 
+		props: ['contract_change', 'emp_stat', 'cur_paf'],
+		components: {Datepicker},
 
-	mounted: function(){
-
-        $(document).ready(function($){
-            $('.m-date').mask('0000-00-00');
-        });
-	},
-
-	methods: {
-		c_cc(){
-			if(this.cur_paf){
-				return this.cur_paf.master_key_employment_status;
-			}else{
-				return 'ren';
+		data: function(){
+			return {
+				employment_status: this.c_cc(),
+				cont_change: this.e_cc(),
+				p_date: this.de(),
+				e_date: this.ed(),
+				r_date: this.rd(),
+				s_date: this.sd(),
 			}
 		},
 
-		e_cc(){
-			if(this.cur_paf){
-				return this.cur_paf.master_key_change_of_contract;
-			}else{
-				return 'project-based';
-			}
+		mounted: function(){
+
+	        $(document).ready(function($){
+	            $('.m-date').mask('0000-00-00');
+	        });
 		},
 
-		ed(){
-			if(this.cur_paf) {
-				return this.cur_paf.contract_end;
-			}else{
-				return new Date().toISOString().slice(0, 10);
-			}
-		},
+		methods: {
+			c_cc(){
+				if(this.cur_paf){
+					return this.cur_paf.master_key_employment_status;
+				}else{
+					return 'ren';
+				}
+			},
 
-		rd(){
-			if(this.cur_paf) {
-				return this.cur_paf.resigned_date;
-			}else{
-				return new Date().toISOString().slice(0, 10);
-			}
-		},
+			e_cc(){
+				if(this.cur_paf){
+					return this.cur_paf.master_key_change_of_contract;
+				}else{
+					return 'project-based';
+				}
+			},
 
-		sd(){
-			if(this.cur_paf) {
-				return this.cur_paf.contract_start;
-			}else{
-				return new Date().toISOString().slice(0, 10);
+			ed(){
+				if(this.cur_paf) {
+					return this.cur_paf.contract_end;
+				}else{
+					return new Date().toISOString().slice(0, 10);
+				}
+			},
+
+			rd(){
+				if(this.cur_paf) {
+					return this.cur_paf.resigned_date;
+				}else{
+					return new Date().toISOString().slice(0, 10);
+				}
+			},
+
+			sd(){
+				if(this.cur_paf) {
+					return this.cur_paf.contract_start;
+				}else{
+					return new Date().toISOString().slice(0, 10);
+				}
+			},
+
+			de(){
+				if(this.cur_paf) {
+					return this.cur_paf.date_effective;
+				}else{
+					return new Date().toISOString().slice(0, 10);
+				}
 			}
 		}
 	}
-}
 	
 </script>

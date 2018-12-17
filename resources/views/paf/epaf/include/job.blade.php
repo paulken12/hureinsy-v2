@@ -51,7 +51,7 @@
 	<div class="col">
 		<div class="form-group">
 			<input type="hidden" name="proposed_department" value="{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}" readonly>
-			{{empty($get_job_details->proposed_key_team) ? 'n/a' : $get_job_details->masterDepartment->department}}
+			{{empty($get_job_details->proposed_key_department) ? 'n/a' : $get_job_details->masterDepartment->department}}
 		</div>
 	</div>
 </div>

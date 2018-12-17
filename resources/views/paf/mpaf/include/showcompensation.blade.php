@@ -49,7 +49,7 @@
 	</div>
 	<div class="col">
 		<div class="input-group">
-			<input type="text" id="proposed_probi_rate" name="proposed_probi_rate" class="form-control m-money" title="Proposed_probi_rate" placeholder="0.00" value="{{empty($get_current_compensation_details->current_probi_rate) ? '' : $get_compensation_details->proposed_probi_rate}}">
+			<input type="text" id="proposed_probi_rate" name="proposed_probi_rate" class="form-control m-money" title="Proposed_probi_rate" placeholder="0.00" value="{{empty($get_compensation_details->proposed_probi_rate) ? '' : $get_compensation_details->proposed_probi_rate}}">
 			 <div class="input-group-append">
                 <div class="input-group-text">
                     <small>php</small>

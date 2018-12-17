@@ -111,6 +111,7 @@
                                                                 :format="'yyyy-MM-dd'"
                                                                 :bootstrap-styling="true"
                                                                 :typeable="true"
+                                                                :required="true"
                                                                 v-mask="'####-##-##'"
                                                                 placeholder="Date of Birth">
                                                     </datepicker>
@@ -120,48 +121,63 @@
                                                 <div class="form-group">
                                                     <label for="basic_civil_status_key" class="sr-only">Civil
                                                         Status</label>
-                                                    <select id="basic_civil_status_key"
+                                                    <select id="basic_civil_status_key" name="basic_civil_status_key"
                                                             v-model="form.basic_civil_status_key"
-                                                            class="form-control">
+                                                            class="form-control"
+                                                            v-bind:class="{ 'is-invalid': form.errors.has('basic_civil_status_key')}">
                                                         <option disabled value="">Civil Status</option>
                                                         <option v-for="civilType in civil" v-bind:value="civilType.key">
                                                             {{civilType.civil_status}}
                                                         </option>
                                                     </select>
+                                                    <small class="text-danger"
+                                                           v-if="form.errors.has('basic_civil_status_key')"
+                                                           v-text="form.errors.get('basic_civil_status_key')"></small>
                                                 </div>
                                             </div>
                                             <div class="col-sm">
                                                 <div class="form-group">
                                                     <label for="basic_citizenship_key"
                                                            class="sr-only">Citizenship</label>
-                                                    <select id="basic_citizenship_key" class="form-control"
-                                                            v-model="form.basic_citizenship_key">
+                                                    <select id="basic_citizenship_key" name="basic_citizenship_key" 
+                                                            v-model="form.basic_citizenship_key" 
+                                                            class="form-control"
+                                                            v-bind:class="{ 'is-invalid': form.errors.has('basic_citizenship_key')}">
                                                         <option disabled value="">Citizenship</option>
                                                         <option v-for="citizenshipType in citizenship"
                                                                 v-bind:value="citizenshipType.key">
                                                             {{citizenshipType.citizenship}}
                                                         </option>
                                                     </select>
+                                                    <small class="text-danger"
+                                                           v-if="form.errors.has('basic_citizenship_key')"
+                                                           v-text="form.errors.get('basic_citizenship_key')"></small>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group">
-                                                    <label for="gender_key" class="sr-only">Gender</label>
-                                                    <select id="gender_key" class="form-control"
-                                                            v-model="form.basic_gender_key">
+                                                    <label for="basic_gender_key" class="sr-only">Gender</label>
+                                                    <select id="basic_gender_key" name="basic_gender_key" 
+                                                            v-model="form.basic_gender_key"
+                                                            class="form-control"
+                                                            v-bind:class="{ 'is-invalid': form.errors.has('basic_gender_key')}">
                                                         <option disabled value="">Gender</option>
                                                         <option v-for="genderType in gender"
                                                                 v-bind:value="genderType.key">
                                                             {{genderType.gender}}
                                                         </option>
                                                     </select>
+                                                    <small class="text-danger"
+                                                           v-if="form.errors.has('basic_gender_key')"
+                                                           v-text="form.errors.get('basic_gender_key')"></small>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="basic_birth_place" class="sr-only">Birth Place</label>
-                                            <input type="text" id="basic_birth_place" v-model="form.basic_birth_place"
+                                            <input type="text" id="basic_birth_place"
+                                                   v-model="form.basic_birth_place"
                                                    class="form-control"
                                                    title="Birth Place" placeholder="Birth Place">
                                         </div>
@@ -619,7 +635,7 @@
                                                                 :bootstrap-styling="true"
                                                                 :typeable="true"
                                                                 v-mask="'####-##-##'"
-                                                                placeholder="Date of Birth">
+                                                                placeholder="Date from">
                                                             </datepicker>
                                                         </div>
                                                     </div>
@@ -636,7 +652,7 @@
                                                                 :bootstrap-styling="true"
                                                                 :typeable="true"
                                                                 v-mask="'####-##-##'"
-                                                                placeholder="Date of Birth">
+                                                                placeholder="Date To">
                                                             </datepicker>
                                                         </div>
                                                     </div>
@@ -680,11 +696,6 @@
                                                     <div class="form-group">
                                                         <label class="sr-only" for="train_date_from">Start Date</label>
                                                         <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <div class="input-group-text">
-                                                                    <small>from</small>
-                                                                </div>
-                                                            </div>
                                                             <!-- <input type="text"
                                                                    class="form-control bdc-grey-200 start-date"
                                                                    id="train_date_from"
@@ -697,7 +708,7 @@
                                                                 :bootstrap-styling="true"
                                                                 :typeable="true"
                                                                 v-mask="'####-##-##'"
-                                                                placeholder="Date of Birth">
+                                                                placeholder="Date From">
                                                             </datepicker>
                                                         </div>
                                                     </div>
@@ -706,11 +717,6 @@
                                                     <div class="form-group">
                                                         <label class="sr-only" for="train_date_to">End Date</label>
                                                         <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <div class="input-group-text">
-                                                                    <small>to</small>
-                                                                </div>
-                                                            </div>
                                                             <!-- <input type="text"
                                                                    class="form-control bdc-grey-200 end-date"
                                                                    id="train_date_to"
@@ -723,7 +729,7 @@
                                                                 :bootstrap-styling="true"
                                                                 :typeable="true"
                                                                 v-mask="'####-##-##'"
-                                                                placeholder="Date of Birth">
+                                                                placeholder="Date To">
                                                             </datepicker>
                                                         </div>
                                                     </div>

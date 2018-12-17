@@ -44,7 +44,7 @@
 	</div>
 	<div class="col">
 		<div class="form-group">
-			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->masterProjectAssignment->name}}
+			{{empty($get_current_schedule_details->current_key_work_location) ? 'n/a' : $get_current_schedule_details->MasterCompany->name}}
 		</div>
 	</div>
 	<div class="col">

@@ -13,11 +13,21 @@
 				<option v-for="subcategory in subcategories" v-bind:value="subcategory.id" v-if="subcategory.master_id_status == Categories">{{ subcategory.sub_request_status }} - {{ subcategory.description }}</option>
 			</select>
 		</div>
-		<div class="row" v-if="SubCategories == 5">
-			<div class="col-2">
+		<div class="row" v-if="SubCategories == 5 && Categories == 2 ">
+			<div class="col-4">
 				<div class="form-group">
 					<label for="proposed_effective_date"><strong>Date Effective</strong></label>
-					<input type="text" v-model="Date_effective" id="date_effective" name="date_effective" class="form-control" title="Date_effective"  data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd">
+					<!-- <input type="text" v-model="Date_effective" id="date_effective" name="date_effective" class="form-control" title="Date_effective"  data-provide="datepicker" data-date-format="yyyy-mm-dd" v-mask="'####-##-##'" placeholder="yyyy-mm-dd"> -->
+					<datepicker v-model="Date_effective" 
+								name="date_effective"
+                                :format="'yyyy-MM-dd'"
+                                :bootstrap-styling="true"
+                                :typeable="true"
+                                :calendar-button="true"
+                                calendar-button-icon="ti-calendar"
+                                v-mask="'####-##-##'"
+                                placeholder="Date Effective">
+                    </datepicker>
 				</div>
 			</div>
 		</div>
@@ -27,27 +37,30 @@
 
 <script>
 
-export default{ 
-	props: ['categories', 'subcategories', 'date_effective'],
+    import Datepicker from 'vuejs-datepicker';
 
-	data: function(){
-		return {
-			Categories: '',
-			SubCategories: '',
+	export default{ 
+		props: ['categories', 'subcategories', 'date_effective'],
+		components: {Datepicker},
 
-			Date_effective: this.d_e(),
-		}
-	},
+		data: function(){
+			return {
+				Categories: '',
+				SubCategories: '',
 
-	methods: {
-		d_e(){
-			if(this.date_effective){
-				return this.date_effective.date_effective;
-			}else{
-				return new Date().toISOString().slice(0, 10);
+				Date_effective: this.d_e(),
+			}
+		},
+
+		methods: {
+			d_e(){
+				if(this.date_effective){
+					return this.date_effective.date_effective;
+				}else{
+					return new Date().toISOString().slice(0, 10);
+				}
 			}
 		}
 	}
-}
 	
 </script>

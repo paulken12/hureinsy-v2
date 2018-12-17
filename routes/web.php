@@ -266,13 +266,21 @@ Route::group(['middleware' => ['auth','verified']],function()
 
     Route::patch('profile/{profile}/experience', 'Personnel\Profile\ProfileController@updateExperience');
 
+    Route::patch('profile/{profile}/benefit', 'Personnel\Profile\ProfileController@updateBenefit');
+
 //    Route::post('profile/{profile}/experience/insert', 'Personnel\Profile\ProfileController@storeExperience');
 
     Route::delete('profile/experience/{id}', 'Personnel\Profile\ProfileController@deleteExperience');
+    
+    Route::delete('profile/education/{id}', 'Personnel\Profile\ProfileController@deleteEducation');
+
+    Route::delete('profile/family/{id}', 'Personnel\Profile\ProfileController@deleteFamily');
+
+    Route::delete('profile/training/{id}', 'Personnel\Profile\ProfileController@deleteTraining');
+
+    Route::delete('profile/reference/{id}', 'Personnel\Profile\ProfileController@deleteReference');
 
     Route::patch('profile/{profile}/education', 'Personnel\Profile\ProfileController@updateEducation');
-
-    Route::post('profile/{profile}/education/insert', 'Personnel\Profile\ProfileController@storeEducation');
 
     Route::patch('profile/{profile}/family', 'Personnel\Profile\ProfileController@updateFamily');
 
@@ -280,7 +288,11 @@ Route::group(['middleware' => ['auth','verified']],function()
 
     Route::patch('profile/{profile}/reference', 'Personnel\Profile\ProfileController@updateReference');
 
-    Route::delete('profile/reference/{id}', 'Personnel\Profile\ProfileController@deleteReference');
+    Route::patch('profile/{profile}/training', 'Personnel\Profile\ProfileController@updateTraining');
+
+    Route::patch('profile/{profile}/benefit', 'Personnel\Profile\ProfileController@updateBenefit');
+
+    Route::post('profile/{profile}/education/insert', 'Personnel\Profile\ProfileController@storeEducation');
 
     /* ------------------ PERSONNEL LIST ------------------*/
 

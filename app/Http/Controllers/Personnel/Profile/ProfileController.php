@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Personnel\Profile;
 
 use App\Master\MasterBloodType;
 use App\Master\MasterEducationType;
+use App\Master\MasterFamilyType;
+use App\Master\MasterGender;
 use App\Personnel\Info\Contract;
 use App\Personnel\Info\EmpAddress;
 use App\Personnel\Info\EmpBasic;
 use App\Personnel\Info\EmpContract;
+use App\Personnel\Info\EmpEducation;
 use App\Personnel\Info\EmpExperience;
+use App\Personnel\Info\EmpFamily;
 use App\Personnel\Info\EmpReference;
 use App\Personnel\Info\EmpSkill;
+use App\Personnel\Info\EmpTraining;
 use App\Role;
 use function Complex\add;
 use Illuminate\Http\Request;
@@ -26,10 +31,11 @@ class ProfileController extends Controller
 
         $blood = MasterBloodType::all();
         $education_type= MasterEducationType::all();
-
+        $family_type= MasterFamilyType::all();
+        $gender_type= MasterGender::all();
         $role = Role::all();
-
-        return view('personnel.profile.show', compact('profile','isOwner','blood','education_type','role'));
+ 
+        return view('personnel.profile.show', compact('profile','isOwner','blood','education_type','role','family_type','gender_type'));
     }
 
     public function updateAddress(Request $request,EmpBasic $profile)
@@ -86,7 +92,6 @@ class ProfileController extends Controller
     }
 
     public function updateContact(Request $request, EmpBasic $profile) {
-
         $contact = $request->validate([
             'telephone_num'          => 'nullable',
             'mobile_num'             => 'nullable',
@@ -174,6 +179,17 @@ class ProfileController extends Controller
 
 
         for($i=0; $i < count($experience['exp_id']); ++$i ) {
+            if(!empty($experience['exp_date_from'][$i])){
+               $experience['exp_date_from'][$i] = date('Y-m-d', strtotime($experience['exp_date_from'][$i]));
+            }
+            else{
+               $experience['exp_date_from'][$i] = strtotime('0000-00-00');
+            }
+            if(!empty($experience['exp_date_to'][$i])){
+               $experience['exp_date_to'][$i] = date('Y-m-d', strtotime($experience['exp_date_to'][$i]));
+            }else{
+               $experience['exp_date_to'][$i] = strtotime('0000-00-00');
+            }
             EmpExperience::updateOrCreate([
                 'id'=>$experience['exp_id'][$i],
                 'emp_basic_id' => $profile->id,
@@ -240,7 +256,144 @@ class ProfileController extends Controller
         }
     }
 
+    public function updateTraining(Request $request, EmpBasic $profile) {
+        $tra = $request->validate([
+            'tra_id'=>'required',
+            'tra_title'=>'nullable',
+            'tra_start'=>'nullable',
+            'tra_end'=>'nullable',
+            'tra_location'=>'nullable',
+        ]);
+        
+        for($i=0; $i < count($tra['tra_title']); ++$i) {
+            if(!empty($tra['tra_start'][$i])){
+               $tra['tra_start'][$i] = date('Y-m-d', strtotime($tra['tra_start'][$i]));
+            }else{
+                $tra['tra_start'][$i] = strtotime('0000-00-00');
+            }
+            if(!empty($tra['tra_end'][$i])){
+               $tra['tra_end'][$i] = date('Y-m-d', strtotime($tra['tra_end'][$i]));
+            }else{
+                $tra['tra_end'][$i] = strtotime('0000-00-00');
+            }
+            EmpTraining::updateOrCreate([
+                'id'=>$tra['tra_id'][$i],
+                'emp_basic_id' => $profile->id,
+            ],[
+                'title'=> $tra['tra_title'][$i],
+                'date_from'=> $tra['tra_start'][$i],
+                'date_to'=> $tra['tra_end'][$i],
+                'place_seminar'=> $tra['tra_location'][$i],
+            ]);
+        }
+
+        $tra = $profile->training;
+
+        return response()->json(['data' =>$tra],200);
+    }
+
+    public function updateBenefit(Request $request, EmpBasic $profile) {
+
+        $ben = $request->validate([
+            'ben_sss' => 'nullable',
+            'ben_pagibig' => 'nullable',
+            'ben_philhealth' => 'nullable',
+            'ben_tin' => 'nullable',
+            'ben_payroll' => 'nullable',
+        ]);
+
+        foreach ($profile->benefit as $benefit) {
+            $benefit->sss_num = $ben ['ben_sss'];
+            $benefit->pagibig_num = $ben['ben_pagibig'];
+            $benefit->philhealth_num = $ben['ben_philhealth'];
+            $benefit->tin_num    = $ben['ben_tin'];
+            $benefit->payroll_account = $ben['ben_payroll'];
+            $benefit->update();
+        }
+    }
+
+    public function deleteBenefit(EmpTraining $id) {
+        $id->delete();
+    }
+
+    public function deleteTraining(EmpTraining $id) {
+        $id->delete();
+    }
+
     public function deleteReference(EmpReference $id) {
+        $id->delete();
+    }
+
+    public function updateEducation(Request $request, EmpBasic $profile) {
+        $edu = $request->validate([
+            'education_id'           => 'required',
+            'master_education_key'   => 'nullable',
+            'edu_course'             => 'nullable',
+            'edu_name_of_school'     => 'nullable',
+            'edu_year_graduated'     => 'nullable',
+            'edu_award'              => 'nullable',
+        ]);
+
+        for($i=0; $i < count($edu['master_education_key']); ++$i ) {
+            EmpEducation::updateOrCreate([
+                'id'=>$edu['education_id'][$i],
+                'emp_basic_id' => $profile->id,
+            ],[
+                'master_education_key'=> $edu['master_education_key'][$i],
+                'course'=> $edu['edu_course'][$i],
+                'name_of_school'=> $edu['edu_name_of_school'][$i],
+                'year_graduated'=> $edu['edu_year_graduated'][$i],
+                'award'=> $edu['edu_award'][$i],
+            ]);
+        }
+
+        $edu = $profile->education;
+
+        return response()->json(['data' =>$edu],200);
+    }
+
+    public function deleteEducation(EmpEducation $id) {
+        $id->delete();
+    }
+
+    public function updateFamily(Request $request, EmpBasic $profile) {
+        $fam = $request->validate([
+            'family_id'           => 'required',
+            'master_family_key'   => 'nullable',
+            'fam_last_name'       => 'nullable',
+            'fam_first_name'      => 'nullable',
+            'fam_date_of_birth'   => 'nullable',
+            'fam_occupation'      => 'nullable',
+            'fam_employer'        => 'nullable',
+            'master_gender_key'   => 'nullable',
+        ]);
+
+        for($i=0; $i < count($fam['master_family_key']); ++$i ) {
+            if(!empty($fam['fam_date_of_birth'][$i])){
+                $fam['fam_date_of_birth'][$i] = date('Y-m-d', strtotime($fam['fam_date_of_birth'][$i]));
+            }else{
+                $fam['fam_date_of_birth'][$i] = strtotime('0000-00-00');
+            }
+            EmpFamily::updateOrCreate([
+                'id'                =>$fam['family_id'][$i],
+                'emp_basic_id'      => $profile->id,
+            ],[
+                'master_family_key' => $fam['master_family_key'][$i],
+                'last_name'         => $fam['fam_last_name'][$i],
+                'first_name'        => $fam['fam_first_name'][$i],
+                'date_of_birth'     => $fam['fam_date_of_birth'][$i],
+                'occupation'        => $fam['fam_occupation'][$i],
+                'employer'          => $fam['fam_employer'][$i],
+                'master_gender_key' => $fam['master_gender_key'][$i],
+            ]);
+        }
+
+        $fam = $profile->family;
+
+        return response()->json(['data' =>$fam],200);
+    }
+
+    public function deleteFamily(EmpFamily $id) {
         $id->delete();
     }
 
@@ -256,7 +409,5 @@ class ProfileController extends Controller
 
         return response([], 204);
     }
-
-
 
 }
