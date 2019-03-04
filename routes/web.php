@@ -236,11 +236,44 @@ Route::group(['middleware' => ['auth','role:titan|admin|human resource','verifie
 
     Route::get('/employee/attendance', 'Attendance\Schedule\AttScheduleController@create')->name('employee.attendance');
 
+    Route::get('/employee/attendance/{id}', 'Attendance\Schedule\AttScheduleController@show')->name('employee.attendance.show');
+
+    Route::post('/employee/attendance/store', 'Attendance\Schedule\AttScheduleController@store')->name('employee.attendance.store');
+
     /* ------------------ ATTENDANCE ------------------*/
 
     Route::get('/import', 'Attendance\Raw\ImportRawController@index')->name('import');
 
     Route::post('/import/file', 'Attendance\Raw\ImportRawController@store')->name('import.file');
+
+    /* ------------------ DTR ------------------*/
+
+    Route::get('/dtrlist', 'Attendance\DTR\MyDTR@list')->name('dtrlist');
+
+    Route::get('/dtrlist/{dtr}', 'Attendance\DTR\MyDTR@index')->name('dtrlist.dtr');
+
+    /* ------------------ HOLIDAY ------------------*/
+
+    Route::get('/holiday', 'Attendance\Schedule\AttHolidayController@index')->name('holiday');
+
+    Route::post('/holiday/store', 'Attendance\Schedule\AttHolidayController@store')->name('holiday.store');
+
+    Route::delete('/holiday/delete/{id}', 'Attendance\Schedule\AttHolidayController@delete')->name('holiday.delete');
+
+    /* ------------------ SHIFTS ------------------*/
+
+    Route::get('/shift', 'Attendance\Schedule\AttShiftController@index')->name('shift');
+
+    Route::post('/shift/store', 'Attendance\Schedule\AttShiftController@store')->name('shift');
+    
+    Route::delete('/shift/delete/{id}', 'Attendance\Schedule\AttShiftController@delete')->name('shift');
+
+    /* ------------------ FORMS ------------------*/
+
+    Route::get('/forms/ob', 'Attendance\AppriseForms\AttOBFormController@index')->name('forms.ob');
+
+    Route::post('/forms/ob/store', 'Attendance\AppriseForms\AttOBFormController@store')->name('forms.ob.store');
+
 });
 
 /* ------------------ PERSONNEL ------------------*/

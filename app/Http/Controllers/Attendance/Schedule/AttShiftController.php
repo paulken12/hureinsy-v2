@@ -15,7 +15,11 @@ class AttShiftController extends Controller
      */
     public function index()
     {
-        //
+
+        //dd(date('l', strtotime('monday + 2 day')));
+
+        $shift = AttShift::all();
+        return view('admin.attendance-management.dtr.shift.index', compact('shift'));
     }
 
     /**
@@ -36,7 +40,27 @@ class AttShiftController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $shi = $request->validate([
+
+            'in_name' => 'required|unique:att_shifts,display_name',
+
+            'in_in' => 'required',
+
+            'in_out' => 'required',
+
+        ],[
+            'in_name.required' => 'name is required',
+            'in_name.unique' => 'name has already been taken',
+        ]);
+
+        AttShift::create([
+            'display_name' => $request->in_name, 
+            'time_in' => $request->in_in, 
+            'time_out' => $request->in_out, 
+
+        ]);
+
+        return ['mes' => 'Shift added'];
     }
 
     /**
@@ -79,8 +103,8 @@ class AttShiftController extends Controller
      * @param  \App\Attendance\Schedule\AttShift  $attShift
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AttShift $attShift)
+    public function delete(AttShift $id)
     {
-        //
+        $id->delete();
     }
 }

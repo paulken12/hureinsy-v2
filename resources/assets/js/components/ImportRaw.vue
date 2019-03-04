@@ -1,6 +1,7 @@
 <template>
     <div class="bd bgc-white">
-        <!--<form method="POST" enctype="multipart/form-data">-->
+        <form action="/import/file" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_token" :value="csrf">
             <div class="layers">
                 <div class="layer w-100 p-20">
                     <div class="peers">
@@ -12,9 +13,10 @@
                 </div>
 
                 <div class="container-fluid bdT p-20">
+                    <small v-text="f_mes" v-bind:class="{'text-danger' : !troo}"></small>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="import_file" name="import_file" @change="onChange" required>
-                        <label class="custom-file-label" for="import_file">Choose file...</label>
+                        <label class="custom-file-label" for="import_file" v-text="f_name"></label>
                     </div>
                 </div>
 
@@ -23,47 +25,64 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="ti-calendar"></i></div>
-                                    </div>
-                                    <input type="text" class="form-control bdc-grey-200 start-date" id="start_date" v-model="date_start"
-                                           placeholder="Start Date" data-provide="datepicker"
-                                           data-date-format="yyyy-mm-dd">
-                                </div>
+                                <datepicker v-model="date_start" 
+                                            name="date_start"
+                                            :format="'yyyy-MM-dd'"
+                                            :bootstrap-styling="true"
+                                            :typeable="true"
+                                            :calendar-button="true"
+                                            calendar-button-icon="ti-calendar"
+                                            v-mask="'####-##-##'"
+                                            placeholder="Start Date">
+                                </datepicker>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="ti-calendar"></i></div>
-                                    </div>
-                                    <input type="text" class="form-control bdc-grey-200 end-date" id="end_date" v-model="date_end"
-                                           placeholder="End Date" data-provide="datepicker"
-                                           data-date-format="yyyy-mm-dd">
-                                </div>
+                                <datepicker v-model="date_end" 
+                                            name="date_end"
+                                            :format="'yyyy-MM-dd'"
+                                            :bootstrap-styling="true"
+                                            :typeable="true"
+                                            :calendar-button="true"
+                                            calendar-button-icon="ti-calendar"
+                                            v-mask="'####-##-##'"
+                                            placeholder="End Date">
+                                </datepicker>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ta-r bdT w-100 p-20">
-                <button  class="btn btn-info">Import</button>
+                <button class="btn btn-info" :disabled="!troo">Import</button>
             </div>
-        <!--</form>-->
+        </form>
     </div>
 </template>
 
 <script>
+
+    import Datepicker from 'vuejs-datepicker';
+
     export default {
+
+        components: {Datepicker},
+
         data: function(){
             return{
+                troo: true,
+                csrf: '',
                 raw: [],
-                date_start: '2018-04-01',
-                date_end: '2018-04-05'
-            // date_start: moment().format('YYYY-MM-DD'),
+                date_start: new Date().toISOString().slice(0, 10),
+                date_end: new Date().toISOString().slice(0, 10),
+                f_name: 'Choose file...',
+                f_mes: 'Upload only the log file (.dat) with less 2MB file size',
+                f_mes1: 'Upload only the log file (.dat) with less 2MB file size',
+                f_err1: 'Max file size is up to 2MB only',
+                f_err2: 'Upload only .dat file extension',
+                // date_start: moment().format('YYYY-MM-DD'),
                 // date_end: moment().subtract(5, "days").format('YYYY-MM-DD')
             }
         },
@@ -83,6 +102,7 @@
             $("#end_date").datepicker().on(
                 "changeDate", () => {this.date_end = $('#end_date').val()}
             );
+            this.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         },
         methods: {
@@ -104,7 +124,22 @@
                 let reader = new FileReader();
                 let arr= [];
 
-                let newArray =[];
+                this.f_name = file.name;
+                    console.log(file.mozFullPath);
+
+                if(file.size < 2000000 && file.name.split('.').pop() === "dat"){
+                    this.f_mes = this.f_mes1;
+                    this.troo = true;
+                }else if(file.name.split('.').pop() != "dat"){
+                    this.f_mes = this.f_err2;
+                    this.troo = false;
+                }else{
+                    this.f_mes = this.f_err1;
+                    this.troo = false;
+                }
+
+
+/*                let newArray =[];
 
                 reader.readAsText(file);
 
@@ -164,23 +199,24 @@
 
                 };
 
-                //console.log(arr);
-                // console.log(this.raw);
-                // console.log();
+                console.log(arr);
+                console.log(this.raw);
+                console.log();
 
-                // let arr = [];
-                // this.raw.forEach(function (entry) {
-                //     arr[entry['emp_id']][entry['date']][''] = entry['time'];
-                // });
-                //console.log(this.raw);
+                //let arr = [];
+                this.raw.forEach(function (entry) {
+                    arr[entry['emp_id']][entry['date']][''] = entry['time'];
+                });
+                console.log(this.raw);
+
                 let t1 = performance.now();
-                console.log("tCall to doSomething ook " + (t1 - t0) + " milliseconds.");
-
-
+                console.log("tCall to doSomething ook " + (t1 - t0) + " milliseconds.");*/
 
             }
         }
     }
+    
+
 </script>
 
 

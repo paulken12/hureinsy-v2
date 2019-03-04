@@ -119,33 +119,41 @@
 
 /*For data tables*/
 
-#masters-list_wrapper label, #paf-list_wrapper label {
+#masters-list_wrapper label, #paf-list_wrapper label, #dtr-table_wrapper label, #att-list_wrapper label, #sched-list_wrapper label, #empSched-list_wrapper label {
   margin: 1rem;
 }
 
-#masters-list_wrapper #masters-list_info, #paf-list_wrapper #paf-list_info {
+#masters-list_wrapper #masters-list_info, #paf-list_wrapper #paf-list_info, #dtr-table_wrapper #dtr-table_info, #att-list_wrapper #att-list_info, #sched-list_wrapper #sched-list_info, #empSched-list_wrapper #empSched-list_info {
   margin: 1rem;
 }
 
-#masters-list_wrapper .current, #paf-list_wrapper .current {
+#masters-list_wrapper .current, #paf-list_wrapper .current, #dtr-table_wrapper .current, #att-list_wrapper .current, #sched-list_wrapper .current, #empSched-list_wrapper .current {
   background: #2196f3;
 }
 
-#masters-list_wrapper .paginate_button:hover, #paf-list_wrapper .paginate_button:hover {
+#masters-list_wrapper .paginate_button:hover, #paf-list_wrapper .paginate_button:hover, #dtr-table_wrapper .paginate_button:hover, #att-list_wrapper.pagiate_button:hover, #sched-list_wrapper.pagiate_button:hover, #empSched-list_wrapper.pagiate_button:hover {
   background: #2196f3;
 }
 
-#masters-list_wrapper #masters-list_paginate, #paf-list_wrapper #paf-list_paginate, {
+#masters-list_wrapper #masters-list_paginate, #paf-list_wrapper #paf-list_paginate, #dtr-table_wrapper #dtr-table_paginate, #att-list_wrapper #att-list_paginate, #sched-list_wrapper #sched-list_paginate, #empSched-list_wrapper #empSched-list_paginate {
   margin: 1rem;
 }
 
-#masters-list_wrapper .table th, #paf-list_wrapper .table th, {
+#masters-list_wrapper .table th, #paf-list_wrapper .table th, #dtr-table_wrapper .table th, #att-list_wrapper .table th, #sched-list_wrapper .table th, #empSched-list_wrapper .table th,{
   cursor: cell;
 }
 
-#masters-list_wrapper .table td, #paf-list_wrapper .table td,  {
+#masters-list_wrapper .table td, #paf-list_wrapper .table td, #dtr-table_wrapper .table td, #att-list_wrapper .table td, #sched-list_wrapper .table td, #empSched-list_wrapper .table td,{
   padding: 0.75rem;
   border-top: 1px solid #dee2e6;
+}
+
+#CsvButton, #PrintButton, #CopyButton{
+    margin: 0.75rem;
+}
+
+.dt-buttons{
+    text-align:left;
 }
 
 /* Assignment */
@@ -340,3 +348,13 @@
 .assign#assign-visitors .info .counter .unit {
     font-size: 15px;
 }
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 400px;
+    overflow-y: auto;
+}
+
+

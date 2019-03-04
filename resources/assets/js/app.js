@@ -18,11 +18,11 @@ Vue.use(VueTheMask);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//HRIS
 Vue.component('action-management', require('./components/ActionManagement.vue'));
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('employee-form', require('./components/EmployeeForm.vue'));
 Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
-Vue.component('import-raw', require('./components/ImportRaw.vue'));
 Vue.component('employee-profile', require('./components/EmployeeProfile.vue'));
 Vue.component('address-form', require('./components/AddressForm.vue'));
 Vue.component('make-paf', require('./components/MakePaf.vue'));
@@ -38,6 +38,14 @@ Vue.component('contract-form', require('./components/ContractForm.vue'));
 Vue.component('family-form', require('./components/FamilyForm.vue'));
 Vue.component('nature-form', require('./components/NatureForm.vue'));
 Vue.component('training-form', require('./components/TrainingForm.vue'));
+//AMS
+Vue.component('dtr-table', require('./components/DtrTable.vue'));
+Vue.component('holiday-form', require('./components/HolidayForm.vue'));
+Vue.component('shift-form', require('./components/ShiftForm.vue'));
+Vue.component('schedule-chart', require('./components/ScheduleChart.vue'));
+Vue.component('import-raw', require('./components/ImportRaw.vue'));
+Vue.component('schedule-form', require('./components/ScheduleForm.vue'));
+Vue.component('ob-form', require('./components/OBForm.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -77,6 +85,10 @@ const app = new Vue({
         $('#employee-list').DataTable();
         $('#masters-list').DataTable();
         $('#paf-list').DataTable();
+        $('#sched-list').DataTable({
+            iDisplayLength: 4,
+            bLengthChange: false,
+        });
 
 
         $(document).ready(function($){
@@ -192,3 +204,6 @@ const app = new Vue({
         }
     }
 });
+
+   /*     console.log("%cSTOP  %cSTOP", "color: red; font-size:150px;",
+         "color: blue; font-size:70px;}");*/

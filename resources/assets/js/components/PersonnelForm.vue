@@ -5,10 +5,9 @@
 
         <div class="wizard-container">
             <div class="card wizard-card" data-col-smor="blue" id="wizard">
-                <form action="/register/confirmed" METHOD="POST" @submit.prevent="onSubmit"
+                <form action="/register/confirmed" METHOD="POST" @submit="onSubmit"
                       @keydown="form.errors.clear($event.target.name)" enctype="multipart/form-data">
-<!-- 
-                    <input type="hidden" name="_token" :value="csrf"> -->
+                    <input type="hidden" name="_token" :value="csrf">
                     <div class="wizard-header">
                         <h3>
                             <b>Please complete your personal information</b> <br>

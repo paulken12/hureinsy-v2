@@ -15,7 +15,6 @@ class CreateAttShiftsTable extends Migration
     {
         Schema::create('att_shifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
             $table->string('display_name');
             $table->time('time_in');
             $table->time('time_out');

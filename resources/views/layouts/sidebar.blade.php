@@ -54,7 +54,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="javascript:void(0);">Upload Raw Data</a>
+                                        <a href="{{route('import')}}">Upload Raw Data</a>
                                     </li>
                                     <li>
                                         <a href="{{route('attendances')}}">Schedule</a>

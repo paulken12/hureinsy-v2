@@ -250,10 +250,16 @@ class ProfileController extends Controller
         $skill = $request->validate([
             'user_obj'=>'nullable'
         ]);
-        foreach ($profile->skill as $skills) {
-            $skills->objective = $skill['user_obj'];
-            $skills->update();
-        }
+
+        EmpSkill::updateOrCreate([
+            'emp_basic_id' => $profile->id,
+        ],[
+            'objective' => $skill['user_obj'],
+        ]);
+
+        $skill = $profile->skill;
+
+        return response()->json(['data' =>$skill],200);
     }
 
     public function updateTraining(Request $request, EmpBasic $profile) {

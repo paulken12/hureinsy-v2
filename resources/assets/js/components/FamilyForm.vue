@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
-                            <label for="name_of_school" class="sr-only">Date of Birth</label>
+                            <label for="fam_date_of_birth" class="sr-only">Date of Birth</label>
                             <datepicker v-model="form.fam_date_of_birth[index]" 
                                         :format="'yyyy-MM-dd'"
                                         :bootstrap-styling="true"

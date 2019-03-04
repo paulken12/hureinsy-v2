@@ -62,7 +62,7 @@
                 own: this.owner,
 
                form: new Form({
-                   user_obj: ''
+                   user_obj: '',
                })
 
             }

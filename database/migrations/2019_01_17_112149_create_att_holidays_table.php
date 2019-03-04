@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttAttendancesTable extends Migration
+class CreateAttHolidaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateAttAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('att_attendances', function (Blueprint $table) {
+        Schema::create('att_holidays', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dtr_id');
-            $table->integer('emp_basic_id');
+            $table->string('name');
             $table->date('date');
-            $table->string('time_in');
-            $table->boolean('is_late');
-            $table->string('time_out');
-            $table->boolean('is_under_time');
-            $table->double('total_hours');
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ class CreateAttAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('att_attendances');
+        Schema::dropIfExists('att_holidays');
     }
 }
