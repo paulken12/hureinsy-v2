@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers\Paf;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use App\User;
+use App\Team;
+use App\Annex\JobDescription\AnnexJobDescription;
+use App\Annex\Schedule\AnnexSchedule;
+use App\Annex\Compensation\AnnexCompensation;
+use App\Contract\Job;
+use App\Contract\Project;
+use App\Http\Controllers\Controller;    
+use App\Http\Controllers\RoleController;
+use App\Master\MasterCompany;
+use App\Master\MasterContractChangePaf;
+use App\Master\MasterDepartment;
 use App\Master\MasterEmpStatus;
-use App\Paf\PafManagement;
+use App\Master\MasterScheduleTypePaf;
 use App\Paf\PafChangeJob;
 use App\Paf\PafChangeSchedule;
 use App\Paf\PafChangeCompensation;
@@ -14,182 +23,107 @@ use App\Paf\PafCurrentJob;
 use App\Paf\PafCurrentSchedule;
 use App\Paf\PafCurrentCompensation;
 use App\Paf\PafHrAssessment;
-use App\Http\Controllers\Controller;    
-use App\Http\Controllers\RoleController;
-use App\Helper\Paf\PersonnelActionManagement;
+use App\Paf\PafManagement;
+use App\Personnel\Info\EmpBasic;
+use App\Personnel\Info\Contract;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class RequestController extends Controller
 {
 
     public function index()
     {  
+        $employee = Contract::orderBy('id')->get();
+        $annex_a = AnnexJobDescription::orderBy('id')->get();
+        $annex_b = AnnexSchedule::orderBy('id')->get();
+        $annex_c = AnnexCompensation::orderBy('id')->get();
+        $cchange = MasterContractChangePaf::all();
 
-        $employee_info = Cache::get('call_emp_info');
-//->where('reporting_to', Auth::user()->basicInfo->pluck('id')->first())
-        return view('paf.mpaf.search', compact('employee_info'));
+        //annex a
+        $mjob = Job::all();
+        $mdept = MasterDepartment::all();
+        $mpro = Project::all();
+        $memp = EmpBasic::all();
+        $mtea = Team::all();
+        $msta = MasterEmpStatus::all();
+
+        //annex b
+        $mcomp = MasterCompany::all();
+
+        return view('paf.mpaf.search', compact('employee', 'annex_a', 'annex_b', 'annex_c', 'mjob', 'mdept', 'mpro', 'memp', 'mtea', 'mcomp', 'msta', 'cchange'));
         
     }
 
-    public function show($emplid)
+    public function store(Request $request)
     {
-
-        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($emplid));   
-
-        $jobTitles = Cache::get('call_master_job_title');
-
-        $teams = Cache::get('call_team');
-
-        $department = Cache::get('call_master_department');
-
-        $project_assignment = Cache::get('call_master_company');
-
-        $proj_assignment = Cache::get('call_master_project_assignment');
-
-        $employment_status = Cache::get('call_contract_change');
-
-        $cont_change = MasterEmpStatus::all();
-
-        $sched_type = Cache::get('call_master_paf_schedule_type');
-
-        $reportingTo = Cache::get('call_emp_info');
-
-        $employee_name = Cache::get('get_employee_info');  
-
-        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam()); 
-
-        $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
-        
-        $mamamo = date('Y-m-d');
-
-        return view('paf.mpaf.request', compact('employee_contract','employee_name', 'employment_status', 'department', 'jobTitles', 'project_assignment', 'sched_type', 'proj_assignment', 'employee_team', 'teams', 'reportingTo', 'cont_change', 'mamamo'));
-    }
-
-    public function create($form)
-    {
-
-        Cache::forever('get_employee_info', PersonnelActionManagement::get_employee_info($form));   
-
-        $user = Auth::user()->basicInfo->pluck('id')->first();
-
-        $request_id = PafManagement::create([
-
-            'employee_company_id' => $form,
-
-            'requested_by_company_id' => $user,
-
-            'remarks' => 'Emergency request by the manager respond asap',
-
-            'comfirmation_flag' => 0,
-
-            'master_id_request_status' => '1',
-
-            'master_id_sub_request_status' => '1',
-
-            'application_flag' => 0,
-
-        ]);
-
-        PafChangeJob::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-
-        PafCurrentJob::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-
-        PafChangeSchedule::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-
-        PafCurrentSchedule::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-
-        PafChangeCompensation::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-        
-        PafCurrentCompensation::create([
-
-            'request_id' => $request_id->id,
-
-
-        ]);
-
-        PafHrAssessment::create([
-
-            'request_id' => $request_id->id,
-
-        ]);
-
-        $request_id->rq_id = $request_id->scopeLastId();
-
-        $request_id->save();
-
-        return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
-
-
-    }
-
-    public function store(Request $request, $form)
-    {
-
-        $validator = $request->validate([
-            'employment_status' => 'required|exists:master_contract_change_pafs,key',
+        $paf = $request->validate([
+            'emp_id' => 'required',
+            'proposed_effective_date' => 'required',
+            'employment_status' => 'required',
             'cont_change' => 'nullable',
-            'cont_start' => 'nullable',
-            'cont_end' => 'nullable',
-            'res_date' => 'nullable',
-            'remarks'=>'required|string|max:191',
-            'proposed_job_title' => 'nullable|string|max:191',
-            'proposed_department' => 'nullable|string|max:191',
-            'proposed_team' => 'nullable|string|max:191',
-            'proposed_supervisor' => 'nullable|string|max:191',
-            'proposed_project_assignment' => 'nullable|string|max:191',
-            'proposed_schedule' => 'nullable|string|max:191',
-            'proposed_work_location' => 'nullable|string|max:191',
-            'proposed_job_grade' => 'nullable|string|max:191',
-            'proposed_probi_rate' => 'nullable|string|max:191',
-            'proposed_gross_salary' => 'nullable|string|max:191',
-            'proposed_basic_salary' => 'nullable|string|max:191',
-            'proposed_bonus_allowance' => 'nullable|string|max:191',
-            'proposed_benefits' => 'nullable|string|max:191',
-            'date_effective' => 'required',
+            'contract_start' => 'nullable',
+            'contract_end' => 'nullable',
+            'resignation_date' => 'nullable',
+            'remarks' => 'required',
+
+            'job_description' => 'nullable',
+            'department' => 'nullable',
+            'team' => 'nullable',
+            'reporting_to' => 'nullable',
+            'project' => 'nullable',
+            
+            'company' => 'nullable',
+            'schedule_type' => 'nullable',
+            
+            'job_grade' => 'nullable',
+            'probationary_rate' => 'nullable',
+            'gross_salary' => 'nullable',
+            'basic_salary' => 'nullable',
+            'other_bonus_allowance' => 'nullable',
+            'other_benefits' => 'nullable',
+
+            'current_job_description' => 'nullable',
+            'current_department' => 'nullable',
+            'current_team' => 'nullable',
+            'current_reporting_to' => 'nullable',
+            'current_project' => 'nullable',
+
+            'current_company' => 'nullable',
+            'current_schedule_type' => 'nullable',
+
+            'current_job_grade' => 'nullable',
+            'current_probationary_rate' => 'nullable',
+            'current_gross_salary' => 'nullable',
+            'current_basic_salary' => 'nullable',
+            'current_other_bonus_allowance' => 'nullable',
+            'current_other_benefits' => 'nullable',
         ]);
 
         $user = Auth::user()->basicInfo->pluck('id')->first();
 
-        if($request->input('employment_status') == 'eoc' || $request->input('employment_status') == 'snr'){
+        if($paf['employment_status'] == 'eoc' || $paf['employment_status'] == 'snr'){
             $cc = 'separated';
-        }else if($request->input('employment_status') == 'ttp'){
+        }else if($paf['employment_status'] == 'ttp'){
             $cc = 'project-based';
-        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'ptr'){
+        }else if($paf['employment_status'] == 'reg' || $paf['employment_status'] == 'ptr'){
             $cc = 'regular';
         }else{
-            $cc = $request->input('cont_change');
+            $cc = $paf['cont_change'];
         }
 
         $request_id = PafManagement::create([
 
-            'employee_company_id' => $form,
+            'employee_company_id' => $paf['emp_id'],
 
-            'master_key_employment_status' => $request->input('employment_status'),
+            'master_key_employment_status' => $paf['employment_status'],
 
             'master_key_change_of_contract' => $cc,
 
             'requested_by_company_id' => $user,
 
-            'remarks' => $request->input('remarks'),
+            'remarks' => $paf['remarks'],
 
             'comfirmation_flag' => 0,
 
@@ -197,13 +131,13 @@ class RequestController extends Controller
 
             'master_id_sub_request_status' => '1',
 
-            'date_effective' => $request->input('date_effective'),
+            'date_effective' => $paf['proposed_effective_date'],
 
-            'contract_start' => $request->input('cont_start'),
+            'contract_start' => $paf['contract_start'],
             
-            'contract_end' => $request->input('cont_end'),
+            'contract_end' => $paf['contract_end'],
 
-            'resigned_date' => $request->input('res_date'),
+            'resigned_date' => $paf['resignation_date'],
 
             'application_flag' => 0,
 
@@ -213,65 +147,65 @@ class RequestController extends Controller
 
             'request_id' => $request_id->id,
 
-            'proposed_key_job_title' => $request->input('proposed_job_title'),
+            'proposed_key_job_title' => $paf['job_description'],
 
-            'proposed_key_department' => $request->input('proposed_department'),
+            'proposed_key_department' => $paf['department'],
 
-            'proposed_key_team' => $request->input('proposed_team'),
+            'proposed_key_team' => $paf['team'],
 
-            'proposed_key_supervisor' => $request->input('proposed_supervisor'),
+            'proposed_key_supervisor' => $paf['reporting_to'],
 
-            'proposed_key_project_assignment' => $request->input('proposed_project_assignment'),
+            'proposed_key_project_assignment' => $paf['project'],
         ]);
 
         PafCurrentJob::create([
 
             'request_id' => $request_id->id,
 
-            'current_key_job_title' => $request->input('current_job_title'),
+            'current_key_job_title' => $paf['current_job_description'],
 
-            'current_key_department' => $request->input('current_department'),
+            'current_key_department' => $paf['current_department'],
 
-            'current_key_team' => $request->input('current_team'),
+            'current_key_team' => $paf['current_team'],
 
-            'current_key_supervisor' => $request->input('current_supervisor'),
+            'current_key_supervisor' => $paf['current_reporting_to'],
 
-            'current_key_project_assignment' => $request->input('current_project_assignment'),
+            'current_key_project_assignment' => $paf['current_project'],
         ]);
 
         PafChangeSchedule::create([
 
             'request_id' => $request_id->id,
 
-            'proposed_key_schedule' => $request->input('proposed_schedule'),
+            'proposed_key_schedule' => $paf['schedule_type'],
 
-            'proposed_key_work_location' => $request->input('proposed_work_location'),
+            'proposed_key_work_location' => $paf['company'],
         ]);
 
         PafCurrentSchedule::create([
 
             'request_id' => $request_id->id,
 
-            'current_key_schedule' => $request->input('current_schedule'),
+            'current_key_schedule' => $paf['current_schedule_type'],
 
-            'current_key_work_location' => $request->input('current_work_location'),
+            'current_key_work_location' => $paf['current_company'],
         ]);
 
         PafChangeCompensation::create([
 
             'request_id' => $request_id->id,
 
-            'proposed_key_job_grade' => $request->input('proposed_job_grade'),
+            'proposed_key_job_grade' => $paf['job_grade'],
 
-            'proposed_probi_rate' => $request->input('proposed_probi_rate'),
+            'proposed_probi_rate' => $paf['probationary_rate'],
 
-            'proposed_gross_salary' => $request->input('proposed_gross_salary'),
+            'proposed_gross_salary' => $paf['gross_salary'],
 
-            'proposed_basic_salary' => $request->input('proposed_basic_salary'),
+            'proposed_basic_salary' => $paf['basic_salary'],
 
-            'proposed_bonus_allowance' => $request->input('proposed_bonus_allowance'),
+            'proposed_bonus_allowance' => $paf['other_bonus_allowance'],
 
-            'proposed_benefits' => $request->input('proposed_benefits'),
+            'proposed_benefits' => $paf['other_benefits'],
 
         ]);
         
@@ -279,17 +213,17 @@ class RequestController extends Controller
 
             'request_id' => $request_id->id,
 
-            'current_key_job_grade' => $request->input('current_job_grade'),
+            'current_key_job_grade' => $paf['current_job_grade'],
 
-            'current_probi_rate' => $request->input('current_probi_rate'),
+            'current_probi_rate' => $paf['current_probationary_rate'],
 
-            'current_gross_salary' => $request->input('current_gross_salary'),
+            'current_gross_salary' => $paf['current_gross_salary'],
 
-            'current_basic_salary' => $request->input('current_basic_salary'),
+            'current_basic_salary' => $paf['current_basic_salary'],
 
-            'current_bonus_allowance' => $request->input('current_bonus_allowance'),
+            'current_bonus_allowance' => $paf['current_other_bonus_allowance'],
 
-            'current_benefits' => $request->input('current_benefits'),
+            'current_benefits' => $paf['current_other_benefits'],
 
         ]);
 
@@ -303,7 +237,7 @@ class RequestController extends Controller
 
         $request_id->save();
 
-        return redirect(route('paf.search'))->with('success', 'Request complete, your request will be sent to the hr.');
+        return ['mes' => 'PAF form requested.'];
     }
 }
 

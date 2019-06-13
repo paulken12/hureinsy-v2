@@ -18,11 +18,13 @@ class CreateAttAttendancesTable extends Migration
             $table->string('dtr_id');
             $table->integer('emp_basic_id');
             $table->date('date');
-            $table->string('time_in');
-            $table->boolean('is_late');
-            $table->string('time_out');
-            $table->boolean('is_under_time');
-            $table->double('total_hours');
+            $table->string('required_time_in');
+            $table->string('time_in')->nullable();
+            $table->boolean('is_late')->nullable();
+            $table->string('required_time_out');
+            $table->string('time_out')->nullable();
+            $table->boolean('is_under_time')->nullable();
+            $table->double('total_hours')->nullable();
             $table->timestamps();
         });
     }

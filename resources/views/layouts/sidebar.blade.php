@@ -11,8 +11,6 @@
                             {{Auth::user()->roles->pluck('display_name')->first()}}
                         </small>
                     </span>
-
-
                 </div>
                 <div class="peer">
                     <div class="mobile-toggle sidebar-toggle">
@@ -47,17 +45,17 @@
                         @if(Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
                                 <a href="javascript:void(0);">
-                                    <span>Daily Time Record</span>
+                                    <span>Daily Time Record and Task</span>
                                     <span class="arrow">
-            <i class="ti-angle-right"></i>
-            </span>
+                                        <i class="ti-angle-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{route('import')}}">Upload Raw Data</a>
+                                        <a href="{{route('att')}}">Import Data</a>
                                     </li>
                                     <li>
-                                        <a href="{{route('attendances')}}">Schedule</a>
+                                        <a href="{{route('att.task')}}">Task</a>
                                     </li>
                                </ul>
                             </li>
@@ -81,8 +79,8 @@
                             <a href="javascript:void(0);">
                                 <span>Apprise Forms</span>
                                 <span class="arrow">
-            <i class="ti-angle-right"></i>
-            </span>
+                                    <i class="ti-angle-right"></i>
+                                </span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -92,22 +90,19 @@
                                     <a href="javascript:void(0);">Absence</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Official Business</a>
+                                    <a href="{{route('forms.ob')}}">Official Business</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Over Time</a>
+                                    <a href="{{route('forms.ot')}}">Over Time</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Under Time</a>
+                                    <a href="{{route('forms.et')}}">Under Time</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Time In/Out Validation</a>
+                                    <a href="{{route('forms.tv')}}">Time In/Out Validation</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Under Time</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">Change of Shift</a>
+                                    <a href="{{route('forms.cs')}}">Change of Shift</a>
                                 </li>
                             </ul>
                         </li>
@@ -127,14 +122,14 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="nav-item dropdown">
-                            <a href="{{route('paf.myrequest.list', [date('m'), date('Y')])}}">
+                            <a href="{{route('paf.myrequest.list')}}">
                                 <span>My request lists<small><span class="badge badge-pill badge-danger" title="New completed request">{{empty($count->count_complete_user()) ? '' : $count->count_complete_user()}}</span></small></span>
                             </a>
                         </li>
 
                         @if(Auth::user()->hasRole('supervisor') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
-                                <a href="{{route('paf.view.list', [date('m'), date('Y')])}}">
+                                <a href="{{route('paf.view.list')}}">
                                     <span>View all paf request</span>
                                 </a>
                             </li>
@@ -148,21 +143,21 @@
                         @endif
                         @if(Auth::user()->hasRole('operation manager') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
-                                <a href="{{route('paf.reassess.list', [date('m'), date('Y')])}}">
+                                <a href="{{route('paf.reassess.list')}}">
                                     <span>Reassessment <small><span class="badge badge-pill badge-danger" title="Your request needs reassessment">{{empty($count->count_open_man()) ? '' : $count->count_open_man()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
                         @if(Auth::user()->hasRole('human resource') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
-                                <a href="{{route('paf.assessment.list', [date('m'), date('Y')])}}">
+                                <a href="{{route('paf.assessment.list')}}">
                                     <span>Assessment <small><span class="badge badge-pill badge-danger" title="You have request to assess">{{empty($count->count_open_hr()) ? '' : $count->count_open_hr()}}</span></small></span>
                                 </a>
                             </li>
                         @endif
                         @if(Auth::user()->hasRole('executive') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('titan'))
                             <li class="nav-item dropdown">
-                                <a href="{{route('paf.approval.list', [date('m'), date('Y')])}}">
+                                <a href="{{route('paf.approval.list')}}">
                                     <span>Approval <small><span class="badge badge-pill badge-danger" title="You have request to approve">{{empty($count->count_open_exec()) ? '' : $count->count_open_exec()}}</span></small></span>
                                 </a>
                             </li>

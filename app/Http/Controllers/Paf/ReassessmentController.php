@@ -2,189 +2,290 @@
 
 namespace App\Http\Controllers\Paf;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Master\MasterEmpStatus;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
-use App\Helper\Paf\PersonnelActionManagement;
+use App\Personnel\Info\EmpBasic;
+use App\Master\MasterBehaviouralAssessmentPaf;
+use App\Master\MasterProficiencyTestPaf;
+use App\Master\MasterOverallRecommendationPaf;
+use App\Master\MasterPerformanceEvaluationPaf;
+use App\Master\MasterContractChangePaf;
+use App\Master\MasterCompany;
+use App\Master\MasterDepartment;
+use App\Master\MasterEmpStatus;
+use App\Master\MasterScheduleTypePaf;
+use App\Paf\PafChangeCompensation;
+use App\Paf\PafChangeJob;
+use App\Paf\PafChangeSchedule;
+use App\Paf\PafHrAssessment;
+use App\Paf\PafManagement;
+use App\Contract\Job;
+use App\Contract\Project;
+use App\Role;
+use App\Status;
+use App\SubStatus;
+use App\Team;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ReassessmentController extends Controller
 {
-    public function list($month, $year)
+    public function list()
     {
+        $auth_id = Auth::user()->basicInfo->pluck('id')->first();
+        $list = PafManagement::whereNotIn('master_id_sub_request_status', [1, 2])
+                       ->where('requested_by_company_id', $auth_id)  
+                       ->get();
+        $employees = EmpBasic::all();
+        $cchange = MasterContractChangePaf::all();
+        $substatus = SubStatus::all();
 
-        Cache::forever('call_paf_lists_manager', PersonnelActionManagement::call_paf_lists_manager($month, $year));
+        //annex a
+        $mjob = Job::all();
+        $mdept = MasterDepartment::all();
+        $mpro = Project::all();
+        $memp = EmpBasic::all();
+        $mtea = Team::all();
+        $msta = MasterEmpStatus::all();
 
-        $request_list = Cache::get('call_paf_lists_manager');
-
-        $archives = Cache::get('call_paf_lists_archived');
-
-    	return view('paf.mpaf.list', compact('request_list', 'archives'));
+        //annex b
+        $mcomp = MasterCompany::all();
+    	return view('paf.mpaf.list', compact('list', 'employees', 'cchange', 'substatus', 'mjob', 'mdept', 'mpro', 'memp', 'mtea', 'msta', 'mcomp'));
     }
 
-    public function show($form){
+    public function show($id){
+        $emp = PafManagement::where('id', $id)->first();
 
-        Cache::forget('call_paf_lists_manager');
+        $response = [ 
+            'data' => [
+                'job_description' => !$emp->annexa->proposed_key_job_title ?
+                            '' : $emp->annexa->proposed_key_job_title,  
 
-        //Get Status 
-        $user_log = Auth::user()->roles->first(); 
-        $get_status = $user_log->status;
-        $get_sub_status =$user_log->sub_status;
+                'department' => !$emp->annexa->proposed_key_department ?
+                            '' : $emp->annexa->proposed_key_department, 
+                
+                'team' => !$emp->annexa->proposed_key_team ?
+                            '' : $emp->annexa->proposed_key_team, 
 
-        //Get Master details
-        $reportingTo = Cache::get('call_emp_info');
+                'reporting_to' => !$emp->annexa->proposed_key_supervisor ?
+                            '' : $emp->annexa->proposed_key_supervisor,
 
-        $proj_assignment = Cache::get('call_master_project_assignment');
+                'project' => !$emp->annexa->proposed_key_project_assignment ?
+                            '' : $emp->annexa->proposed_key_project_assignment,
 
-        $jobTitles = Cache::get('call_master_job_title');
+                'company' => !$emp->annexb->proposed_key_work_location ?
+                            '' : $emp->annexb->proposed_key_work_location,
 
-        $department = Cache::get('call_master_department');
+                'schedule_type' => $emp->annexb->proposed_key_schedule,
+                'job_grade' => $emp->annexc->proposed_key_job_grade,
+                'probationary_rate' => $emp->annexc->proposed_probi_rate,
+                'gross_salary' => $emp->annexc->proposed_gross_salary,
+                'basic_salary' => $emp->annexc->proposed_basic_salary,
+                'other_bonus_allowance' => $emp->annexc->proposed_bonus_allowance,
+                'other_benefits' => $emp->annexc->proposed_benefits,
 
-        $sched_type = Cache::get('call_master_paf_schedule_type');
+                'current_job_description' => !$emp->current_annexa->current_key_job_title ? 
+                    'No Job' : 
+                    $emp->current_annexa->masterJobTitle->job_title .' '.  $emp->current_annexa->masterJobTitle->job_description,
 
-        $project_assignment = Cache::get('call_master_company');
+                'current_department' => !$emp->current_annexa->current_key_department ? 
+                    'No Department' : 
+                    $emp->current_annexa->masterDepartment->department,
 
-        $employment_status = Cache::get('call_contract_change');
+                'current_team' => !$emp->current_annexa->current_key_team ? 
+                    'No Team' : 
+                    $emp->current_annexa->empTeam->display_name,
+                
+                'current_reporting_to' => !$emp->current_annexa->current_key_supervisor ? 
+                    'No Reporting To' : 
+                    $emp->current_annexa->empBasic->last_name .', '. $emp->current_annexa->empBasic->first_name,
+                
+                'current_project' => !$emp->current_annexa->current_key_project_assignment ? 
+                    'No Project' : 
+                    $emp->current_annexa->masterProjectAssignment->project_title,
 
-        $cont_change = MasterEmpStatus::all();
+                'current_company' => !$emp->current_annexb->current_key_work_location ? 
+                    'No Work Location' : 
+                    $emp->current_annexb->masterCompany->name,
+                'current_schedule_type' => $emp->current_annexb->current_key_schedule,
+                'current_job_grade' => $emp->current_annexc->current_key_job_grade,
+                'current_probationary_rate' => $emp->current_annexc->current_probi_rate,
+                'current_gross_salary' => $emp->current_annexc->current_gross_salary,
+                'current_basic_salary' => $emp->current_annexc->current_basic_salary,
+                'current_other_bonus_allowance' => $emp->current_annexc->current_bonus_allowance, 
+                'current_other_benefits' => $emp->current_annexc->current_benefits,
 
-        $teams = Cache::get('call_team');
+                'beh' => !$emp->paf_hr->key_behavioural_assessment ?
+                    'No Behavioural Assessment' :
+                    $emp->paf_hr->masterBehavioural->behaviour,
+                
+                'pro' => !$emp->paf_hr->key_proficiency_test ?
+                    'No Proficiency Assessment' :
+                    $emp->paf_hr->masterProficiency->proficiency,
+                
+                'ove' => !$emp->paf_hr->key_overall_recommendation ?
+                    'No Overall Assessment' :
+                    $emp->paf_hr->masterOverall->overall,
+                
+                'per' => !$emp->paf_hr->key_performance_evaluation ?
+                    'No Performance Assessment' :
+                    $emp->paf_hr->masterEvaluation->evaluation,
+                
+                'rem' => !$emp->paf_hr->other_remarks ?
+                    'No Remarks' :
+                    $emp->paf_hr->other_remarks,
 
-        //Get paf details
-        $get_paf_details = PersonnelActionManagement::get_paf_request($form);
+                'a' => !$emp->annexa->proposed_remarks_hr ?
+                    'No Remarks' :
+                    $emp->annexa->proposed_remarks_hr,
+                
+                'b' => !$emp->annexb->proposed_remarks_hr ?
+                    'No Remarks' :
+                    $emp->annexb->proposed_remarks_hr,
+                
+                'c' => !$emp->annexc->proposed_remarks_hr ?
+                    'No Remarks' :
+                    $emp->annexc->proposed_remarks_hr,
 
-        $get_job_details = PersonnelActionManagement::get_paf_job_detail($form); 
-
-        $get_schedule_details = PersonnelActionManagement::get_paf_schedule_detail($form); 
-
-        $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
-
-        $get_current_job_details = PersonnelActionManagement::get_current_paf_job_detail($form);
-
-        $get_current_schedule_details = PersonnelActionManagement::get_current_paf_schedule_detail($form);
-
-        $get_current_compensation_details = PersonnelActionManagement::get_current_paf_compensation_detail($form);
-
-        $get_hr_assessment_details = PersonnelActionManagement::get_hr_assessment_detail($form);
-
-        //Get employee details
-        $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
-
-        $employee_contract = PersonnelActionManagement::get_employee_contract($employee_name->id);
-
-        $employee_team = PersonnelActionManagement::get_employee_team($employee_name->myTeam());
-
-        if($get_paf_details->masterPafSubStatus->id == '3'){
-    	   return view('paf.mpaf.showrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'proj_assignment', 'teams', 'employee_team', 'cont_change'));
-		}else{
-    	   return view('paf.mpaf.readrequest', compact('employee_contract', 'form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportingTo', 'sched_type', 'get_paf_details', 'get_current_job_details', 'get_current_schedule_details', 'get_current_compensation_details', 'get_hr_assessment_details', 'employee_team'));
-        }
+                'ea' => !$emp->annexa->proposed_remarks_exec ?
+                    'No Remarks' :
+                    $emp->annexa->proposed_remarks_exec,
+                
+                'eb' => !$emp->annexb->proposed_remarks_exec ?
+                    'No Remarks' :
+                    $emp->annexb->proposed_remarks_exec,
+                
+                'ec' => !$emp->annexc->proposed_remarks_exec ?
+                    'No Remarks' :
+                    $emp->annexc->proposed_remarks_exec,
+                ]
+            ];
+            
+        return response()->json($response);
     }
 
-    public function store(Request $request, $form)
+    public function store(Request $request, $id)
     {
 
-        $validator = $request->validate([
-            'employment_status' => 'required|exists:master_contract_change_pafs,key',
+        $paf = $validator = $request->validate([            
+            'emp_id' => 'required',
+            'proposed_effective_date' => 'required',
+            'employment_status' => 'required',
             'cont_change' => 'nullable',
-            'cont_start' => 'nullable',
-            'cont_end' => 'nullable',
-            'res_date' => 'nullable',
-            'remarks'=>'required|string|max:191',
-            'proposed_job_title' => 'nullable|string|max:191',
-            'proposed_department' => 'nullable|string|max:191',
-            'proposed_team' => 'nullable|string|max:191',
-            'proposed_supervisor' => 'nullable|string|max:191',
-            'proposed_project_assignment' => 'nullable|string|max:191',
-            'proposed_schedule' => 'nullable|string|max:191',
-            'proposed_work_location' => 'nullable|string|max:191',
-            'proposed_job_grade' => 'nullable|string|max:191',
-            'proposed_probi_rate' => 'nullable|string|max:191',
-            'proposed_gross_salary' => 'nullable|string|max:191',
-            'proposed_basic_salary' => 'nullable|string|max:191',
-            'proposed_bonus_allowance' => 'nullable|string|max:191',
-            'proposed_benefits' => 'nullable|string|max:191',
-            'date_effective' => 'required',
+            'contract_start' => 'nullable',
+            'contract_end' => 'nullable',
+            'resignation_date' => 'nullable',
+            'remarks' => 'required',
+
+            'job_description' => 'nullable',
+            'department' => 'nullable',
+            'team' => 'nullable',
+            'reporting_to' => 'nullable',
+            'project' => 'nullable',
+            
+            'company' => 'nullable',
+            'schedule_type' => 'nullable',
+            
+            'job_grade' => 'nullable',
+            'probationary_rate' => 'nullable',
+            'gross_salary' => 'nullable',
+            'basic_salary' => 'nullable',
+            'other_bonus_allowance' => 'nullable',
+            'other_benefits' => 'nullable',
+
+            'current_job_description' => 'nullable',
+            'current_department' => 'nullable',
+            'current_team' => 'nullable',
+            'current_reporting_to' => 'nullable',
+            'current_project' => 'nullable',
+
+            'current_company' => 'nullable',
+            'current_schedule_type' => 'nullable',
+
+            'current_job_grade' => 'nullable',
+            'current_probationary_rate' => 'nullable',
+            'current_gross_salary' => 'nullable',
+            'current_basic_salary' => 'nullable',
+            'current_other_bonus_allowance' => 'nullable',
+            'current_other_benefits' => 'nullable',
+
+            'status' => 'required',
+            'substatus' => 'required',
        ]);
 
         $user = Auth::user()->basicInfo->pluck('id')->first();
 
-        if($request->input('employment_status') == 'eoc' || $request->input('employment_status') == 'snr'){
+        if($paf['employment_status'] == 'eoc' || $paf['employment_status'] == 'snr'){
             $cc = 'separated';
-        }else if($request->input('employment_status') == 'ttp'){
+        }else if($paf['employment_status'] == 'ttp'){
             $cc = 'project-based';
-        }else if($request->input('employment_status') == 'reg' || $request->input('employment_status') == 'reg'){
+        }else if($paf['employment_status'] == 'reg' || $paf['employment_status'] == 'ptr'){
             $cc = 'regular';
         }else{
-            if(empty($request->input('cont_change'))){
-                $cc = 'project-based';
-            }else{
-                $cc = $request->input('cont_change');
-            }
+            $cc = $paf['cont_change'];
         }
 
-        $form_update = PersonnelActionManagement::get_paf_request($form);  
+        $form_update = PafManagement::find($id);
 
-        $form_update->master_key_employment_status = $request->input('employment_status');
+        $form_update->master_key_employment_status = $paf['employment_status'];
 
-        $form_update->master_key_change_of_contract = $request->input('cont_change');
+        $form_update->master_key_change_of_contract = $cc;
 
-        $form_update->remarks = $request->input('remarks');
+        $form_update->remarks = $paf['remarks'];
 
-        $form_update->master_id_request_status = $request->input('request_status');
+        $form_update->master_id_request_status = $paf['status'];
 
-        $form_update->master_id_sub_request_status = $request->input('sub_request_status');
+        $form_update->master_id_sub_request_status = $paf['substatus'];
 
-        $form_update->date_effective =$request->input('date_effective');
+        $form_update->date_effective = $paf['proposed_effective_date'];
         
-        $form_update->contract_start =$request->input('cont_start');
+        $form_update->contract_start = $paf['contract_start'];
         
-        $form_update->contract_end =$request->input('cont_end');
+        $form_update->contract_end = $paf['contract_end'];
         
-        $form_update->resigned_date =$request->input('res_date');
+        $form_update->resigned_date = $paf['resignation_date'];
         
         $form_update->save();
 
-        $job_update = PersonnelActionManagement::get_paf_job_detail($form); 
+        $job_update = PafChangeJob::where('request_id', $id)->first(); 
 
-        $job_update->proposed_key_job_title = $request->input('proposed_position_title');
+        $job_update->proposed_key_job_title = $paf['job_description'];
 
-        $job_update->proposed_key_department = $request->input('proposed_department');
+        $job_update->proposed_key_department = $paf['department'];
 
-        $job_update->proposed_key_team = $request->input('proposed_team');
+        $job_update->proposed_key_team = $paf['team'];
 
-        $job_update->proposed_key_supervisor = $request->input('proposed_supervisor');
+        $job_update->proposed_key_supervisor = $paf['reporting_to'];
 
-        $job_update->proposed_key_project_assignment = $request->input('proposed_project_assignment');
+        $job_update->proposed_key_project_assignment = $paf['project'];
 
         $job_update->save();
 
-        $sched_update = PersonnelActionManagement::get_paf_schedule_detail($form); 
+        $sched_update = PafChangeSchedule::where('request_id', $id)->first();
 
-        $sched_update->proposed_key_schedule = $request->input('proposed_schedule');
+        $sched_update->proposed_key_schedule = $paf['schedule_type'];
 
-        $sched_update->proposed_key_work_location = $request->input('proposed_work_location');
+        $sched_update->proposed_key_work_location = $paf['company'];
 
         $sched_update->save(); 
 
-        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($form);
+        $compensation_update = PafChangeCompensation::where('request_id', $id)->first();
 
-        $compensation_update->proposed_key_job_grade = $request->input('proposed_job_grade');
+        $compensation_update->proposed_key_job_grade = $paf['job_grade'];
 
-        $compensation_update->proposed_probi_rate = $request->input('proposed_probi_rate');
+        $compensation_update->proposed_probi_rate = $paf['probationary_rate'];
 
-        $compensation_update->proposed_basic_salary = $request->input('proposed_basic_salary');
+        $compensation_update->proposed_basic_salary = $paf['basic_salary'];
 
-        $compensation_update->proposed_gross_salary = $request->input('proposed_gross_salary');
+        $compensation_update->proposed_gross_salary = $paf['gross_salary'];
         
-        $compensation_update->proposed_bonus_allowance = $request->input('proposed_bonus_allowance');
+        $compensation_update->proposed_bonus_allowance = $paf['other_bonus_allowance'];
 
-        $compensation_update->proposed_benefits = $request->input('proposed_benefits');
+        $compensation_update->proposed_benefits = $paf['other_benefits'];
 
         $compensation_update->save();
 
-    	return redirect(route('paf.reassess.list', [date('m'), date('Y')]))->with('success', 'Request form updated');
+        return ['mes' => 'PAF form updated.'];
     }
 }

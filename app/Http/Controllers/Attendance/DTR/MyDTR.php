@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Attendance\DTR;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Attendance\Schedule\AttAttendance;
 use App\Http\Controllers\Controller;
@@ -10,23 +11,9 @@ class MyDTR extends Controller
 {
     public function list()
     {
-    	$dtr = AttAttendance::distinct('dtr_id')->pluck('dtr_id');
-    	$dlist = array();
-    	$cout = 1;
+    	$dtr = AttAttendance::where('emp_basic_id', Auth::user()->basicInfo->pluck('id')->first())->get();
 
-    	foreach($dtr as $list){
-    		$date = str_split($list, strlen($list)/2);
-    		$dlist[] = array(
-    					'id' => $cout,
-    					'dtr_id' => $list,
-    					'date_start' => date('Y-m-d', strtotime($date[0])),
-    					'date_end' => date('Y-m-d', strtotime($date[1])),
-    		);
-
-    		$cout = $cout+1;
-    	}
-    	//dd(date('Y-m-d', strtotime('20190114')));
-        return view('admin.attendance-management.dtr.raw-data-table.list', compact('dlist'));
+        return view('admin.attendance-management.dtr.raw-data-table.list', compact('dtr', 'dlist'));
     }
 
     public function index($dtr)

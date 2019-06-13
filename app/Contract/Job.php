@@ -18,7 +18,6 @@ class Job extends Model
     {
         return $this->belongsToMany(Project::class)->withPivot('job_id', 'project_id');
     }
-
     public function department()
     {
         return $this->belongsTo(MasterDepartment::class, 'master_department_key');

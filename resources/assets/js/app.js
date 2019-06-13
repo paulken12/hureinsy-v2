@@ -36,8 +36,13 @@ Vue.component('benefit-form', require('./components/BenefitForm.vue'));
 Vue.component('reference-form', require('./components/ReferenceForm.vue'));
 Vue.component('contract-form', require('./components/ContractForm.vue'));
 Vue.component('family-form', require('./components/FamilyForm.vue'));
-Vue.component('nature-form', require('./components/NatureForm.vue'));
 Vue.component('training-form', require('./components/TrainingForm.vue'));
+Vue.component('paf-request-form', require('./components/PafRequestForm.vue'));
+Vue.component('paf-evaluation-form', require('./components/PafEvaluationForm.vue'));
+Vue.component('paf-returned-form', require('./components/PafReturnedForm.vue'));
+Vue.component('paf-approval-form', require('./components/PafApprovalForm.vue'));
+Vue.component('paf-confirmation-form', require('./components/PafConfirmationForm.vue'));
+Vue.component('paf-view-form', require('./components/PafViewForm.vue'));
 //AMS
 Vue.component('dtr-table', require('./components/DtrTable.vue'));
 Vue.component('holiday-form', require('./components/HolidayForm.vue'));
@@ -46,6 +51,22 @@ Vue.component('schedule-chart', require('./components/ScheduleChart.vue'));
 Vue.component('import-raw', require('./components/ImportRaw.vue'));
 Vue.component('schedule-form', require('./components/ScheduleForm.vue'));
 Vue.component('ob-form', require('./components/OBForm.vue'));
+Vue.component('authorize-ob-form', require('./components/AuthorizeOBForm.vue'));
+Vue.component('tv-form', require('./components/TVForm.vue'));
+Vue.component('authorize-tv-form', require('./components/AuthorizeTVForm.vue'));
+Vue.component('cs-form', require('./components/CSForm.vue'));
+Vue.component('authorize-cs-form', require('./components/AuthorizeCSForm.vue'));
+Vue.component('et-form', require('./components/ETForm.vue'));
+Vue.component('authorize-et-form', require('./components/AuthorizeETForm.vue'));
+Vue.component('ot-form', require('./components/OTForm.vue'));
+Vue.component('authorize-ot-form', require('./components/AuthorizeOTForm.vue'));
+Vue.component('import-att', require('./components/ImportAtt.vue'));
+Vue.component('att-table', require('./components/AttTable.vue'));
+Vue.component('att-task', require('./components/AttTask.vue'));
+Vue.component('my-dtr', require('./components/MyDTR.vue'));
+Vue.component('sil-form', require('./components/SILForm.vue'));
+Vue.component('leave-form', require('./components/LeaveForm.vue'));
+//Vue.component('authorize-ot-form', require('./components/AuthorizeOTForm.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -81,7 +102,6 @@ const app = new Vue({
 
 
     mounted: function () {
-
         $('#employee-list').DataTable();
         $('#masters-list').DataTable();
         $('#paf-list').DataTable();
@@ -89,7 +109,6 @@ const app = new Vue({
             iDisplayLength: 4,
             bLengthChange: false,
         });
-
 
         $(document).ready(function($){
             $('.m-money').mask('000,000,000.00', {reverse: true});

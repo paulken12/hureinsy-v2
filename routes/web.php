@@ -242,9 +242,17 @@ Route::group(['middleware' => ['auth','role:titan|admin|human resource','verifie
 
     /* ------------------ ATTENDANCE ------------------*/
 
-    Route::get('/import', 'Attendance\Raw\ImportRawController@index')->name('import');
+    Route::get('/att', 'Attendance\AttImportController@index')->name('att');
+    
+    Route::post('/att/import', 'Attendance\AttImportController@import')->name('att.import');
 
-    Route::post('/import/file', 'Attendance\Raw\ImportRawController@store')->name('import.file');
+    Route::get('/att/import/table{dtr_id}', 'Attendance\AttImportController@table')->name('att.import.table');
+
+    /* ------------------ SIL Management ------------------*/
+
+    Route::get('/sil', 'Attendance\SILManagementController@index')->name('sil');
+
+    Route::patch('/sil/update/{id}', 'Attendance\SILManagementController@update')->name('sil.update');
 
     /* ------------------ DTR ------------------*/
 
@@ -268,11 +276,87 @@ Route::group(['middleware' => ['auth','role:titan|admin|human resource','verifie
     
     Route::delete('/shift/delete/{id}', 'Attendance\Schedule\AttShiftController@delete')->name('shift');
 
-    /* ------------------ FORMS ------------------*/
+    /* ------------------ TASK ------------------*/
+    
+    Route::get('/att/task', 'Attendance\AttTaskController@index')->name('att.task');
 
+    /* ------------------ FORMS ------------------*/
+    //Official Business
     Route::get('/forms/ob', 'Attendance\AppriseForms\AttOBFormController@index')->name('forms.ob');
 
     Route::post('/forms/ob/store', 'Attendance\AppriseForms\AttOBFormController@store')->name('forms.ob.store');
+
+    Route::patch('/forms/ob/update/{id}', 'Attendance\AppriseForms\AttOBFormController@update')->name('forms.ob.update');
+
+    Route::get('/authorize/forms/ob', 'Attendance\AuthorizeForms\AttAuthorizeOBFormController@index')->name('authorize.forms.ob');
+
+    Route::patch('/authorize/forms/ob/{id}', 'Attendance\AuthorizeForms\AttAuthorizeOBFormController@update')->name('authorize.forms.ob.update');
+
+    //Time Validation
+    Route::get('/forms/tv', 'Attendance\AppriseForms\AttTVFormController@index')->name('forms.tv');
+
+    Route::post('/forms/tv/store', 'Attendance\AppriseForms\AttTVFormController@store')->name('forms.tv.store');
+
+    Route::patch('/forms/tv/update/{id}', 'Attendance\AppriseForms\AttTVFormController@update')->name('forms.tv.update');
+
+    Route::get('/authorize/forms/tv', 'Attendance\AuthorizeForms\AttAuthorizeTVFormController@index')->name('authorize.forms.tv');
+
+    Route::patch('/authorize/forms/tv/{id}', 'Attendance\AuthorizeForms\AttAuthorizeTVFormController@update')->name('authorize.forms.tv.update');
+
+    //Leave Form
+    Route::get('/forms/leave', 'Attendance\AppriseForms\AttLeaveFormController@index')->name('forms.tv');
+
+    Route::post('/forms/leave/store', 'Attendance\AppriseForms\AttLeaveFormController@store')->name('forms.tv.store');
+
+    //Route::patch('/forms/leave/update/{id}', 'Attendance\AppriseForms\AttLeaveFormController@update')->name('forms.tv.update');
+/*
+    Route::get('/authorize/forms/leave', 'Attendance\AuthorizeForms\AttLeaveFormController@index')->name('authorize.forms.tv');
+
+    Route::patch('/authorize/forms/leave/{id}', 'Attendance\AuthorizeForms\AttLeaveFormController@update')->name('authorize.forms.tv.update');*/
+
+    //Change of Shift
+    Route::get('/forms/cs', 'Attendance\AppriseForms\AttCSFormController@index')->name('forms.cs');
+
+    Route::post('/forms/cs/store', 'Attendance\AppriseForms\AttCSFormController@store')->name('forms.cs.store');
+    
+    Route::patch('/forms/cs/update/{id}', 'Attendance\AppriseForms\AttCSFormController@update')->name('forms.cs.update');
+
+    Route::get('/authorize/forms/cs', 'Attendance\AuthorizeForms\AttAuthorizeCSFormController@index')->name('authorize.forms.cs');
+
+    Route::patch('/authorize/forms/cs/{id}', 'Attendance\AuthorizeForms\AttAuthorizeCSFormController@update')->name('authorize.forms.cs.update');
+
+    //Early Timeout
+    Route::get('/forms/et', 'Attendance\AppriseForms\AttETFormController@index')->name('forms.et');
+
+    Route::post('/forms/et/store', 'Attendance\AppriseForms\AttETFormController@store')->name('forms.et.store');
+    
+    Route::patch('/forms/et/update/{id}', 'Attendance\AppriseForms\AttETFormController@update')->name('forms.et.update');
+
+    Route::get('/authorize/forms/et', 'Attendance\AuthorizeForms\AttAuthorizeETFormController@index')->name('authorize.forms.et');
+
+    Route::patch('/authorize/forms/et/{id}', 'Attendance\AuthorizeForms\AttAuthorizeETFormController@update')->name('authorize.forms.et.update');
+
+    //Over Time
+    Route::get('/forms/ot', 'Attendance\AppriseForms\AttOTFormController@index')->name('forms.ot');
+
+    Route::post('/forms/ot/store', 'Attendance\AppriseForms\AttOTFormController@store')->name('forms.ot.store');
+    
+    Route::patch('/forms/ot/update/{id}', 'Attendance\AppriseForms\AttOTFormController@update')->name('forms.ot.update');
+
+    Route::get('/authorize/forms/ot', 'Attendance\AuthorizeForms\AttAuthorizeOTFormController@index')->name('authorize.forms.ot');
+
+    Route::patch('/authorize/forms/ot/{id}', 'Attendance\AuthorizeForms\AttAuthorizeOTFormController@update')->name('authorize.forms.ot.update');
+
+    //Leave Form
+    Route::get('/forms/lf', 'Attendance\AppriseForms\AttOTFormController@index')->name('forms.lf');
+
+    Route::post('/forms/lf/store', 'Attendance\AppriseForms\AttOTFormController@store')->name('forms.lf.store');
+    
+    Route::patch('/forms/lf/update/{id}', 'Attendance\AppriseForms\AttOTFormController@update')->name('forms.lf.update');
+
+    Route::get('/authorize/forms/lf', 'Attendance\AuthorizeForms\AttAuthorizeOTFormController@index')->name('authorize.forms.lf');
+
+    Route::patch('/authorize/forms/lf/{id}', 'Attendance\AuthorizeForms\AttAuthorizeOTFormController@update')->name('authorize.forms.lf.update');
 
 });
 
@@ -337,51 +421,45 @@ Route::group(['middleware' => ['auth','verified']],function()
 
     /* ------------------ PAF MANAGER ------------------ */
 
-    Route::get('paf/search', 'Paf\RequestController@index')->name('paf.search');    
+    Route::get('paf/search', 'Paf\RequestController@index')->name('paf.search');   
 
-    Route::post('paf/search/result', 'Paf\RequestController@search')->name('paf.search.result');
+    Route::post('paf/search/store', 'Paf\RequestController@store')->name('paf.search.store');  
 
-    Route::get('paf/search/result/request/{emplid}', 'Paf\RequestController@show')->name('paf.search.result.show');    
+    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
 
-    Route::post('paf/search/result/request/submit/{form}', 'Paf\RequestController@store')->name('paf.search.result.store');
+    Route::get('paf/request/list/show/{id}', 'Paf\ReassessmentController@show')->name('paf.reassess.list.show');
 
-    Route::get('paf/search/result/request/emergency/{form}', 'Paf\RequestController@create')->name('paf.search.result.create');    
-
-    Route::get('paf/request/list/month={month}+year={year}', 'Paf\ReassessmentController@list')->name('paf.reassess.list');  
-
-    Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.reassess.list.show');
-
-    Route::post('paf/request/show/store/{form}', 'Paf\ReassessmentController@store')->name('paf.reassess.list.store');
+    Route::patch('paf/request/list/show/store/{id}', 'Paf\ReassessmentController@store')->name('paf.reassess.list.show.store');
 
     /* ------------------ PAF HR ------------------ */ 
 
-    Route::get('paf/assessment/list/month={month}+year={year}', 'Paf\AssessmentController@list')->name('paf.assessment.list');    
+    Route::get('paf/assessment/list', 'Paf\AssessmentController@list')->name('paf.assessment.list');    
 
-    Route::get('paf/assessment/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.assessment.list.show'); 
+    Route::get('paf/assessment/list/show/{id}', 'Paf\AssessmentController@show')->name('paf.assessment.list.show'); 
 
-    Route::post('paf/assessment/list/show/store/{form}', 'Paf\AssessmentController@assessment')->name('paf.assessment.list.store');
+    Route::patch('paf/assessment/list/show/store/{id}', 'Paf\AssessmentController@assessment')->name('paf.assessment.list.show.store');
 
     /* ------------------ PAF EXECUTIVE------------------ */
 
-    Route::get('paf/approval/list/month={month}+year={year}', 'Paf\ApprovalController@list')->name('paf.approval.list');
+    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.approval.list');
 
-    Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.approval.list.show');
+    Route::get('paf/approval/list/show/{id}', 'Paf\ApprovalController@show')->name('paf.approval.list.show');
 
-    Route::post('paf/approval/list/store/{form}', 'Paf\ApprovalController@store')->name('paf.approval.list.store');
+    Route::patch('paf/approval/list/show/store/{id}', 'Paf\ApprovalController@store')->name('paf.approval.list.show.store');
 
     /* ------------------ PAF SUPERVISOR------------------ */
 
-    Route::get('paf/view/list/month={month}+year={year}', 'Paf\ViewPafController@list')->name('paf.view.list');
+    Route::get('paf/view/list', 'Paf\ViewPafController@list')->name('paf.view.list');
 
-    Route::get('paf/view/list/show/{form}', 'Paf\ViewPafController@show')->name('paf.view.list.show');
+    Route::get('paf/view/list/show/{id}', 'Paf\ViewPafController@show')->name('paf.view.list.show');
 
     /* ------------------ PAF USER ------------------ */
 
-    Route::get('paf/my_request/list/month={month}+year={year}', 'Paf\UserPafController@list')->name('paf.myrequest.list');
+    Route::get('paf/my_request/list', 'Paf\UserPafController@list')->name('paf.myrequest.list');
 
-    Route::get('paf/my_request/list/show/{form}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
+    Route::get('paf/my_request/list/show/{id}', 'Paf\UserPafController@show')->name('paf.myrequest.list.show');
 
-    Route::get('paf/my_request/list/show/accept/{form}', 'Paf\UserPafController@store')->name('paf.myrequest.list.store');
+    Route::patch('paf/my_request/list/show/store/{id}', 'Paf\UserPafController@store')->name('paf.myrequest.list.show.store');
 
     /* ------------------ CHANGE PASSWORD ------------------*/
 

@@ -16,6 +16,7 @@ class CreateAttOBFormsTable extends Migration
         Schema::create('att_o_b_forms', function (Blueprint $table) {
             $table->increments('id');
             $table->String('employee_id');
+            $table->String('reporting_to')->nullable();
             $table->date('date')->nullable();
             $table->String('location')->nullable();
             $table->time('time_in')->nullable();
@@ -25,6 +26,8 @@ class CreateAttOBFormsTable extends Migration
             $table->String('reason')->nullable();
             $table->String('status');
             $table->String('confirmed');
+            $table->String('remarks');
+            $table->String('applied');
             $table->timestamps();
         });
     }

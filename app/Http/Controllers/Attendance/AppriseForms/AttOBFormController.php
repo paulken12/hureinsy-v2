@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Attendance\AppriseForms\AttOBForm;
+use App\Personnel\Info\Contract;
 
 class AttOBFormController extends Controller
 {
@@ -40,6 +41,10 @@ class AttOBFormController extends Controller
     public function store(Request $request)
     {
 
+        $emp_id = Auth::user()->basicInfo->pluck('id')->first();
+
+        $contract = Contract::where('emp_basic_id', $emp_id)->first();
+
         $OB = $request->validate([
 
             'ob_date' => 'required',
@@ -71,7 +76,9 @@ class AttOBFormController extends Controller
 
         for($i=0; $i < count($OB['ob_date']); ++$i ) {
             AttOBForm::create([
-                'employee_id' => Auth::user()->basicInfo->pluck('id')->first(),
+                'employee_id' => $emp_id,
+
+                'reporting_to' => $contract->jobDescription->reporting_to,
 
                 'date' => $OB['ob_date'][$i],
 
@@ -87,9 +94,11 @@ class AttOBFormController extends Controller
 
                 'o_out' => $OB['to_checked'][$i],
 
-                'status' => 'Waiting for authorization',
+                'status' => 'For authorization',
 
                 'confirmed' => 0,
+                
+                'applied' => 0
 
             ]);
         }
@@ -126,9 +135,10 @@ class AttOBFormController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, AttOBForm $id)
     {
-        //
+        $id->confirmed = 1;
+        $id->save();
     }
 
     /**

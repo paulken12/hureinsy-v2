@@ -18,9 +18,6 @@ class MasterStatusPaf extends Seeder
             [
                 'request_status'=>'Completed'
             ],
-            [
-                'request_status'=>'Closed'
-            ],
 
         ];
 

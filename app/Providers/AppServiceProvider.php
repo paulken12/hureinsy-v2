@@ -21,11 +21,12 @@ class AppServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('paf_managements')) {            
             date_default_timezone_set("Asia/Hong_Kong");
-            CacheHelper::create_master_cache();
 
+            //if(){}
             PersonnelActionManagement::contractChange();    
-            if(date('h:ia') <= date('h:ia', strtotime('1:00am')) || date('h:ia') >= date('h:ia', strtotime('12:00am'))){
-            }
+            PersonnelActionManagement::addSIL();      
+            PersonnelActionManagement::updateSIL();      
+            PersonnelActionManagement::resetSIL();      
         }
 
     }

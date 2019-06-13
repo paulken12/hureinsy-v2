@@ -42,8 +42,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterOverallRecommendationPaf::class);
         $this->call(MasterPerformanceEvaluationPaf::class);
         $this->call(MasterProficiencyTestPaf::class);
-        $this->call(StatusRole::class);
-        $this->call(SubStatusRole::class);
+        //AMS
+        $this->call(MasterLeaveType::class);
 
 //
 //        $this->call(MasterAddressType::class);

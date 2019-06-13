@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Master\MasterContractChangePaf;
 use App\Master\MasterEmpStatus;
 use App\Personnel\Info\EmpBasic;
+use App\Paf\PafHrAssessment;
 use App\Status;
 use App\SubStatus;
 
@@ -88,6 +89,26 @@ class PafManagement extends Model
     public function annexc()
     {
         return $this->belongsTo(PafChangeCompensation::class, 'id');
+    }
+
+    public function current_annexa()
+    {
+        return $this->belongsTo(PafCurrentJob::class, 'id');
+    }
+    
+    public function current_annexb()
+    {
+        return $this->belongsTo(PafCurrentSchedule::class, 'id');
+    }
+    
+    public function current_annexc()
+    {
+        return $this->belongsTo(PafCurrentCompensation::class, 'id');
+    }
+
+    public function paf_hr()
+    {
+        return $this->belongsTo(PafHrAssessment::class, 'id');
     }
 
     public function scopeLastId() {

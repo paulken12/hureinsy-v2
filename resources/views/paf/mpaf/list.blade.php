@@ -1,6 +1,26 @@
 @extends('layouts.dashboard')
 
 @section('content')
+	<paf-returned-form
+		:employees = "{{$employees}}"
+		:list = "{{$list}}"
+		:cchange = "{{$cchange}}"
+		:substatus = "{{$substatus}}"
+		:mjob = "{{$mjob}}"
+		:mdept = "{{$mdept}}"
+		:mpro = "{{$mpro}}"
+		:memp = "{{$memp}}"
+		:mtea = "{{$mtea}}"
+		:msta = "{{$msta}}"
+		:mcomp = "{{$mcomp}}">
+	</paf-returned-form>
+
+
+
+
+
+
+{{-- 
 	<div class="full-container">
         <div class="remain-height pos-r scrollable">
             <div class="bgc-white bdrs-3">
@@ -76,5 +96,5 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
